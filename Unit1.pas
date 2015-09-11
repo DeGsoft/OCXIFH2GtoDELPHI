@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, HasarUnit, Vcl.ExtCtrls;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, HasarUnit;
 
 type
   TForm1 = class(TForm)
@@ -178,357 +178,357 @@ implementation
 
 procedure TForm1.AbrirCajClick(Sender: TObject);
 begin
-CommandAbrirCaj_Click;
+dm.CommandAbrirCaj_Click;
 end;
 
 procedure TForm1.AuditClick(Sender: TObject);
 begin
-CommandAudit_Click;
+dm.CommandAudit_Click;
 end;
 
 procedure TForm1.AvanzPapClick(Sender: TObject);
 begin
-CommandAvanzPap_Click;
+dm.CommandAvanzPap_Click;
 end;
 
 procedure TForm1.BorrarLogoClick(Sender: TObject);
 begin
- CommandBorrarLogo_Click;
+ dm.CommandBorrarLogo_Click;
 end;
 
 procedure TForm1.CancelClick(Sender: TObject);
 begin
- CommandCancel_Click;
+ dm.CommandCancel_Click;
 end;
 
 procedure TForm1.CapacClick(Sender: TObject);
 begin
- CommandCapac_Click;
+ dm.CommandCapac_Click;
 end;
 
 procedure TForm1.CargaLogoClick(Sender: TObject);
 begin
- CommandCargaLogo_Click;
+ dm.CommandCargaLogo_Click;
 end;
 
 procedure TForm1.CfgBaudiosClick(Sender: TObject);
 begin
-CommandCfgBaudios_Click;
+dm.CommandCfgBaudios_Click;
 end;
 
 procedure TForm1.CfgFyhClick(Sender: TObject);
 begin
-CommandCfgFyh_Click;
+dm.CommandCfgFyh_Click;
 end;
 
 procedure TForm1.CfgImprFisClick(Sender: TObject);
 begin
-CommandCfgImprFis_Click;
+dm.CommandCfgImprFis_Click;
 end;
 
 procedure TForm1.CfgRedClick(Sender: TObject);
 begin
-CommandCfgRed_Click;
+dm.CommandCfgRed_Click;
 end;
 
 procedure TForm1.CfgServCorreoClick(Sender: TObject);
 begin
-CommandCfgServCorreo_Click;
+dm.CommandCfgServCorreo_Click;
 end;
 
 procedure TForm1.CfgZBorrClick(Sender: TObject);
 begin
-CommandCfgZBorr_Click;
+dm.CommandCfgZBorr_Click;
 end;
 
 procedure TForm1.CFgZonaClick(Sender: TObject);
 begin
-CommandCFgZona_Click;
+dm.CommandCFgZona_Click;
 end;
 
 procedure TForm1.CierreZClick(Sender: TObject);
 begin
-CommandCierreZ_Click;
+dm.CommandCierreZ_Click;
 end;
 
 procedure TForm1.ConsAcumComprobClick(Sender: TObject);
 begin
-CommandConsAcumComprob_Click;
+dm.CommandConsAcumComprob_Click;
 end;
 
 procedure TForm1.ConsAcumMemoriaClick(Sender: TObject);
 begin
-CommandConsAcumMemoria_Click;
+dm.CommandConsAcumMemoria_Click;
 end;
 
 procedure TForm1.ConsCfgRedClick(Sender: TObject);
 begin
-CommandConsCfgRed_Click;
+dm.CommandConsCfgRed_Click;
 end;
 
 procedure TForm1.ConsCierreZClick(Sender: TObject);
 begin
-CommandConsCierreZ_Click;
+dm.CommandConsCierreZ_Click;
 end;
 
 procedure TForm1.ConsCorreoClick(Sender: TObject);
 begin
-CommandConsCorreo_Click;
+dm.CommandConsCorreo_Click;
 end;
 
 procedure TForm1.ConsDocAsocClick(Sender: TObject);
 begin
-CommandConsDocAsoc_Click;
+dm.CommandConsDocAsoc_Click;
 end;
 
 procedure TForm1.ConsErrorClick(Sender: TObject);
 begin
-CommandConsError_Click;
+dm.CommandConsError_Click;
 end;
 
 procedure TForm1.ConsEstadoClick(Sender: TObject);
 begin
-CommandConsEstado_Click;
+dm.CommandConsEstado_Click;
 end;
 
 procedure TForm1.ConsModversClick(Sender: TObject);
 begin
-CommandConsModvers_Click;
+dm.CommandConsModvers_Click;
 end;
 
 procedure TForm1.ConsZetasClick(Sender: TObject);
 begin
-CommandConsZetas_Click;
+dm.CommandConsZetas_Click;
 end;
 
 procedure TForm1.ConsZonaClick(Sender: TObject);
 begin
-CommandConsZona_Click;
+dm.CommandConsZona_Click;
 end;
 
 procedure TForm1.CopiarDocClick(Sender: TObject);
 begin
-CommandCopiarDoc_Click;
+dm.CommandCopiarDoc_Click;
 end;
 
 procedure TForm1.DatosIniClick(Sender: TObject);
 begin
-CommandDatosIni_Click;
+dm.CommandDatosIni_Click;
 end;
 
 procedure TForm1.DocxMailClick(Sender: TObject);
 begin
-CommandDocxMail_Click;
+dm.CommandDocxMail_Click;
 end;
 
 procedure TForm1.DONAClick(Sender: TObject);
 begin
-CommandDONA_Click;
+dm.CommandDONA_Click;
 end;
 
 procedure TForm1.EquisClick(Sender: TObject);
 begin
- CommandEquis_Click;
+ dm.CommandEquis_Click;
 end;
 
 procedure TForm1.FechaHoraClick(Sender: TObject);
 begin
- CommandFechaHora_Click;
+ dm.CommandFechaHora_Click;
 end;
 
 procedure TForm1.GenericoClick(Sender: TObject);
 begin
- CommandGenerico_Click;
+ dm.CommandGenerico_Click;
 end;
 
 procedure TForm1.ModifCategClick(Sender: TObject);
 begin
-CommandModifCateg_Click;
+dm.CommandModifCateg_Click;
 end;
 
 procedure TForm1.ModifIIBBClick(Sender: TObject);
 begin
-CommandModifIIBB_Click;
+dm.CommandModifIIBB_Click;
 end;
 
 procedure TForm1.ModifIniActivClick(Sender: TObject);
 begin
-CommandModifIniActiv_Click;
+dm.CommandModifIniActiv_Click;
 end;
 
 procedure TForm1.NCCClick(Sender: TObject);
 begin
-//CommandNCC_Click;
+//dm.CommandNCC_Click;
 end;
 
 procedure TForm1.ObtRepAuditClick(Sender: TObject);
 begin
-CommandObtRepAudit_Click;
+dm.CommandObtRepAudit_Click;
 end;
 
 procedure TForm1.ObtRepDocClick(Sender: TObject);
 begin
-CommandObtRepDoc_Click;
+dm.CommandObtRepDoc_Click;
 end;
 
 procedure TForm1.ObtRepElectrClick(Sender: TObject);
 begin
-CommandObtRepElectr_Click;
+dm.CommandObtRepElectr_Click;
 end;
 
 procedure TForm1.ObtRepLogClick(Sender: TObject);
 begin
-CommandObtRepLog_Click;
+dm.CommandObtRepLog_Click;
 end;
 
 procedure TForm1.ObtStFiscalClick(Sender: TObject);
 begin
-CommandObtStFiscal_Click;
+dm.CommandObtStFiscal_Click;
 end;
 
 procedure TForm1.ObtStImprClick(Sender: TObject);
 begin
-CommandObtStImpr_Click;
+dm.CommandObtStImpr_Click;
 end;
 
 procedure TForm1.PatronClick(Sender: TObject);
 begin
-CommandPatron_Click;
+dm.CommandPatron_Click;
 end;
 
 procedure TForm1.PRESUPClick(Sender: TObject);
 begin
-CommandPRESUP_Click;
+dm.CommandPRESUP_Click;
 end;
 
 procedure TForm1.ProtocoloClick(Sender: TObject);
 begin
-CommandProtocolo_Click;
+dm.CommandProtocolo_Click;
 end;
 
 procedure TForm1.RangoZClick(Sender: TObject);
 begin
-CommandRangoZ_Click;
+dm.CommandRangoZ_Click;
 end;
 
 procedure TForm1.RBOXClick(Sender: TObject);
 begin
-CommandRBOX_Click;
+dm.CommandRBOX_Click;
 end;
 
 procedure TForm1.ReimprClick(Sender: TObject);
 begin
-CommandReimpr_Click;
+dm.CommandReimpr_Click;
 end;
 
 procedure TForm1.RTORClick(Sender: TObject);
 begin
-CommandRTOR_Click;
+dm.CommandRTOR_Click;
 end;
 
 procedure TForm1.RTOXClick(Sender: TObject);
 begin
-CommandRTOX_Click;
+dm.CommandRTOX_Click;
 end;
 
 procedure TForm1.SalirClick(Sender: TObject);
 begin
-CommandSalir_Click;
+dm.CommandSalir_Click;
 end;
 
 procedure TForm1.SubtotClick(Sender: TObject);
 begin
-CommandSubtot_Click;
+dm.CommandSubtot_Click;
 end;
 
 procedure TForm1.TFAClick(Sender: TObject);
 begin
-CommandTFA_Click;
+dm.CommandTFA_Click;
 end;
 
 procedure TForm1.TFBClick(Sender: TObject);
 begin
-CommandTFB_Click;
+dm.CommandTFB_Click;
 end;
 
 procedure TForm1.TFCClick(Sender: TObject);
 begin
-CommandTFC_Click;
+dm.CommandTFC_Click;
 end;
 
 procedure TForm1.TFMClick(Sender: TObject);
 begin
-CommandTFM_Click;
+dm.CommandTFM_Click;
 end;
 
 procedure TForm1.TiqueClick(Sender: TObject);
 begin
-CommandTique_Click;
+dm.CommandTique_Click;
 end;
 
 procedure TForm1.TiqueNCClick(Sender: TObject);
 begin
-CommandTiqueNC_Click;
+dm.CommandTiqueNC_Click;
 end;
 
 procedure TForm1.TNCAClick(Sender: TObject);
 begin
-CommandTNCA_Click;
+dm.CommandTNCA_Click;
 end;
 
 procedure TForm1.TNCBClick(Sender: TObject);
 begin
-CommandTNCB_Click;
+dm.CommandTNCB_Click;
 end;
 
 procedure TForm1.TNCMClick(Sender: TObject);
 begin
-CommandTNCM_Click;
+dm.CommandTNCM_Click;
 end;
 
 procedure TForm1.TNDAClick(Sender: TObject);
 begin
-CommandTNDA_Click;
+dm.CommandTNDA_Click;
 end;
 
 procedure TForm1.TNDBClick(Sender: TObject);
 begin
-CommandTNDB_Click;
+dm.CommandTNDB_Click;
 end;
 
 procedure TForm1.TNDCClick(Sender: TObject);
 begin
-CommandTNDC_Click;
+dm.CommandTNDC_Click;
 end;
 
 procedure TForm1.TNDMClick(Sender: TObject);
 begin
-CommandTNDM_Click;
+dm.CommandTNDM_Click;
 end;
 
 procedure TForm1.TRAClick(Sender: TObject);
 begin
-CommandTRA_Click;
+dm.CommandTRA_Click;
 end;
 
 procedure TForm1.TRBClick(Sender: TObject);
 begin
-CommandTRB_Click;
+dm.CommandTRB_Click;
 end;
 
 procedure TForm1.TRCClick(Sender: TObject);
 begin
-CommandTRC_Click;
+dm.CommandTRC_Click;
 end;
 
 procedure TForm1.TRMClick(Sender: TObject);
 begin
-CommandTRM_Click;
+dm.CommandTRM_Click;
 end;
 
 procedure TForm1.ZBorrClick(Sender: TObject);
 begin
-CommandZBorr_Click;
+dm.CommandZBorr_Click;
 end;
 
 end.

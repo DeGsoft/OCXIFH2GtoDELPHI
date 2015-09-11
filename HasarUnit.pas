@@ -1,45 +1,127 @@
 unit HasarUnit;
 
-// ###################################################################################################################
-// Impresoras Fiscales HASAR - 2da. Generación                                     OCX Fiscal HASAR - 2da. Generación
-// RG AFIP Nº 3561/13 - Controladores Fiscales Nueva tecnología                    Ejemplo de uso
-// Dto. Software de Base - Compañía HASAR SAIC - Grupo HASAR                       Marzo 2015
-// ###################################################################################################################
-
 interface
 
 uses
-  HasarArgentina_TLB, System.SysUtils,System.TypInfo;
+  System.SysUtils, System.Classes,HasarArgentina_TLB, System.TypInfo;
+
+type
+  Tdm = class(TDataModule)
+
+
+
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+     procedure CommandAbrirCaj_Click;
+procedure CommandAudit_Click;
+procedure CommandAvanzPap_Click;
+procedure CommandBorrarLogo_Click;
+procedure CommandCancel_Click;
+procedure CommandCapac_Click;
+procedure CommandCargaLogo_Click;
+procedure CommandCfgBaudios_Click;
+procedure CommandCfgFyh_Click;
+procedure CommandCfgImprFis_Click;
+procedure CommandCfgRed_Click;
+procedure CommandCfgServCorreo_Click;
+procedure CommandCfgZBorr_Click;
+procedure CommandCFgZona_Click;
+procedure CommandCierreZ_Click;
+procedure CommandConsAcumComprob_Click;
+procedure CommandConsAcumMemoria_Click;
+procedure CommandConsCfgRed_Click;
+procedure CommandConsCierreZ_Click;
+procedure CommandConsCorreo_Click;
+procedure CommandConsDocAsoc_Click;
+procedure CommandConsError_Click;
+procedure CommandConsEstado_Click;
+procedure CommandConsModvers_Click;
+procedure CommandConsZetas_Click;
+procedure CommandConsZona_Click;
+procedure CommandCopiarDoc_Click;
+procedure CommandDatosIni_Click;
+procedure CommandDocxMail_Click;
+procedure CommandDONA_Click;
+procedure CommandEquis_Click;
+procedure CommandFechaHora_Click;
+procedure CommandGenerico_Click;
+procedure CommandModifCateg_Click;
+procedure CommandModifIIBB_Click;
+procedure CommandModifIniActiv_Click;
+procedure CommandObtRepAudit_Click;
+procedure CommandObtRepDoc_Click;
+procedure CommandObtRepElectr_Click;
+procedure CommandObtRepLog_Click;
+procedure CommandObtStFiscal_Click;
+procedure CommandObtStImpr_Click;
+procedure CommandPatron_Click;
+procedure CommandPRESUP_Click;
+procedure CommandProtocolo_Click;
+procedure CommandRangoZ_Click;
+procedure CommandRBOX_Click;
+procedure CommandReimpr_Click;
+procedure CommandRTOR_Click;
+procedure CommandRTOX_Click;
+procedure CommandSalir_Click;
+procedure CommandSubtot_Click;
+procedure CommandTFA_Click;
+procedure CommandTFB_Click;
+procedure CommandTFC_Click;
+procedure CommandTFM_Click;
+procedure CommandTique_Click;
+procedure CommandTiqueNC_Click;
+procedure CommandTNCA_Click;
+procedure CommandTNCB_Click;
+procedure CommandTNCC_Click;
+procedure CommandTNCM_Click;
+procedure CommandTNDA_Click;
+procedure CommandTNDB_Click;
+procedure CommandTNDC_Click;
+procedure CommandTNDM_Click;
+procedure CommandTRA_Click;
+procedure CommandTRB_Click;
+procedure CommandTRC_Click;
+procedure CommandTRM_Click;
+procedure CommandZBorr_Click;
+//procedure Form_Load;
+//procedure HASARNG_ComandoEnProceso;
+//procedure HASARNG_ComandoProcesado;
+// HASARNG_EventoImpresora(Estado: EstadoImpresora);
+  end;
 
 var
-  HASARNG : ImpresoraFiscalRG3561;
+  dm: Tdm;
+  HASARNG: ImpresoraFiscalRG3561;
 
 implementation
 
-// Option Explicit
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
 
 // ====================================================================================================================
 // Comando de apertura del cajón de dinero.
 // ====================================================================================================================
 
-procedure CommandAbrirCaj_Click;
+procedure Tdm.CommandAbrirCaj_Click;
 begin
 
-Writeln('');
-Writeln('ABRIENDO CAJON DE DINERO...');
-Writeln('');
+  Writeln('');
+  Writeln('ABRIENDO CAJON DE DINERO...');
+  Writeln('');
 
- Try
+  Try
     HASARNG.AbrirCajonDinero;
-  Writeln('');
-  Writeln('CAJON DE DINERO ABIERTO !...');
-  Writeln('');
+    Writeln('');
+    Writeln('CAJON DE DINERO ABIERTO !...');
+    Writeln('');
 
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -47,29 +129,26 @@ end;
 // Impresión de un informe de aditoría por fechas.
 // ====================================================================================================================
 
-procedure CommandAudit_Click;
+procedure Tdm.CommandAudit_Click;
 begin
 
-Writeln('');
-Writeln('IMPRIMIENDO REPORTE DE AUDITORIA POR FECHAS...');
-Writeln('');
-
- Try
-    HASARNG.ReportarZetasPorFecha(StrToDate('23/02/2015'), StrToDate('25/02/2015'),
-      ReporteAuditoriaGlobal);
-
   Writeln('');
+  Writeln('IMPRIMIENDO REPORTE DE AUDITORIA POR FECHAS...');
+  Writeln('');
+
+  Try
+    HASARNG.ReportarZetasPorFecha(StrToDate('23/02/2015'),
+      StrToDate('25/02/2015'), ReporteAuditoriaGlobal);
+
+    Writeln('');
     Writeln('REPORTE IMPRESO !...');
     Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
 
-      Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -77,36 +156,33 @@ end;
 // Comandos de avance de papel.
 // ====================================================================================================================
 
-procedure CommandAvanzPap_Click;
+procedure Tdm.CommandAvanzPap_Click;
 begin
 
-Writeln('');
+  Writeln('');
   Writeln('AVANZANDO PAPEL...');
   Writeln('');
 
- Try
+  Try
     HASARNG.AvanzarPapelAmbasEstaciones(3);
-  Writeln('3 líneas en tique/rollo testigo.');
+    Writeln('3 líneas en tique/rollo testigo.');
 
     HASARNG.AvanzarPapelEstacionAuditoria(3);
-  Writeln('3 líneas en rollo testigo, solamente.');
+    Writeln('3 líneas en rollo testigo, solamente.');
 
     HASARNG.AvanzarPapelEstacionTique(3);
-  Writeln('3 líneas en tique, solamente.'
+    Writeln('3 líneas en tique, solamente.'
 
       );
     Writeln('');
     Writeln('FIN DE AVANCE DE PAPEL...');
     Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
 
-      Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -114,27 +190,24 @@ end;
 // Se elimina el logo del emisor de la memoria de trabajo de la impresora fiscal.
 // ====================================================================================================================
 
-procedure CommandBorrarLogo_Click;
+procedure Tdm.CommandBorrarLogo_Click;
 begin
 
-Writeln('');
+  Writeln('');
   Writeln('ELIMINANDO LOGO DEL EMISOR...');
   Writeln('');
 
- Try
+  Try
     HASARNG.EliminarLogoEmisor;
 
-  Writeln('');
+    Writeln('');
     Writeln('LOGO ELIMINADO !...');
     Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -142,27 +215,24 @@ end;
 // Se cancela el comprobante en curso de emisión.
 // ====================================================================================================================
 
-procedure CommandCancel_Click;
+procedure Tdm.CommandCancel_Click;
 begin
 
-Writeln('');
+  Writeln('');
   Writeln('CANCELANDO COMPROBANTE ABIERTO...');
-Writeln('');
+  Writeln('');
 
- Try
+  Try
     HASARNG.Cancelar;
 
-  Writeln('');
+    Writeln('');
     Writeln('CANCELADO !...');
-  Writeln('');
+    Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -170,7 +240,7 @@ end;
 // Consulta de capacidades de la impresora fiscal
 // ====================================================================================================================
 
-procedure CommandCapac_Click;
+procedure Tdm.CommandCapac_Click;
 
 var
   respcapac: RespuestaConsultarCapacidadesImpresoraFiscal;
@@ -178,74 +248,71 @@ var
 begin
   Writeln('');
   Writeln('CONSULTANDO CAPACIDADES DE LA IMPRESORA FISCAL...');
-Writeln('');
+  Writeln('');
 
- Try
+  Try
     respcapac := HASARNG.ConsultarCapacidadesImpresoraFiscal(AltoLogo,
       EstacionTicket, TiqueFacturaA);
-  Writeln('Alto logotipo := [' +( respcapac.Valor) + ']');
-  Writeln('');
+    Writeln('Alto logotipo := [' + (respcapac.Valor) + ']');
+    Writeln('');
     respcapac := HASARNG.ConsultarCapacidadesImpresoraFiscal(AnchoLogo,
       EstacionTicket, TiqueFacturaA);
 
-    Writeln('Ancho logotipo            := [' +( respcapac.Valor) + ']');
-  Writeln('');
+    Writeln('Ancho logotipo            := [' + (respcapac.Valor) + ']');
+    Writeln('');
     respcapac := HASARNG.ConsultarCapacidadesImpresoraFiscal(AnchoRazonSocial,
       EstacionTicket, TiqueFacturaA);
 
-    Writeln('Ancho razón social        := [' +( respcapac.Valor) + ']');
-  Writeln('');
+    Writeln('Ancho razón social        := [' + (respcapac.Valor) + ']');
+    Writeln('');
     respcapac := HASARNG.ConsultarCapacidadesImpresoraFiscal(AnchoTextoFiscal,
       EstacionTicket, TiqueFacturaA);
 
-    Writeln('Ancho texto fiscal        := [' +( respcapac.Valor) + ']');
-  Writeln('');
+    Writeln('Ancho texto fiscal        := [' + (respcapac.Valor) + ']');
+    Writeln('');
     respcapac := HASARNG.ConsultarCapacidadesImpresoraFiscal
       (AnchoTextoLineasUsuario, EstacionTicket, TiqueFacturaA);
 
-    Writeln('Ancho líneas usuario      := [' +( respcapac.Valor) + ']');
-  Writeln('');
+    Writeln('Ancho líneas usuario      := [' + (respcapac.Valor) + ']');
+    Writeln('');
     respcapac := HASARNG.ConsultarCapacidadesImpresoraFiscal(AnchoTextoNoFiscal,
       EstacionTicket, TiqueFacturaA);
 
-    Writeln('Ancho texto no fiscal     := [' +( respcapac.Valor) + ']');
-  Writeln('');
+    Writeln('Ancho texto no fiscal     := [' + (respcapac.Valor) + ']');
+    Writeln('');
     respcapac := HASARNG.ConsultarCapacidadesImpresoraFiscal(AnchoTextoVenta,
       EstacionTicket, TiqueFacturaA);
 
-    Writeln('Ancho texto venta         := [' +( respcapac.Valor) + ']');
-  Writeln('');
+    Writeln('Ancho texto venta         := [' + (respcapac.Valor) + ']');
+    Writeln('');
     respcapac := HASARNG.ConsultarCapacidadesImpresoraFiscal
       (AnchoTotalImpresion, EstacionTicket, TiqueFacturaA);
 
-    Writeln('Ancho total impresión     := [' +( respcapac.Valor) + ']');
-  Writeln('');
+    Writeln('Ancho total impresión     := [' + (respcapac.Valor) + ']');
+    Writeln('');
     respcapac := HASARNG.ConsultarCapacidadesImpresoraFiscal(SoportaCajon,
       EstacionPorDefecto, NoDocumento);
 
-    Writeln('Soporta cajón dinero      := [' +( respcapac.Valor) + ']');
-  Writeln('');
+    Writeln('Soporta cajón dinero      := [' + (respcapac.Valor) + ']');
+    Writeln('');
     respcapac := HASARNG.ConsultarCapacidadesImpresoraFiscal(SoportaEstacion,
       EstacionTicket, TiqueFacturaA);
 
-    Writeln('Soporta estación tique    := [' +( respcapac.Valor) + ']');
-  Writeln('');
+    Writeln('Soporta estación tique    := [' + (respcapac.Valor) + ']');
+    Writeln('');
     respcapac := HASARNG.ConsultarCapacidadesImpresoraFiscal(SoportaComprobante,
       EstacionTicket, TiqueFacturaA);
 
-    Writeln('Soporta tique factura " A " := [' +( respcapac.Valor) + ']');
+    Writeln('Soporta tique factura " A " := [' + (respcapac.Valor) + ']');
 
-  Writeln('');
-  Writeln('FIN DE LA CONSULTA !...');
-  Writeln('');
+    Writeln('');
+    Writeln('FIN DE LA CONSULTA !...');
+    Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -253,13 +320,13 @@ end;
 // Cargar imagen de logotipo del emisor en la memoria de trabajo de la impresora fiscal.
 // ====================================================================================================================
 
-procedure CommandCargaLogo_Click;
+procedure Tdm.CommandCargaLogo_Click;
 begin
-Writeln('');
-Writeln('CARGANDO LOGO EMISOR...');
-Writeln('');
+  Writeln('');
+  Writeln('CARGANDO LOGO EMISOR...');
+  Writeln('');
 
- Try
+  Try
     HASARNG.CargarLogoEmisor(ComienzoCargaLogo,
       '424D9E180000000000003E00000028000000DC010000680000000100010000000000601800000000000000000000000000000000000000000000FFFFFF00FFFF');
 
@@ -461,15 +528,14 @@ Writeln('');
     HASARNG.CargarLogoEmisor(FinCargaLogo,
       'FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0');
 
-  Writeln('');
+    Writeln('');
     Writeln('LOGO DEL EMISOR CARGADO !...');
     Writeln('');
 
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -477,27 +543,24 @@ end;
 // Configurar velocidad de transferencia de información (baudios); del puerto serie RS-232.
 // ====================================================================================================================
 
-procedure CommandCfgBaudios_Click;
+procedure Tdm.CommandCfgBaudios_Click;
 begin
   Writeln('');
-Writeln('CONFIGURANDO BAUDIOS RS-232...');
-Writeln('');
+  Writeln('CONFIGURANDO BAUDIOS RS-232...');
+  Writeln('');
 
- Try
+  Try
     HASARNG.CambiarVelocidadPuerto(Baudrate9600);
-  Writeln('Baudios := 9600'
+    Writeln('Baudios := 9600'
 
       );
     Writeln('');
-  Writeln('FIN DE LA CONFIGURACION !...');
+    Writeln('FIN DE LA CONFIGURACION !...');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -505,26 +568,23 @@ end;
 // Configurar fecha y hora en la impresora fiscal.
 // ====================================================================================================================
 
-procedure CommandCfgFyh_Click;
+procedure Tdm.CommandCfgFyh_Click;
 begin
-Writeln('');
+  Writeln('');
   Writeln('CONFIGURANDO FECHA Y HORA...');
   Writeln('');
 
- Try
+  Try
     HASARNG.ConfigurarFechaHora(StrToDate('06/03/2015'), StrToDate('10:49:45'));
 
-  Writeln('');
+    Writeln('');
     Writeln('FIN DE LA CONFIGURACION !...');
     Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -532,42 +592,41 @@ end;
 // Configurar parámetros de comportamiento de la impresora fiscal.
 // ====================================================================================================================
 
-procedure CommandCfgImprFis_Click;
+procedure Tdm.CommandCfgImprFis_Click;
 
 begin
   Writeln('');
   Writeln('CONFIGURANDO PARAMETROS IMPRESORA FISCAL...');
   Writeln('');
 
- Try
-  Writeln('Borrado automático CTD        := P');
+  Try
+    Writeln('Borrado automático CTD        := P');
     HASARNG.ConfigurarImpresoraFiscal(BorradoAutomaticoAuditoria, 'P');
-  Writeln('');
+    Writeln('');
 
-  Writeln('Verificar supera monto máximo := N');
+    Writeln('Verificar supera monto máximo := N');
     HASARNG.ConfigurarImpresoraFiscal(ChequeoDesborde, 'N');
-  Writeln('');
+    Writeln('');
 
-  Writeln('Corte de papel                := P');
+    Writeln('Corte de papel                := P');
     HASARNG.ConfigurarImpresoraFiscal(CortePapel, 'P');
-  Writeln('');
+    Writeln('');
 
-  Writeln('Imprimir CAMBIO $0.00         := P');
+    Writeln('Imprimir CAMBIO $0.00         := P');
     HASARNG.ConfigurarImpresoraFiscal(ImpresionCambio, 'P');
-  Writeln('');
+    Writeln('');
 
-  Writeln('Imprimir leyendas opcionales  := P');
+    Writeln('Imprimir leyendas opcionales  := P');
     HASARNG.ConfigurarImpresoraFiscal(ImpresionLeyendas, 'P');
-  Writeln('');
-
+    Writeln('');
 
     Writeln('Texto saldo  pendientes       := Pendiente de pago');
     HASARNG.ConfigurarImpresoraFiscal(PagoSaldo, 'Pendiente de pago');
-  Writeln('');
+    Writeln('');
 
-  Writeln('Aviso sonoro falta papel      := P');
+    Writeln('Aviso sonoro falta papel      := P');
     HASARNG.ConfigurarImpresoraFiscal(SonidoAviso, 'P');
-  Writeln('');
+    Writeln('');
 
     // 'Modificar estos parámetros requiere Cierre 'Z' previo.
     // '------------------------------------------------------
@@ -579,17 +638,14 @@ begin
     // '    HASARNG.ConfigurarImpresoraFiscal( TipoHabilitacion, "A"
     // 'Debug.Print
 
-  Writeln('');
+    Writeln('');
     Writeln('FIN DE LA CONFIGURACION !...');
     Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -597,29 +653,26 @@ end;
 // Configurar parámetros de conectividad en red.
 // ====================================================================================================================
 
-procedure CommandCfgRed_Click;
+procedure Tdm.CommandCfgRed_Click;
 begin
-Writeln('');
+  Writeln('');
   Writeln('CONFIGURANDO PARAMETROS CONECTIVIDAD EN RED...');
-Writeln('');
+  Writeln('');
 
- Try
-  Writeln('Dirección IP  := 10.0.7.69');
-  Writeln('Máscara       := 255.255.255.0');
-  Writeln('Puerta enlace := 10.0.7.69');
+  Try
+    Writeln('Dirección IP  := 10.0.7.69');
+    Writeln('Máscara       := 255.255.255.0');
+    Writeln('Puerta enlace := 10.0.7.69');
     HASARNG.ConfigurarRed('10.0.7.69', '255.255.255.0', '10.0.7.69');
 
-  Writeln('');
+    Writeln('');
     Writeln('FIN DE LA CONFIGURACION !...');
     Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -627,31 +680,28 @@ end;
 // Configurar servidor SMHTP para correo electrónico.
 // ====================================================================================================================
 
-procedure CommandCfgServCorreo_Click;
+procedure Tdm.CommandCfgServCorreo_Click;
 begin
 
-Writeln('');
+  Writeln('');
   Writeln('CONFIGURANDO SERVIDOR SMTP...');
   Writeln('');
 
- Try
-  Writeln('IP SMTP     := 200.80.204.3');
-  Writeln('Puerto      := 465');
-  Writeln('Responder a := hasarventas@hasar.com');
+  Try
+    Writeln('IP SMTP     := 200.80.204.3');
+    Writeln('Puerto      := 465');
+    Writeln('Responder a := hasarventas@hasar.com');
     HASARNG.ConfigurarServidorCorreo('200.80.204.3', 465,
       'hasarventas@hasar.com');
 
-  Writeln('');
+    Writeln('');
     Writeln('FIN DE LA CONFIGURACION !...');
     Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -659,28 +709,25 @@ end;
 // Configurar Cierre 'Z' límite para borrado de la CTD.
 // ====================================================================================================================
 
-procedure CommandCfgZBorr_Click;
+procedure Tdm.CommandCfgZBorr_Click;
 begin
 
-Writeln('');
+  Writeln('');
   Writeln('CONFIGURANDO LIMITE BORRADO CTD...');
   Writeln('');
 
- Try
-  Writeln('Límite, Cierre " Z " Nro. := 1');
+  Try
+    Writeln('Límite, Cierre " Z " Nro. := 1');
     HASARNG.ConfigurarZetaBorrable(1);
 
-  Writeln('');
+    Writeln('');
     Writeln('FIN DE LA CONFIGURACION !...');
     Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -688,16 +735,16 @@ end;
 // Impresión del Informe Diario de Cierre 'Z'.
 // ====================================================================================================================
 
-procedure CommandCFgZona_Click;
+procedure Tdm.CommandCFgZona_Click;
 
 var
   estilo: AtributosDeTexto;
 begin
-Writeln('');
+  Writeln('');
   Writeln('CONFIGURANDO ZONAS LINEAS DE USUARIO...');
   Writeln('');
 
- Try
+  Try
     estilo.Centrado := True;
     HASARNG.ConfigurarZona(1, estilo, 'Texto línea 1 - Fantasía',
       EstacionTicket, ZonaFantasia);
@@ -749,17 +796,14 @@ Writeln('');
     HASARNG.ConfigurarZona(4, estilo, 'Texto línea 4 - Domicilio emisor',
       EstacionTicket, ZonaDomicilioEmisor);
 
-  Writeln('');
+    Writeln('');
     Writeln('FIN de la CONFIGURACION....');
     Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -767,7 +811,7 @@ end;
 // Impresión del Informe Diario de Cierre 'Z'.
 // ====================================================================================================================
 
-procedure CommandCierreZ_Click;
+procedure Tdm.CommandCierreZ_Click;
 
 var
   cierre: RespuestaCerrarJornadaFiscal;
@@ -780,67 +824,80 @@ begin
 
     cierre := HASARNG.CerrarJornadaFiscal(ReporteZ);
     Writeln('');
-    //?Writeln('Reporte...           := [' + FloatToStr(cierre.Reporte) + ']');
+    // ?Writeln('Reporte...           := [' + FloatToStr(cierre.Reporte) + ']');
     Writeln('');
 
-    Writeln('Cierre Nro.          := [' +IntToStr(cierre.Z.Numero) + ']');
-    Writeln('Fecha cierre         := [' +DateToStr(cierre.Z.Fecha) + ']');
+    Writeln('Cierre Nro.          := [' + IntToStr(cierre.Z.Numero) + ']');
+    Writeln('Fecha cierre         := [' + DateToStr(cierre.Z.Fecha) + ']');
     Writeln('');
 
-    Writeln('DF cancelados        := [' +IntToStr(cierre.Z.DF_CantidadCancelados) + ']');
+    Writeln('DF cancelados        := [' +
+      IntToStr(cierre.Z.DF_CantidadCancelados) + ']');
 
-    Writeln('DF emitidos          := [' +IntToStr(cierre.Z.DF_CantidadEmitidos) + ']');
+    Writeln('DF emitidos          := [' +
+      IntToStr(cierre.Z.DF_CantidadEmitidos) + ']');
 
     Writeln('');
 
     Writeln('DF total ventas      := [' + FloatToStr(cierre.Z.DF_Total) + ']');
 
-    Writeln('DF total gravado     := [' + FloatToStr(cierre.Z.DF_TotalGravado) + ']');
+    Writeln('DF total gravado     := [' +
+      FloatToStr(cierre.Z.DF_TotalGravado) + ']');
 
-    Writeln('DF total IVA         := [' + FloatToStr(cierre.Z.DF_TotalIVA) + ']');
+    Writeln('DF total IVA         := [' +
+      FloatToStr(cierre.Z.DF_TotalIVA) + ']');
 
-    Writeln('DF total no gravado  := [' + FloatToStr(cierre.Z.DF_TotalNoGravado) + ']');
+    Writeln('DF total no gravado  := [' +
+      FloatToStr(cierre.Z.DF_TotalNoGravado) + ']');
 
-    Writeln('DF total exento      := [' + FloatToStr(cierre.Z.DF_TotalExento) + ']');
+    Writeln('DF total exento      := [' +
+      FloatToStr(cierre.Z.DF_TotalExento) + ']');
 
-    Writeln('DF total tributos    := [' + FloatToStr(cierre.Z.DF_TotalTributos) + ']');
+    Writeln('DF total tributos    := [' +
+      FloatToStr(cierre.Z.DF_TotalTributos) + ']');
 
     Writeln('');
 
-    Writeln('DNFH emitidos        := [' +IntToStr(cierre.Z.DNFH_CantidadEmitidos) + ']');
+    Writeln('DNFH emitidos        := [' +
+      IntToStr(cierre.Z.DNFH_CantidadEmitidos) + ']');
 
-    Writeln('DNFH total acumulado := [' + FloatToStr(cierre.Z.DNFH_Total) + ']');
+    Writeln('DNFH total acumulado := [' +
+      FloatToStr(cierre.Z.DNFH_Total) + ']');
 
     Writeln('');
 
-    Writeln('NC canceladas        := [' +IntToStr(cierre.Z.NC_CantidadCancelados) + ']');
+    Writeln('NC canceladas        := [' +
+      IntToStr(cierre.Z.NC_CantidadCancelados) + ']');
 
-    Writeln('NC emitidas          := [' +IntToStr(cierre.Z.NC_CantidadEmitidos) + ']');
+    Writeln('NC emitidas          := [' +
+      IntToStr(cierre.Z.NC_CantidadEmitidos) + ']');
 
     Writeln('NC total crédito     := [' + FloatToStr(cierre.Z.NC_Total) + ']');
 
-    Writeln('NC total gravado     := [' + FloatToStr(cierre.Z.NC_TotalGravado) + ']');
+    Writeln('NC total gravado     := [' +
+      FloatToStr(cierre.Z.NC_TotalGravado) + ']');
 
-    Writeln('NC total IVA         := [' + FloatToStr(cierre.Z.NC_TotalIVA) + ']');
+    Writeln('NC total IVA         := [' +
+      FloatToStr(cierre.Z.NC_TotalIVA) + ']');
 
-    Writeln('NC total no gravado  := [' + FloatToStr(cierre.Z.NC_TotalNoGravado) + ']');
+    Writeln('NC total no gravado  := [' +
+      FloatToStr(cierre.Z.NC_TotalNoGravado) + ']');
 
-    Writeln('NC total exento      := [' + FloatToStr(cierre.Z.NC_TotalExento) + ']');
+    Writeln('NC total exento      := [' +
+      FloatToStr(cierre.Z.NC_TotalExento) + ']');
 
-    Writeln('NC total tributos    := [' + FloatToStr(cierre.Z.NC_TotalTributos) + ']'
+    Writeln('NC total tributos    := [' +
+      FloatToStr(cierre.Z.NC_TotalTributos) + ']'
 
       );
     Writeln('');
-  Writeln('INFORME DIARIO DE CIERRE " Z "... IMPRESO !...');
-  Writeln('');
+    Writeln('INFORME DIARIO DE CIERRE " Z "... IMPRESO !...');
+    Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -848,7 +905,7 @@ end;
 // Consulta de acumulados para determnado comprobante.
 // ====================================================================================================================
 
-procedure CommandConsAcumComprob_Click;
+procedure Tdm.CommandConsAcumComprob_Click;
 
 var
   acomprob: RespuestaConsultarAcumuladosComprobante;
@@ -860,28 +917,26 @@ begin
   Writeln('CONSULTANDO ACUMULADOS COMPROBANTE:');
   Writeln('');
 
- Try
+  Try
     acomprob := HASARNG.ConsultarAcumuladosComprobante(TiqueFacturaA, 13);
 
     if (acomprob.Registro = (RegistroFinal)) then
     begin
       Writeln('NO HAY INFORMACION DISPONIBLE !...');
-    Writeln('');
+      Writeln('');
 
-
-       end;
-
+    end;
 
     Case acomprob.Registro of
       HasarArgentina_TLB.RegistroDetalladoDF:
         begin
           Writeln('');
           Writeln('TIPO REGISTRO:');
-          //?Writeln('[' + (acomprob.Registro) + ']');
+          // ?Writeln('[' + (acomprob.Registro) + ']');
           Writeln('');
           Writeln('DF (Documentos Fiscales);:');
           Writeln('-------------------------');
-          //?Writeln('DF Tipo comprobante        := [' +FromTiposComprobanteToString(acomprob.RegDF.CodigoComprobante) + ']');
+          // ?Writeln('DF Tipo comprobante        := [' +FromTiposComprobanteToString(acomprob.RegDF.CodigoComprobante) + ']');
 
           Writeln('DF Nro. inicial            := [' +
             IntToStr(acomprob.RegDF.NumeroInicial) + ']');
@@ -897,12 +952,13 @@ begin
             FloatToStr(acomprob.RegDF.Total) + ']');
 
           Writeln('DF total gravado           := [' +
-           FloatToStr(acomprob.RegDF.TotalGravado) + ']');
+            FloatToStr(acomprob.RegDF.TotalGravado) + ']');
 
           Writeln('DF total no gravado        := [' +
             FloatToStr(acomprob.RegDF.TotalNoGravado) + ']');
 
-          Writeln('DF total exento            := [' + FloatToStr(acomprob.RegDF.TotalExento) + ']');
+          Writeln('DF total exento            := [' +
+            FloatToStr(acomprob.RegDF.TotalExento) + ']');
           Writeln('');
 
           Writeln('DF IVA 1                   := [' +
@@ -996,8 +1052,8 @@ begin
             FloatToStr(acomprob.RegDF.MontoNetoSinIVA_10) + ']');
           Writeln('');
 
-          Writeln('DF total IVA               := [' + FloatToStr(acomprob.RegDF.TotalIVA) +
-            ']');
+          Writeln('DF total IVA               := [' +
+            FloatToStr(acomprob.RegDF.TotalIVA) + ']');
           Writeln('');
 
           Writeln('DF tributo 1               := [' +
@@ -1074,14 +1130,14 @@ begin
       RegistroDetalladoDNFH:
         begin
           Writeln('');
-        Writeln('TIPO REGISTRO:');
-        Writeln('[' + FloatToStr(acomprob.Registro) + ']');
-        Writeln('');
+          Writeln('TIPO REGISTRO:');
+          Writeln('[' + FloatToStr(acomprob.Registro) + ']');
+          Writeln('');
 
           Writeln('DNFH (Documentos No Fiscales Homologados);: :=QUE ACUMULAN:=');
 
           Writeln('---------------------------------------------------------');
-        Writeln('DNFH Tipo Comprob.         := [' +
+          Writeln('DNFH Tipo Comprob.         := [' +
             { FromTiposComprobanteToString }
             FloatToStr(acomprob.RegDF.CodigoComprobante) + ']');
 
@@ -1091,8 +1147,8 @@ begin
           Writeln('DNFH Nro. Final            := [' +
             IntToStr(acomprob.RegDNFH.NumeroFinal) + ']');
 
-          Writeln('DNFH total acumulado       := [' + FloatToStr(acomprob.RegDNFH.Total) +
-            ']');
+          Writeln('DNFH total acumulado       := [' +
+            FloatToStr(acomprob.RegDNFH.Total) + ']');
           Writeln('');
         end;
       HasarArgentina_TLB.RegistroDetalladoDNFHNoAcum:
@@ -1100,40 +1156,40 @@ begin
           Writeln('');
           Writeln('TIPO REGISTRO:');
           Writeln('[' + FloatToStr(acomprob.Registro) + ']');
-        Writeln('');
+          Writeln('');
 
           Writeln('DNFH (Documentos No Fiscales Homologados);: :=QUE NO ACUMULAN:=');
 
           Writeln('------------------------------------------------------------');
-        Writeln('Tipo Comprobante := [' +
+          Writeln('Tipo Comprobante := [' +
             { FromTiposComprobanteToString }
             FloatToStr(acomprob.RegDF.CodigoComprobante) + ']');
 
           Writeln('Nº inicial       := [' +
             IntToStr(acomprob.RegDNFH_NoAcum.NumeroInicial) + ']');
 
-          Writeln('Nº final         := [' +IntToStr(acomprob.RegDNFH_NoAcum.NumeroFinal)
-            + ']');
+          Writeln('Nº final         := [' +
+            IntToStr(acomprob.RegDNFH_NoAcum.NumeroFinal) + ']');
           Writeln('');
         end;
       HasarArgentina_TLB.RegistroGlobal:
         begin
           Writeln('');
-        Writeln('TIPO REGISTRO:');
-        Writeln('[' + FloatToStr(acomprob.Registro) + ']');
-        Writeln('');
-        Writeln('INFORMACION GLOBAL:');
-        Writeln('-------------------');
+          Writeln('TIPO REGISTRO:');
+          Writeln('[' + FloatToStr(acomprob.Registro) + ']');
+          Writeln('');
+          Writeln('INFORMACION GLOBAL:');
+          Writeln('-------------------');
 
           Writeln('DF cant. cancelados := [' +
             IntToStr(acomprob.RegGlobal.DF_CantidadCancelados) + ']');
 
           Writeln('DF cant. emitidos   := [' +
             IntToStr(acomprob.RegGlobal.DF_CantidadEmitidos) + ']');
-        Writeln('');
+          Writeln('');
 
-          Writeln('DF total ventas     := [' + FloatToStr(acomprob.RegGlobal.DF_Total) +
-            ']');
+          Writeln('DF total ventas     := [' +
+            FloatToStr(acomprob.RegGlobal.DF_Total) + ']');
           Writeln('');
 
           Writeln('DF total gravado    := [' +
@@ -1148,15 +1204,15 @@ begin
           Writeln('DF total no gravado := [' +
             FloatToStr(acomprob.RegGlobal.DF_TotalNoGravado) + ']');
 
-          Writeln('DF total exento     := [' + FloatToStr(acomprob.RegGlobal.DF_TotalExento)
-            + ']');
+          Writeln('DF total exento     := [' +
+            FloatToStr(acomprob.RegGlobal.DF_TotalExento) + ']');
           Writeln('');
 
-          Writeln('DF total DNFH       := [' + FloatToStr(acomprob.RegGlobal.DNFH_Total) +
-            ']');
+          Writeln('DF total DNFH       := [' +
+            FloatToStr(acomprob.RegGlobal.DNFH_Total) + ']');
           Writeln('');
         end;
-       end;
+    end;
 
     acomprob2 := HASARNG.ContinuarConsultaAcumulados;
 
@@ -1169,10 +1225,10 @@ begin
             Writeln('');
             Writeln('TIPO REGISTRO:');
             Writeln('[' + FloatToStr(acomprob2.Registro) + ']');
-          Writeln('');
-          Writeln('DF (Documentos Fiscales);:');
-          Writeln('-------------------------');
-          Writeln('DF Tipo comprobante        := [' +
+            Writeln('');
+            Writeln('DF (Documentos Fiscales);:');
+            Writeln('-------------------------');
+            Writeln('DF Tipo comprobante        := [' +
               { FromTiposComprobanteToString }
               FloatToStr(acomprob2.RegDF.CodigoComprobante) + ']');
 
@@ -1184,7 +1240,7 @@ begin
 
             Writeln('DF cancelados              := [' +
               IntToStr(acomprob2.RegDF.CantidadCancelados) + ']');
-          Writeln('');
+            Writeln('');
 
             Writeln('DF total ventas            := [' +
               FloatToStr(acomprob2.RegDF.Total) + ']');
@@ -1260,8 +1316,8 @@ begin
               FloatToStr(acomprob2.RegDF.MontoIVA_10) + ']');
             Writeln('');
 
-            Writeln('DF total IVA               := [' + FloatToStr(acomprob2.RegDF.TotalIVA
-             ) + ']');
+            Writeln('DF total IVA               := [' +
+              FloatToStr(acomprob2.RegDF.TotalIVA) + ']');
             Writeln('');
 
             Writeln('DF tributo 1               := [' +
@@ -1338,14 +1394,14 @@ begin
         HasarArgentina_TLB.RegistroDetalladoDNFH:
           begin
             Writeln('');
-          Writeln('TIPO REGISTRO:');
-          Writeln('[' + FloatToStr(acomprob2.Registro) + ']');
-          Writeln('');
+            Writeln('TIPO REGISTRO:');
+            Writeln('[' + FloatToStr(acomprob2.Registro) + ']');
+            Writeln('');
 
             Writeln('DNFH (Documentos No Fiscales Homologados);: :=QUE ACUMULAN:=');
 
             Writeln('---------------------------------------------------------');
-          Writeln('DNFH Tipo Comprob.         := [' +
+            Writeln('DNFH Tipo Comprob.         := [' +
               { FromTiposComprobanteToString }
               FloatToStr(acomprob2.RegDF.CodigoComprobante) + ']');
 
@@ -1355,8 +1411,8 @@ begin
             Writeln('DNFH Nro. Final            := [' +
               FloatToStr(acomprob2.RegDNFH.NumeroFinal) + ']');
 
-            Writeln('DNFH total acumulado       := [' + FloatToStr(acomprob2.RegDNFH.Total
-             ) + ']');
+            Writeln('DNFH total acumulado       := [' +
+              FloatToStr(acomprob2.RegDNFH.Total) + ']');
             Writeln('');
           end;
         HasarArgentina_TLB.RegistroDetalladoDNFHNoAcum:
@@ -1364,12 +1420,12 @@ begin
             Writeln('');
             Writeln('TIPO REGISTRO:');
             Writeln('[' + FloatToStr(acomprob2.Registro) + ']');
-          Writeln('');
+            Writeln('');
 
             Writeln('DNFH (Documentos No Fiscales Homologados);: :=QUE NO ACUMULAN:=');
 
             Writeln('------------------------------------------------------------');
-          Writeln('Tipo Comprobante := [' +
+            Writeln('Tipo Comprobante := [' +
               { FromTiposComprobanteToString }
               FloatToStr(acomprob2.RegDF.CodigoComprobante) + ']');
 
@@ -1378,26 +1434,26 @@ begin
 
             Writeln('Nº final         := [' +
               FloatToStr(acomprob2.RegDNFH_NoAcum.NumeroFinal) + ']');
-          Writeln('');
+            Writeln('');
           end;
         HasarArgentina_TLB.RegistroGlobal:
           begin
             Writeln('');
-          Writeln('TIPO REGISTRO:');
-          Writeln('[' + FloatToStr(acomprob2.Registro) + ']');
-          Writeln('');
-          Writeln('INFORMACION GLOBAL:');
-          Writeln('-------------------');
+            Writeln('TIPO REGISTRO:');
+            Writeln('[' + FloatToStr(acomprob2.Registro) + ']');
+            Writeln('');
+            Writeln('INFORMACION GLOBAL:');
+            Writeln('-------------------');
 
             Writeln('DF cant. cancelados := [' +
               FloatToStr(acomprob2.RegGlobal.DF_CantidadCancelados) + ']');
 
             Writeln('DF cant. emitidos   := [' +
               FloatToStr(acomprob2.RegGlobal.DF_CantidadEmitidos) + ']');
-          Writeln('');
+            Writeln('');
 
-            Writeln('DF total ventas     := [' + FloatToStr(acomprob2.RegGlobal.DF_Total) +
-              ']');
+            Writeln('DF total ventas     := [' +
+              FloatToStr(acomprob2.RegGlobal.DF_Total) + ']');
             Writeln('');
 
             Writeln('DF total gravado    := [' +
@@ -1414,30 +1470,27 @@ begin
 
             Writeln('DF total exento     := [' +
               FloatToStr(acomprob2.RegGlobal.DF_TotalExento) + ']');
-          Writeln('');
+            Writeln('');
 
-            Writeln('DF total DNFH       := [' + FloatToStr(acomprob2.RegGlobal.DNFH_Total
-             ) + ']');
+            Writeln('DF total DNFH       := [' +
+              FloatToStr(acomprob2.RegGlobal.DNFH_Total) + ']');
             Writeln('');
           end;
-         end;
+      end;
 
       acomprob2 := HASARNG.ContinuarConsultaAcumulados;
-       end;
+    end;
 
-  Writeln('');
+    Writeln('');
     Writeln('NO HAY MAS INFORMACION DISPONIBLE !...');
     Writeln('');
-  Writeln('FIN DE LA CONSULTA...');
+    Writeln('FIN DE LA CONSULTA...');
     Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -1445,18 +1498,18 @@ end;
 // Consulta de acumulados en la memoria de trabajo de la impresora fiscal.
 // ====================================================================================================================
 
-procedure CommandConsAcumMemoria_Click;
+procedure Tdm.CommandConsAcumMemoria_Click;
 
 var
   amem: RespuestaConsultarAcumuladosMemoriaDeTrabajo;
 
   amem2: RespuestaContinuarConsultaAcumulados;
 begin
-Writeln('');
+  Writeln('');
   Writeln('CONSULTANDO ACUMULADOS MEMORIA DE TRABAJO...');
   Writeln('');
 
- Try
+  Try
     amem := HASARNG.ConsultarAcumuladosMemoriaDeTrabajo(NoDocumento);
 
     If (amem.Registro = HasarArgentina_TLB.RegistroFinal) then
@@ -1465,34 +1518,33 @@ Writeln('');
       Writeln('NO HAY INFORMACION DISPONIBLE !...');
       Writeln('');
 
-
-       end;
-
+    end;
 
     Case amem.Registro of
       HasarArgentina_TLB.RegistroDetalladoDF:
         begin
           Writeln('');
           Writeln('TIPO REGISTRO:');
-          Writeln('[' +FloatToStr(amem.Registro) + ']');
-        Writeln('');
-        Writeln('DF (Documentos Fiscales);:');
-        Writeln('-------------------------');
+          Writeln('[' + FloatToStr(amem.Registro) + ']');
+          Writeln('');
+          Writeln('DF (Documentos Fiscales);:');
+          Writeln('-------------------------');
 
           Writeln('DF cancelados              := [' +
-           FloatToStr(amem.RegDF.CantidadCancelados) + ']');
-        Writeln('DF Tipo comprobante        := [' +
+            FloatToStr(amem.RegDF.CantidadCancelados) + ']');
+          Writeln('DF Tipo comprobante        := [' +
             { FromTiposComprobanteToString }
             FloatToStr(amem.RegDF.CodigoComprobante) + ']');
 
           Writeln('DF Nro. inicial            := [' +
             FloatToStr(amem.RegDF.NumeroInicial) + ']');
 
-          Writeln('DF Nro. final              := [' +FloatToStr(amem.RegDF.NumeroFinal) +
-            ']');
+          Writeln('DF Nro. final              := [' +
+            FloatToStr(amem.RegDF.NumeroFinal) + ']');
           Writeln('');
 
-          Writeln('DF total ventas            := [' + FloatToStr(amem.RegDF.Total) + ']');
+          Writeln('DF total ventas            := [' +
+            FloatToStr(amem.RegDF.Total) + ']');
 
           Writeln('');
 
@@ -1502,8 +1554,8 @@ Writeln('');
           Writeln('DF total no gravado        := [' +
             FloatToStr(amem.RegDF.TotalNoGravado) + ']');
 
-          Writeln('DF total exento            := [' +FloatToStr(amem.RegDF.TotalExento) +
-            ']');
+          Writeln('DF total exento            := [' +
+            FloatToStr(amem.RegDF.TotalExento) + ']');
           Writeln('');
 
           Writeln('DF IVA 1                   := [' +
@@ -1522,147 +1574,148 @@ Writeln('');
             FloatToStr(amem.RegDF.AlicuotaIVA_3) + ']');
 
           Writeln('DF monto IVA 3             := [' +
-           FloatToStr(amem.RegDF.MontoIVA_3) + ']');
+            FloatToStr(amem.RegDF.MontoIVA_3) + ']');
 
           Writeln('DF IVA 4                   := [' +
-           FloatToStr(amem.RegDF.AlicuotaIVA_4) + ']');
+            FloatToStr(amem.RegDF.AlicuotaIVA_4) + ']');
 
           Writeln('DF monto IVA 4             := [' +
-           FloatToStr(amem.RegDF.MontoIVA_4) + ']');
+            FloatToStr(amem.RegDF.MontoIVA_4) + ']');
 
           Writeln('DF IVA 5                   := [' +
-           FloatToStr(amem.RegDF.AlicuotaIVA_5) + ']');
+            FloatToStr(amem.RegDF.AlicuotaIVA_5) + ']');
 
           Writeln('DF monto IVA 5             := [' +
-           FloatToStr(amem.RegDF.MontoIVA_5) + ']');
+            FloatToStr(amem.RegDF.MontoIVA_5) + ']');
 
           Writeln('DF IVA 6                   := [' +
-           FloatToStr(amem.RegDF.AlicuotaIVA_6) + ']');
+            FloatToStr(amem.RegDF.AlicuotaIVA_6) + ']');
 
           Writeln('DF monto IVA 6             := [' +
-           FloatToStr(amem.RegDF.MontoIVA_6) + ']');
+            FloatToStr(amem.RegDF.MontoIVA_6) + ']');
 
           Writeln('DF IVA 7                   := [' +
-           FloatToStr(amem.RegDF.AlicuotaIVA_7) + ']');
+            FloatToStr(amem.RegDF.AlicuotaIVA_7) + ']');
 
           Writeln('DF monto IVA 7             := [' +
-           FloatToStr(amem.RegDF.MontoIVA_7) + ']');
+            FloatToStr(amem.RegDF.MontoIVA_7) + ']');
 
           Writeln('DF IVA 8                   := [' +
-           FloatToStr(amem.RegDF.AlicuotaIVA_8) + ']');
+            FloatToStr(amem.RegDF.AlicuotaIVA_8) + ']');
 
           Writeln('DF monto IVA 8             := [' +
-           FloatToStr(amem.RegDF.MontoIVA_8) + ']');
+            FloatToStr(amem.RegDF.MontoIVA_8) + ']');
 
           Writeln('DF IVA 9                   := [' +
-           FloatToStr(amem.RegDF.AlicuotaIVA_9) + ']');
+            FloatToStr(amem.RegDF.AlicuotaIVA_9) + ']');
 
           Writeln('DF monto IVA 9             := [' +
-           FloatToStr(amem.RegDF.MontoIVA_9) + ']');
+            FloatToStr(amem.RegDF.MontoIVA_9) + ']');
 
           Writeln('DF IVA 10                  := [' +
-           FloatToStr(amem.RegDF.AlicuotaIVA_10) + ']');
+            FloatToStr(amem.RegDF.AlicuotaIVA_10) + ']');
 
-          Writeln('DF monto IVA 10            := [' +FloatToStr(amem.RegDF.MontoIVA_10) +
-            ']');
+          Writeln('DF monto IVA 10            := [' +
+            FloatToStr(amem.RegDF.MontoIVA_10) + ']');
           Writeln('');
 
-          Writeln('DF total IVA               := [' +FloatToStr(amem.RegDF.TotalIVA) +
-            ']');
+          Writeln('DF total IVA               := [' +
+            FloatToStr(amem.RegDF.TotalIVA) + ']');
           Writeln('');
 
           Writeln('DF tributo 1               := [' +
-           FloatToStr(amem.RegDF.CodigoTributo1) + ']');
+            FloatToStr(amem.RegDF.CodigoTributo1) + ']');
 
           Writeln('DF monto tributo 1         := [' +
-           FloatToStr(amem.RegDF.ImporteTributo1) + ']');
+            FloatToStr(amem.RegDF.ImporteTributo1) + ']');
 
           Writeln('DF tributo 2               := [' +
-           FloatToStr(amem.RegDF.CodigoTributo2) + ']');
+            FloatToStr(amem.RegDF.CodigoTributo2) + ']');
 
           Writeln('DF monto tributo 2         := [' +
-           FloatToStr(amem.RegDF.ImporteTributo2) + ']');
+            FloatToStr(amem.RegDF.ImporteTributo2) + ']');
 
           Writeln('DF tributo 3               := [' +
-           FloatToStr(amem.RegDF.CodigoTributo3) + ']');
+            FloatToStr(amem.RegDF.CodigoTributo3) + ']');
 
           Writeln('DF monto tributo 3         := [' +
-           FloatToStr(amem.RegDF.ImporteTributo3) + ']');
+            FloatToStr(amem.RegDF.ImporteTributo3) + ']');
 
           Writeln('DF tributo 4               := [' +
-           FloatToStr(amem.RegDF.CodigoTributo4) + ']');
+            FloatToStr(amem.RegDF.CodigoTributo4) + ']');
 
           Writeln('DF monto tributo 4         := [' +
-           FloatToStr(amem.RegDF.ImporteTributo4) + ']');
+            FloatToStr(amem.RegDF.ImporteTributo4) + ']');
 
           Writeln('DF tributo 5               := [' +
-           FloatToStr(amem.RegDF.CodigoTributo5) + ']');
+            FloatToStr(amem.RegDF.CodigoTributo5) + ']');
 
           Writeln('DF monto tributo 5         := [' +
-           FloatToStr(amem.RegDF.ImporteTributo5) + ']');
+            FloatToStr(amem.RegDF.ImporteTributo5) + ']');
 
           Writeln('DF tributo 6               := [' +
-           FloatToStr(amem.RegDF.CodigoTributo6) + ']');
+            FloatToStr(amem.RegDF.CodigoTributo6) + ']');
 
           Writeln('DF monto tributo 6         := [' +
-           FloatToStr(amem.RegDF.ImporteTributo6) + ']');
+            FloatToStr(amem.RegDF.ImporteTributo6) + ']');
 
           Writeln('DF tributo 7               := [' +
-           FloatToStr(amem.RegDF.CodigoTributo7) + ']');
+            FloatToStr(amem.RegDF.CodigoTributo7) + ']');
 
           Writeln('DF monto tributo 7         := [' +
-           FloatToStr(amem.RegDF.ImporteTributo7) + ']');
+            FloatToStr(amem.RegDF.ImporteTributo7) + ']');
 
           Writeln('DF tributo 8               := [' +
-           FloatToStr(amem.RegDF.CodigoTributo8) + ']');
+            FloatToStr(amem.RegDF.CodigoTributo8) + ']');
 
           Writeln('DF monto tributo 8         := [' +
-           FloatToStr(amem.RegDF.ImporteTributo8) + ']');
+            FloatToStr(amem.RegDF.ImporteTributo8) + ']');
 
           Writeln('DF tributo 9               := [' +
-           FloatToStr(amem.RegDF.CodigoTributo9) + ']');
+            FloatToStr(amem.RegDF.CodigoTributo9) + ']');
 
           Writeln('DF monto tributo 9         := [' +
-           FloatToStr(amem.RegDF.ImporteTributo9) + ']');
+            FloatToStr(amem.RegDF.ImporteTributo9) + ']');
 
           Writeln('DF tributo 10              := [' +
-           FloatToStr(amem.RegDF.CodigoTributo10) + ']');
+            FloatToStr(amem.RegDF.CodigoTributo10) + ']');
 
           Writeln('DF monto tributo 10        := [' +
-           FloatToStr(amem.RegDF.ImporteTributo10) + ']');
+            FloatToStr(amem.RegDF.ImporteTributo10) + ']');
 
           Writeln('DF tributo 11              := [' +
-           FloatToStr(amem.RegDF.CodigoTributo11) + ']');
+            FloatToStr(amem.RegDF.CodigoTributo11) + ']');
 
           Writeln('DF monto tributo 11        := [' +
-           FloatToStr(amem.RegDF.ImporteTributo11) + ']');
+            FloatToStr(amem.RegDF.ImporteTributo11) + ']');
           Writeln('');
 
-          Writeln('DF total tributos          := [' +FloatToStr(amem.RegDF.TotalTributos) +
-            ']');
+          Writeln('DF total tributos          := [' +
+            FloatToStr(amem.RegDF.TotalTributos) + ']');
           Writeln('');
         end;
       HasarArgentina_TLB.RegistroDetalladoDNFH:
         begin
           Writeln('');
-        Writeln('TIPO REGISTRO:');
-        Writeln('[' +FloatToStr(amem.Registro) + ']');
-        Writeln('');
+          Writeln('TIPO REGISTRO:');
+          Writeln('[' + FloatToStr(amem.Registro) + ']');
+          Writeln('');
 
           Writeln('DNFH (Documentos No Fiscales Homologados);: :=QUE ACUMULAN:=');
 
           Writeln('---------------------------------------------------------');
-        Writeln('DNFH Tipo Comprob.         := [' +
+          Writeln('DNFH Tipo Comprob.         := [' +
             { FromTiposComprobanteToString }
             FloatToStr(amem.RegDNFH.CodigoComprobante) + ']');
 
           Writeln('DNFH Nro. inicial          := [' +
-           FloatToStr(amem.RegDNFH.NumeroInicial) + ']');
+            FloatToStr(amem.RegDNFH.NumeroInicial) + ']');
 
           Writeln('DNFH Nro. Final            := [' +
-           FloatToStr(amem.RegDNFH.NumeroFinal) + ']');
+            FloatToStr(amem.RegDNFH.NumeroFinal) + ']');
 
-          Writeln('DNFH total acumulado       := [' +FloatToStr(amem.RegDNFH.Total) + ']');
+          Writeln('DNFH total acumulado       := [' +
+            FloatToStr(amem.RegDNFH.Total) + ']');
 
           Writeln('');
         end;
@@ -1670,63 +1723,65 @@ Writeln('');
         begin
           Writeln('');
           Writeln('TIPO REGISTRO:');
-          Writeln('[' +FloatToStr(amem.Registro) + ']');
-        Writeln('');
+          Writeln('[' + FloatToStr(amem.Registro) + ']');
+          Writeln('');
 
           Writeln('DNFH (Documentos No Fiscales Homologados);: :=QUE NO ACUMULAN:=');
 
           Writeln('------------------------------------------------------------');
-        Writeln('Tipo Comprobante := [' +
+          Writeln('Tipo Comprobante := [' +
             { FromTiposComprobanteToString }
             FloatToStr(amem.RegDNFH_NoAcum.CodigoComprobante) + ']');
           Writeln('Nº inicial       := [' +
-           FloatToStr(amem.RegDNFH_NoAcum.NumeroInicial) + ']');
+            FloatToStr(amem.RegDNFH_NoAcum.NumeroInicial) + ']');
 
-          Writeln('Nº final         := [' +FloatToStr(amem.RegDNFH_NoAcum.NumeroFinal) +
-            ']');
+          Writeln('Nº final         := [' +
+            FloatToStr(amem.RegDNFH_NoAcum.NumeroFinal) + ']');
           Writeln('');
         end;
       HasarArgentina_TLB.RegistroGlobal:
         begin
           Writeln('');
-        Writeln('TIPO REGISTRO:');
-        Writeln('[' +FloatToStr(amem.Registro) + ']');
-        Writeln('');
-        Writeln('INFORMACION GLOBAL:');
-        Writeln('-------------------');
+          Writeln('TIPO REGISTRO:');
+          Writeln('[' + FloatToStr(amem.Registro) + ']');
+          Writeln('');
+          Writeln('INFORMACION GLOBAL:');
+          Writeln('-------------------');
 
           Writeln('DF cant. cancelados := [' +
-           FloatToStr(amem.RegGlobal.DF_CantidadCancelados) + ']');
+            FloatToStr(amem.RegGlobal.DF_CantidadCancelados) + ']');
 
           Writeln('DF cant. emitidos   := [' +
-           FloatToStr(amem.RegGlobal.DF_CantidadEmitidos) + ']');
+            FloatToStr(amem.RegGlobal.DF_CantidadEmitidos) + ']');
           Writeln('');
 
-          Writeln('DF total ventas     := [' +FloatToStr(amem.RegGlobal.DF_Total) + ']');
+          Writeln('DF total ventas     := [' +
+            FloatToStr(amem.RegGlobal.DF_Total) + ']');
 
           Writeln('');
 
           Writeln('DF total gravado    := [' +
-           FloatToStr(amem.RegGlobal.DF_TotalGravado) + ']');
+            FloatToStr(amem.RegGlobal.DF_TotalGravado) + ']');
 
           Writeln('DF total IVA        := [' +
-           FloatToStr(amem.RegGlobal.DF_TotalIVA) + ']');
+            FloatToStr(amem.RegGlobal.DF_TotalIVA) + ']');
 
           Writeln('DF total tributos   := [' +
-           FloatToStr(amem.RegGlobal.DF_TotalTributos) + ']');
+            FloatToStr(amem.RegGlobal.DF_TotalTributos) + ']');
 
           Writeln('DF total no gravado := [' +
-           FloatToStr(amem.RegGlobal.DF_TotalNoGravado) + ']');
+            FloatToStr(amem.RegGlobal.DF_TotalNoGravado) + ']');
 
-          Writeln('DF total exento     := [' +FloatToStr(amem.RegGlobal.DF_TotalExento) +
-            ']');
+          Writeln('DF total exento     := [' +
+            FloatToStr(amem.RegGlobal.DF_TotalExento) + ']');
           Writeln('');
 
-          Writeln('DF total DNFH       := [' +FloatToStr(amem.RegGlobal.DNFH_Total) + ']');
+          Writeln('DF total DNFH       := [' +
+            FloatToStr(amem.RegGlobal.DNFH_Total) + ']');
 
           Writeln('');
         end;
-       end;
+    end;
 
     amem2 := HASARNG.ContinuarConsultaAcumulados;
 
@@ -1738,277 +1793,274 @@ Writeln('');
           begin
             Writeln('');
             Writeln('TIPO REGISTRO:');
-            Writeln('[' +FloatToStr(amem2.Registro) + ']');
-          Writeln('');
-          Writeln('DF (Documentos Fiscales);:');
-          Writeln('-------------------------');
+            Writeln('[' + FloatToStr(amem2.Registro) + ']');
+            Writeln('');
+            Writeln('DF (Documentos Fiscales);:');
+            Writeln('-------------------------');
 
             Writeln('DF cancelados              := [' +
               FloatToStr(amem2.RegDF.CantidadCancelados) + ']');
-          Writeln('DF Tipo comprobante        := [' +
+            Writeln('DF Tipo comprobante        := [' +
               { FromTiposComprobanteToString }
               FloatToStr(amem2.RegDF.CodigoComprobante) + ']');
 
             Writeln('DF Nro. inicial            := [' +
               FloatToStr(amem2.RegDF.NumeroInicial) + ']');
 
-            Writeln('DF Nro. final              := [' + FloatToStr(amem2.RegDF.NumeroFinal
-             ) + ']');
+            Writeln('DF Nro. final              := [' +
+              FloatToStr(amem2.RegDF.NumeroFinal) + ']');
             Writeln('');
 
-            Writeln('DF total ventas            := [' + FloatToStr(amem2.RegDF.Total) +
-              ']');
+            Writeln('DF total ventas            := [' +
+              FloatToStr(amem2.RegDF.Total) + ']');
             Writeln('');
 
             Writeln('DF total gravado           := [' +
-             FloatToStr(amem2.RegDF.TotalGravado) + ']');
+              FloatToStr(amem2.RegDF.TotalGravado) + ']');
 
             Writeln('DF total no gravado        := [' +
-             FloatToStr(amem2.RegDF.TotalNoGravado) + ']');
+              FloatToStr(amem2.RegDF.TotalNoGravado) + ']');
 
-            Writeln('DF total exento            := [' + FloatToStr(amem2.RegDF.TotalExento
-             ) + ']');
+            Writeln('DF total exento            := [' +
+              FloatToStr(amem2.RegDF.TotalExento) + ']');
             Writeln('');
 
             Writeln('DF IVA 1                   := [' +
-             FloatToStr(amem2.RegDF.AlicuotaIVA_1) + ']');
+              FloatToStr(amem2.RegDF.AlicuotaIVA_1) + ']');
 
             Writeln('DF monto IVA 1             := [' +
-             FloatToStr(amem2.RegDF.MontoIVA_1) + ']');
+              FloatToStr(amem2.RegDF.MontoIVA_1) + ']');
 
             Writeln('DF IVA 2                   := [' +
-             FloatToStr(amem2.RegDF.AlicuotaIVA_2) + ']');
+              FloatToStr(amem2.RegDF.AlicuotaIVA_2) + ']');
 
             Writeln('DF monto IVA 2             := [' +
-             FloatToStr(amem2.RegDF.MontoIVA_2) + ']');
+              FloatToStr(amem2.RegDF.MontoIVA_2) + ']');
 
             Writeln('DF IVA 3                   := [' +
-             FloatToStr(amem2.RegDF.AlicuotaIVA_3) + ']');
+              FloatToStr(amem2.RegDF.AlicuotaIVA_3) + ']');
 
             Writeln('DF monto IVA 3             := [' +
-             FloatToStr(amem2.RegDF.MontoIVA_3) + ']');
+              FloatToStr(amem2.RegDF.MontoIVA_3) + ']');
 
             Writeln('DF IVA 4                   := [' +
-             FloatToStr(amem2.RegDF.AlicuotaIVA_4) + ']');
+              FloatToStr(amem2.RegDF.AlicuotaIVA_4) + ']');
 
             Writeln('DF monto IVA 4             := [' +
-             FloatToStr(amem2.RegDF.MontoIVA_4) + ']');
+              FloatToStr(amem2.RegDF.MontoIVA_4) + ']');
 
             Writeln('DF IVA 5                   := [' +
-             FloatToStr(amem2.RegDF.AlicuotaIVA_5) + ']');
+              FloatToStr(amem2.RegDF.AlicuotaIVA_5) + ']');
 
             Writeln('DF monto IVA 5             := [' +
-             FloatToStr(amem2.RegDF.MontoIVA_5) + ']');
+              FloatToStr(amem2.RegDF.MontoIVA_5) + ']');
 
             Writeln('DF IVA 6                   := [' +
-             FloatToStr(amem2.RegDF.AlicuotaIVA_6) + ']');
+              FloatToStr(amem2.RegDF.AlicuotaIVA_6) + ']');
 
             Writeln('DF monto IVA 6             := [' +
-             FloatToStr(amem2.RegDF.MontoIVA_6) + ']');
+              FloatToStr(amem2.RegDF.MontoIVA_6) + ']');
 
             Writeln('DF IVA 7                   := [' +
-             FloatToStr(amem2.RegDF.AlicuotaIVA_7) + ']');
+              FloatToStr(amem2.RegDF.AlicuotaIVA_7) + ']');
 
             Writeln('DF monto IVA 7             := [' +
-             FloatToStr(amem2.RegDF.MontoIVA_7) + ']');
+              FloatToStr(amem2.RegDF.MontoIVA_7) + ']');
 
             Writeln('DF IVA 8                   := [' +
-             FloatToStr(amem2.RegDF.AlicuotaIVA_8) + ']');
+              FloatToStr(amem2.RegDF.AlicuotaIVA_8) + ']');
 
             Writeln('DF monto IVA 8             := [' +
-             FloatToStr(amem2.RegDF.MontoIVA_8) + ']');
+              FloatToStr(amem2.RegDF.MontoIVA_8) + ']');
 
             Writeln('DF IVA 9                   := [' +
-             FloatToStr(amem2.RegDF.AlicuotaIVA_9) + ']');
+              FloatToStr(amem2.RegDF.AlicuotaIVA_9) + ']');
 
             Writeln('DF monto IVA 9             := [' +
-             FloatToStr(amem2.RegDF.MontoIVA_9) + ']');
+              FloatToStr(amem2.RegDF.MontoIVA_9) + ']');
 
             Writeln('DF IVA 10                  := [' +
-             FloatToStr(amem2.RegDF.AlicuotaIVA_10) + ']');
+              FloatToStr(amem2.RegDF.AlicuotaIVA_10) + ']');
 
-            Writeln('DF monto IVA 10            := [' + FloatToStr(amem2.RegDF.MontoIVA_10
-             ) + ']');
+            Writeln('DF monto IVA 10            := [' +
+              FloatToStr(amem2.RegDF.MontoIVA_10) + ']');
             Writeln('');
 
-            Writeln('DF total IVA               := [' + FloatToStr(amem2.RegDF.TotalIVA) +
-              ']');
+            Writeln('DF total IVA               := [' +
+              FloatToStr(amem2.RegDF.TotalIVA) + ']');
             Writeln('');
 
             Writeln('DF tributo 1               := [' +
-             FloatToStr(amem2.RegDF.CodigoTributo1) + ']');
+              FloatToStr(amem2.RegDF.CodigoTributo1) + ']');
 
             Writeln('DF monto tributo 1         := [' +
-             FloatToStr(amem2.RegDF.ImporteTributo1) + ']');
+              FloatToStr(amem2.RegDF.ImporteTributo1) + ']');
 
             Writeln('DF tributo 2               := [' +
-             FloatToStr(amem2.RegDF.CodigoTributo2) + ']');
+              FloatToStr(amem2.RegDF.CodigoTributo2) + ']');
 
             Writeln('DF monto tributo 2         := [' +
-             FloatToStr(amem2.RegDF.ImporteTributo2) + ']');
+              FloatToStr(amem2.RegDF.ImporteTributo2) + ']');
 
             Writeln('DF tributo 3               := [' +
-             FloatToStr(amem2.RegDF.CodigoTributo3) + ']');
+              FloatToStr(amem2.RegDF.CodigoTributo3) + ']');
 
             Writeln('DF monto tributo 3         := [' +
-             FloatToStr(amem2.RegDF.ImporteTributo3) + ']');
+              FloatToStr(amem2.RegDF.ImporteTributo3) + ']');
 
             Writeln('DF tributo 4               := [' +
-             FloatToStr(amem2.RegDF.CodigoTributo4) + ']');
+              FloatToStr(amem2.RegDF.CodigoTributo4) + ']');
 
             Writeln('DF monto tributo 4         := [' +
-             FloatToStr(amem2.RegDF.ImporteTributo4) + ']');
+              FloatToStr(amem2.RegDF.ImporteTributo4) + ']');
 
             Writeln('DF tributo 5               := [' +
-             FloatToStr(amem2.RegDF.CodigoTributo5) + ']');
+              FloatToStr(amem2.RegDF.CodigoTributo5) + ']');
 
             Writeln('DF monto tributo 5         := [' +
-             FloatToStr(amem2.RegDF.ImporteTributo5) + ']');
+              FloatToStr(amem2.RegDF.ImporteTributo5) + ']');
 
             Writeln('DF tributo 6               := [' +
-             FloatToStr(amem2.RegDF.CodigoTributo6) + ']');
+              FloatToStr(amem2.RegDF.CodigoTributo6) + ']');
 
             Writeln('DF monto tributo 6         := [' +
-             FloatToStr(amem2.RegDF.ImporteTributo6) + ']');
+              FloatToStr(amem2.RegDF.ImporteTributo6) + ']');
 
             Writeln('DF tributo 7               := [' +
-             FloatToStr(amem2.RegDF.CodigoTributo7) + ']');
+              FloatToStr(amem2.RegDF.CodigoTributo7) + ']');
 
             Writeln('DF monto tributo 7         := [' +
-             FloatToStr(amem2.RegDF.ImporteTributo7) + ']');
+              FloatToStr(amem2.RegDF.ImporteTributo7) + ']');
 
             Writeln('DF tributo 8               := [' +
-             FloatToStr(amem2.RegDF.CodigoTributo8) + ']');
+              FloatToStr(amem2.RegDF.CodigoTributo8) + ']');
 
             Writeln('DF monto tributo 8         := [' +
-             FloatToStr(amem2.RegDF.ImporteTributo8) + ']');
+              FloatToStr(amem2.RegDF.ImporteTributo8) + ']');
 
             Writeln('DF tributo 9               := [' +
-             FloatToStr(amem2.RegDF.CodigoTributo9) + ']');
+              FloatToStr(amem2.RegDF.CodigoTributo9) + ']');
 
             Writeln('DF monto tributo 9         := [' +
-             FloatToStr(amem2.RegDF.ImporteTributo9) + ']');
+              FloatToStr(amem2.RegDF.ImporteTributo9) + ']');
 
             Writeln('DF tributo 10              := [' +
-             FloatToStr(amem2.RegDF.CodigoTributo10) + ']');
+              FloatToStr(amem2.RegDF.CodigoTributo10) + ']');
 
             Writeln('DF monto tributo 10        := [' +
-             FloatToStr(amem2.RegDF.ImporteTributo10) + ']');
+              FloatToStr(amem2.RegDF.ImporteTributo10) + ']');
 
             Writeln('DF tributo 11              := [' +
-             FloatToStr(amem2.RegDF.CodigoTributo11) + ']');
+              FloatToStr(amem2.RegDF.CodigoTributo11) + ']');
 
             Writeln('DF monto tributo 11        := [' +
-             FloatToStr(amem2.RegDF.ImporteTributo11) + ']');
+              FloatToStr(amem2.RegDF.ImporteTributo11) + ']');
             Writeln('');
 
             Writeln('DF total tributos          := [' +
-             FloatToStr(amem2.RegDF.TotalTributos) + ']');
+              FloatToStr(amem2.RegDF.TotalTributos) + ']');
             Writeln('');
           end;
         HasarArgentina_TLB.RegistroDetalladoDNFH:
           begin
             Writeln('');
-          Writeln('TIPO REGISTRO:');
-          Writeln('[' +FloatToStr(amem2.Registro) + ']');
-          Writeln('');
+            Writeln('TIPO REGISTRO:');
+            Writeln('[' + FloatToStr(amem2.Registro) + ']');
+            Writeln('');
 
             Writeln('DNFH (Documentos No Fiscales Homologados);: :=QUE ACUMULAN:=');
 
             Writeln('---------------------------------------------------------');
-          Writeln('DNFH Tipo Comprob.         := [' +
+            Writeln('DNFH Tipo Comprob.         := [' +
               { FromTiposComprobanteToString }
               FloatToStr(amem2.RegDNFH.CodigoComprobante) + ']');
 
             Writeln('DNFH Nro. inicial          := [' +
-             FloatToStr(amem2.RegDNFH.NumeroInicial) + ']');
+              FloatToStr(amem2.RegDNFH.NumeroInicial) + ']');
 
             Writeln('DNFH Nro. Final            := [' +
-             FloatToStr(amem2.RegDNFH.NumeroFinal) + ']');
+              FloatToStr(amem2.RegDNFH.NumeroFinal) + ']');
 
-            Writeln('DNFH total acumulado       := [' + FloatToStr(amem2.RegDNFH.Total) +
-              ']');
+            Writeln('DNFH total acumulado       := [' +
+              FloatToStr(amem2.RegDNFH.Total) + ']');
             Writeln('');
           end;
         HasarArgentina_TLB.RegistroDetalladoDNFHNoAcum:
           begin
             Writeln('');
             Writeln('TIPO REGISTRO:');
-            Writeln('[' +FloatToStr(amem2.Registro) + ']');
-          Writeln('');
+            Writeln('[' + FloatToStr(amem2.Registro) + ']');
+            Writeln('');
 
             Writeln('DNFH (Documentos No Fiscales Homologados);: :=QUE NO ACUMULAN:=');
 
             Writeln('------------------------------------------------------------');
-          Writeln('Tipo Comprobante := [' +
+            Writeln('Tipo Comprobante := [' +
               { FromTiposComprobanteToString }
               FloatToStr(amem2.RegDNFH_NoAcum.CodigoComprobante) + ']');
 
             Writeln('Nº inicial       := [' +
-             FloatToStr(amem2.RegDNFH_NoAcum.NumeroInicial) + ']');
+              FloatToStr(amem2.RegDNFH_NoAcum.NumeroInicial) + ']');
 
-            Writeln('Nº final         := [' + FloatToStr(amem2.RegDNFH_NoAcum.NumeroFinal) +
-              ']');
+            Writeln('Nº final         := [' +
+              FloatToStr(amem2.RegDNFH_NoAcum.NumeroFinal) + ']');
             Writeln('');
           end;
         HasarArgentina_TLB.RegistroGlobal:
           begin
             Writeln('');
-          Writeln('TIPO REGISTRO:');
-          Writeln('[' +FloatToStr(amem2.Registro) + ']');
-          Writeln('');
-          Writeln('INFORMACION GLOBAL:');
-          Writeln('-------------------');
+            Writeln('TIPO REGISTRO:');
+            Writeln('[' + FloatToStr(amem2.Registro) + ']');
+            Writeln('');
+            Writeln('INFORMACION GLOBAL:');
+            Writeln('-------------------');
 
             Writeln('DF cant. cancelados := [' +
-             FloatToStr(amem2.RegGlobal.DF_CantidadCancelados) + ']');
+              FloatToStr(amem2.RegGlobal.DF_CantidadCancelados) + ']');
 
             Writeln('DF cant. emitidos   := [' +
-             FloatToStr(amem2.RegGlobal.DF_CantidadEmitidos) + ']');
-          Writeln('');
+              FloatToStr(amem2.RegGlobal.DF_CantidadEmitidos) + ']');
+            Writeln('');
 
-            Writeln('DF total ventas     := [' + FloatToStr(amem2.RegGlobal.DF_Total) +
-              ']');
+            Writeln('DF total ventas     := [' +
+              FloatToStr(amem2.RegGlobal.DF_Total) + ']');
             Writeln('');
 
             Writeln('DF total gravado    := [' +
-             FloatToStr(amem2.RegGlobal.DF_TotalGravado) + ']');
+              FloatToStr(amem2.RegGlobal.DF_TotalGravado) + ']');
 
             Writeln('DF total IVA        := [' +
-             FloatToStr(amem2.RegGlobal.DF_TotalIVA) + ']');
+              FloatToStr(amem2.RegGlobal.DF_TotalIVA) + ']');
 
             Writeln('DF total tributos   := [' +
-             FloatToStr(amem2.RegGlobal.DF_TotalTributos) + ']');
+              FloatToStr(amem2.RegGlobal.DF_TotalTributos) + ']');
 
             Writeln('DF total no gravado := [' +
-             FloatToStr(amem2.RegGlobal.DF_TotalNoGravado) + ']');
+              FloatToStr(amem2.RegGlobal.DF_TotalNoGravado) + ']');
 
-            Writeln('DF total exento     := [' + FloatToStr(amem2.RegGlobal.DF_TotalExento
-             ) + ']');
+            Writeln('DF total exento     := [' +
+              FloatToStr(amem2.RegGlobal.DF_TotalExento) + ']');
             Writeln('');
 
-            Writeln('DF total DNFH       := [' + FloatToStr(amem2.RegGlobal.DNFH_Total) +
-              ']');
+            Writeln('DF total DNFH       := [' +
+              FloatToStr(amem2.RegGlobal.DNFH_Total) + ']');
             Writeln('');
           end;
-         end;
+      end;
 
       amem2 := HASARNG.ContinuarConsultaAcumulados;
-       end;
+    end;
 
-  Writeln('');
+    Writeln('');
     Writeln('NO HAY MAS INFORMACION DISPONIBLE !...');
     Writeln('');
-  Writeln('FIN DE LA CONSULTA !...');
-  Writeln('');
+    Writeln('FIN DE LA CONSULTA !...');
+    Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -2016,7 +2068,7 @@ end;
 // Consultar configuración de conectividad en red.
 // ====================================================================================================================
 
-procedure CommandConsCfgRed_Click;
+procedure Tdm.CommandConsCfgRed_Click;
 
 var
   cfgred: RespuestaConsultarConfiguracionRed;
@@ -2026,24 +2078,21 @@ begin
   Writeln('CONSULTANDO CONFIGURACION DE RED...');
   Writeln('');
 
- Try
+  Try
     cfgred := HASARNG.ConsultarConfiguracionRed;
     Writeln('');
-  Writeln('CONFIGURACION DE RED:');
-  Writeln('Direcc. IP := [' + (cfgred.DireccionIP) + ']');
-  Writeln('Gateway    := [' + (cfgred.Gateway) + ']');
-  Writeln('Máscara    := [' + (cfgred.Mascara) + ']');
+    Writeln('CONFIGURACION DE RED:');
+    Writeln('Direcc. IP := [' + (cfgred.DireccionIP) + ']');
+    Writeln('Gateway    := [' + (cfgred.Gateway) + ']');
+    Writeln('Máscara    := [' + (cfgred.Mascara) + ']');
     Writeln('');
-  Writeln('FIN DE LA CONSULTA !...');
-  Writeln('');
+    Writeln('FIN DE LA CONSULTA !...');
+    Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -2051,7 +2100,7 @@ end;
 // Consulta de acumulados para determinado Cierre Diario 'Z' - Memoria fiscal de la impresora fiscal.
 // ==================================================================================================================
 
-procedure CommandConsCierreZ_Click;
+procedure Tdm.CommandConsCierreZ_Click;
 
 var
   azeta: RespuestaConsultarAcumuladosCierreZeta;
@@ -2063,8 +2112,8 @@ begin
   Writeln('CONSULTANDO ACUMULADOS CIERRE " Z "...');
   Writeln('');
 
- Try
-    azeta := HASARNG.ConsultarAcumuladosCierreZeta(ReporteZNumero, 11);
+  Try
+    //?azeta := FloatToStr(HASARNG.ConsultarAcumuladosCierreZeta(ReporteZNumero, 11));
 
     if (azeta.Registro = HasarArgentina_TLB.RegistroFinal) then
     begin
@@ -2072,268 +2121,268 @@ begin
       Writeln('NO HAY INFORMACION DISPONIBLE !...');
       Writeln('');
 
-
-       end;
-
+    end;
 
     Case azeta.Registro of
       HasarArgentina_TLB.RegistroDetalladoDF:
         begin
           Writeln('');
           Writeln('TIPO REGISTRO:');
-          Writeln('[' +FloatToStr(azeta.Registro) + ']');
-        Writeln('');
-        Writeln('DF (Documentos Fiscales);:');
-        Writeln('-------------------------');
-        Writeln('DF Tipo comprobante        := [' +
+          Writeln('[' + FloatToStr(azeta.Registro) + ']');
+          Writeln('');
+          Writeln('DF (Documentos Fiscales);:');
+          Writeln('-------------------------');
+          Writeln('DF Tipo comprobante        := [' +
             { FromTiposComprobanteToString }
-            (azeta.RegDF.CodigoComprobante) + ']');
+            FloatToStr(azeta.RegDF.CodigoComprobante) + ']');
 
           Writeln('DF Nro. inicial            := [' +
-           FloatToStr(azeta.RegDF.NumeroInicial) + ']');
+            FloatToStr(azeta.RegDF.NumeroInicial) + ']');
 
           Writeln('DF Nro. final              := [' +
-           FloatToStr(azeta.RegDF.NumeroFinal) + ']');
+            FloatToStr(azeta.RegDF.NumeroFinal) + ']');
 
           Writeln('DF cancelados              := [' +
-           FloatToStr(azeta.RegDF.CantidadCancelados) + ']');
+            FloatToStr(azeta.RegDF.CantidadCancelados) + ']');
           Writeln('');
 
-          Writeln('DF total ventas            := [' +FloatToStr(azeta.RegDF.Total) + ']');
+          Writeln('DF total ventas            := [' +
+            FloatToStr(azeta.RegDF.Total) + ']');
 
           Writeln('');
 
           Writeln('DF total gravado           := [' +
-           FloatToStr(azeta.RegDF.TotalGravado) + ']');
+            FloatToStr(azeta.RegDF.TotalGravado) + ']');
 
           Writeln('DF total no gravado        := [' +
-           FloatToStr(azeta.RegDF.TotalNoGravado) + ']');
+            FloatToStr(azeta.RegDF.TotalNoGravado) + ']');
 
-          Writeln('DF total exento            := [' +FloatToStr(azeta.RegDF.TotalExento) +
-            ']');
+          Writeln('DF total exento            := [' +
+            FloatToStr(azeta.RegDF.TotalExento) + ']');
           Writeln('');
 
           Writeln('DF IVA 1                   := [' +
-           FloatToStr(azeta.RegDF.AlicuotaIVA_1) + ']');
+            FloatToStr(azeta.RegDF.AlicuotaIVA_1) + ']');
 
           Writeln('DF monto IVA 1             := [' +
-           FloatToStr(azeta.RegDF.MontoIVA_1) + ']');
+            FloatToStr(azeta.RegDF.MontoIVA_1) + ']');
 
           Writeln('DF IVA 2                   := [' +
-           FloatToStr(azeta.RegDF.AlicuotaIVA_2) + ']');
+            FloatToStr(azeta.RegDF.AlicuotaIVA_2) + ']');
 
           Writeln('DF monto IVA 2             := [' +
-           FloatToStr(azeta.RegDF.MontoIVA_2) + ']');
+            FloatToStr(azeta.RegDF.MontoIVA_2) + ']');
 
           Writeln('DF IVA 3                   := [' +
-           FloatToStr(azeta.RegDF.AlicuotaIVA_3) + ']');
+            FloatToStr(azeta.RegDF.AlicuotaIVA_3) + ']');
 
           Writeln('DF monto IVA 3             := [' +
-           FloatToStr(azeta.RegDF.MontoIVA_3) + ']');
+            FloatToStr(azeta.RegDF.MontoIVA_3) + ']');
 
           Writeln('DF IVA 4                   := [' +
-           FloatToStr(azeta.RegDF.AlicuotaIVA_4) + ']');
+            FloatToStr(azeta.RegDF.AlicuotaIVA_4) + ']');
 
           Writeln('DF monto IVA 4             := [' +
-           FloatToStr(azeta.RegDF.MontoIVA_4) + ']');
+            FloatToStr(azeta.RegDF.MontoIVA_4) + ']');
 
           Writeln('DF IVA 5                   := [' +
-           FloatToStr(azeta.RegDF.AlicuotaIVA_5) + ']');
+            FloatToStr(azeta.RegDF.AlicuotaIVA_5) + ']');
 
           Writeln('DF monto IVA 5             := [' +
-           FloatToStr(azeta.RegDF.MontoIVA_5) + ']');
+            FloatToStr(azeta.RegDF.MontoIVA_5) + ']');
 
           Writeln('DF IVA 6                   := [' +
-           FloatToStr(azeta.RegDF.AlicuotaIVA_6) + ']');
+            FloatToStr(azeta.RegDF.AlicuotaIVA_6) + ']');
 
           Writeln('DF monto IVA 6             := [' +
-           FloatToStr(azeta.RegDF.MontoIVA_6) + ']');
+            FloatToStr(azeta.RegDF.MontoIVA_6) + ']');
 
           Writeln('DF IVA 7                   := [' +
-           FloatToStr(azeta.RegDF.AlicuotaIVA_7) + ']');
+            FloatToStr(azeta.RegDF.AlicuotaIVA_7) + ']');
 
           Writeln('DF monto IVA 7             := [' +
-           FloatToStr(azeta.RegDF.MontoIVA_7) + ']');
+            FloatToStr(azeta.RegDF.MontoIVA_7) + ']');
 
           Writeln('DF IVA 8                   := [' +
-           FloatToStr(azeta.RegDF.AlicuotaIVA_8) + ']');
+            FloatToStr(azeta.RegDF.AlicuotaIVA_8) + ']');
 
           Writeln('DF monto IVA 8             := [' +
-           FloatToStr(azeta.RegDF.MontoIVA_8) + ']');
+            FloatToStr(azeta.RegDF.MontoIVA_8) + ']');
 
           Writeln('DF IVA 9                   := [' +
-           FloatToStr(azeta.RegDF.AlicuotaIVA_9) + ']');
+            FloatToStr(azeta.RegDF.AlicuotaIVA_9) + ']');
 
           Writeln('DF monto IVA 9             := [' +
-           FloatToStr(azeta.RegDF.MontoIVA_9) + ']');
+            FloatToStr(azeta.RegDF.MontoIVA_9) + ']');
 
           Writeln('DF IVA 10                  := [' +
-           FloatToStr(azeta.RegDF.AlicuotaIVA_10) + ']');
+            FloatToStr(azeta.RegDF.AlicuotaIVA_10) + ']');
 
-          Writeln('DF monto IVA 10            := [' +FloatToStr(azeta.RegDF.MontoIVA_10) +
-            ']');
+          Writeln('DF monto IVA 10            := [' +
+            FloatToStr(azeta.RegDF.MontoIVA_10) + ']');
           Writeln('');
 
-          Writeln('DF total IVA               := [' +FloatToStr(azeta.RegDF.TotalIVA) +
-            ']');
+          Writeln('DF total IVA               := [' +
+            FloatToStr(azeta.RegDF.TotalIVA) + ']');
           Writeln('');
 
           Writeln('DF tributo 1               := [' +
-           FloatToStr(azeta.RegDF.CodigoTributo1) + ']');
+            FloatToStr(azeta.RegDF.CodigoTributo1) + ']');
 
           Writeln('DF monto tributo 1         := [' +
-           FloatToStr(azeta.RegDF.ImporteTributo1) + ']');
+            FloatToStr(azeta.RegDF.ImporteTributo1) + ']');
 
           Writeln('DF tributo 2               := [' +
-           FloatToStr(azeta.RegDF.CodigoTributo2) + ']');
+            FloatToStr(azeta.RegDF.CodigoTributo2) + ']');
 
           Writeln('DF monto tributo 2         := [' +
-           FloatToStr(azeta.RegDF.ImporteTributo2) + ']');
+            FloatToStr(azeta.RegDF.ImporteTributo2) + ']');
 
           Writeln('DF tributo 3               := [' +
-           FloatToStr(azeta.RegDF.CodigoTributo3) + ']');
+            FloatToStr(azeta.RegDF.CodigoTributo3) + ']');
 
           Writeln('DF monto tributo 3         := [' +
-           FloatToStr(azeta.RegDF.ImporteTributo3) + ']');
+            FloatToStr(azeta.RegDF.ImporteTributo3) + ']');
 
           Writeln('DF tributo 4               := [' +
-           FloatToStr(azeta.RegDF.CodigoTributo4) + ']');
+            FloatToStr(azeta.RegDF.CodigoTributo4) + ']');
 
           Writeln('DF monto tributo 4         := [' +
-           FloatToStr(azeta.RegDF.ImporteTributo4) + ']');
+            FloatToStr(azeta.RegDF.ImporteTributo4) + ']');
 
           Writeln('DF tributo 5               := [' +
-           FloatToStr(azeta.RegDF.CodigoTributo5) + ']');
+            FloatToStr(azeta.RegDF.CodigoTributo5) + ']');
 
           Writeln('DF monto tributo 5         := [' +
-           FloatToStr(azeta.RegDF.ImporteTributo5) + ']');
+            FloatToStr(azeta.RegDF.ImporteTributo5) + ']');
 
           Writeln('DF tributo 6               := [' +
-           FloatToStr(azeta.RegDF.CodigoTributo6) + ']');
+            FloatToStr(azeta.RegDF.CodigoTributo6) + ']');
 
           Writeln('DF monto tributo 6         := [' +
-           FloatToStr(azeta.RegDF.ImporteTributo6) + ']');
+            FloatToStr(azeta.RegDF.ImporteTributo6) + ']');
 
           Writeln('DF tributo 7               := [' +
-           FloatToStr(azeta.RegDF.CodigoTributo7) + ']');
+            FloatToStr(azeta.RegDF.CodigoTributo7) + ']');
 
           Writeln('DF monto tributo 7         := [' +
-           FloatToStr(azeta.RegDF.ImporteTributo7) + ']');
+            FloatToStr(azeta.RegDF.ImporteTributo7) + ']');
 
           Writeln('DF tributo 8               := [' +
-           FloatToStr(azeta.RegDF.CodigoTributo8) + ']');
+            FloatToStr(azeta.RegDF.CodigoTributo8) + ']');
 
           Writeln('DF monto tributo 8         := [' +
-           FloatToStr(azeta.RegDF.ImporteTributo8) + ']');
+            FloatToStr(azeta.RegDF.ImporteTributo8) + ']');
 
           Writeln('DF tributo 9               := [' +
-           FloatToStr(azeta.RegDF.CodigoTributo9) + ']');
+            FloatToStr(azeta.RegDF.CodigoTributo9) + ']');
 
           Writeln('DF monto tributo 9         := [' +
-           FloatToStr(azeta.RegDF.ImporteTributo9) + ']');
+            FloatToStr(azeta.RegDF.ImporteTributo9) + ']');
 
           Writeln('DF tributo 10              := [' +
-           FloatToStr(azeta.RegDF.CodigoTributo10) + ']');
+            FloatToStr(azeta.RegDF.CodigoTributo10) + ']');
 
           Writeln('DF monto tributo 10        := [' +
-           FloatToStr(azeta.RegDF.ImporteTributo10) + ']');
+            FloatToStr(azeta.RegDF.ImporteTributo10) + ']');
 
           Writeln('DF tributo 11              := [' +
-           FloatToStr(azeta.RegDF.CodigoTributo11) + ']');
+            FloatToStr(azeta.RegDF.CodigoTributo11) + ']');
 
           Writeln('DF monto tributo 11        := [' +
-           FloatToStr(azeta.RegDF.ImporteTributo11) + ']');
+            FloatToStr(azeta.RegDF.ImporteTributo11) + ']');
           Writeln('');
 
-          Writeln('DF total tributos          := [' +FloatToStr(azeta.RegDF.TotalTributos
-           ) + ']');
+          Writeln('DF total tributos          := [' +
+            FloatToStr(azeta.RegDF.TotalTributos) + ']');
           Writeln('');
         end;
       HasarArgentina_TLB.RegistroDetalladoDNFH:
         begin
           Writeln('');
-        Writeln('TIPO REGISTRO:');
-        Writeln('[' +FloatToStr(azeta.Registro) + ']');
-        Writeln('');
+          Writeln('TIPO REGISTRO:');
+          Writeln('[' + FloatToStr(azeta.Registro) + ']');
+          Writeln('');
 
           Writeln('DNFH (Documentos No Fiscales Homologados);: :=QUE ACUMULAN:=');
 
           Writeln('---------------------------------------------------------');
-        Writeln('DNFH Tipo Comprob.         := [' +
+          Writeln('DNFH Tipo Comprob.         := [' +
             { FromTiposComprobanteToString }
-            (azeta.RegDNFH.CodigoComprobante) + ']');
+            FloatToStr(azeta.RegDNFH.CodigoComprobante) + ']');
 
           Writeln('DNFH Nro. inicial          := [' +
-           FloatToStr(azeta.RegDNFH.NumeroInicial) + ']');
+            FloatToStr(azeta.RegDNFH.NumeroInicial) + ']');
 
           Writeln('DNFH Nro. Final            := [' +
-           FloatToStr(azeta.RegDNFH.NumeroFinal) + ']');
+            FloatToStr(azeta.RegDNFH.NumeroFinal) + ']');
 
-          Writeln('DNFH total acumulado       := [' +FloatToStr(azeta.RegDNFH.Total) +
-            ']');
+          Writeln('DNFH total acumulado       := [' +
+            FloatToStr(azeta.RegDNFH.Total) + ']');
           Writeln('');
         end;
       HasarArgentina_TLB.RegistroDetalladoDNFHNoAcum:
         begin
           Writeln('');
           Writeln('TIPO REGISTRO:');
-          Writeln('[' +FloatToStr(azeta.Registro) + ']');
-        Writeln('');
+          Writeln('[' + FloatToStr(azeta.Registro) + ']');
+          Writeln('');
 
           Writeln('DNFH (Documentos No Fiscales Homologados);: :=QUE NO ACUMULAN:=');
 
           Writeln('------------------------------------------------------------');
-        Writeln('Tipo Comprobante := [' +
+          Writeln('Tipo Comprobante := [' +
             { FromTiposComprobanteToString }
-            (azeta.RegDNFH_NoAcum.CodigoComprobante) + ']');
+            FloatToStr(azeta.RegDNFH_NoAcum.CodigoComprobante) + ']');
           Writeln('Nº inicial       := [' +
-           FloatToStr(azeta.RegDNFH_NoAcum.NumeroInicial) + ']');
+            FloatToStr(azeta.RegDNFH_NoAcum.NumeroInicial) + ']');
 
-          Writeln('Nº final         := [' +FloatToStr(azeta.RegDNFH_NoAcum.NumeroFinal) +
-            ']');
+          Writeln('Nº final         := [' +
+            FloatToStr(azeta.RegDNFH_NoAcum.NumeroFinal) + ']');
           Writeln('');
         end;
       HasarArgentina_TLB.RegistroGlobal:
         begin
           Writeln('');
-        Writeln('TIPO REGISTRO:');
-        Writeln('[' +FloatToStr(azeta.Registro) + ']');
-        Writeln('');
-        Writeln('INFORMACION GLOBAL:');
-        Writeln('-------------------');
+          Writeln('TIPO REGISTRO:');
+          Writeln('[' + FloatToStr(azeta.Registro) + ']');
+          Writeln('');
+          Writeln('INFORMACION GLOBAL:');
+          Writeln('-------------------');
 
           Writeln('DF cant. cancelados := [' +
-           FloatToStr(azeta.RegGlobal.DF_CantidadCancelados) + ']');
+            FloatToStr(azeta.RegGlobal.DF_CantidadCancelados) + ']');
 
           Writeln('DF cant. emitidos   := [' +
-           FloatToStr(azeta.RegGlobal.DF_CantidadEmitidos) + ']');
+            FloatToStr(azeta.RegGlobal.DF_CantidadEmitidos) + ']');
           Writeln('');
 
-          Writeln('DF total ventas     := [' +FloatToStr(azeta.RegGlobal.DF_Total) + ']');
+          Writeln('DF total ventas     := [' +
+            FloatToStr(azeta.RegGlobal.DF_Total) + ']');
 
           Writeln('');
 
           Writeln('DF total gravado    := [' +
-           FloatToStr(azeta.RegGlobal.DF_TotalGravado) + ']');
+            FloatToStr(azeta.RegGlobal.DF_TotalGravado) + ']');
 
           Writeln('DF total IVA        := [' +
-           FloatToStr(azeta.RegGlobal.DF_TotalIVA) + ']');
+            FloatToStr(azeta.RegGlobal.DF_TotalIVA) + ']');
 
           Writeln('DF total tributos   := [' +
-           FloatToStr(azeta.RegGlobal.DF_TotalTributos) + ']');
+            FloatToStr(azeta.RegGlobal.DF_TotalTributos) + ']');
 
           Writeln('DF total no gravado := [' +
-           FloatToStr(azeta.RegGlobal.DF_TotalNoGravado) + ']');
+            FloatToStr(azeta.RegGlobal.DF_TotalNoGravado) + ']');
 
-          Writeln('DF total exento     := [' +FloatToStr(azeta.RegGlobal.DF_TotalExento) +
-            ']');
+          Writeln('DF total exento     := [' +
+            FloatToStr(azeta.RegGlobal.DF_TotalExento) + ']');
           Writeln('');
 
-          Writeln('DF total DNFH       := [' +FloatToStr(azeta.RegGlobal.DNFH_Total) +
-            ']');
+          Writeln('DF total DNFH       := [' +
+            FloatToStr(azeta.RegGlobal.DNFH_Total) + ']');
           Writeln('');
         end;
-       end;
+    end;
 
     azeta2 := HASARNG.ContinuarConsultaAcumulados;
 
@@ -2345,276 +2394,274 @@ begin
           begin
             Writeln('');
             Writeln('TIPO REGISTRO:');
-            Writeln('[' +FloatToStr(azeta2.Registro) + ']');
-          Writeln('');
-          Writeln('DF (Documentos Fiscales);:');
-          Writeln('-------------------------');
-          Writeln('DF Tipo comprobante        := [' +
+            Writeln('[' + FloatToStr(azeta2.Registro) + ']');
+            Writeln('');
+            Writeln('DF (Documentos Fiscales);:');
+            Writeln('-------------------------');
+            Writeln('DF Tipo comprobante        := [' +
               { FromTiposComprobanteToString }
-              (azeta2.RegDF.CodigoComprobante) + ']');
+              FloatToStr(azeta2.RegDF.CodigoComprobante) + ']');
 
             Writeln('DF Nro. inicial            := [' +
-             FloatToStr(azeta2.RegDF.NumeroInicial) + ']');
+              FloatToStr(azeta2.RegDF.NumeroInicial) + ']');
 
             Writeln('DF Nro. final              := [' +
-             FloatToStr(azeta2.RegDF.NumeroFinal) + ']');
+              FloatToStr(azeta2.RegDF.NumeroFinal) + ']');
 
             Writeln('DF cancelados              := [' +
-             FloatToStr(azeta2.RegDF.CantidadCancelados) + ']');
+              FloatToStr(azeta2.RegDF.CantidadCancelados) + ']');
             Writeln('');
 
-            Writeln('DF total ventas            := [' +FloatToStr(azeta2.RegDF.Total) +
-              ']');
+            Writeln('DF total ventas            := [' +
+              FloatToStr(azeta2.RegDF.Total) + ']');
             Writeln('');
 
             Writeln('DF total gravado           := [' +
-             FloatToStr(azeta2.RegDF.TotalGravado) + ']');
+              FloatToStr(azeta2.RegDF.TotalGravado) + ']');
 
             Writeln('DF total no gravado        := [' +
-             FloatToStr(azeta2.RegDF.TotalNoGravado) + ']');
+              FloatToStr(azeta2.RegDF.TotalNoGravado) + ']');
 
-            Writeln('DF total exento            := [' +FloatToStr(azeta2.RegDF.TotalExento)
-              + ']');
+            Writeln('DF total exento            := [' +
+              FloatToStr(azeta2.RegDF.TotalExento) + ']');
             Writeln('');
 
             Writeln('DF IVA 1                   := [' +
-             FloatToStr(azeta2.RegDF.AlicuotaIVA_1) + ']');
+              FloatToStr(azeta2.RegDF.AlicuotaIVA_1) + ']');
 
             Writeln('DF monto IVA 1             := [' +
-             FloatToStr(azeta2.RegDF.MontoIVA_1) + ']');
+              FloatToStr(azeta2.RegDF.MontoIVA_1) + ']');
 
             Writeln('DF IVA 2                   := [' +
-             FloatToStr(azeta2.RegDF.AlicuotaIVA_2) + ']');
+              FloatToStr(azeta2.RegDF.AlicuotaIVA_2) + ']');
 
             Writeln('DF monto IVA 2             := [' +
-             FloatToStr(azeta2.RegDF.MontoIVA_2) + ']');
+              FloatToStr(azeta2.RegDF.MontoIVA_2) + ']');
 
             Writeln('DF IVA 3                   := [' +
-             FloatToStr(azeta2.RegDF.AlicuotaIVA_3) + ']');
+              FloatToStr(azeta2.RegDF.AlicuotaIVA_3) + ']');
 
             Writeln('DF monto IVA 3             := [' +
-             FloatToStr(azeta2.RegDF.MontoIVA_3) + ']');
+              FloatToStr(azeta2.RegDF.MontoIVA_3) + ']');
 
             Writeln('DF IVA 4                   := [' +
-             FloatToStr(azeta2.RegDF.AlicuotaIVA_4) + ']');
+              FloatToStr(azeta2.RegDF.AlicuotaIVA_4) + ']');
 
             Writeln('DF monto IVA 4             := [' +
-             FloatToStr(azeta2.RegDF.MontoIVA_4) + ']');
+              FloatToStr(azeta2.RegDF.MontoIVA_4) + ']');
 
             Writeln('DF IVA 5                   := [' +
-             FloatToStr(azeta2.RegDF.AlicuotaIVA_5) + ']');
+              FloatToStr(azeta2.RegDF.AlicuotaIVA_5) + ']');
 
             Writeln('DF monto IVA 5             := [' +
-             FloatToStr(azeta2.RegDF.MontoIVA_5) + ']');
+              FloatToStr(azeta2.RegDF.MontoIVA_5) + ']');
 
             Writeln('DF IVA 6                   := [' +
-             FloatToStr(azeta2.RegDF.AlicuotaIVA_6) + ']');
+              FloatToStr(azeta2.RegDF.AlicuotaIVA_6) + ']');
 
             Writeln('DF monto IVA 6             := [' +
-             FloatToStr(azeta2.RegDF.MontoIVA_6) + ']');
+              FloatToStr(azeta2.RegDF.MontoIVA_6) + ']');
 
             Writeln('DF IVA 7                   := [' +
-             FloatToStr(azeta2.RegDF.AlicuotaIVA_7) + ']');
+              FloatToStr(azeta2.RegDF.AlicuotaIVA_7) + ']');
 
             Writeln('DF monto IVA 7             := [' +
-             FloatToStr(azeta2.RegDF.MontoIVA_7) + ']');
+              FloatToStr(azeta2.RegDF.MontoIVA_7) + ']');
 
             Writeln('DF IVA 8                   := [' +
-             FloatToStr(azeta2.RegDF.AlicuotaIVA_8) + ']');
+              FloatToStr(azeta2.RegDF.AlicuotaIVA_8) + ']');
 
             Writeln('DF monto IVA 8             := [' +
-             FloatToStr(azeta2.RegDF.MontoIVA_8) + ']');
+              FloatToStr(azeta2.RegDF.MontoIVA_8) + ']');
 
             Writeln('DF IVA 9                   := [' +
-             FloatToStr(azeta2.RegDF.AlicuotaIVA_9) + ']');
+              FloatToStr(azeta2.RegDF.AlicuotaIVA_9) + ']');
 
             Writeln('DF monto IVA 9             := [' +
-             FloatToStr(azeta2.RegDF.MontoIVA_9) + ']');
+              FloatToStr(azeta2.RegDF.MontoIVA_9) + ']');
 
             Writeln('DF IVA 10                  := [' +
-             FloatToStr(azeta2.RegDF.AlicuotaIVA_10) + ']');
+              FloatToStr(azeta2.RegDF.AlicuotaIVA_10) + ']');
 
-            Writeln('DF monto IVA 10            := [' +FloatToStr(azeta2.RegDF.MontoIVA_10
-             ) + ']');
+            Writeln('DF monto IVA 10            := [' +
+              FloatToStr(azeta2.RegDF.MontoIVA_10) + ']');
             Writeln('');
 
-            Writeln('DF total IVA               := [' +FloatToStr(azeta2.RegDF.TotalIVA) +
-              ']');
+            Writeln('DF total IVA               := [' +
+              FloatToStr(azeta2.RegDF.TotalIVA) + ']');
             Writeln('');
 
             Writeln('DF tributo 1               := [' +
-             FloatToStr(azeta2.RegDF.CodigoTributo1) + ']');
+              FloatToStr(azeta2.RegDF.CodigoTributo1) + ']');
 
             Writeln('DF monto tributo 1         := [' +
-             FloatToStr(azeta2.RegDF.ImporteTributo1) + ']');
+              FloatToStr(azeta2.RegDF.ImporteTributo1) + ']');
 
             Writeln('DF tributo 2               := [' +
-             FloatToStr(azeta2.RegDF.CodigoTributo2) + ']');
+              FloatToStr(azeta2.RegDF.CodigoTributo2) + ']');
 
             Writeln('DF monto tributo 2         := [' +
-             FloatToStr(azeta2.RegDF.ImporteTributo2) + ']');
+              FloatToStr(azeta2.RegDF.ImporteTributo2) + ']');
 
             Writeln('DF tributo 3               := [' +
-             FloatToStr(azeta2.RegDF.CodigoTributo3) + ']');
+              FloatToStr(azeta2.RegDF.CodigoTributo3) + ']');
 
             Writeln('DF monto tributo 3         := [' +
-             FloatToStr(azeta2.RegDF.ImporteTributo3) + ']');
+              FloatToStr(azeta2.RegDF.ImporteTributo3) + ']');
 
             Writeln('DF tributo 4               := [' +
-             FloatToStr(azeta2.RegDF.CodigoTributo4) + ']');
+              FloatToStr(azeta2.RegDF.CodigoTributo4) + ']');
 
             Writeln('DF monto tributo 4         := [' +
-             FloatToStr(azeta2.RegDF.ImporteTributo4) + ']');
+              FloatToStr(azeta2.RegDF.ImporteTributo4) + ']');
 
             Writeln('DF tributo 5               := [' +
-             FloatToStr(azeta2.RegDF.CodigoTributo5) + ']');
+              FloatToStr(azeta2.RegDF.CodigoTributo5) + ']');
 
             Writeln('DF monto tributo 5         := [' +
-             FloatToStr(azeta2.RegDF.ImporteTributo5) + ']');
+              FloatToStr(azeta2.RegDF.ImporteTributo5) + ']');
 
             Writeln('DF tributo 6               := [' +
-             FloatToStr(azeta2.RegDF.CodigoTributo6) + ']');
+              FloatToStr(azeta2.RegDF.CodigoTributo6) + ']');
 
             Writeln('DF monto tributo 6         := [' +
-             FloatToStr(azeta2.RegDF.ImporteTributo6) + ']');
+              FloatToStr(azeta2.RegDF.ImporteTributo6) + ']');
 
             Writeln('DF tributo 7               := [' +
-             FloatToStr(azeta2.RegDF.CodigoTributo7) + ']');
+              FloatToStr(azeta2.RegDF.CodigoTributo7) + ']');
 
             Writeln('DF monto tributo 7         := [' +
-             FloatToStr(azeta2.RegDF.ImporteTributo7) + ']');
+              FloatToStr(azeta2.RegDF.ImporteTributo7) + ']');
 
             Writeln('DF tributo 8               := [' +
-             FloatToStr(azeta2.RegDF.CodigoTributo8) + ']');
+              FloatToStr(azeta2.RegDF.CodigoTributo8) + ']');
 
             Writeln('DF monto tributo 8         := [' +
-             FloatToStr(azeta2.RegDF.ImporteTributo8) + ']');
+              FloatToStr(azeta2.RegDF.ImporteTributo8) + ']');
 
             Writeln('DF tributo 9               := [' +
-             FloatToStr(azeta2.RegDF.CodigoTributo9) + ']');
+              FloatToStr(azeta2.RegDF.CodigoTributo9) + ']');
 
             Writeln('DF monto tributo 9         := [' +
-             FloatToStr(azeta2.RegDF.ImporteTributo9) + ']');
+              FloatToStr(azeta2.RegDF.ImporteTributo9) + ']');
 
             Writeln('DF tributo 10              := [' +
-             FloatToStr(azeta2.RegDF.CodigoTributo10) + ']');
+              FloatToStr(azeta2.RegDF.CodigoTributo10) + ']');
 
             Writeln('DF monto tributo 10        := [' +
-             FloatToStr(azeta2.RegDF.ImporteTributo10) + ']');
+              FloatToStr(azeta2.RegDF.ImporteTributo10) + ']');
 
             Writeln('DF tributo 11              := [' +
-             FloatToStr(azeta2.RegDF.CodigoTributo11) + ']');
+              FloatToStr(azeta2.RegDF.CodigoTributo11) + ']');
 
             Writeln('DF monto tributo 11        := [' +
-             FloatToStr(azeta2.RegDF.ImporteTributo11) + ']');
+              FloatToStr(azeta2.RegDF.ImporteTributo11) + ']');
             Writeln('');
 
             Writeln('DF total tributos          := [' +
-             FloatToStr(azeta2.RegDF.TotalTributos) + ']');
+              FloatToStr(azeta2.RegDF.TotalTributos) + ']');
             Writeln('');
           end;
         HasarArgentina_TLB.RegistroDetalladoDNFH:
           begin
             Writeln('');
-          Writeln('TIPO REGISTRO:');
-          Writeln('[' +FloatToStr(azeta2.Registro) + ']');
-          Writeln('');
+            Writeln('TIPO REGISTRO:');
+            Writeln('[' + FloatToStr(azeta2.Registro) + ']');
+            Writeln('');
 
             Writeln('DNFH (Documentos No Fiscales Homologados);: :=QUE ACUMULAN:=');
 
             Writeln('---------------------------------------------------------');
-          Writeln('DNFH Tipo Comprob.         := [' +
+            Writeln('DNFH Tipo Comprob.         := [' +
               { FromTiposComprobanteToString }
-              (azeta2.RegDNFH.CodigoComprobante) + ']');
+              FloatToStr(azeta2.RegDNFH.CodigoComprobante) + ']');
 
             Writeln('DNFH Nro. inicial          := [' +
-             FloatToStr(azeta2.RegDNFH.NumeroInicial) + ']');
+              FloatToStr(azeta2.RegDNFH.NumeroInicial) + ']');
 
             Writeln('DNFH Nro. Final            := [' +
-             FloatToStr(azeta2.RegDNFH.NumeroFinal) + ']');
+              FloatToStr(azeta2.RegDNFH.NumeroFinal) + ']');
 
-            Writeln('DNFH total acumulado       := [' +FloatToStr(azeta2.RegDNFH.Total) +
-              ']');
+            Writeln('DNFH total acumulado       := [' +
+              FloatToStr(azeta2.RegDNFH.Total) + ']');
             Writeln('');
           end;
         HasarArgentina_TLB.RegistroDetalladoDNFHNoAcum:
           begin
             Writeln('');
             Writeln('TIPO REGISTRO:');
-            Writeln('[' +FloatToStr(azeta2.Registro) + ']');
-          Writeln('');
+            Writeln('[' + FloatToStr(azeta2.Registro) + ']');
+            Writeln('');
 
             Writeln('DNFH (Documentos No Fiscales Homologados);: :=QUE NO ACUMULAN:=');
 
             Writeln('------------------------------------------------------------');
-          Writeln('Tipo Comprobante := [' +
+            Writeln('Tipo Comprobante := [' +
               { FromTiposComprobanteToString }
-              (azeta2.RegDNFH_NoAcum.CodigoComprobante) + ']');
+              FloatToStr(azeta2.RegDNFH_NoAcum.CodigoComprobante) + ']');
 
             Writeln('Nº inicial       := [' +
-             FloatToStr(azeta2.RegDNFH_NoAcum.NumeroInicial) + ']');
+              FloatToStr(azeta2.RegDNFH_NoAcum.NumeroInicial) + ']');
 
-            Writeln('Nº final         := [' +FloatToStr(azeta2.RegDNFH_NoAcum.NumeroFinal
-             ) + ']');
+            Writeln('Nº final         := [' +
+              FloatToStr(azeta2.RegDNFH_NoAcum.NumeroFinal) + ']');
             Writeln('');
           end;
         HasarArgentina_TLB.RegistroGlobal:
           begin
             Writeln('');
-          Writeln('TIPO REGISTRO:');
-          Writeln('[' +FloatToStr(azeta2.Registro) + ']');
-          Writeln('');
-          Writeln('INFORMACION GLOBAL:');
-          Writeln('-------------------');
+            Writeln('TIPO REGISTRO:');
+            Writeln('[' + FloatToStr(azeta2.Registro) + ']');
+            Writeln('');
+            Writeln('INFORMACION GLOBAL:');
+            Writeln('-------------------');
 
             Writeln('DF cant. cancelados := [' +
-             FloatToStr(azeta2.RegGlobal.DF_CantidadCancelados) + ']');
+              IntToStr(azeta2.RegGlobal.DF_CantidadCancelados) + ']');
 
             Writeln('DF cant. emitidos   := [' +
-             FloatToStr(azeta2.RegGlobal.DF_CantidadEmitidos) + ']');
-          Writeln('');
+              FloatToStr(azeta2.RegGlobal.DF_CantidadEmitidos) + ']');
+            Writeln('');
 
-            Writeln('DF total ventas     := [' +FloatToStr(azeta2.RegGlobal.DF_Total) +
-              ']');
+            Writeln('DF total ventas     := [' +
+              FloatToStr(azeta2.RegGlobal.DF_Total) + ']');
             Writeln('');
 
             Writeln('DF total gravado    := [' +
-             FloatToStr(azeta2.RegGlobal.DF_TotalGravado) + ']');
+              FloatToStr(azeta2.RegGlobal.DF_TotalGravado) + ']');
 
             Writeln('DF total IVA        := [' +
-             FloatToStr(azeta2.RegGlobal.DF_TotalIVA) + ']');
+              FloatToStr(azeta2.RegGlobal.DF_TotalIVA) + ']');
 
             Writeln('DF total tributos   := [' +
-             FloatToStr(azeta2.RegGlobal.DF_TotalTributos) + ']');
+              FloatToStr(azeta2.RegGlobal.DF_TotalTributos) + ']');
 
             Writeln('DF total no gravado := [' +
-             FloatToStr(azeta2.RegGlobal.DF_TotalNoGravado) + ']');
+              FloatToStr(azeta2.RegGlobal.DF_TotalNoGravado) + ']');
 
-            Writeln('DF total exento     := [' +FloatToStr(azeta2.RegGlobal.DF_TotalExento)
-              + ']');
+            Writeln('DF total exento     := [' +
+              FloatToStr(azeta2.RegGlobal.DF_TotalExento) + ']');
             Writeln('');
 
-            Writeln('DF total DNFH       := [' +FloatToStr(azeta2.RegGlobal.DNFH_Total) +
-              ']');
+            Writeln('DF total DNFH       := [' +
+              FloatToStr(azeta2.RegGlobal.DNFH_Total) + ']');
             Writeln('');
           end;
-         end;
+      end;
 
       azeta2 := HASARNG.ContinuarConsultaAcumulados;
-       end;
+    end;
 
-  Writeln('');
+    Writeln('');
     Writeln('NO HAY MAS INFORMACION DISPONIBLE !...');
     Writeln('');
-  Writeln('FIN DE LA CONSULTA !...');
-  Writeln('');
+    Writeln('FIN DE LA CONSULTA !...');
+    Writeln('');
 
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -2622,7 +2669,7 @@ end;
 // Consultar configuración del servidor de correo electrónico.
 // ====================================================================================================================
 
-procedure CommandConsCorreo_Click;
+procedure Tdm.CommandConsCorreo_Click;
 
 var
   respcorreo: RespuestaConsultarConfiguracionServidorCorreo;
@@ -2632,21 +2679,21 @@ begin
   Writeln('CONSULTANDO CONFIGURACION DEL SERVIDOR DE CORREO ELECTRONICO...');
   Writeln('');
 
- Try
+  Try
     respcorreo := HASARNG.ConsultarConfiguracionServidorCorreo;
     Writeln('');
     Writeln('IP Servidor SMTP     := [' + (respcorreo.DireccionIP) + ']');
-    Writeln('Port Servidor SMTP   := [' + (respcorreo.Puerto) + ']');
-    Writeln('Responder a          := [' + (respcorreo.DireccionRemitente) + ']');
+    Writeln('Port Servidor SMTP   := [' + IntToStr(respcorreo.Puerto) + ']');
+    Writeln('Responder a          := [' +
+      (respcorreo.DireccionRemitente) + ']');
     Writeln('');
     Writeln('FIN DE LA CONSULTA !...');
     Writeln('');
 
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -2654,47 +2701,44 @@ end;
 // Consultar documentos asociados.
 // ====================================================================================================================
 
-procedure CommandConsDocAsoc_Click;
+procedure Tdm.CommandConsDocAsoc_Click;
 
 var
   respdoc: RespuestaConsultarDocumentoAsociado;
 begin
-Writeln('');
-Writeln('CONSULTANDO DOCUMENTOS ASOCIADOS...');
-Writeln('');
+  Writeln('');
+  Writeln('CONSULTANDO DOCUMENTOS ASOCIADOS...');
+  Writeln('');
 
- Try
+  Try
     respdoc := HASARNG.ConsultarDocumentoAsociado(1);
     Writeln('');
-  Writeln(':=LINEA 1:=');
-  Writeln('Tipo comprobante := [' +
-      { FromTiposComprobanteToString } (respdoc.CodigoComprobante) + ']');
+    Writeln(':=LINEA 1:=');
+    Writeln('Tipo comprobante := [' +
+      { FromTiposComprobanteToString } FloatToStr(respdoc.CodigoComprobante) + ']');
 
-    Writeln('Nro. comprobante := [' + respdoc.NumeroPos + '-' +(
-      respdoc.NumeroComprobante) + ']');
+    Writeln('Nro. comprobante := [' +IntToStr(respdoc.NumeroPos) + '-' +
+      FloatToStr(respdoc.NumeroComprobante) + ']');
     Writeln('');
 
     respdoc := HASARNG.ConsultarDocumentoAsociado(2);
-  Writeln('');
+    Writeln('');
     Writeln(':=LINEA 2:=');
-  Writeln('Tipo comprobante := [' +
-      { FromTiposComprobanteToString } (respdoc.CodigoComprobante) + ']');
+    Writeln('Tipo comprobante := [' +
+      { FromTiposComprobanteToString } FloatToStr(respdoc.CodigoComprobante) + ']');
 
-    Writeln('Nro. comprobante := [' + respdoc.NumeroPos + '-' +
-      respdoc.NumeroComprobante + ']'
+    Writeln('Nro. comprobante := [' +IntToStr(respdoc.NumeroPos) + '-' +
+     IntToStr(respdoc.NumeroComprobante) + ']'
 
       );
     Writeln('');
-  Writeln('FIN DE LA CONSULTA !...');
-  Writeln('');
+    Writeln('FIN DE LA CONSULTA !...');
+    Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -2702,7 +2746,7 @@ end;
 // Consultar información último error producido.
 // ====================================================================================================================
 
-procedure CommandConsError_Click;
+procedure Tdm.CommandConsError_Click;
 
 var
   resperr: RespuestaConsultarUltimoError;
@@ -2712,26 +2756,23 @@ begin
   Writeln('CONSULTANDO ULTIMO ERROR...');
   Writeln('');
 
- Try
+  Try
     resperr := HASARNG.ConsultarUltimoError;
-  Writeln('');
-  Writeln('ID error := [' + (resperr.UltimoError) + ']');
-
-    Writeln('Campo    := [' + (resperr.NumeroParametro) + ' :: ' +
-      (resperr.NombreParametro) + ']');
-  Writeln('Mensaje  := [' + (resperr.Descripcion) + ']');
-  Writeln('Contexto := [' + (resperr.Contexto) + ']');
     Writeln('');
-  Writeln('FIN DE LA CONSULTA !...');
-  Writeln('');
+    Writeln('ID error := [' + (resperr.UltimoError) + ']');
 
+    Writeln('Campo    := [' + IntToStr(resperr.NumeroParametro) + ' :: ' +
+      (resperr.NombreParametro) + ']');
+    Writeln('Mensaje  := [' + (resperr.Descripcion) + ']');
+    Writeln('Contexto := [' + (resperr.Contexto) + ']');
+    Writeln('');
+    Writeln('FIN DE LA CONSULTA !...');
+    Writeln('');
 
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -2739,66 +2780,62 @@ end;
 // Consultar estado general de la impresora fiscal.
 // ====================================================================================================================
 
-procedure CommandConsEstado_Click;
+procedure Tdm.CommandConsEstado_Click;
 
 var
   respest: RespuestaConsultarEstado;
 begin
-Writeln('');
+  Writeln('');
   Writeln('CONSULTANDO ESTADO GENERAL IMPRESORA FISCAL...');
-Writeln('');
+  Writeln('');
 
- Try
+  Try
     respest := HASARNG.ConsultarEstado(NoDocumento);
     Writeln('');
 
     Writeln('Tipo Comprobante      := [' + { FromTiposComprobanteToString }
-      (respest.CodigoComprobante) + ']');
+      FloatToStr(respest.CodigoComprobante) + ']');
 
     Writeln('Ultimo Nro.           := [' +
-      (respest.NumeroUltimoComprobante) + ']');
+      FloatToStr(respest.NumeroUltimoComprobante) + ']');
 
-    Writeln('Cancelados            := [' + (respest.CantidadCancelados) + ']');
+    Writeln('Cancelados            := [' + FloatToStr(respest.CantidadCancelados) + ']');
 
-    Writeln('Emitidos              := [' + (respest.CantidadEmitidos) + ']');
+    Writeln('Emitidos              := [' + FloatToStr(respest.CantidadEmitidos) + ']');
 
     Writeln('');
-  Writeln('Almacenado en memoria de trabajo...');
+    Writeln('Almacenado en memoria de trabajo...');
 
-    Writeln('Código de barras      := [' +
-      (respest.EstadoAuxiliar.CodigoBarrasAlmacenado) + ']');
+    Writeln('Código de barras      := [' + BoolToStr(respest.EstadoAuxiliar.CodigoBarrasAlmacenado) + ']');
 
     Writeln('Datos del cliente     := [' +
-      (respest.EstadoAuxiliar.DatosClienteAlmacenados) + ']');
-  Writeln('');
-  Writeln('Memoria de auditoria...');
+      BoolToStr(respest.EstadoAuxiliar.DatosClienteAlmacenados) + ']');
+    Writeln('');
+    Writeln('Memoria de auditoria...');
 
     Writeln('Casi llena            := [' +
-      (respest.EstadoAuxiliar.MemoriaAuditoriaCasiLlena) + ']');
+      BoolToStr(respest.EstadoAuxiliar.MemoriaAuditoriaCasiLlena) + ']');
 
     Writeln('Llena                 := [' +
-      (respest.EstadoAuxiliar.MemoriaAuditoriaLlena) + ']');
-  Writeln('');
+      BoolToStr(respest.EstadoAuxiliar.MemoriaAuditoriaLlena) + ']');
+    Writeln('');
     Writeln('Otra info...');
 
     Writeln('Modo entrenamiento    := [' +
-      (respest.EstadoAuxiliar.ModoEntrenamiento) + ']');
+      BoolToStr(respest.EstadoAuxiliar.ModoEntrenamiento) + ']');
 
     Writeln('Ult. comprob. cancel. := [' +
-      (respest.EstadoAuxiliar.UltimoComprobanteFueCancelado) + ']'
+      BoolToStr(respest.EstadoAuxiliar.UltimoComprobanteFueCancelado) + ']'
 
       );
     Writeln('');
-  Writeln('FIN DE LA CONSULTA !...');
-  Writeln('');
+    Writeln('FIN DE LA CONSULTA !...');
+    Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -2806,40 +2843,37 @@ end;
 // Consultar información acerca del modelo y versión de la impresora fiscal.
 // ====================================================================================================================
 
-procedure CommandConsModvers_Click;
+procedure Tdm.CommandConsModvers_Click;
 
 var
   resp: RespuestaConsultarVersion;
 begin
-Writeln('');
+  Writeln('');
   Writeln('CONSULTANDO MODELO Y VERSION IMPRESORA FISCAL...');
-Writeln('');
-
- Try
-    resp := HASARNG.ConsultarVersion;
   Writeln('');
 
-    Writeln('Impresora fiscal  := [' + (resp.NombreProducto) + ']');
-  Writeln('Marca             := [' + (resp.Marca) + ']');
-  Writeln('Modelo y versión  := [' + (resp.Version) + ']');
+  Try
+    resp := HASARNG.ConsultarVersion;
+    Writeln('');
 
-    Writeln('Fecha firmware    := [' + (resp.FechaFirmware) + ']');
-  Writeln('Versión motor     := [' + (resp.VersionMotor) + ']');
+    Writeln('Impresora fiscal  := [' +(resp.NombreProducto) + ']');
+    Writeln('Marca             := [' +(resp.Marca) + ']');
+    Writeln('Modelo y versión  := [' +(resp.Version) + ']');
 
-    Writeln('Versión protocolo := [' + (resp.VersionProtocolo) + ']'
+    Writeln('Fecha firmware    := [' +(resp.FechaFirmware) + ']');
+    Writeln('Versión motor     := [' +(resp.VersionMotor) + ']');
+
+    Writeln('Versión protocolo := [' + IntToStr(resp.VersionProtocolo) + ']'
 
       );
     Writeln('');
-  Writeln('FIN DE LA CONSULTA !...');
-  Writeln('');
+    Writeln('FIN DE LA CONSULTA !...');
+    Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -2847,35 +2881,32 @@ end;
 // Consultar capacidad de cierres 'Z'.
 // ====================================================================================================================
 
-procedure CommandConsZetas_Click;
+procedure Tdm.CommandConsZetas_Click;
 
 var
   respz: RespuestaConsultarCapacidadZetas;
 begin
-Writeln('');
+  Writeln('');
   Writeln('CONSULTANDO CAPACIDAD CIERRES " Z "...');
   Writeln('');
 
- Try
+  Try
     respz := HASARNG.ConsultarCapacidadZetas;
-  Writeln('');
-  Writeln('Cierres " Z " totales     := [' +
-      (respz.CantidadDeZetasRemanentes) + ']');
-  Writeln('Cierres " Z " realizados  := [' + (respz.UltimaZeta) + ']');
-  Writeln('Cierres " Z " disponibles := [' + (Val(respz.CantidadDeZetasRemanentes)
-      - Val(respz.UltimaZeta)) + ']');
+    Writeln('');
+    Writeln('Cierres " Z " totales     := [' +
+      IntToStr(respz.CantidadDeZetasRemanentes) + ']');
+    Writeln('Cierres " Z " realizados  := [' + IntToStr(respz.UltimaZeta) + ']');
+    Writeln('Cierres " Z " disponibles := [' +
+      IntToStr((respz.CantidadDeZetasRemanentes) - (respz.UltimaZeta)) + ']');
 
-  Writeln('');
-  Writeln('FIN DE LA CONSULTA !...');
-  Writeln('');
+    Writeln('');
+    Writeln('FIN DE LA CONSULTA !...');
+    Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -2883,7 +2914,7 @@ end;
 // Consultar líneas de usuario, por zona.
 // ====================================================================================================================
 
-procedure CommandConsZona_Click;
+procedure Tdm.CommandConsZona_Click;
 
 var
   resp: RespuestaConsultarZona;
@@ -2893,339 +2924,336 @@ begin
   Writeln('CONSULTANDO LINEAS DE USUARIO POR ZONA...');
   Writeln('');
 
- Try
+  Try
     resp := HASARNG.ConsultarZona(1, EstacionTicket, ZonaFantasia);
-  Writeln('');
+    Writeln('');
     Writeln(':=LINEA 1 , Fantasía:=');
 
-    Writeln('Estilo: Borrado     := [' + (resp.Atributos.BorradoTexto) + ']');
+    Writeln('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']');
 
-    Writeln('Estilo: Centrado    := [' + (resp.Atributos.Centrado) + ']');
+    Writeln('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']');
 
-    Writeln('Estilo: Doble ancho := [' + (resp.Atributos.DobleAncho) + ']');
+    Writeln('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']');
 
-    Writeln('Estilo: Negrita     := [' + (resp.Atributos.Negrita) + ']');
+    Writeln('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']');
 
-    Writeln('Texto               := [' + (resp.Descripcion) + ']');
+    Writeln('Texto               := [' +(resp.Descripcion) + ']');
 
     Writeln('');
 
     resp := HASARNG.ConsultarZona(2, EstacionTicket, ZonaFantasia);
-  Writeln('');
+    Writeln('');
     Writeln(':=LINEA 2 , Fantasía:=');
 
-    Writeln('Estilo: Borrado     := [' + (resp.Atributos.BorradoTexto) + ']');
+    Writeln('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']');
 
-    Writeln('Estilo: Centrado    := [' + (resp.Atributos.Centrado) + ']');
+    Writeln('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']');
 
-    Writeln('Estilo: Doble ancho := [' + (resp.Atributos.DobleAncho) + ']');
+    Writeln('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']');
 
-    Writeln('Estilo: Negrita     := [' + (resp.Atributos.Negrita) + ']');
+    Writeln('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']');
 
-    Writeln('Texto  := [' + (resp.Descripcion) + ']');
-  Writeln('');
+    Writeln('Texto  := [' +(resp.Descripcion) + ']');
+    Writeln('');
 
     resp := HASARNG.ConsultarZona(1, EstacionTicket, Zona1Encabezado);
-  Writeln('');
+    Writeln('');
     Writeln(':=LINEA 1 , Encabezado 1:=');
 
-    Writeln('Estilo: Borrado     := [' + (resp.Atributos.BorradoTexto) + ']');
+    Writeln('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']');
 
-    Writeln('Estilo: Centrado    := [' + (resp.Atributos.Centrado) + ']');
+    Writeln('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']');
 
-    Writeln('Estilo: Doble ancho := [' + (resp.Atributos.DobleAncho) + ']');
+    Writeln('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']');
 
-    Writeln('Estilo: Negrita     := [' + (resp.Atributos.Negrita) + ']');
+    Writeln('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']');
 
-    Writeln('Texto  := [' + (resp.Descripcion) + ']');
-  Writeln('');
+    Writeln('Texto  := [' +(resp.Descripcion) + ']');
+    Writeln('');
 
     resp := HASARNG.ConsultarZona(2, EstacionTicket, Zona1Encabezado);
-  Writeln('');
+    Writeln('');
     Writeln(':=LINEA 2 , Encabezado 1:=');
 
-    Writeln('Estilo: Borrado     := [' + (resp.Atributos.BorradoTexto) + ']');
+    Writeln('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']');
 
-    Writeln('Estilo: Centrado    := [' + (resp.Atributos.Centrado) + ']');
+    Writeln('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']');
 
-    Writeln('Estilo: Doble ancho := [' + (resp.Atributos.DobleAncho) + ']');
+    Writeln('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']');
 
-    Writeln('Estilo: Negrita     := [' + (resp.Atributos.Negrita) + ']');
+    Writeln('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']');
 
-    Writeln('Texto  := [' + (resp.Descripcion) + ']');
-  Writeln('');
+    Writeln('Texto  := [' +(resp.Descripcion) + ']');
+    Writeln('');
 
     resp := HASARNG.ConsultarZona(3, EstacionTicket, Zona1Encabezado);
-  Writeln('');
+    Writeln('');
     Writeln(':=LINEA 3 , Encabezado 1:=');
 
-    Writeln('Estilo: Borrado     := [' + (resp.Atributos.BorradoTexto) + ']');
+    Writeln('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']');
 
-    Writeln('Estilo: Centrado    := [' + (resp.Atributos.Centrado) + ']');
+    Writeln('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']');
 
-    Writeln('Estilo: Doble ancho := [' + (resp.Atributos.DobleAncho) + ']');
+    Writeln('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']');
 
-    Writeln('Estilo: Negrita     := [' + (resp.Atributos.Negrita) + ']');
+    Writeln('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']');
 
-    Writeln('Texto  := [' + (resp.Descripcion) + ']');
-  Writeln('');
+    Writeln('Texto  := [' +(resp.Descripcion) + ']');
+    Writeln('');
 
     resp := HASARNG.ConsultarZona(1, EstacionTicket, Zona2Encabezado);
-  Writeln('');
+    Writeln('');
     Writeln(':=LINEA 1 , Encabezado 2:=');
 
-    Writeln('Estilo: Borrado     := [' + (resp.Atributos.BorradoTexto) + ']');
+    Writeln('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']');
 
-    Writeln('Estilo: Centrado    := [' + (resp.Atributos.Centrado) + ']');
+    Writeln('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']');
 
-    Writeln('Estilo: Doble ancho := [' + (resp.Atributos.DobleAncho) + ']');
+    Writeln('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']');
 
-    Writeln('Estilo: Negrita     := [' + (resp.Atributos.Negrita) + ']');
+    Writeln('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']');
 
-    Writeln('Texto  := [' + (resp.Descripcion) + ']');
-  Writeln('');
+    Writeln('Texto  := [' +(resp.Descripcion) + ']');
+    Writeln('');
 
     resp := HASARNG.ConsultarZona(2, EstacionTicket, Zona2Encabezado);
-  Writeln('');
+    Writeln('');
     Writeln(':=LINEA 2 , Encabezado 2:=');
 
-    Writeln('Estilo: Borrado     := [' + (resp.Atributos.BorradoTexto) + ']');
+    Writeln('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']');
 
-    Writeln('Estilo: Centrado    := [' + (resp.Atributos.Centrado) + ']');
+    Writeln('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']');
 
-    Writeln('Estilo: Doble ancho := [' + (resp.Atributos.DobleAncho) + ']');
+    Writeln('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']');
 
-    Writeln('Estilo: Negrita     := [' + (resp.Atributos.Negrita) + ']');
+    Writeln('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']');
 
-    Writeln('Texto  := [' + (resp.Descripcion) + ']');
-  Writeln('');
+    Writeln('Texto  := [' +(resp.Descripcion) + ']');
+    Writeln('');
 
     resp := HASARNG.ConsultarZona(3, EstacionTicket, Zona2Encabezado);
-  Writeln('');
+    Writeln('');
     Writeln(':=LINEA 3 , Encabezado 2:=');
 
-    Writeln('Estilo: Borrado     := [' + (resp.Atributos.BorradoTexto) + ']');
+    Writeln('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']');
 
-    Writeln('Estilo: Centrado    := [' + (resp.Atributos.Centrado) + ']');
+    Writeln('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']');
 
-    Writeln('Estilo: Doble ancho := [' + (resp.Atributos.DobleAncho) + ']');
+    Writeln('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']');
 
-    Writeln('Estilo: Negrita     := [' + (resp.Atributos.Negrita) + ']');
+    Writeln('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']');
 
-    Writeln('Texto  := [' + (resp.Descripcion) + ']');
-  Writeln('');
+    Writeln('Texto  := [' +(resp.Descripcion) + ']');
+    Writeln('');
 
     resp := HASARNG.ConsultarZona(1, EstacionTicket, Zona1Cola);
-  Writeln('');
+    Writeln('');
     Writeln(':=LINEA 1 , Cola 1:=');
-    Writeln('Estilo: Borrado     := [' + (resp.Atributos.BorradoTexto) + ']');
+    Writeln('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']');
 
-    Writeln('Estilo: Centrado    := [' + (resp.Atributos.Centrado) + ']');
+    Writeln('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']');
 
-    Writeln('Estilo: Doble ancho := [' + (resp.Atributos.DobleAncho) + ']');
+    Writeln('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']');
 
-    Writeln('Estilo: Negrita     := [' + (resp.Atributos.Negrita) + ']');
+    Writeln('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']');
 
-    Writeln('Texto  := [' + (resp.Descripcion) + ']');
-  Writeln('');
+    Writeln('Texto  := [' +(resp.Descripcion) + ']');
+    Writeln('');
 
     resp := HASARNG.ConsultarZona(2, EstacionTicket, Zona1Cola);
-  Writeln('');
+    Writeln('');
     Writeln(':=LINEA 2 , Cola 1:=');
-    Writeln('Estilo: Borrado     := [' + (resp.Atributos.BorradoTexto) + ']');
+    Writeln('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']');
 
-    Writeln('Estilo: Centrado    := [' + (resp.Atributos.Centrado) + ']');
+    Writeln('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']');
 
-    Writeln('Estilo: Doble ancho := [' + (resp.Atributos.DobleAncho) + ']');
+    Writeln('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']');
 
-    Writeln('Estilo: Negrita     := [' + (resp.Atributos.Negrita) + ']');
+    Writeln('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']');
 
-    Writeln('Texto  := [' + (resp.Descripcion) + ']');
-  Writeln('');
+    Writeln('Texto  := [' +(resp.Descripcion) + ']');
+    Writeln('');
 
     resp := HASARNG.ConsultarZona(3, EstacionTicket, Zona1Cola);
-  Writeln('');
+    Writeln('');
     Writeln(':=LINEA 3 , Cola 1:=');
-    Writeln('Estilo: Borrado     := [' + (resp.Atributos.BorradoTexto) + ']');
+    Writeln('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']');
 
-    Writeln('Estilo: Centrado    := [' + (resp.Atributos.Centrado) + ']');
+    Writeln('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']');
 
-    Writeln('Estilo: Doble ancho := [' + (resp.Atributos.DobleAncho) + ']');
+    Writeln('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']');
 
-    Writeln('Estilo: Negrita     := [' + (resp.Atributos.Negrita) + ']');
+    Writeln('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']');
 
-    Writeln('Texto  := [' + (resp.Descripcion) + ']');
-  Writeln('');
+    Writeln('Texto  := [' +(resp.Descripcion) + ']');
+    Writeln('');
 
     resp := HASARNG.ConsultarZona(4, EstacionTicket, Zona1Cola);
-  Writeln('');
+    Writeln('');
     Writeln(':=LINEA 4 , Cola 1:=');
-    Writeln('Estilo: Borrado     := [' + (resp.Atributos.BorradoTexto) + ']');
+    Writeln('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']');
 
-    Writeln('Estilo: Centrado    := [' + (resp.Atributos.Centrado) + ']');
+    Writeln('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']');
 
-    Writeln('Estilo: Doble ancho := [' + (resp.Atributos.DobleAncho) + ']');
+    Writeln('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']');
 
-    Writeln('Estilo: Negrita     := [' + (resp.Atributos.Negrita) + ']');
+    Writeln('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']');
 
-    Writeln('Texto  := [' + (resp.Descripcion) + ']');
-  Writeln('');
+    Writeln('Texto  := [' +(resp.Descripcion) + ']');
+    Writeln('');
 
     resp := HASARNG.ConsultarZona(1, EstacionTicket, Zona2Cola);
-  Writeln('');
+    Writeln('');
     Writeln(':=LINEA 1 , Cola 2:=');
-    Writeln('Estilo: Borrado     := [' + (resp.Atributos.BorradoTexto) + ']');
+    Writeln('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']');
 
-    Writeln('Estilo: Centrado    := [' + (resp.Atributos.Centrado) + ']');
+    Writeln('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']');
 
-    Writeln('Estilo: Doble ancho := [' + (resp.Atributos.DobleAncho) + ']');
+    Writeln('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']');
 
-    Writeln('Estilo: Negrita     := [' + (resp.Atributos.Negrita) + ']');
+    Writeln('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']');
 
-    Writeln('Texto  := [' + (resp.Descripcion) + ']');
-  Writeln('');
+    Writeln('Texto  := [' +(resp.Descripcion) + ']');
+    Writeln('');
 
     resp := HASARNG.ConsultarZona(2, EstacionTicket, Zona2Cola);
-  Writeln('');
+    Writeln('');
     Writeln(':=LINEA 2 , Cola 2:=');
-    Writeln('Estilo: Borrado     := [' + (resp.Atributos.BorradoTexto) + ']');
+    Writeln('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']');
 
-    Writeln('Estilo: Centrado    := [' + (resp.Atributos.Centrado) + ']');
+    Writeln('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']');
 
-    Writeln('Estilo: Doble ancho := [' + (resp.Atributos.DobleAncho) + ']');
+    Writeln('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']');
 
-    Writeln('Estilo: Negrita     := [' + (resp.Atributos.Negrita) + ']');
+    Writeln('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']');
 
-    Writeln('Texto  := [' + (resp.Descripcion) + ']');
-  Writeln('');
+    Writeln('Texto  := [' +(resp.Descripcion) + ']');
+    Writeln('');
 
     resp := HASARNG.ConsultarZona(3, EstacionTicket, Zona2Cola);
-  Writeln('');
+    Writeln('');
     Writeln(':=LINEA 3 , Cola 2:=');
-    Writeln('Estilo: Borrado     := [' + (resp.Atributos.BorradoTexto) + ']');
+    Writeln('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']');
 
-    Writeln('Estilo: Centrado    := [' + (resp.Atributos.Centrado) + ']');
+    Writeln('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']');
 
-    Writeln('Estilo: Doble ancho := [' + (resp.Atributos.DobleAncho) + ']');
+    Writeln('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']');
 
-    Writeln('Estilo: Negrita     := [' + (resp.Atributos.Negrita) + ']');
+    Writeln('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']');
 
-    Writeln('Texto  := [' + (resp.Descripcion) + ']');
-  Writeln('');
+    Writeln('Texto  := [' +(resp.Descripcion) + ']');
+    Writeln('');
 
     resp := HASARNG.ConsultarZona(4, EstacionTicket, Zona2Cola);
-  Writeln('');
+    Writeln('');
     Writeln(':=LINEA 4 , Cola 2:=');
-    Writeln('Estilo: Borrado     := [' + (resp.Atributos.BorradoTexto) + ']');
+    Writeln('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']');
 
-    Writeln('Estilo: Centrado    := [' + (resp.Atributos.Centrado) + ']');
+    Writeln('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']');
 
-    Writeln('Estilo: Doble ancho := [' + (resp.Atributos.DobleAncho) + ']');
+    Writeln('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']');
 
-    Writeln('Estilo: Negrita     := [' + (resp.Atributos.Negrita) + ']');
+    Writeln('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']');
 
-    Writeln('Texto  := [' + (resp.Descripcion) + ']');
-  Writeln('');
+    Writeln('Texto  := [' +(resp.Descripcion) + ']');
+    Writeln('');
 
     resp := HASARNG.ConsultarZona(5, EstacionTicket, Zona2Cola);
-  Writeln('');
+    Writeln('');
     Writeln(':=LINEA 5 , Cola 2:=');
-    Writeln('Estilo: Borrado     := [' + (resp.Atributos.BorradoTexto) + ']');
+    Writeln('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']');
 
-    Writeln('Estilo: Centrado    := [' + (resp.Atributos.Centrado) + ']');
+    Writeln('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']');
 
-    Writeln('Estilo: Doble ancho := [' + (resp.Atributos.DobleAncho) + ']');
+    Writeln('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']');
 
-    Writeln('Estilo: Negrita     := [' + (resp.Atributos.Negrita) + ']');
+    Writeln('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']');
 
-    Writeln('Texto  := [' + (resp.Descripcion) + ']');
-  Writeln('');
+    Writeln('Texto  := [' +(resp.Descripcion) + ']');
+    Writeln('');
 
     resp := HASARNG.ConsultarZona(6, EstacionTicket, Zona2Cola);
-  Writeln('');
+    Writeln('');
     Writeln(':=LINEA 6 , Cola 2:=');
-    Writeln('Estilo: Borrado     := [' + (resp.Atributos.BorradoTexto) + ']');
+    Writeln('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']');
 
-    Writeln('Estilo: Centrado    := [' + (resp.Atributos.Centrado) + ']');
+    Writeln('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']');
 
-    Writeln('Estilo: Doble ancho := [' + (resp.Atributos.DobleAncho) + ']');
+    Writeln('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']');
 
-    Writeln('Estilo: Negrita     := [' + (resp.Atributos.Negrita) + ']');
+    Writeln('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']');
 
-    Writeln('Texto  := [' + (resp.Descripcion) + ']');
-  Writeln('');
+    Writeln('Texto  := [' +(resp.Descripcion) + ']');
+    Writeln('');
 
     resp := HASARNG.ConsultarZona(1, EstacionTicket, ZonaDomicilioEmisor);
-  Writeln('');
+    Writeln('');
     Writeln(':=LINEA 1 , Domicilio emisor:=');
 
-    Writeln('Estilo: Borrado     := [' + (resp.Atributos.BorradoTexto) + ']');
+    Writeln('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']');
 
-    Writeln('Estilo: Centrado    := [' + (resp.Atributos.Centrado) + ']');
+    Writeln('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']');
 
-    Writeln('Estilo: Doble ancho := [' + (resp.Atributos.DobleAncho) + ']');
+    Writeln('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']');
 
-    Writeln('Estilo: Negrita     := [' + (resp.Atributos.Negrita) + ']');
+    Writeln('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']');
 
-    Writeln('Texto  := [' + (resp.Descripcion) + ']');
-  Writeln('');
+    Writeln('Texto  := [' +(resp.Descripcion) + ']');
+    Writeln('');
 
     resp := HASARNG.ConsultarZona(2, EstacionTicket, ZonaDomicilioEmisor);
-  Writeln('');
+    Writeln('');
     Writeln(':=LINEA 2 , Domicilio emisor:=');
 
-    Writeln('Estilo: Borrado     := [' + (resp.Atributos.BorradoTexto) + ']');
+    Writeln('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']');
 
-    Writeln('Estilo: Centrado    := [' + (resp.Atributos.Centrado) + ']');
+    Writeln('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']');
 
-    Writeln('Estilo: Doble ancho := [' + (resp.Atributos.DobleAncho) + ']');
+    Writeln('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']');
 
-    Writeln('Estilo: Negrita     := [' + (resp.Atributos.Negrita) + ']');
+    Writeln('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']');
 
-    Writeln('Texto  := [' + (resp.Descripcion) + ']');
-  Writeln('');
+    Writeln('Texto  := [' +(resp.Descripcion) + ']');
+    Writeln('');
 
     resp := HASARNG.ConsultarZona(3, EstacionTicket, ZonaDomicilioEmisor);
-  Writeln('');
+    Writeln('');
     Writeln(':=LINEA 3 , Domicilio emisor:=');
 
-    Writeln('Estilo: Borrado     := [' + (resp.Atributos.BorradoTexto) + ']');
+    Writeln('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']');
 
-    Writeln('Estilo: Centrado    := [' + (resp.Atributos.Centrado) + ']');
+    Writeln('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']');
 
-    Writeln('Estilo: Doble ancho := [' + (resp.Atributos.DobleAncho) + ']');
+    Writeln('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']');
 
-    Writeln('Estilo: Negrita     := [' + (resp.Atributos.Negrita) + ']');
+    Writeln('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']');
 
-    Writeln('Texto  := [' + (resp.Descripcion) + ']');
-  Writeln('');
+    Writeln('Texto  := [' +(resp.Descripcion) + ']');
+    Writeln('');
 
     resp := HASARNG.ConsultarZona(4, EstacionTicket, ZonaDomicilioEmisor);
-  Writeln('');
+    Writeln('');
     Writeln(':=LINEA 4 , Domicilio emisor:=');
 
-    Writeln('Estilo: Borrado     := [' + (resp.Atributos.BorradoTexto) + ']');
+    Writeln('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']');
 
-    Writeln('Estilo: Centrado    := [' + (resp.Atributos.Centrado) + ']');
+    Writeln('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']');
 
-    Writeln('Estilo: Doble ancho := [' + (resp.Atributos.DobleAncho) + ']');
+    Writeln('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']');
 
-    Writeln('Estilo: Negrita     := [' + (resp.Atributos.Negrita) + ']');
+    Writeln('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']');
 
-    Writeln('Texto  := [' + (resp.Descripcion) + ']'
+    Writeln('Texto  := [' +(resp.Descripcion) + ']'
 
       );
     Writeln('');
-  Writeln('FIN DE LA CONSULTA !...');
-  Writeln('');
+    Writeln('FIN DE LA CONSULTA !...');
+    Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -3233,28 +3261,25 @@ end;
 // Se pide la reimpresión de un comprobante cualquera.
 // ====================================================================================================================
 
-procedure CommandCopiarDoc_Click;
+procedure Tdm.CommandCopiarDoc_Click;
 begin
 
-Writeln('');
+  Writeln('');
   Writeln('SOLICITANDO REIMPRESION DE COMPROBANTE...');
   Writeln('');
 
- Try
+  Try
     Writeln('Copia de Tique Factura " A " Nº 13');
     HASARNG.CopiarComprobante(TiqueFacturaA, 13);
 
-  Writeln('');
+    Writeln('');
     Writeln('COMPROBANTE REIMPRESO !...');
     Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -3262,43 +3287,40 @@ end;
 // Consultar datos de inicialización de la impresora fiscal.
 // ====================================================================================================================
 
-procedure CommandDatosIni_Click;
+procedure Tdm.CommandDatosIni_Click;
 
 var
   datosini: RespuestaConsultarDatosInicializacion;
 begin
-Writeln('');
+  Writeln('');
   Writeln('CONSULTANDO DATOS DE INCIALIZACION...');
   Writeln('');
 
- Try
+  Try
     datosini := HASARNG.ConsultarDatosInicializacion;
     Writeln('');
 
     Writeln('Razón Social      := [' + (datosini.RazonSocial) + ']');
-  Writeln('CUIT              := [' + (datosini.Cuit) + ']');
-  Writeln('Responsab. IVA    := [' +
+    Writeln('CUIT              := [' + (datosini.Cuit) + ']');
+    Writeln('Responsab. IVA    := [' +
       { FromTiposDeResponsabilidadesImpresorToString }
-      (datosini.ResponsabilidadIVA) + ']');
+      FloatToStr(datosini.ResponsabilidadIVA) + ']');
     Writeln('Ingr. Brutos      := [' + (datosini.IngBrutos) + ']');
 
-    Writeln('Fecha inicio act. := [' + (datosini.FechaInicioActividades) + ']');
+    Writeln('Fecha inicio act. := [' + DateToStr(datosini.FechaInicioActividades) + ']');
 
-    Writeln('Nro. POS          := [' + (datosini.NumeroPos) + ']');
-  Writeln('Reg. impr. fiscal := [' + (datosini.Registro) + ']'
+    Writeln('Nro. POS          := [' + IntToStr(datosini.NumeroPos) + ']');
+    Writeln('Reg. impr. fiscal := [' + (datosini.Registro) + ']'
 
       );
     Writeln('');
-  Writeln('FIN DE LA CONSULTA !...');
-  Writeln('');
+    Writeln('FIN DE LA CONSULTA !...');
+    Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -3306,29 +3328,26 @@ end;
 // Comando para el envío de comprobantes, por correo electrónico.
 // ====================================================================================================================
 
-procedure CommandDocxMail_Click;
+procedure Tdm.CommandDocxMail_Click;
 begin
 
-Writeln('');
+  Writeln('');
   Writeln('ENVIANDO COMPROBANTE POR MAIL:');
   Writeln('');
 
- Try
+  Try
     Writeln('Enviando: Tique Factura " A " Nº 13 :: rcardenes@hasar.com');
-  Writeln('');
+    Writeln('');
     HASARNG.EnviarDocumentoCorreo(TiqueFacturaA, 13, 'rcardenes@hasar.com');
 
-  Writeln('');
+    Writeln('');
     Writeln('COMPROBANTE ENVIADO !...');
     Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -3336,7 +3355,7 @@ end;
 // Impresión de un Comprobante Donación.
 // ====================================================================================================================
 
-procedure CommandDONA_Click;
+procedure Tdm.CommandDONA_Click;
 
 var
   respabrir: RespuestaAbrirDocumento;
@@ -3348,8 +3367,8 @@ var
 begin
   Try
     Writeln('');
-  Writeln('IMPRIMIENDO - COMPROBANTE DONACION:');
-  Writeln('');
+    Writeln('IMPRIMIENDO - COMPROBANTE DONACION:');
+    Writeln('');
 
     HASARNG.CargarDatosCliente('Razón Social Cliente...', '99999999995',
       ResponsableInscripto, TipoCUIT, 'Domicilio Cliente...',
@@ -3360,7 +3379,7 @@ begin
       TipoCUIL, 'Domicilio Beneficiario...');
     respabrir := HASARNG.AbrirDocumento(ComprobanteDonacion);
 
-  Writeln('');
+    Writeln('');
     Writeln(' - (abrir); Comprob. Donación Nro.   := [' +
       IntToStr(respabrir.NumeroComprobante) + ']');
     Writeln('');
@@ -3369,30 +3388,28 @@ begin
       ModoSumaMonto, IIVariablePorcentual, 0, DisplayNo, ModoPrecioTotal, 1, '',
       'DONA', Donacion);
     resppago := HASARNG.ImprimirPago('Efectivo...', 10, Pagar, DisplayNo, '',
-      Efectivo, '', '');
+      Efectivo, 0, '');
 
-  Writeln('');
-    Writeln(' - Pagando... Cambio                 := [' + FloatToStr(resppago.Saldo) + ']');
-  Writeln('');
+    Writeln('');
+    Writeln(' - Pagando... Cambio                 := [' +
+      FloatToStr(resppago.Saldo) + ']');
+    Writeln('');
 
-    respcierre := HASARNG.CerrarDocumento('', 'hasarventas@hasar.com');
+    respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
 
-  Writeln('');
+    Writeln('');
     Writeln(' - (cerrar);Comprobante Donación Nro. := [' +
       IntToStr(respcierre.NumeroComprobante) + ']');
     Writeln(' - Páginas                           := [' +
       IntToStr(respcierre.CantidadDePaginas) + ']');
     Writeln('');
-  Writeln('COMPROBANTE DONACION IMPRESO !...');
-  Writeln('');
+    Writeln('COMPROBANTE DONACION IMPRESO !...');
+    Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -3400,22 +3417,22 @@ end;
 // Impresión del Detalle de ventas (cierre 'X');.
 // ====================================================================================================================
 
-procedure CommandEquis_Click;
+procedure Tdm.CommandEquis_Click;
 
 var
   cierre: RespuestaCerrarJornadaFiscal;
 begin
-Writeln('');
+  Writeln('');
   Writeln('DETALLE DE VENTAS:');
   Writeln('');
 
- Try
+  Try
     cierre := HASARNG.CerrarJornadaFiscal(ReporteX);
     Writeln('');
-  Writeln('Reporte...        := [' + FloatToStr(cierre.Reporte) + ']');
-  Writeln('');
-  Writeln('Detalle Nro.      := [' + FloatToStr(cierre.X.Numero) + ']');
-  Writeln('');
+    Writeln('Reporte...        := [' + FloatToStr(cierre.Reporte) + ']');
+    Writeln('');
+    Writeln('Detalle Nro.      := [' + FloatToStr(cierre.X.Numero) + ']');
+    Writeln('');
     Writeln('Fecha inicial     := [' + FloatToStr(cierre.X.FechaInicio) + ']');
 
     Writeln('Hora inicial      := [' + FloatToStr(cierre.X.HoraInicio) + ']');
@@ -3426,38 +3443,40 @@ Writeln('');
 
     Writeln('');
 
-    Writeln('DF Emitidos       := [' + FloatToStr(cierre.X.DF_CantidadEmitidos) + ']');
-  Writeln('DF total ventas   := [' + FloatToStr(cierre.X.DF_Total) + ']');
+    Writeln('DF Emitidos       := [' +
+      FloatToStr(cierre.X.DF_CantidadEmitidos) + ']');
+    Writeln('DF total ventas   := [' + FloatToStr(cierre.X.DF_Total) + ']');
 
     Writeln('DF total IVA      := [' + FloatToStr(cierre.X.DF_TotalIVA) + ']');
 
-    Writeln('DF total tributos := [' + FloatToStr(cierre.X.DF_TotalTributos) + ']');
+    Writeln('DF total tributos := [' +
+      FloatToStr(cierre.X.DF_TotalTributos) + ']');
 
     Writeln('');
 
-    Writeln('DNFH emitidos     := [' + FloatToStr(cierre.X.DNFH_CantidadEmitidos) + ']');
+    Writeln('DNFH emitidos     := [' +
+      FloatToStr(cierre.X.DNFH_CantidadEmitidos) + ']');
 
     Writeln('');
 
-    Writeln('NC emitidas       := [' + FloatToStr(cierre.X.NC_CantidadEmitidos) + ']');
-  Writeln('NC total crédito  := [' + FloatToStr(cierre.X.NC_Total) + ']');
+    Writeln('NC emitidas       := [' +
+      FloatToStr(cierre.X.NC_CantidadEmitidos) + ']');
+    Writeln('NC total crédito  := [' + FloatToStr(cierre.X.NC_Total) + ']');
 
     Writeln('NC total IVA      := [' + FloatToStr(cierre.X.NC_TotalIVA) + ']');
 
-    Writeln('NC total tributos := [' + FloatToStr(cierre.X.NC_TotalTributos) + ']'
+    Writeln('NC total tributos := [' +
+      FloatToStr(cierre.X.NC_TotalTributos) + ']'
 
       );
     Writeln('');
-  Writeln('DETALLE DE VENTAS IMPRESO !...');
-  Writeln('');
+    Writeln('DETALLE DE VENTAS IMPRESO !...');
+    Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -3465,33 +3484,30 @@ end;
 // Impresión de un Documento Genérico.
 // ====================================================================================================================
 
-procedure CommandFechaHora_Click;
+procedure Tdm.CommandFechaHora_Click;
 
 var
   respfyh: RespuestaConsultarFechaHora;
 begin
-Writeln('');
+  Writeln('');
   Writeln('CONSULTA DE FECHA Y HORA:');
   Writeln('');
 
- Try
+  Try
     respfyh := HASARNG.ConsultarFechaHora;
-  Writeln('');
-  Writeln('Fecha := [' + DateToStr(respfyh.Fecha) + ']');
-  Writeln('Hora  := [' + TimeToStr(respfyh.Hora) + ']'
+    Writeln('');
+    Writeln('Fecha := [' + DateToStr(respfyh.Fecha) + ']');
+    Writeln('Hora  := [' + TimeToStr(respfyh.Hora) + ']'
 
       );
     Writeln('');
-  Writeln('FIN DE LA CONSULTA !...');
-  Writeln('');
+    Writeln('FIN DE LA CONSULTA !...');
+    Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -3499,12 +3515,12 @@ end;
 // Impresión de un Documento Genérico.
 // ====================================================================================================================
 
-procedure CommandGenerico_Click;
+procedure Tdm.CommandGenerico_Click;
 
 var
   respabrir: RespuestaAbrirDocumento;
 
-  resppago: RespuestaImprimirPago;
+  //resppago: RespuestaImprimirPago;
 
   estilo: AtributosDeTexto;
 
@@ -3513,8 +3529,8 @@ var
 begin
   Try
     Writeln('');
-  Writeln('IMPRIMIENDO - DOCUMENTO GENERICO:');
-  Writeln('');
+    Writeln('IMPRIMIENDO - DOCUMENTO GENERICO:');
+    Writeln('');
 
     HASARNG.CargarDatosCliente('Razón Social Cliente...', '99999999995',
       ResponsableInscripto, TipoCUIT, 'Domicilio Cliente...',
@@ -3564,24 +3580,21 @@ begin
     HASARNG.ImprimirTextoGenerico(estilo, 'Texto dob anch, negr y cent.',
       DisplayNo);
 
-    respcierre := HASARNG.CerrarDocumento('', 'hasarventas@hasar.com');
+    respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
 
-  Writeln('');
+    Writeln('');
     Writeln(' - (cerrar);Documento Genérico Nro. := [' +
       IntToStr(respcierre.NumeroComprobante) + ']');
     Writeln(' - Páginas                         := [' +
       IntToStr(respcierre.CantidadDePaginas) + ']');
     Writeln('');
-  Writeln('DOCUMENTO GENERICO IMPRESO !...');
-  Writeln('');
+    Writeln('DOCUMENTO GENERICO IMPRESO !...');
+    Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -3590,28 +3603,25 @@ end;
 // Se requiere un Cierre 'Z' previo.
 // ====================================================================================================================
 
-procedure CommandModifCateg_Click;
+procedure Tdm.CommandModifCateg_Click;
 begin
 
-Writeln('');
+  Writeln('');
   Writeln('MODIFICANDO CATEGORIA IVA...');
   Writeln('');
-Writeln('Nueva responsabilidad IVA := Responsable Inscripto');
-Writeln('');
-
- Try
-    HASARNG.CambiarCategoriaIVA(IFResponsableInscripto);
+  Writeln('Nueva responsabilidad IVA := Responsable Inscripto');
   Writeln('');
+
+  Try
+    HASARNG.CambiarCategoriaIVA(IFResponsableInscripto);
+    Writeln('');
     Writeln('CATEGORIA IVA MODIFICADA !...');
     Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -3620,29 +3630,26 @@ end;
 // Se requiere un Cierre 'Z' previo.
 // ====================================================================================================================
 
-procedure CommandModifIIBB_Click;
+procedure Tdm.CommandModifIIBB_Click;
 begin
 
-Writeln('');
+  Writeln('');
   Writeln('MODIFICANDO INSCRIPCION INGRESOS BRUTOS...');
   Writeln('');
 
   Writeln('Nuevo código Ingresos Brutos := IIBB-54321099876543210');
-Writeln('');
-
- Try
-    HASARNG.CambiarInscripIIBB('IIBB-54321099876543210');
   Writeln('');
+
+  Try
+    HASARNG.CambiarInscripIIBB('IIBB-54321099876543210');
+    Writeln('');
     Writeln('INSCRIPCION INGRESOS BRUTOS MODIFICADA !...');
     Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -3651,28 +3658,25 @@ end;
 // Se requiere un Cierre 'Z' previo.
 // ====================================================================================================================
 
-procedure CommandModifIniActiv_Click;
+procedure Tdm.CommandModifIniActiv_Click;
 begin
 
-Writeln('');
+  Writeln('');
   Writeln('MODIFICANDO FECHA DE INICIO DE ACTIVIDADES...');
   Writeln('');
-Writeln('Nueva fecha inicio actividades := 01/02/2015');
-Writeln('');
-
- Try
-    HASARNG.CambiarFechaInicioActividades('01/02/2015');
+  Writeln('Nueva fecha inicio actividades := 01/02/2015');
   Writeln('');
+
+  Try
+    HASARNG.CambiarFechaInicioActividades(01/02/2015);
+    Writeln('');
     Writeln('FECHA DE INICIO DE ACTIVIDADES MODIFICADA !...');
-  Writeln('');
+    Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -3680,21 +3684,21 @@ end;
 // Descarga de CTD.
 // ====================================================================================================================
 
-procedure CommandObtRepAudit_Click;
+procedure Tdm.CommandObtRepAudit_Click;
 
 var
   resp: RespuestaObtenerPrimerBloqueAuditoria;
 
   resp2: RespuestaObtenerSiguienteBloqueAuditoria;
 begin
-Writeln('');
+  Writeln('');
   Writeln('DESCARGA DE CTD (Cinta Testigo Digital);:');
   Writeln('');
 
- Try
+  Try
     Writeln('Período: 01/02/2015 al 27/02/2015 , Comprimir, XML único');
-  Writeln('');
-    resp := HASARNG.ObtenerPrimerBloqueAuditoria(150201, 150227, ReporteZFecha,
+    Writeln('');
+    resp := HASARNG.ObtenerPrimerBloqueAuditoria('150201', '150227', ReporteZFecha,
       Comprime, XMLUnico);
     Writeln('');
 
@@ -3703,14 +3707,13 @@ Writeln('');
       Writeln('NO HAY INFORMACION DISPONIBLE !...');
       Writeln('');
 
-
     end
     else
     begin
-      Writeln('Primer bloque de información    := [' + (resp.Informacion) + ']');
-    Writeln('');
+      Writeln('Primer bloque de información    := [' +
+       (resp.Informacion) + ']');
+      Writeln('');
     end;
-
 
     while True do
     begin
@@ -3720,27 +3723,23 @@ Writeln('');
       begin
         Writeln('Siguiente bloque de información := [' +
           (resp2.Informacion) + ']');
-      Writeln('');
+        Writeln('');
       end
       else
       begin
         Writeln('');
-      Writeln('NO HAY MAS INFORMACION DISPONIBLE !...');
-      Writeln('');
-      Writeln('INFORMACION CTD DESCARGADA !...');
-      Writeln('');
+        Writeln('NO HAY MAS INFORMACION DISPONIBLE !...');
+        Writeln('');
+        Writeln('INFORMACION CTD DESCARGADA !...');
+        Writeln('');
       end;
 
+    end;
 
-       end;
-
-
-
-     except
+  except
     on E: Exception do
-      Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -3748,18 +3747,18 @@ end;
 // Descarga de reportes electrónicos semanales.
 // ====================================================================================================================
 
-procedure CommandObtRepDoc_Click;
+procedure Tdm.CommandObtRepDoc_Click;
 
 var
   resp: RespuestaObtenerPrimerBloqueDocumento;
 
   resp2: RespuestaObtenerSiguienteBloqueDocumento;
 begin
-Writeln('');
+  Writeln('');
   Writeln('DESCARGA INFORMACION COMPROBANTES:');
   Writeln('');
 
- Try
+  Try
     resp := HASARNG.ObtenerPrimerBloqueDocumento(1, 4, TiqueFacturaA, Comprime,
       XMLUnico);
 
@@ -3768,13 +3767,13 @@ Writeln('');
       Writeln('NO HAY INFORMACION DISPONIBLE !...!');
       Writeln('');
 
-
     end
     else
     begin
-      Writeln('Primer bloque de información    := [' + (resp.Informacion) + ']');
-    Writeln('');
-       end;
+      Writeln('Primer bloque de información    := [' +
+       (resp.Informacion) + ']');
+      Writeln('');
+    end;
 
     while (True) do
     begin
@@ -3784,27 +3783,23 @@ Writeln('');
       begin
         Writeln('Siguiente bloque de información := [' +
           (resp2.Informacion) + ']');
-      Writeln('');
+        Writeln('');
       end
       else
       begin
         Writeln('');
-      Writeln('NO HAY MAS INFORMACION DISPONIBLE !...');
-      Writeln('');
-      Writeln('INFORMACION COMPROBANTES DESCARGADA !...');
-      Writeln('');
+        Writeln('NO HAY MAS INFORMACION DISPONIBLE !...');
+        Writeln('');
+        Writeln('INFORMACION COMPROBANTES DESCARGADA !...');
+        Writeln('');
 
+      end;
+    end;
 
-         end;
-       end;
-
-
-
-     except
+  except
     on E: Exception do
-      Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -3812,35 +3807,34 @@ end;
 // Descarga de reportes electrónicos semanales.
 // ====================================================================================================================
 
-procedure CommandObtRepElectr_Click;
+procedure Tdm.CommandObtRepElectr_Click;
 
 var
   resp: RespuestaObtenerPrimerBloqueReporteElectronico;
 
   resp2: RespuestaObtenerSiguienteBloqueReporteElectronico;
 begin
-Writeln('');
+  Writeln('');
   Writeln('DESCARGA DE REPORTES SEMANALES:');
   Writeln('');
 
- Try
+  Try
     Writeln('Período: 01/02/2015 al 27/02/2015');
-    resp := HASARNG.ObtenerPrimerBloqueReporteElectronico('01/02/2015',
-      '27/02/2015');
+    resp := HASARNG.ObtenerPrimerBloqueReporteElectronico(01/02/2015, 27/02/2015,0);
 
     if (resp.Registro = BloqueFinal) then
     begin
       Writeln('');
-    Writeln('NO HAY INFORMACION DISPONIBLE !...');
-    Writeln('');
-
+      Writeln('NO HAY INFORMACION DISPONIBLE !...');
+      Writeln('');
 
     end
     else
     begin
-      Writeln('Primer bloque de información    := [' + (resp.Informacion) + ']');
-    Writeln('');
-       end;
+      Writeln('Primer bloque de información    := [' +
+       (resp.Informacion) + ']');
+      Writeln('');
+    end;
 
     while (True) do
     begin
@@ -3850,27 +3844,23 @@ Writeln('');
       begin
         Writeln('Siguiente bloque de información := [' +
           (resp2.Informacion) + ']');
-      Writeln('');
+        Writeln('');
       end
       else
       begin
         Writeln('');
-      Writeln('NO HAY MÁS INFORMACION DISPONIBLE !...');
-      Writeln('');
-      Writeln('REPORTES SEMANALES DECARGADOS !...');
-      Writeln('');
+        Writeln('NO HAY MÁS INFORMACION DISPONIBLE !...');
+        Writeln('');
+        Writeln('REPORTES SEMANALES DECARGADOS !...');
+        Writeln('');
 
+      end;
+    end;
 
-         end;
-       end;
-
-
-
-     except
+  except
     on E: Exception do
-      Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -3878,32 +3868,33 @@ end;
 // Descarga del LOG interno de la impresora fiscal.
 // ====================================================================================================================
 
-procedure CommandObtRepLog_Click;
+procedure Tdm.CommandObtRepLog_Click;
 
 var
   resp: RespuestaObtenerPrimerBloqueLog;
 
   resp2: RespuestaObtenerSiguienteBloqueLog;
 begin
-Writeln('');
+  Writeln('');
   Writeln('DESCARGA LOG INTERNO:');
   Writeln('');
 
- Try
+  Try
     resp := HASARNG.ObtenerPrimerBloqueLog;
 
     if (resp.Registro = BloqueFinal) then
     begin
       Writeln('');
-    Writeln('NO HAY INFORMACION DISPONIBLE !...');
-    Writeln('');
+      Writeln('NO HAY INFORMACION DISPONIBLE !...');
+      Writeln('');
 
     end
     else
     begin
-      Writeln('Primer bloque de información    := [' + (resp.Informacion) + ']');
-    Writeln('');
-       end;
+      Writeln('Primer bloque de información    := [' +
+       (resp.Informacion) + ']');
+      Writeln('');
+    end;
 
     While (True) do
     begin
@@ -3913,27 +3904,23 @@ Writeln('');
       begin
         Writeln('Siguiente bloque de información := [' +
           (resp2.Informacion) + ']');
-      Writeln('');
+        Writeln('');
       end
       else
       begin
         Writeln('');
-      Writeln('NO HAY MAS INFORMACION DISPONIBLE !...');
-      Writeln('');
-      Writeln('LOG INTERNO DESCARGADO !...');
-      Writeln('');
+        Writeln('NO HAY MAS INFORMACION DISPONIBLE !...');
+        Writeln('');
+        Writeln('LOG INTERNO DESCARGADO !...');
+        Writeln('');
 
+      end;
+    end;
 
-         end;
-       end;
-
-
-
-     except
+  except
     on E: Exception do
-      Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -3941,59 +3928,53 @@ end;
 // Consulta de estado fiscal del último comando ejecutado.
 // ====================================================================================================================
 
-procedure CommandObtStFiscal_Click;
+procedure Tdm.CommandObtStFiscal_Click;
 
 var
   resp: EstadoFiscal;
 begin
-Writeln('');
+  Writeln('');
   Writeln('CONSULTA ULTIMO ESTADO FISCAL:');
   Writeln('');
 
- Try
+  Try
     resp := HASARNG.ObtenerUltimoEstadoFiscal;
 
-    Writeln('Doc. abierto             := [' + (resp.DocumentoAbierto) + ']');
+    Writeln('Doc. abierto             := [' + BoolToStr(resp.DocumentoAbierto) + ']');
 
-    Writeln('Doc. fiscal abierto      := [' +
-      (resp.DocumentoFiscalAbierto) + ']');
+    Writeln('Doc. fiscal abierto      := [' + BoolToStr(resp.DocumentoFiscalAbierto) + ']');
 
-    Writeln('Error aritmético         := [' + (resp.ErrorAritmetico) + ']');
+    Writeln('Error aritmético         := [' + BoolToStr(resp.ErrorAritmetico) + ']');
 
-    Writeln('Error de ejecución       := [' + (resp.ErrorEjecucion) + ']');
+    Writeln('Error de ejecución       := [' + BoolToStr(resp.ErrorEjecucion) + ']');
 
-    Writeln('Error de estado          := [' + (resp.ErrorEstado) + ']');
+    Writeln('Error de estado          := [' + BoolToStr(resp.ErrorEstado) + ']');
 
-    Writeln('Error general            := [' + (resp.ErrorGeneral) + ']');
+    Writeln('Error general            := [' + BoolToStr(resp.ErrorGeneral) + ']');
 
-    Writeln('Error mem. auditoría     := [' + (resp.ErrorMemoriaAuditoria) + ']');
+    Writeln('Error mem. auditoría     := [' + BoolToStr(resp.ErrorMemoriaAuditoria) + ']');
 
-    Writeln('Error mem. fiscal        := [' + (resp.ErrorMemoriaFiscal) + ']');
+    Writeln('Error mem. fiscal        := [' + BoolToStr(resp.ErrorMemoriaFiscal) + ']');
 
-    Writeln('Error mem. trabajo       := [' + (resp.ErrorMemoriaTrabajo) + ']');
+    Writeln('Error mem. trabajo       := [' + BoolToStr(resp.ErrorMemoriaTrabajo) + ']');
 
-    Writeln('Error parámetro          := [' + (resp.ErrorParametro) + ']');
+    Writeln('Error parámetro          := [' + BoolToStr(resp.ErrorParametro) + ']');
 
-    Writeln('Mem. fiscal casi llena   := [' +
-      (resp.MemoriaFiscalCasiLlena) + ']');
+    Writeln('Mem. fiscal casi llena   := [' + BoolToStr(resp.MemoriaFiscalCasiLlena) + ']');
 
-    Writeln('Mem. fiscal inicializada := [' +
-      (resp.MemoriaFiscalInicializada) + ']');
+    Writeln('Mem. fiscal inicializada := [' + BoolToStr(resp.MemoriaFiscalInicializada) + ']');
 
-    Writeln('Mem. fiscal llena        := [' + (resp.MemoriaFiscalLlena) + ']'
+    Writeln('Mem. fiscal llena        := [' + BoolToStr(resp.MemoriaFiscalLlena) + ']'
 
       );
     Writeln('');
-  Writeln('FIN DE LA CONSULTA !...');
-  Writeln('');
+    Writeln('FIN DE LA CONSULTA !...');
+    Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -4001,44 +3982,41 @@ end;
 // Consulta último estado de la impresora.
 // ====================================================================================================================
 
-procedure CommandObtStImpr_Click;
+procedure Tdm.CommandObtStImpr_Click;
 
 var
   resp: EstadoImpresora;
 begin
-Writeln('');
+  Writeln('');
   Writeln('CONSULTA ULTIMO ESTADO DE IMPRESORA:');
   Writeln('');
 
- Try
+  Try
     resp := HASARNG.ObtenerUltimoEstadoImpresora;
-    Writeln('Cajón abierto        := [' + (resp.CajonAbierto) + ']');
+    Writeln('Cajón abierto        := [' + BoolToStr(resp.CajonAbierto) + ']');
 
-    Writeln('Error impresora      := [' + (resp.ErrorImpresora) + ']');
+    Writeln('Error impresora      := [' + BoolToStr(resp.ErrorImpresora) + ']');
 
-    Writeln('Falta papel testigo  := [' + (resp.FaltaPapelJournal) + ']');
+    Writeln('Falta papel testigo  := [' + BoolToStr(resp.FaltaPapelJournal) + ']');
 
-    Writeln('Falta papel comprob. := [' + (resp.FaltaPapelReceipt) + ']');
+    Writeln('Falta papel comprob. := [' + BoolToStr(resp.FaltaPapelReceipt) + ']');
 
-    Writeln('Impresora ocupada    := [' + (resp.ImpresoraOcupada) + ']');
+    Writeln('Impresora ocupada    := [' + BoolToStr(resp.ImpresoraOcupada) + ']');
 
-    Writeln('Impresora offline    := [' + (resp.ImpresoraOffLine) + ']');
+    Writeln('Impresora offline    := [' + BoolToStr(resp.ImpresoraOffLine) + ']');
 
-    Writeln('Estado Or lógico     := [' + (resp.OrLogico) + ']');
-    Writeln('Tapa abierta         := [' + (resp.TapaAbierta) + ']'
+    Writeln('Estado Or lógico     := [' + BoolToStr(resp.OrLogico) + ']');
+    Writeln('Tapa abierta         := [' + BoolToStr(resp.TapaAbierta) + ']'
 
       );
     Writeln('');
-  Writeln('FIN DE LA CONSULTA !...');
-  Writeln('');
+    Writeln('FIN DE LA CONSULTA !...');
+    Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -4046,18 +4024,18 @@ end;
 // Impresión de Documento Patrón, según definición RG AFIP Nº 3561/13.
 // ====================================================================================================================
 
-procedure CommandPatron_Click;
+procedure Tdm.CommandPatron_Click;
 
 var
   estilo: AtributosDeTexto;
 
   resp: RespuestaAbrirDocumento;
 begin
-Writeln('');
+  Writeln('');
   Writeln('IMPRESION DE DOCUMENTO PATRON:');
   Writeln('');
 
- Try
+  Try
     estilo.BorradoTexto := False;
     estilo.Centrado := False;
     estilo.DobleAncho := False;
@@ -4085,23 +4063,21 @@ Writeln('');
     resp := HASARNG.AbrirDocumento(TiqueFacturaA);
     Writeln('');
 
-    Writeln('(abrir); Doc. Patrón Nro. := [' + (resp.NumeroComprobante) + ']');
-  Writeln('');
+    Writeln('(abrir); Doc. Patrón Nro. := [' +intToStr(resp.NumeroComprobante) + ']');
+    Writeln('');
     resp := HASARNG.AbrirDocumento(TiqueFacturaA);
 
-    Writeln('Tique Factura " A " Nº [' + (resp.NumeroComprobante) +
+    Writeln('Tique Factura " A " Nº [' +intToStr(resp.NumeroComprobante) +
       ']... ABIERTO !');
-  Writeln('');
+    Writeln('');
 
-  Writeln('');
-  Writeln('DOCUMENTO PATRON IMPRESO !...');
-  Writeln('');
+    Writeln('');
+    Writeln('DOCUMENTO PATRON IMPRESO !...');
+    Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
 
 
@@ -4173,14 +4149,13 @@ Writeln('');
   // 'DEfectivo ........................................289.78PagarDisplayNOPesos Argentinos ................................Efectivo
   // 'E
 
-
 end;
 
 // ====================================================================================================================
 // Impresión de un Presupuesto 'X' clase 'A'.
 // ====================================================================================================================
 
-procedure CommandPRESUP_Click;
+procedure Tdm.CommandPRESUP_Click;
 
 var
   respabrir: RespuestaAbrirDocumento;
@@ -4192,17 +4167,17 @@ var
 begin
   Try
     Writeln('');
-  Writeln('IMPRIMIENDO - PRESUPUESTO " X " Clase " A ":');
-  Writeln('');
+    Writeln('IMPRIMIENDO - PRESUPUESTO " X " Clase " A ":');
+    Writeln('');
 
     HASARNG.CargarDatosCliente('Razón Social Cliente...', '99999999995',
       ResponsableInscripto, TipoCUIT, 'Domicilio Cliente...',
       'Domicilio extensión 1...', 'Domicilio extensión 2...',
       'Domicilio extensión 3....');
     respabrir := HASARNG.AbrirDocumento(PresupuestoX);
-  Writeln('');
+    Writeln('');
     Writeln(' - (abrir);Presupuesto " X " Nro.  := [' +
-      (respabrir.NumeroComprobante) + ']');
+      intToStr(respabrir.NumeroComprobante) + ']');
     Writeln('');
 
     estilo.Negrita := True;
@@ -4213,24 +4188,21 @@ begin
     HASARNG.ImprimirDescuentoItem('Oferta 10%...', 10, DisplayNo,
       ModoPrecioTotal);
 
-    respcierre := HASARNG.CerrarDocumento('', 'hasarventas@hasar.com');
+    respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
 
-  Writeln('');
-    Writeln(' - (cerrar);Presupuesto " X " Nro. := [' +
-      (respcierre.NumeroComprobante) + ']');
-    Writeln(' - Páginas                      := [' +
-      (respcierre.CantidadDePaginas) + ']');
     Writeln('');
-  Writeln('PRESUPUESTO " X " IMPRESO !...');
-  Writeln('');
+    Writeln(' - (cerrar);Presupuesto " X " Nro. := [' +
+     IntToStr(respcierre.NumeroComprobante) + ']');
+    Writeln(' - Páginas                      := [' +
+     IntToStr(respcierre.CantidadDePaginas) + ']');
+    Writeln('');
+    Writeln('PRESUPUESTO " X " IMPRESO !...');
+    Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -4238,44 +4210,40 @@ end;
 // Establecer conexión con la impresora fiscal y consultar estado fiscal, y de impresora, actual.
 // ====================================================================================================================
 
-procedure CommandProtocolo_Click;
-
-var
-  stprn: EstadoImpresora;
-
-  resp: RespuestaConsultarVersion;
+procedure Tdm.CommandProtocolo_Click;
+//var
+  //stprn: EstadoImpresora;
+  //?resp: RespuestaConsultarVersion;
 
 begin
   Try
     Writeln('');
-  Writeln('========================================');
-  Writeln('VERIFICANDO CONEXION A IMPRESORA FISCAL:');
-  Writeln('');
-  Writeln('ETHERNET - Conectando a... 10.0.7.69');
-  Writeln('ETHERNET - Conectando a... 127.0.0.1');
-  Writeln('');
-    HASARNG.Conectar('10.0.7.69');
-    HASARNG.Conectar('127.0.0.1');
+    Writeln('========================================');
+    Writeln('VERIFICANDO CONEXION A IMPRESORA FISCAL:');
     Writeln('');
-  Writeln('CONECTADO ! ...');
+    Writeln('ETHERNET - Conectando a... 10.0.7.69');
+    Writeln('ETHERNET - Conectando a... 127.0.0.1');
+    Writeln('');
+    HASARNG.Conectar('10.0.7.69',0);
+    HASARNG.Conectar('127.0.0.1',0);
+    Writeln('');
+    Writeln('CONECTADO ! ...');
 
     CommandObtStImpr_Click;
     CommandObtStFiscal_Click;
-  Writeln('');
+    Writeln('');
 
-    Writeln('OCX FISCAL HASAR NG versión := [' + (HASARNG.ObtenerVersion) + ']');
-  Writeln('');
+    Writeln('OCX FISCAL HASAR NG versión := [' +
+      IntToStr(HASARNG.ObtenerVersion) + ']');
+    Writeln('');
     CommandConsModvers_Click;
-  Writeln('========================================');
-  Writeln('');
+    Writeln('========================================');
+    Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -4283,7 +4251,7 @@ end;
 // Consultar rango de fechas, o números de cierres 'Z'.
 // ====================================================================================================================
 
-procedure CommandRangoZ_Click;
+procedure Tdm.CommandRangoZ_Click;
 
 var
   resp1: RespuestaObtenerRangoFechasPorZetas;
@@ -4293,39 +4261,36 @@ var
 begin
   Try
     Writeln('');
-  Writeln('CONSULTA RANGO NUMEROS DE CIERRES " Z ":');
-  Writeln('');
-  Writeln('Rango consultado: 01/01/2015 al 31/12/2015...');
-  Writeln('');
+    Writeln('CONSULTA RANGO NUMEROS DE CIERRES " Z ":');
+    Writeln('');
+    Writeln('Rango consultado: 01/01/2015 al 31/12/2015...');
+    Writeln('');
 
-    resp2 := HASARNG.ObtenerRangoZetasPorFechas('01/01/2014', '31/12/2015');
-  Writeln('');
+    resp2 := HASARNG.ObtenerRangoZetasPorFechas(01/01/2014, 31/12/2015);
+    Writeln('');
     Writeln('Nro. " Z " inicial  := [' + IntToStr(resp2.ZetaInicial) + ']');
-  Writeln('Nro. " Z " final    := [' + IntToStr(resp2.ZetaFinal) + ']');
-  Writeln('');
+    Writeln('Nro. " Z " final    := [' + IntToStr(resp2.ZetaFinal) + ']');
+    Writeln('');
 
-  Writeln('CONSULTA RANGO FECHAS DE CIERRES " Z ":');
-  Writeln('');
-  Writeln('Rango consultado: 1 al 4000...');
-  Writeln('');
+    Writeln('CONSULTA RANGO FECHAS DE CIERRES " Z ":');
+    Writeln('');
+    Writeln('Rango consultado: 1 al 4000...');
+    Writeln('');
 
     resp1 := HASARNG.ObtenerRangoFechasPorZetas(1, 4000);
-  Writeln('');
-    Writeln('Fecha " Z " inicial := [' + (resp1.FechaInicial) + ']');
-  Writeln('Fecha " Z " final   := [' + (resp1.FechaFinal) + ']'
+    Writeln('');
+    Writeln('Fecha " Z " inicial := [' + DateToStr(resp1.FechaInicial) + ']');
+    Writeln('Fecha " Z " final   := [' + DateToStr(resp1.FechaFinal) + ']'
 
       );
     Writeln('');
-  Writeln('FIN DE LA CONSULTA !...');
-  Writeln('');
+    Writeln('FIN DE LA CONSULTA !...');
+    Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -4333,22 +4298,22 @@ end;
 // Impresión de un Recibo X'.
 // ====================================================================================================================
 
-procedure CommandRBOX_Click;
+procedure Tdm.CommandRBOX_Click;
 
 var
   respabrir: RespuestaAbrirDocumento;
 
   resppago: RespuestaImprimirPago;
 
-  estilo: AtributosDeTexto;
+//?  estilo: AtributosDeTexto;
 
   respcierre: RespuestaCerrarDocumento;
 
 begin
   Try
     Writeln('');
-  Writeln('IMPRIMIENDO - RECIBO " X ":');
-  Writeln('');
+    Writeln('IMPRIMIENDO - RECIBO " X ":');
+    Writeln('');
 
     HASARNG.CargarDocumentoAsociado(1, TiqueFacturaA, 2019, 1458);
     HASARNG.CargarDatosCliente('Razón Social Cliente...', '99999999995',
@@ -4359,8 +4324,8 @@ begin
     Writeln('');
 
     Writeln(' - (abrir); Recibo " X " Nro. := [' +
-      (respabrir.NumeroComprobante) + ']');
-  Writeln('');
+      intToStr(respabrir.NumeroComprobante) + ']');
+    Writeln('');
 
     HASARNG.ImprimirItem('Item a la venta...', 1, 3500, Gravado, 0,
       ModoSumaMonto, IIVariablePorcentual, 0, DisplayNo, ModoPrecioTotal, 1,
@@ -4368,29 +4333,26 @@ begin
     HASARNG.ImprimirConceptoRecibo('Alquiler mes de Marzo de 2015...');
 
     resppago := HASARNG.ImprimirPago('Efectivo...', 3500, Pagar, DisplayNo, '',
-      Efectivo, '', '');
+      Efectivo, 0, '');
     Writeln('');
-    Writeln(' - Pagando... Cambio       := [' + (resppago.Saldo) + ']');
-  Writeln('');
+    Writeln(' - Pagando... Cambio       := [' + FloatToStr(resppago.Saldo) + ']');
+    Writeln('');
 
-    respcierre := HASARNG.CerrarDocumento('', 'hasarventas@hasar.com');
-  Writeln('');
+    respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
+    Writeln('');
     Writeln(' - (cerrar);Recibo " X " Nro. := [' +
-      (respcierre.NumeroComprobante) + ']');
+     IntToStr(respcierre.NumeroComprobante) + ']');
 
-    Writeln(' - Páginas                 := [' + (respcierre.CantidadDePaginas) +
-      ']');
+    Writeln(' - Páginas                 := [' +
+     IntToStr(respcierre.CantidadDePaginas) + ']');
     Writeln('');
-  Writeln('RECIBO " X " IMPRESO !...');
-  Writeln('');
+    Writeln('RECIBO " X " IMPRESO !...');
+    Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -4398,30 +4360,27 @@ end;
 // Se pide otro ejemplar del último comprobante emitido.
 // ====================================================================================================================
 
-procedure CommandReimpr_Click;
+procedure Tdm.CommandReimpr_Click;
 
 var
   resp: RespuestaPedirReimpresion;
 begin
-Writeln('');
+  Writeln('');
   Writeln('REIMPRESION COMPROBANTE:');
   Writeln('');
 
- Try
+  Try
     resp := HASARNG.PedirReimpresion;
-  Writeln('');
-  Writeln('Copia Nro. := [' + (resp.NumeroDeCopia) + ']');
-  Writeln('');
-  Writeln('FIN DE LA REIMPRESION !...');
-  Writeln('');
+    Writeln('');
+    Writeln('Copia Nro. := [' +intToStr(resp.NumeroDeCopia) + ']');
+    Writeln('');
+    Writeln('FIN DE LA REIMPRESION !...');
+    Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -4429,7 +4388,7 @@ end;
 // Impresión de un Remito 'R'.
 // ====================================================================================================================
 
-procedure CommandRTOR_Click;
+procedure Tdm.CommandRTOR_Click;
 
 var
   respabrir: RespuestaAbrirDocumento;
@@ -4443,8 +4402,8 @@ var
 begin
   Try
     Writeln('');
-  Writeln('IMPRIMIENDO - REMITO " R ":');
-  Writeln('');
+    Writeln('IMPRIMIENDO - REMITO " R ":');
+    Writeln('');
 
     HASARNG.CargarDatosCliente('Razón Social Cliente...', '99999999995',
       ResponsableInscripto, TipoCUIT, 'Domicilio Cliente...',
@@ -4455,11 +4414,11 @@ begin
       'ABC123', 'DEF456');
     HASARNG.CargarDocumentoAsociado(1, TiqueFacturaA, 2019, 1458);
     respabrir := HASARNG.AbrirDocumento(RemitoR);
-  Writeln('');
+    Writeln('');
 
     Writeln(' - (abrir); Remito " R " Nro. := [' +
-      (respabrir.NumeroComprobante) + ']');
-  Writeln('');
+      intToStr(respabrir.NumeroComprobante) + ']');
+    Writeln('');
 
     estilo.Negrita := True;
     HASARNG.ImprimirTextoFiscal(estilo, 'Hasta agotar stock...', DisplayNo);
@@ -4467,30 +4426,27 @@ begin
       ModoSumaMonto, IIVariablePorcentual, 0, DisplayNo, ModoPrecioTotal, 1,
       '779123456789', '', Unidad);
     resppago := HASARNG.ImprimirPago('Efectivo...', 100, Pagar, DisplayNo, '',
-      Efectivo, '', '');
+      Efectivo, 0, '');
     Writeln('');
-    Writeln(' - Pagando... Cambio       := [' + (resppago.Saldo) + ']');
-  Writeln('');
+    Writeln(' - Pagando... Cambio       := [' + FloatToStr(resppago.Saldo) + ']');
+    Writeln('');
 
-    respcierre := HASARNG.CerrarDocumento('', 'hasarventas@hasar.com');
+    respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
 
-  Writeln('');
+    Writeln('');
     Writeln(' - (cerrar);Remito " R " Nro. := [' +
-      (respcierre.NumeroComprobante) + ']');
+     IntToStr(respcierre.NumeroComprobante) + ']');
 
-    Writeln(' - Páginas                 := [' + (respcierre.CantidadDePaginas) +
-      ']');
+    Writeln(' - Páginas                 := [' +
+     IntToStr(respcierre.CantidadDePaginas) + ']');
     Writeln('');
-  Writeln('REMITO " R " IMPRESO !...');
-  Writeln('');
+    Writeln('REMITO " R " IMPRESO !...');
+    Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -4498,7 +4454,7 @@ end;
 // Impresión de un Remito X'.
 // ====================================================================================================================
 
-procedure CommandRTOX_Click;
+procedure Tdm.CommandRTOX_Click;
 
 var
   respabrir: RespuestaAbrirDocumento;
@@ -4512,8 +4468,8 @@ var
 begin
   Try
     Writeln('');
-  Writeln('IMPRIMIENDO - REMITO " X ":');
-  Writeln('');
+    Writeln('IMPRIMIENDO - REMITO " X ":');
+    Writeln('');
 
     HASARNG.CargarDatosCliente('Razón Social Cliente...', '99999999995',
       ResponsableInscripto, TipoCUIT, 'Domicilio Cliente...',
@@ -4524,11 +4480,11 @@ begin
       'ABC123', 'DEF456');
     HASARNG.CargarDocumentoAsociado(1, TiqueFacturaA, 2019, 1458);
     respabrir := HASARNG.AbrirDocumento(RemitoX);
-  Writeln('');
+    Writeln('');
 
     Writeln(' - (abrir); Remito " X " Nro.  := [' +
-      (respabrir.NumeroComprobante) + ']');
-  Writeln('');
+      intToStr(respabrir.NumeroComprobante) + ']');
+    Writeln('');
 
     estilo.Negrita := True;
     HASARNG.ImprimirTextoFiscal(estilo, 'Hasta agotar stock...', DisplayNo);
@@ -4536,30 +4492,27 @@ begin
       ModoSumaMonto, IIVariablePorcentual, 0, DisplayNo, ModoPrecioTotal, 1,
       '779123456789', '', Unidad);
     resppago := HASARNG.ImprimirPago('Efectivo...', 100, Pagar, DisplayNo, '',
-      Efectivo, '', '');
+      Efectivo, 0, '');
     Writeln('');
-    Writeln(' - Pagando... Cambio        := [' + (resppago.Saldo) + ']');
-  Writeln('');
+    Writeln(' - Pagando... Cambio        := [' + FloatToStr(resppago.Saldo) + ']');
+    Writeln('');
 
-    respcierre := HASARNG.CerrarDocumento('', 'hasarventas@hasar.com');
+    respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
 
-  Writeln('');
+    Writeln('');
     Writeln(' - (cerrar); Remito " X " Nro. := [' +
-      (respcierre.NumeroComprobante) + ']');
+     IntToStr(respcierre.NumeroComprobante) + ']');
 
-    Writeln(' - Páginas                  := [' + (respcierre.CantidadDePaginas) +
-      ']');
+    Writeln(' - Páginas                  := [' +
+     IntToStr(respcierre.CantidadDePaginas) + ']');
     Writeln('');
-  Writeln('CREMITO " X " IMPRESO !...');
-  Writeln('');
+    Writeln('CREMITO " X " IMPRESO !...');
+    Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -4567,20 +4520,18 @@ end;
 // Se abandona la aplicación.
 // ====================================================================================================================
 
-procedure CommandSalir_Click;
+procedure Tdm.CommandSalir_Click;
 begin
 
-Writeln('');
+  Writeln('');
   Writeln('...Oh !.................................................');
 
   Writeln('...................CERRANDO PROGRAMA....................');
 
   Writeln('...............................................Chau !...');
-Writeln('');
+  Writeln('');
 
   exit; // End
-
-
 
 end;
 
@@ -4588,38 +4539,35 @@ end;
 // Consulta de subtotal.
 // ====================================================================================================================
 
-procedure CommandSubtot_Click;
+procedure Tdm.CommandSubtot_Click;
 
 var
   respsubt: RespuestaConsultarSubtotal;
 begin
-Writeln('');
+  Writeln('');
   Writeln('CONSULTA SUBTOTAL:');
   Writeln('');
 
- Try
+  Try
     respsubt := HASARNG.ConsultarSubtotal(NoImprimeSubtotal, DisplayNo);
-  Writeln('');
-    Writeln('Cant. Items    := [' + (respsubt.CantidadItems) + ']');
-  Writeln('Subtotal       := [' + (respsubt.Subtotal) + ']');
-  Writeln('Base imponible := [' + (respsubt.MontoBase) + ']');
-  Writeln('IVA            := [' + (respsubt.MontoIVA) + ']');
+    Writeln('');
+    Writeln('Cant. Items    := [' + FloatToStr(respsubt.CantidadItems) + ']');
+    Writeln('Subtotal       := [' + FloatToStr(respsubt.Subtotal) + ']');
+    Writeln('Base imponible := [' + FloatToStr(respsubt.MontoBase) + ']');
+    Writeln('IVA            := [' + FloatToStr(respsubt.MontoIVA) + ']');
 
-    Writeln('Imp. Internos  := [' + (respsubt.MontoImpInternos) + ']');
+    Writeln('Imp. Internos  := [' + FloatToStr(respsubt.MontoImpInternos) + ']');
 
-    Writeln('Otros tributos := [' + (respsubt.MontoOtrosTributos) + ']');
-  Writeln('Pagado         := [' + (respsubt.MontoPagado) + ']');
-  Writeln('');
-  Writeln('FIN DE LA CONSULTA !...');
-  Writeln('');
+    Writeln('Otros tributos := [' + FloatToStr(respsubt.MontoOtrosTributos) + ']');
+    Writeln('Pagado         := [' + FloatToStr(respsubt.MontoPagado) + ']');
+    Writeln('');
+    Writeln('FIN DE LA CONSULTA !...');
+    Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -4627,7 +4575,7 @@ end;
 // Impresión de un Tique Factura 'A'.
 // ====================================================================================================================
 
-procedure CommandTFA_Click;
+procedure Tdm.CommandTFA_Click;
 
 var
   respabrir: RespuestaAbrirDocumento;
@@ -4643,16 +4591,16 @@ begin
     Writeln('');
 
     Writeln('IMPRIMIENDO - TIQUE FACTURA " A " /  A CON LEYENDA :');
-  Writeln('');
+    Writeln('');
 
     HASARNG.CargarDatosCliente('Razón Social Cliente...', '99999999995',
       ResponsableInscripto, TipoCUIT, 'Domicilio Cliente...',
       'Domicilio extensión 1...', 'Domicilio extensión 2...',
       'Domicilio extensión 3....');
     respabrir := HASARNG.AbrirDocumento(TiqueFacturaA);
-  Writeln('');
+    Writeln('');
     Writeln(' - (abrir); Tique Factura " A " Nro.  := [' +
-      (respabrir.NumeroComprobante) + ']');
+      intToStr(respabrir.NumeroComprobante) + ']');
     Writeln('');
 
     estilo.Negrita := True;
@@ -4663,30 +4611,27 @@ begin
     HASARNG.ImprimirDescuentoItem('Oferta 10%...', 10, DisplayNo,
       ModoPrecioBase);
     resppago := HASARNG.ImprimirPago('Efectivo...', 90, Pagar, DisplayNo, '',
-      Efectivo, '', '');
+      Efectivo, 0, '');
     Writeln('');
 
-    Writeln(' - Pagando... Cambio               := [' + (resppago.Saldo) + ']');
-  Writeln('');
+    Writeln(' - Pagando... Cambio               := [' + FloatToStr(resppago.Saldo) + ']');
+    Writeln('');
 
-    respcierre := HASARNG.CerrarDocumento('', 'hasarventas@hasar.com');
+    respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
 
-  Writeln('');
+    Writeln('');
     Writeln(' - (cerrar); Tique Factura " A " Nro. := [' +
-      (respcierre.NumeroComprobante) + ']');
+     IntToStr(respcierre.NumeroComprobante) + ']');
     Writeln(' - Páginas                         := [' +
-      (respcierre.CantidadDePaginas) + ']');
+     IntToStr(respcierre.CantidadDePaginas) + ']');
     Writeln('');
-  Writeln('TIQUE FACTURA " A " IMPRESO !...');
-  Writeln('');
+    Writeln('TIQUE FACTURA " A " IMPRESO !...');
+    Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -4694,7 +4639,7 @@ end;
 // Impresión de un Tique Factura 'B'.
 // ====================================================================================================================
 
-procedure CommandTFB_Click;
+procedure Tdm.CommandTFB_Click;
 
 var
   respabrir: RespuestaAbrirDocumento;
@@ -4708,16 +4653,16 @@ var
 begin
   Try
     Writeln('');
-  Writeln('IMPRIMIENDO - TIQUE FACTURA " B ":');
-  Writeln('');
+    Writeln('IMPRIMIENDO - TIQUE FACTURA " B ":');
+    Writeln('');
 
     HASARNG.CargarDatosCliente('Razón Social Cliente...', '99999999995',
       Monotributo, TipoCUIT, 'Domicilio Cliente...', 'Domicilio extensión 1...',
       'Domicilio extensión 2...', 'Domicilio extensión 3....');
     respabrir := HASARNG.AbrirDocumento(TiqueFacturaB);
-  Writeln('');
+    Writeln('');
     Writeln(' - (abrir); Tique Factura " B " Nro.  := [' +
-      (respabrir.NumeroComprobante) + ']');
+      intToStr(respabrir.NumeroComprobante) + ']');
     Writeln('');
 
     estilo.Negrita := True;
@@ -4728,30 +4673,27 @@ begin
     HASARNG.ImprimirDescuentoItem('Oferta 10%...', 10, DisplayNo,
       ModoPrecioBase);
     resppago := HASARNG.ImprimirPago('Efectivo...', 90, Pagar, DisplayNo, '',
-      Efectivo, '', '');
+      Efectivo, 0, '');
     Writeln('');
 
-    Writeln(' - Pagando... Cambio               := [' + (resppago.Saldo) + ']');
-  Writeln('');
+    Writeln(' - Pagando... Cambio               := [' + FloatToStr(resppago.Saldo) + ']');
+    Writeln('');
 
-    respcierre := HASARNG.CerrarDocumento('', 'hasarventas@hasar.com');
+    respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
 
-  Writeln('');
+    Writeln('');
     Writeln(' - (cerrar); Tique Factura " B " Nro. := [' +
-      (respcierre.NumeroComprobante) + ']');
+     IntToStr(respcierre.NumeroComprobante) + ']');
     Writeln(' - Páginas                         := [' +
-      (respcierre.CantidadDePaginas) + ']');
+     IntToStr(respcierre.CantidadDePaginas) + ']');
     Writeln('');
-  Writeln('TIQUE FACTURA " B " IMPRESO !...');
-  Writeln('');
+    Writeln('TIQUE FACTURA " B " IMPRESO !...');
+    Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -4759,7 +4701,7 @@ end;
 // Impresión de un Tique Factura 'C'.
 // ====================================================================================================================
 
-procedure CommandTFC_Click;
+procedure Tdm.CommandTFC_Click;
 
 var
   respabrir: RespuestaAbrirDocumento;
@@ -4773,16 +4715,16 @@ var
 begin
   Try
     Writeln('');
-  Writeln('IMPRIMIENDO - TIQUE FACTURA " C ":');
-  Writeln('');
+    Writeln('IMPRIMIENDO - TIQUE FACTURA " C ":');
+    Writeln('');
 
     HASARNG.CargarDatosCliente('Razón Social Cliente...', '99999999995',
       Monotributo, TipoCUIT, 'Domicilio Cliente...', 'Domicilio extensión 1...',
       'Domicilio extensión 2...', 'Domicilio extensión 3....');
     respabrir := HASARNG.AbrirDocumento(TiqueFacturaC);
-  Writeln('');
+    Writeln('');
     Writeln(' - (abrir); Tique Factura " C " Nro.  := [' +
-      (respabrir.NumeroComprobante) + ']');
+      intToStr(respabrir.NumeroComprobante) + ']');
     Writeln('');
 
     estilo.Negrita := True;
@@ -4793,28 +4735,27 @@ begin
     HASARNG.ImprimirDescuentoItem('Oferta 10%...', 10, DisplayNo,
       ModoPrecioTotal);
     resppago := HASARNG.ImprimirPago('Efectivo...', 90, Pagar, DisplayNo, '',
-      Efectivo, '', '');
+      Efectivo, 0, '');
     Writeln('');
 
-    Writeln(' - Pagando... Cambio               := [' + (resppago.Saldo) + ']');
-  Writeln('');
+    Writeln(' - Pagando... Cambio               := [' + FloatToStr(resppago.Saldo) + ']');
+    Writeln('');
 
-    respcierre := HASARNG.CerrarDocumento('', 'hasarventas@hasar.com');
+    respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
 
-  Writeln('');
+    Writeln('');
     Writeln(' - (cerrar); Tique Factura " C " Nro. := [' +
-      (respcierre.NumeroComprobante) + ']');
+     IntToStr(respcierre.NumeroComprobante) + ']');
     Writeln(' - Páginas                         := [' +
-      (respcierre.CantidadDePaginas) + ']');
+     IntToStr(respcierre.CantidadDePaginas) + ']');
     Writeln('');
-  Writeln('TIQUE FACTURA " C "IMPRESO !...');
-  Writeln('');
+    Writeln('TIQUE FACTURA " C "IMPRESO !...');
+    Writeln('');
 
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -4822,7 +4763,7 @@ end;
 // Impresión de un Tique Factura 'M'.
 // ====================================================================================================================
 
-procedure CommandTFM_Click;
+procedure Tdm.CommandTFM_Click;
 
 var
   respabrir: RespuestaAbrirDocumento;
@@ -4836,16 +4777,16 @@ var
 begin
   Try
     Writeln('');
-  Writeln('IMPRIMIENDO - TIQUE FACTURA " M ":');
-  Writeln('');
+    Writeln('IMPRIMIENDO - TIQUE FACTURA " M ":');
+    Writeln('');
 
     HASARNG.CargarDatosCliente('Razón Social Cliente...', '99999999995',
       Monotributo, TipoCUIT, 'Domicilio Cliente...', 'Domicilio extensión 1...',
       'Domicilio extensión 2...', 'Domicilio extensión 3....');
     respabrir := HASARNG.AbrirDocumento(TiqueFacturaM);
-  Writeln('');
+    Writeln('');
     Writeln(' - (abrir); Tique Factura " M " Nro.  := [' +
-      (respabrir.NumeroComprobante) + ']');
+      intToStr(respabrir.NumeroComprobante) + ']');
     Writeln('');
 
     estilo.Negrita := True;
@@ -4856,30 +4797,27 @@ begin
     HASARNG.ImprimirDescuentoItem('Oferta 10%...', 10, DisplayNo,
       ModoPrecioTotal);
     resppago := HASARNG.ImprimirPago('Efectivo...', 90, Pagar, DisplayNo, '',
-      Efectivo, '', '');
+      Efectivo, 0, '');
     Writeln('');
 
-    Writeln(' - Pagando... Cambio               := [' + (resppago.Saldo) + ']');
-  Writeln('');
+    Writeln(' - Pagando... Cambio               := [' + FloatToStr(resppago.Saldo) + ']');
+    Writeln('');
 
-    respcierre := HASARNG.CerrarDocumento('', 'hasarventas@hasar.com');
+    respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
 
-  Writeln('');
+    Writeln('');
     Writeln(' - (cerrar); Tique Factura " M " Nro. := [' +
-      (respcierre.NumeroComprobante) + ']');
+     IntToStr(respcierre.NumeroComprobante) + ']');
     Writeln(' - Páginas                         := [' +
-      (respcierre.CantidadDePaginas) + ']');
+     IntToStr(respcierre.CantidadDePaginas) + ']');
     Writeln('');
-  Writeln('TIQUE FACTURA " M "IMPRESO !...');
-  Writeln('');
+    Writeln('TIQUE FACTURA " M "IMPRESO !...');
+    Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -4887,7 +4825,7 @@ end;
 // Impresión de un Tique a Consumidor Final.
 // ====================================================================================================================
 
-procedure CommandTique_Click;
+procedure Tdm.CommandTique_Click;
 
 var
   respabrir: RespuestaAbrirDocumento;
@@ -4901,14 +4839,14 @@ var
 begin
   Try
     Writeln('');
-  Writeln('IMPRIMIENDO - TIQUE A CONSUMIDOR FINAL:');
-  Writeln('');
+    Writeln('IMPRIMIENDO - TIQUE A CONSUMIDOR FINAL:');
+    Writeln('');
 
     respabrir := HASARNG.AbrirDocumento(Tique);
     Writeln('');
 
     Writeln(' - (abrir); Tique Cons. Final Nro.  := [' +
-      (respabrir.NumeroComprobante) + ']');
+      intToStr(respabrir.NumeroComprobante) + ']');
     Writeln('');
 
     estilo.Negrita := True;
@@ -4920,29 +4858,26 @@ begin
       ModoPrecioBase);
 
     resppago := HASARNG.ImprimirPago('Efectivo...', 90, Pagar, DisplayNo, '',
-      Efectivo, '', '');
+      Efectivo, 0, '');
     Writeln('');
-    Writeln(' - Pagando... Cambio               := [' + (resppago.Saldo) + ']');
-  Writeln('');
+    Writeln(' - Pagando... Cambio               := [' + FloatToStr(resppago.Saldo) + ']');
+    Writeln('');
 
-    respcierre := HASARNG.CerrarDocumento('', 'hasarventas@hasar.com');
+    respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
 
-  Writeln('');
+    Writeln('');
     Writeln(' - (cerrar); Tique Cons. Final Nro. := [' +
-      (respcierre.NumeroComprobante) + ']');
+     IntToStr(respcierre.NumeroComprobante) + ']');
     Writeln(' - Páginas                         := [' +
-      (respcierre.CantidadDePaginas) + ']');
+     IntToStr(respcierre.CantidadDePaginas) + ']');
     Writeln('');
-  Writeln('TIQUE A CONSUMIDOR FINAL IMPRESO !...');
-  Writeln('');
+    Writeln('TIQUE A CONSUMIDOR FINAL IMPRESO !...');
+    Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -4950,7 +4885,7 @@ end;
 // Impresión de un Tique Nota de Crédito a Consumidor Final.
 // ====================================================================================================================
 
-procedure CommandTiqueNC_Click;
+procedure Tdm.CommandTiqueNC_Click;
 
 var
   respabrir: RespuestaAbrirDocumento;
@@ -4966,12 +4901,12 @@ begin
     Writeln('');
 
     Writeln('IMPRIMIENDO - TIQUE NOTA DE CREDITO A CONSUMIDOR FINAL:');
-  Writeln('');
+    Writeln('');
 
     respabrir := HASARNG.AbrirDocumento(TiqueNotaCredito);
-  Writeln('');
+    Writeln('');
     Writeln(' - (abrir); Tique Nota de Crédito a Cons. Final Nro.  := [' +
-      (respabrir.NumeroComprobante) + ']');
+      intToStr(respabrir.NumeroComprobante) + ']');
     Writeln('');
 
     estilo.Negrita := True;
@@ -4982,33 +4917,30 @@ begin
     HASARNG.ImprimirDescuentoItem('Oferta 10%...', 10, DisplayNo,
       ModoPrecioTotal);
     resppago := HASARNG.ImprimirPago('Efectivo...', 90, Pagar, DisplayNo, '',
-      Efectivo, '', '');
+      Efectivo, 0, '');
     Writeln('');
 
     Writeln(' - Pagando... Cambio                                 := [' +
-      (resppago.Saldo) + ']');
+      FloatToStr(resppago.Saldo) + ']');
     Writeln('');
 
-    respcierre := HASARNG.CerrarDocumento('', 'hasarventas@hasar.com');
+    respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
 
-  Writeln('');
+    Writeln('');
     Writeln(' - (cerrar); Tique Nota de Crédito a Cons. Final Nro. := [' +
-      (respcierre.NumeroComprobante) + ']');
+     IntToStr(respcierre.NumeroComprobante) + ']');
 
     Writeln(' - Páginas                                           := [' +
-      (respcierre.CantidadDePaginas) + ']');
+     IntToStr(respcierre.CantidadDePaginas) + ']');
     Writeln('');
 
     Writeln('TIQUE NOTA DE CREDITO A CONSUMIDOR FINAL IMPRESO !...');
-  Writeln('');
+    Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -5016,7 +4948,7 @@ end;
 // Impresión de un Tique Nota de Crédito 'A'.
 // ====================================================================================================================
 
-procedure CommandTNCA_Click;
+procedure Tdm.CommandTNCA_Click;
 
 var
   respabrir: RespuestaAbrirDocumento;
@@ -5032,16 +4964,16 @@ begin
     Writeln('');
 
     Writeln('IMPRIMIENDO - TIQUE NOTA DE CREDITO " A " /  A CON LEYENDA :');
-  Writeln('');
+    Writeln('');
 
     HASARNG.CargarDatosCliente('Razón Social Cliente...', '99999999995',
       ResponsableInscripto, TipoCUIT, 'Domicilio Cliente...',
       'Domicilio extensión 1...', 'Domicilio extensión 2...',
       'Domicilio extensión 3....');
     respabrir := HASARNG.AbrirDocumento(TiqueNotaCreditoA);
-  Writeln('');
+    Writeln('');
     Writeln(' - (abrir); Tique Nota de Crédito " A " Nro.  := [' +
-      (respabrir.NumeroComprobante) + ']');
+      intToStr(respabrir.NumeroComprobante) + ']');
     Writeln('');
 
     estilo.Negrita := True;
@@ -5052,32 +4984,29 @@ begin
     HASARNG.ImprimirDescuentoItem('Oferta 10%...', 10, DisplayNo,
       ModoPrecioTotal);
     resppago := HASARNG.ImprimirPago('Efectivo...', 90, Pagar, DisplayNo, '',
-      Efectivo, '', '');
+      Efectivo, 0, '');
     Writeln('');
 
     Writeln(' - Pagando... Cambio                       := [' +
-      (resppago.Saldo) + ']');
-  Writeln('');
+      FloatToStr(resppago.Saldo) + ']');
+    Writeln('');
 
-    respcierre := HASARNG.CerrarDocumento('', 'hasarventas@hasar.com');
+    respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
 
-  Writeln('');
+    Writeln('');
     Writeln(' - (cerrar); Tique Nota de Crédito " A " Nro. := [' +
-      (respcierre.NumeroComprobante) + ']');
+     IntToStr(respcierre.NumeroComprobante) + ']');
 
     Writeln(' - Páginas                                 := [' +
-      (respcierre.CantidadDePaginas) + ']');
+     IntToStr(respcierre.CantidadDePaginas) + ']');
     Writeln('');
-  Writeln('TIQUE NOTA DE CREDITO " A " IMPRESO !...');
-  Writeln('');
+    Writeln('TIQUE NOTA DE CREDITO " A " IMPRESO !...');
+    Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -5085,7 +5014,7 @@ end;
 // Impresión de un Tique Nota de Crédito 'B'.
 // ====================================================================================================================
 
-procedure CommandTNCB_Click;
+procedure Tdm.CommandTNCB_Click;
 
 var
   respabrir: RespuestaAbrirDocumento;
@@ -5099,16 +5028,16 @@ var
 begin
   Try
     Writeln('');
-  Writeln('IMPRIMIENDO - TIQUE NOTA DE CREDITO " B ":');
-  Writeln('');
+    Writeln('IMPRIMIENDO - TIQUE NOTA DE CREDITO " B ":');
+    Writeln('');
 
     HASARNG.CargarDatosCliente('Razón Social Cliente...', '99999999995',
       Monotributo, TipoCUIT, 'Domicilio Cliente...', 'Domicilio extensión 1...',
       'Domicilio extensión 2...', 'Domicilio extensión 3....');
     respabrir := HASARNG.AbrirDocumento(TiqueNotaCreditoB);
-  Writeln('');
+    Writeln('');
     Writeln(' - (abrir); Tique Nota de Crédito " B " Nro.  := [' +
-      (respabrir.NumeroComprobante) + ']');
+      intToStr(respabrir.NumeroComprobante) + ']');
     Writeln('');
 
     estilo.Negrita := True;
@@ -5119,32 +5048,29 @@ begin
     HASARNG.ImprimirDescuentoItem('Oferta 10%...', 10, DisplayNo,
       ModoPrecioTotal);
     resppago := HASARNG.ImprimirPago('Efectivo...', 90, Pagar, DisplayNo, '',
-      Efectivo, '', '');
+      Efectivo, 0, '');
     Writeln('');
 
     Writeln(' - Pagando... Cambio                       := [' +
-      (resppago.Saldo) + ']');
-  Writeln('');
+      FloatToStr(resppago.Saldo) + ']');
+    Writeln('');
 
-    respcierre := HASARNG.CerrarDocumento('', 'hasarventas@hasar.com');
+    respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
 
-  Writeln('');
+    Writeln('');
     Writeln(' - (cerrar); Tique Nota de Crédito " B " Nro. := [' +
-      (respcierre.NumeroComprobante) + ']');
+     IntToStr(respcierre.NumeroComprobante) + ']');
 
     Writeln(' - Páginas                                 := [' +
-      (respcierre.CantidadDePaginas) + ']');
+     IntToStr(respcierre.CantidadDePaginas) + ']');
     Writeln('');
-  Writeln('TIQUE NOTA DE CREDITO " B " IMPRESO !...');
-  Writeln('');
+    Writeln('TIQUE NOTA DE CREDITO " B " IMPRESO !...');
+    Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -5152,7 +5078,7 @@ end;
 // Impresión de un Tique Nota de Crédito 'C'.
 // ====================================================================================================================
 
-procedure CommandTNCC_Click;
+procedure Tdm.CommandTNCC_Click;
 
 var
   respabrir: RespuestaAbrirDocumento;
@@ -5166,16 +5092,16 @@ var
 begin
   Try
     Writeln('');
-  Writeln('IMPRIMIENDO - TIQUE NOTA DE CREDITO " C ":');
-  Writeln('');
+    Writeln('IMPRIMIENDO - TIQUE NOTA DE CREDITO " C ":');
+    Writeln('');
 
     HASARNG.CargarDatosCliente('Razón Social Cliente...', '99999999995',
       Monotributo, TipoCUIT, 'Domicilio Cliente...', 'Domicilio extensión 1...',
       'Domicilio extensión 2...', 'Domicilio extensión 3....');
     respabrir := HASARNG.AbrirDocumento(TiqueNotaCreditoC);
-  Writeln('');
+    Writeln('');
     Writeln(' - (abrir); Tique Nota de Crédito " C " Nro.  := [' +
-      (respabrir.NumeroComprobante) + ']');
+      intToStr(respabrir.NumeroComprobante) + ']');
     Writeln('');
 
     estilo.Negrita := True;
@@ -5186,32 +5112,29 @@ begin
     HASARNG.ImprimirDescuentoItem('Oferta 10%...', 10, DisplayNo,
       ModoPrecioTotal);
     resppago := HASARNG.ImprimirPago('Efectivo...', 90, Pagar, DisplayNo, '',
-      Efectivo, '', '');
+      Efectivo, 0, '');
     Writeln('');
 
     Writeln(' - Pagando... Cambio                       := [' +
-      (resppago.Saldo) + ']');
-  Writeln('');
+      FloatToStr(resppago.Saldo) + ']');
+    Writeln('');
 
-    respcierre := HASARNG.CerrarDocumento('', 'hasarventas@hasar.com');
+    respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
 
-  Writeln('');
+    Writeln('');
     Writeln(' - (cerrar); Tique Nota de Crédito " C " Nro. := [' +
-      (respcierre.NumeroComprobante) + ']');
+     IntToStr(respcierre.NumeroComprobante) + ']');
 
     Writeln(' - Páginas                                 := [' +
-      (respcierre.CantidadDePaginas) + ']');
+     IntToStr(respcierre.CantidadDePaginas) + ']');
     Writeln('');
-  Writeln('TIQUE NOTA DE CREDITO " C " IMPRESO !...');
-  Writeln('');
+    Writeln('TIQUE NOTA DE CREDITO " C " IMPRESO !...');
+    Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -5219,7 +5142,7 @@ end;
 // Impresión de un Tique Nota de Crédito 'M'.
 // ====================================================================================================================
 
-procedure CommandTNCM_Click;
+procedure Tdm.CommandTNCM_Click;
 
 var
   respabrir: RespuestaAbrirDocumento;
@@ -5233,16 +5156,16 @@ var
 begin
   Try
     Writeln('');
-  Writeln('IMPRIMIENDO - TIQUE NOTA DE CREDITO " M ":');
-  Writeln('');
+    Writeln('IMPRIMIENDO - TIQUE NOTA DE CREDITO " M ":');
+    Writeln('');
 
     HASARNG.CargarDatosCliente('Razón Social Cliente...', '99999999995',
       Monotributo, TipoCUIT, 'Domicilio Cliente...', 'Domicilio extensión 1...',
       'Domicilio extensión 2...', 'Domicilio extensión 3....');
     respabrir := HASARNG.AbrirDocumento(TiqueNotaCreditoM);
-  Writeln('');
+    Writeln('');
     Writeln(' - (abrir); Tique Nota de Crédito " M " Nro.  := [' +
-      (respabrir.NumeroComprobante) + ']');
+      intToStr(respabrir.NumeroComprobante) + ']');
     Writeln('');
 
     estilo.Negrita := True;
@@ -5253,32 +5176,29 @@ begin
     HASARNG.ImprimirDescuentoItem('Oferta 10%...', 10, DisplayNo,
       ModoPrecioTotal);
     resppago := HASARNG.ImprimirPago('Efectivo...', 90, Pagar, DisplayNo, '',
-      Efectivo, '', '');
+      Efectivo, 0, '');
     Writeln('');
 
     Writeln(' - Pagando... Cambio                       := [' +
-      (resppago.Saldo) + ']');
-  Writeln('');
+      FloatToStr(resppago.Saldo) + ']');
+    Writeln('');
 
-    respcierre := HASARNG.CerrarDocumento('', 'hasarventas@hasar.com');
+    respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
 
-  Writeln('');
+    Writeln('');
     Writeln(' - (cerrar); Tique Nota de Crédito " M " Nro. := [' +
-      (respcierre.NumeroComprobante) + ']');
+     IntToStr(respcierre.NumeroComprobante) + ']');
 
     Writeln(' - Páginas                                 := [' +
-      (respcierre.CantidadDePaginas) + ']');
+     IntToStr(respcierre.CantidadDePaginas) + ']');
     Writeln('');
-  Writeln('TIQUE NOTA DE CREDITO " M " IMPRESO !...');
-  Writeln('');
+    Writeln('TIQUE NOTA DE CREDITO " M " IMPRESO !...');
+    Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -5286,7 +5206,7 @@ end;
 // Impresión de un Tique Nota de Débito 'A'.
 // ====================================================================================================================
 
-procedure CommandTNDA_Click;
+procedure Tdm.CommandTNDA_Click;
 
 var
   respabrir: RespuestaAbrirDocumento;
@@ -5302,16 +5222,16 @@ begin
     Writeln('');
 
     Writeln('IMPRIMIENDO - TIQUE NOTA DE DEBITO " A " /  A CON LEYENDA :');
-  Writeln('');
+    Writeln('');
 
     HASARNG.CargarDatosCliente('Razón Social Cliente...', '99999999995',
       ResponsableInscripto, TipoCUIT, 'Domicilio Cliente...',
       'Domicilio extensión 1...', 'Domicilio extensión 2...',
       'Domicilio extensión 3....');
     respabrir := HASARNG.AbrirDocumento(TiqueNotaDebitoA);
-  Writeln('');
+    Writeln('');
     Writeln(' - (abrir); Tique Nota de Débito " A " Nro.  := [' +
-      (respabrir.NumeroComprobante) + ']');
+      intToStr(respabrir.NumeroComprobante) + ']');
     Writeln('');
 
     estilo.Negrita := True;
@@ -5322,32 +5242,29 @@ begin
     HASARNG.ImprimirDescuentoItem('Oferta 10%...', 10, DisplayNo,
       ModoPrecioTotal);
     resppago := HASARNG.ImprimirPago('Efectivo...', 90, Pagar, DisplayNo, '',
-      Efectivo, '', '');
+      Efectivo, 0, '');
     Writeln('');
 
     Writeln(' - Pagando... Cambio                      := [' +
-      (resppago.Saldo) + ']');
-  Writeln('');
+      FloatToStr(resppago.Saldo) + ']');
+    Writeln('');
 
-    respcierre := HASARNG.CerrarDocumento('', 'hasarventas@hasar.com');
+    respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
 
-  Writeln('');
+    Writeln('');
     Writeln(' - (cerrar); Tique Nota de Débito " A " Nro. := [' +
-      (respcierre.NumeroComprobante) + ']');
+     IntToStr(respcierre.NumeroComprobante) + ']');
 
     Writeln(' - Páginas                                := [' +
-      (respcierre.CantidadDePaginas) + ']');
+     IntToStr(respcierre.CantidadDePaginas) + ']');
     Writeln('');
-  Writeln('TIQUE NOTA DE DEBITO " A " IMPRESO !...');
-  Writeln('');
+    Writeln('TIQUE NOTA DE DEBITO " A " IMPRESO !...');
+    Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -5355,7 +5272,7 @@ end;
 // Impresión de un Tique Nota de Débito 'B'.
 // ====================================================================================================================
 
-procedure CommandTNDB_Click;
+procedure Tdm.CommandTNDB_Click;
 
 var
   respabrir: RespuestaAbrirDocumento;
@@ -5369,16 +5286,16 @@ var
 begin
   Try
     Writeln('');
-  Writeln('IMPRIMIENDO - TIQUE NOTA DE DEBITO " B ":');
-  Writeln('');
+    Writeln('IMPRIMIENDO - TIQUE NOTA DE DEBITO " B ":');
+    Writeln('');
 
     HASARNG.CargarDatosCliente('Razón Social Cliente...', '99999999995',
       Monotributo, TipoCUIT, 'Domicilio Cliente...', 'Domicilio extensión 1...',
       'Domicilio extensión 2...', 'Domicilio extensión 3....');
     respabrir := HASARNG.AbrirDocumento(TiqueNotaDebitoB);
-  Writeln('');
+    Writeln('');
     Writeln(' - (abrir); Tique Nota de Débito " B " Nro.  := [' +
-      (respabrir.NumeroComprobante) + ']');
+      intToStr(respabrir.NumeroComprobante) + ']');
     Writeln('');
 
     estilo.Negrita := True;
@@ -5389,32 +5306,29 @@ begin
     HASARNG.ImprimirDescuentoItem('Oferta 10%...', 10, DisplayNo,
       ModoPrecioTotal);
     resppago := HASARNG.ImprimirPago('Efectivo...', 90, Pagar, DisplayNo, '',
-      Efectivo, '', '');
+      Efectivo, 0, '');
     Writeln('');
 
     Writeln(' - Pagando... Cambio                      := [' +
-      (resppago.Saldo) + ']');
-  Writeln('');
+      FloatToStr(resppago.Saldo) + ']');
+    Writeln('');
 
-    respcierre := HASARNG.CerrarDocumento('', 'hasarventas@hasar.com');
+    respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
 
-  Writeln('');
+    Writeln('');
     Writeln(' - (cerrar); Tique Nota de Débito " B " Nro. := [' +
-      (respcierre.NumeroComprobante) + ']');
+     IntToStr(respcierre.NumeroComprobante) + ']');
 
     Writeln(' - Páginas                                := [' +
-      (respcierre.CantidadDePaginas) + ']');
+     IntToStr(respcierre.CantidadDePaginas) + ']');
     Writeln('');
-  Writeln('TIQUE NOTA DE DEBITO " B " IMPRESO !...');
-  Writeln('');
+    Writeln('TIQUE NOTA DE DEBITO " B " IMPRESO !...');
+    Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -5422,7 +5336,7 @@ end;
 // Impresión de un Tique Nota de Débito 'C'.
 // ====================================================================================================================
 
-procedure CommandTNDC_Click;
+procedure Tdm.CommandTNDC_Click;
 
 var
   respabrir: RespuestaAbrirDocumento;
@@ -5436,16 +5350,16 @@ var
 begin
   Try
     Writeln('');
-  Writeln('IMPRIMIENDO - TIQUE NOTA DE DEBITO " C ":');
-  Writeln('');
+    Writeln('IMPRIMIENDO - TIQUE NOTA DE DEBITO " C ":');
+    Writeln('');
 
     HASARNG.CargarDatosCliente('Razón Social Cliente...', '99999999995',
       Monotributo, TipoCUIT, 'Domicilio Cliente...', 'Domicilio extensión 1...',
       'Domicilio extensión 2...', 'Domicilio extensión 3....');
     respabrir := HASARNG.AbrirDocumento(NotaDeDebitoC);
-  Writeln('');
+    Writeln('');
     Writeln(' - (abrir); Tique Nota de Débtio " C " Nro.  := [' +
-      (respabrir.NumeroComprobante) + ']');
+      intToStr(respabrir.NumeroComprobante) + ']');
     Writeln('');
 
     estilo.Negrita := True;
@@ -5456,32 +5370,29 @@ begin
     HASARNG.ImprimirDescuentoItem('Oferta 10%...', 10, DisplayNo,
       ModoPrecioTotal);
     resppago := HASARNG.ImprimirPago('Efectivo...', 90, Pagar, DisplayNo, '',
-      Efectivo, '', '');
+      Efectivo, 0, '');
     Writeln('');
 
     Writeln(' - Pagando... Cambio                      := [' +
-      (resppago.Saldo) + ']');
-  Writeln('');
+      FloatToStr(resppago.Saldo) + ']');
+    Writeln('');
 
-    respcierre := HASARNG.CerrarDocumento('', 'hasarventas@hasar.com');
+    respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
 
-  Writeln('');
+    Writeln('');
     Writeln(' - (cerrar); Tique Nota de Débtio " C " Nro. := [' +
-      (respcierre.NumeroComprobante) + ']');
+     IntToStr(respcierre.NumeroComprobante) + ']');
 
     Writeln(' - Páginas                                := [' +
-      (respcierre.CantidadDePaginas) + ']');
+     IntToStr(respcierre.CantidadDePaginas) + ']');
     Writeln('');
-  Writeln('TIQUE NOTA DE DEBITO " C " IMPRESO !...');
-  Writeln('');
+    Writeln('TIQUE NOTA DE DEBITO " C " IMPRESO !...');
+    Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -5489,7 +5400,7 @@ end;
 // Impresión de un Tique Nota de Débito 'M'.
 // ====================================================================================================================
 
-procedure CommandTNDM_Click;
+procedure Tdm.CommandTNDM_Click;
 
 var
   respabrir: RespuestaAbrirDocumento;
@@ -5503,16 +5414,16 @@ var
 begin
   Try
     Writeln('');
-  Writeln('IMPRIMIENDO - TIQUE NOTA DE DEBITO " M ":');
-  Writeln('');
+    Writeln('IMPRIMIENDO - TIQUE NOTA DE DEBITO " M ":');
+    Writeln('');
 
     HASARNG.CargarDatosCliente('Razón Social Cliente...', '99999999995',
       Monotributo, TipoCUIT, 'Domicilio Cliente...', 'Domicilio extensión 1...',
       'Domicilio extensión 2...', 'Domicilio extensión 3....');
     respabrir := HASARNG.AbrirDocumento(NotaDeDebitoM);
-  Writeln('');
+    Writeln('');
     Writeln(' - (abrir); Tique Nota de Débito " M " Nro.  := [' +
-      (respabrir.NumeroComprobante) + ']');
+      intToStr(respabrir.NumeroComprobante) + ']');
     Writeln('');
 
     estilo.Negrita := True;
@@ -5523,32 +5434,29 @@ begin
     HASARNG.ImprimirDescuentoItem('Oferta 10%...', 10, DisplayNo,
       ModoPrecioTotal);
     resppago := HASARNG.ImprimirPago('Efectivo...', 90, Pagar, DisplayNo, '',
-      Efectivo, '', '');
+      Efectivo, 0, '');
     Writeln('');
 
     Writeln(' - Pagando... Cambio                      := [' +
-      (resppago.Saldo) + ']');
-  Writeln('');
+      FloatToStr(resppago.Saldo) + ']');
+    Writeln('');
 
-    respcierre := HASARNG.CerrarDocumento('', 'hasarventas@hasar.com');
+    respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
 
-  Writeln('');
+    Writeln('');
     Writeln(' - (cerrar); Tique Nota de Débito " M " Nro. := [' +
-      (respcierre.NumeroComprobante) + ']');
+     IntToStr(respcierre.NumeroComprobante) + ']');
 
     Writeln(' - Páginas                                := [' +
-      (respcierre.CantidadDePaginas) + ']');
+     IntToStr(respcierre.CantidadDePaginas) + ']');
     Writeln('');
-  Writeln('TIQUE NOTA DE DEBITO " M " IMPRESO !...');
-  Writeln('');
+    Writeln('TIQUE NOTA DE DEBITO " M " IMPRESO !...');
+    Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -5556,7 +5464,7 @@ end;
 // Impresión de un Tique Recibo 'A'.
 // ====================================================================================================================
 
-procedure CommandTRA_Click;
+procedure Tdm.CommandTRA_Click;
 
 var
   respabrir: RespuestaAbrirDocumento;
@@ -5572,7 +5480,7 @@ begin
     Writeln('');
 
     Writeln('IMPRIMIENDO - TIQUE RECIBO " A " /  A CON LEYENDA :');
-  Writeln('');
+    Writeln('');
 
     HASARNG.CargarDatosCliente('Razón Social Cliente...', '99999999995',
       ResponsableInscripto, TipoCUIT, 'Domicilio Cliente...',
@@ -5582,7 +5490,7 @@ begin
     Writeln('');
 
     Writeln(' - (abrir); Tique Recibo " A " Nro.  := [' +
-      (respabrir.NumeroComprobante) + ']');
+      intToStr(respabrir.NumeroComprobante) + ']');
     Writeln('');
 
     estilo.Negrita := True;
@@ -5593,30 +5501,27 @@ begin
     HASARNG.ImprimirDescuentoItem('Oferta 10%...', 10, DisplayNo,
       ModoPrecioTotal);
     resppago := HASARNG.ImprimirPago('Efectivo...', 90, Pagar, DisplayNo, '',
-      Efectivo, '', '');
+      Efectivo, 0, '');
     Writeln('');
 
-    Writeln('Pagando... Cambio                 := [' + (resppago.Saldo) + ']');
-  Writeln('');
+    Writeln('Pagando... Cambio                 := [' + FloatToStr(resppago.Saldo) + ']');
+    Writeln('');
 
-    respcierre := HASARNG.CerrarDocumento('', 'hasarventas@hasar.com');
+    respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
 
-  Writeln('');
+    Writeln('');
     Writeln(' - (cerrar); Tique Recibo " A " Nro. := [' +
-      (respcierre.NumeroComprobante) + ']');
+     IntToStr(respcierre.NumeroComprobante) + ']');
     Writeln(' - Páginas                        := [' +
-      (respcierre.CantidadDePaginas) + ']');
+     IntToStr(respcierre.CantidadDePaginas) + ']');
     Writeln('');
-  Writeln('TIQUE RECIBO " A " IMPRESO !...');
-  Writeln('');
+    Writeln('TIQUE RECIBO " A " IMPRESO !...');
+    Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -5624,7 +5529,7 @@ end;
 // Impresión de un Tique Recibo 'B'.
 // ====================================================================================================================
 
-procedure CommandTRB_Click;
+procedure Tdm.CommandTRB_Click;
 
 var
   respabrir: RespuestaAbrirDocumento;
@@ -5638,8 +5543,8 @@ var
 begin
   Try
     Writeln('');
-  Writeln('IMPRIMIENDO - TIQUE RECIBO " B ":');
-  Writeln('');
+    Writeln('IMPRIMIENDO - TIQUE RECIBO " B ":');
+    Writeln('');
 
     HASARNG.CargarDatosCliente('Razón Social Cliente...', '99999999995',
       Monotributo, TipoCUIT, 'Domicilio Cliente...', 'Domicilio extensión 1...',
@@ -5648,7 +5553,7 @@ begin
     Writeln('');
 
     Writeln(' - (abrir); Tique Recibo " B " Nro.  := [' +
-      (respabrir.NumeroComprobante) + ']');
+      intToStr(respabrir.NumeroComprobante) + ']');
     Writeln('');
 
     estilo.Negrita := True;
@@ -5659,30 +5564,27 @@ begin
     HASARNG.ImprimirDescuentoItem('Oferta 10%...', 10, DisplayNo,
       ModoPrecioTotal);
     resppago := HASARNG.ImprimirPago('Efectivo...', 90, Pagar, DisplayNo, '',
-      Efectivo, '', '');
+      Efectivo, 0, '');
     Writeln('');
 
-    Writeln(' - Pagando... Cambio              := [' + (resppago.Saldo) + ']');
-  Writeln('');
+    Writeln(' - Pagando... Cambio              := [' + FloatToStr(resppago.Saldo) + ']');
+    Writeln('');
 
-    respcierre := HASARNG.CerrarDocumento('', 'hasarventas@hasar.com');
+    respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
 
-  Writeln('');
+    Writeln('');
     Writeln(' - (cerrar); Tique Recibo " B " Nro. := [' +
-      (respcierre.NumeroComprobante) + ']');
+     IntToStr(respcierre.NumeroComprobante) + ']');
     Writeln(' - Páginas                        := [' +
-      (respcierre.CantidadDePaginas) + ']');
+     IntToStr(respcierre.CantidadDePaginas) + ']');
     Writeln('');
-  Writeln('TIQUE RECIBO " B " IMPRESO !...');
-  Writeln('');
+    Writeln('TIQUE RECIBO " B " IMPRESO !...');
+    Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -5690,7 +5592,7 @@ end;
 // Impresión de un Tique Recibo 'C'.
 // ====================================================================================================================
 
-procedure CommandTRC_Click;
+procedure Tdm.CommandTRC_Click;
 
 var
   respabrir: RespuestaAbrirDocumento;
@@ -5704,15 +5606,15 @@ var
 begin
   Try
     Writeln('');
-  Writeln('IMPRIMIENDO - TIQUE RECIBO " C ":');
-  Writeln('');
+    Writeln('IMPRIMIENDO - TIQUE RECIBO " C ":');
+    Writeln('');
 
     HASARNG.CargarDatosCliente('Razón Social Cliente...', '99999999995',
       Monotributo, TipoCUIT, 'Domicilio Cliente...', 'Domicilio extensión 1...',
       'Domicilio extensión 2...', 'Domicilio extensión 3....');
     respabrir := HASARNG.AbrirDocumento(ReciboC);
     Writeln(' - (abrir); Tique Recibo " C " Nro.  := [' +
-      (respabrir.NumeroComprobante) + ']');
+      intToStr(respabrir.NumeroComprobante) + ']');
 
     estilo.Negrita := True;
     HASARNG.ImprimirTextoFiscal(estilo, 'Hasta agotar stock...', DisplayNo);
@@ -5722,30 +5624,27 @@ begin
     HASARNG.ImprimirDescuentoItem('Oferta 10%...', 10, DisplayNo,
       ModoPrecioTotal);
     resppago := HASARNG.ImprimirPago('Efectivo...', 90, Pagar, DisplayNo, '',
-      Efectivo, '', '');
+      Efectivo, 0, '');
     Writeln('');
 
-    Writeln(' - Pagando... Cambio              := [' + (resppago.Saldo) + ']');
-  Writeln('');
+    Writeln(' - Pagando... Cambio              := [' + FloatToStr(resppago.Saldo) + ']');
+    Writeln('');
 
-    respcierre := HASARNG.CerrarDocumento('', 'hasarventas@hasar.com');
+    respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
 
-  Writeln('');
+    Writeln('');
     Writeln(' - (cerrar); Tique Recibo " C " Nro. := [' +
-      (respcierre.NumeroComprobante) + ']');
+     IntToStr(respcierre.NumeroComprobante) + ']');
     Writeln(' - Páginas                        := [' +
-      (respcierre.CantidadDePaginas) + ']');
+     IntToStr(respcierre.CantidadDePaginas) + ']');
     Writeln('');
-  Writeln('TIQUE RECIBO " C " IMPRESO !...');
-  Writeln('');
+    Writeln('TIQUE RECIBO " C " IMPRESO !...');
+    Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -5753,7 +5652,7 @@ end;
 // Impresión de un Tique Recibo 'M'.
 // ====================================================================================================================
 
-procedure CommandTRM_Click;
+procedure Tdm.CommandTRM_Click;
 
 var
   respabrir: RespuestaAbrirDocumento;
@@ -5767,8 +5666,8 @@ var
 begin
   Try
     Writeln('');
-  Writeln('IMPRIMIENDO - TIQUE RECIBO " M ":');
-  Writeln('');
+    Writeln('IMPRIMIENDO - TIQUE RECIBO " M ":');
+    Writeln('');
 
     HASARNG.CargarDatosCliente('Razón Social Cliente...', '99999999995',
       Monotributo, TipoCUIT, 'Domicilio Cliente...', 'Domicilio extensión 1...',
@@ -5777,7 +5676,7 @@ begin
     Writeln('');
 
     Writeln(' - (abrir); Tique Recibo " M " Nro.  := [' +
-      (respabrir.NumeroComprobante) + ']');
+      intToStr(respabrir.NumeroComprobante) + ']');
     Writeln('');
 
     estilo.Negrita := True;
@@ -5788,30 +5687,27 @@ begin
     HASARNG.ImprimirDescuentoItem('Oferta 10%...', 10, DisplayNo,
       ModoPrecioTotal);
     resppago := HASARNG.ImprimirPago('Efectivo...', 90, Pagar, DisplayNo, '',
-      Efectivo, '', '');
+      Efectivo, 0, '');
     Writeln('');
 
-    Writeln(' - Pagando... Cambio              := [' + (resppago.Saldo) + ']');
-  Writeln('');
+    Writeln(' - Pagando... Cambio              := [' + FloatToStr(resppago.Saldo) + ']');
+    Writeln('');
 
-    respcierre := HASARNG.CerrarDocumento('', 'hasarventas@hasar.com');
+    respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
 
-  Writeln('');
+    Writeln('');
     Writeln(' - (cerrar); Tique Recibo " M " Nro. := [' +
-      (respcierre.NumeroComprobante) + ']');
+     IntToStr(respcierre.NumeroComprobante) + ']');
     Writeln(' - Páginas                        := [' +
-      (respcierre.CantidadDePaginas) + ']');
+     IntToStr(respcierre.CantidadDePaginas) + ']');
     Writeln('');
-  Writeln('TIQUE RECIBO " M " IMPRESO !...');
-  Writeln('');
+    Writeln('TIQUE RECIBO " M " IMPRESO !...');
+    Writeln('');
 
-
-
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -5819,29 +5715,28 @@ end;
 // Se consulta el número de la 'Z' establecida como límite para el borrado de la CTD (Cinta testigo Digital); .
 // ====================================================================================================================
 
-procedure CommandZBorr_Click;
+procedure Tdm.CommandZBorr_Click;
 
 var
   resp: RespuestaConsultarZetaBorrable;
 begin
-Writeln('');
+  Writeln('');
   Writeln('CONSULTA LIMITE BORRADO CIERRES " Z ":');
   Writeln('');
 
- Try
+  Try
     resp := HASARNG.ConsultarZetaBorrable;
-  Writeln('');
+    Writeln('');
 
-    Writeln('Límite Cierre " Z " Nro. := [' + (resp.NumeroZeta) + ']');
-  Writeln('');
-  Writeln('FIN DE LA CONSULTA !...');
-  Writeln('');
+    Writeln('Límite Cierre " Z " Nro. := [' +intToStr(resp.NumeroZeta) + ']');
+    Writeln('');
+    Writeln('FIN DE LA CONSULTA !...');
+    Writeln('');
 
-     except
+  except
     on E: Exception do
-    Writeln('Error := ' +( E.ClassName + ' : ' +( E.Message)));
+      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
   end;
-
 
 end;
 
@@ -5854,7 +5749,6 @@ procedure Form_Load;
 begin
 
   HASARNG.ArchivoRegistro('ocx.log');
-
 
 end;
 
@@ -5872,7 +5766,6 @@ begin
 
   end;
 
-
 end;
 
 // ====================================================================================================================
@@ -5882,8 +5775,8 @@ end;
 procedure HASARNG_ComandoProcesado;
 begin
 
-Writeln('Comando procesado !');
-   //proc := False;
+  Writeln('Comando procesado !');
+  // proc := False;
 
 end;
 
@@ -5891,13 +5784,12 @@ end;
 // Procesamiento del evento impresora.
 // ====================================================================================================================
 
-procedure HASARNG_EventoImpresora(Estado: HasarArgentina_TLB.EstadoImpresora);
+procedure HASARNG_EventoImpresora(Estado: EstadoImpresora);
 begin
 
- Writeln('Evento impresora...');
- Writeln('Estado := [' + (Estado) + ']');
+  Writeln('Evento impresora...');
+//?  Writeln('Estado := [' + (Estado) + ']');
 
 end;
 
 end.
-
