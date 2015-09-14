@@ -333,7 +333,7 @@ end;
 
 procedure TForm1.FechaHoraClick(Sender: TObject);
 begin
- dm.CommandFechaHora_Click;
+dm.CommandFechaHora_Click;
 end;
 
 procedure TForm1.GenericoClick(Sender: TObject);

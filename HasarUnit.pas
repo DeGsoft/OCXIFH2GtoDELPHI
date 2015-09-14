@@ -3,7 +3,7 @@ unit HasarUnit;
 interface
 
 uses
-  System.SysUtils, System.Classes,HasarArgentina_TLB, System.TypInfo;
+  System.SysUtils, System.Classes,HasarArgentina_TLB, System.TypInfo, Winapi.Windows;
 
 type
   Tdm = class(TDataModule)
@@ -85,6 +85,7 @@ procedure CommandTRB_Click;
 procedure CommandTRC_Click;
 procedure CommandTRM_Click;
 procedure CommandZBorr_Click;
+
 //procedure Form_Load;
 //procedure HASARNG_ComandoEnProceso;
 //procedure HASARNG_ComandoProcesado;
@@ -94,6 +95,7 @@ procedure CommandZBorr_Click;
 var
   dm: Tdm;
   HASARNG: ImpresoraFiscalRG3561;
+  wideChars   : array[0..11] of WideChar;
 
 implementation
 
@@ -108,19 +110,19 @@ implementation
 procedure Tdm.CommandAbrirCaj_Click;
 begin
 
-  Writeln('');
-  Writeln('ABRIENDO CAJON DE DINERO...');
-  Writeln('');
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
+  OutputDebugString(StringToWideChar('ABRIENDO CAJON DE DINERO...' , wideChars, 12));
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   Try
     HASARNG.AbrirCajonDinero;
-    Writeln('');
-    Writeln('CAJON DE DINERO ABIERTO !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('CAJON DE DINERO ABIERTO !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -132,22 +134,22 @@ end;
 procedure Tdm.CommandAudit_Click;
 begin
 
-  Writeln('');
-  Writeln('IMPRIMIENDO REPORTE DE AUDITORIA POR FECHAS...');
-  Writeln('');
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
+  OutputDebugString(StringToWideChar('IMPRIMIENDO REPORTE DE AUDITORIA POR FECHAS...' , wideChars, 12));
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   Try
     HASARNG.ReportarZetasPorFecha(StrToDate('23/02/2015'),
       StrToDate('25/02/2015'), ReporteAuditoriaGlobal);
 
-    Writeln('');
-    Writeln('REPORTE IMPRESO !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('REPORTE IMPRESO !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
 
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -159,29 +161,27 @@ end;
 procedure Tdm.CommandAvanzPap_Click;
 begin
 
-  Writeln('');
-  Writeln('AVANZANDO PAPEL...');
-  Writeln('');
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
+  OutputDebugString(StringToWideChar('AVANZANDO PAPEL...' , wideChars, 12));
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   Try
     HASARNG.AvanzarPapelAmbasEstaciones(3);
-    Writeln('3 líneas en tique/rollo testigo.');
+    OutputDebugString(StringToWideChar('3 líneas en tique/rollo testigo.' , wideChars, 12));
 
     HASARNG.AvanzarPapelEstacionAuditoria(3);
-    Writeln('3 líneas en rollo testigo, solamente.');
+    OutputDebugString(StringToWideChar('3 líneas en rollo testigo, solamente.' , wideChars, 12));
 
     HASARNG.AvanzarPapelEstacionTique(3);
-    Writeln('3 líneas en tique, solamente.'
-
-      );
-    Writeln('');
-    Writeln('FIN DE AVANCE DE PAPEL...');
-    Writeln('');
+    OutputDebugString(StringToWideChar('3 líneas en tique, solamente.', wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('FIN DE AVANCE DE PAPEL...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
 
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -193,20 +193,20 @@ end;
 procedure Tdm.CommandBorrarLogo_Click;
 begin
 
-  Writeln('');
-  Writeln('ELIMINANDO LOGO DEL EMISOR...');
-  Writeln('');
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
+  OutputDebugString(StringToWideChar('ELIMINANDO LOGO DEL EMISOR...' , wideChars, 12));
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   Try
     HASARNG.EliminarLogoEmisor;
 
-    Writeln('');
-    Writeln('LOGO ELIMINADO !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('LOGO ELIMINADO !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -218,20 +218,20 @@ end;
 procedure Tdm.CommandCancel_Click;
 begin
 
-  Writeln('');
-  Writeln('CANCELANDO COMPROBANTE ABIERTO...');
-  Writeln('');
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
+  OutputDebugString(StringToWideChar('CANCELANDO COMPROBANTE ABIERTO...' , wideChars, 12));
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   Try
     HASARNG.Cancelar;
 
-    Writeln('');
-    Writeln('CANCELADO !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('CANCELADO !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -246,72 +246,72 @@ var
   respcapac: RespuestaConsultarCapacidadesImpresoraFiscal;
 
 begin
-  Writeln('');
-  Writeln('CONSULTANDO CAPACIDADES DE LA IMPRESORA FISCAL...');
-  Writeln('');
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
+  OutputDebugString(StringToWideChar('CONSULTANDO CAPACIDADES DE LA IMPRESORA FISCAL...' , wideChars, 12));
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   Try
     respcapac := HASARNG.ConsultarCapacidadesImpresoraFiscal(AltoLogo,
       EstacionTicket, TiqueFacturaA);
-    Writeln('Alto logotipo := [' + (respcapac.Valor) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('Alto logotipo := [' + (respcapac.Valor) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
     respcapac := HASARNG.ConsultarCapacidadesImpresoraFiscal(AnchoLogo,
       EstacionTicket, TiqueFacturaA);
 
-    Writeln('Ancho logotipo            := [' + (respcapac.Valor) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('Ancho logotipo            := [' + (respcapac.Valor) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
     respcapac := HASARNG.ConsultarCapacidadesImpresoraFiscal(AnchoRazonSocial,
       EstacionTicket, TiqueFacturaA);
 
-    Writeln('Ancho razón social        := [' + (respcapac.Valor) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('Ancho razón social        := [' + (respcapac.Valor) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
     respcapac := HASARNG.ConsultarCapacidadesImpresoraFiscal(AnchoTextoFiscal,
       EstacionTicket, TiqueFacturaA);
 
-    Writeln('Ancho texto fiscal        := [' + (respcapac.Valor) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('Ancho texto fiscal        := [' + (respcapac.Valor) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
     respcapac := HASARNG.ConsultarCapacidadesImpresoraFiscal
       (AnchoTextoLineasUsuario, EstacionTicket, TiqueFacturaA);
 
-    Writeln('Ancho líneas usuario      := [' + (respcapac.Valor) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('Ancho líneas usuario      := [' + (respcapac.Valor) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
     respcapac := HASARNG.ConsultarCapacidadesImpresoraFiscal(AnchoTextoNoFiscal,
       EstacionTicket, TiqueFacturaA);
 
-    Writeln('Ancho texto no fiscal     := [' + (respcapac.Valor) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('Ancho texto no fiscal     := [' + (respcapac.Valor) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
     respcapac := HASARNG.ConsultarCapacidadesImpresoraFiscal(AnchoTextoVenta,
       EstacionTicket, TiqueFacturaA);
 
-    Writeln('Ancho texto venta         := [' + (respcapac.Valor) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('Ancho texto venta         := [' + (respcapac.Valor) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
     respcapac := HASARNG.ConsultarCapacidadesImpresoraFiscal
       (AnchoTotalImpresion, EstacionTicket, TiqueFacturaA);
 
-    Writeln('Ancho total impresión     := [' + (respcapac.Valor) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('Ancho total impresión     := [' + (respcapac.Valor) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
     respcapac := HASARNG.ConsultarCapacidadesImpresoraFiscal(SoportaCajon,
       EstacionPorDefecto, NoDocumento);
 
-    Writeln('Soporta cajón dinero      := [' + (respcapac.Valor) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('Soporta cajón dinero      := [' + (respcapac.Valor) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
     respcapac := HASARNG.ConsultarCapacidadesImpresoraFiscal(SoportaEstacion,
       EstacionTicket, TiqueFacturaA);
 
-    Writeln('Soporta estación tique    := [' + (respcapac.Valor) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('Soporta estación tique    := [' + (respcapac.Valor) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
     respcapac := HASARNG.ConsultarCapacidadesImpresoraFiscal(SoportaComprobante,
       EstacionTicket, TiqueFacturaA);
 
-    Writeln('Soporta tique factura " A " := [' + (respcapac.Valor) + ']');
+    OutputDebugString(StringToWideChar('Soporta tique factura " A " := [' + (respcapac.Valor) + ']' , wideChars, 12));
 
-    Writeln('');
-    Writeln('FIN DE LA CONSULTA !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('FIN DE LA CONSULTA !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -322,9 +322,9 @@ end;
 
 procedure Tdm.CommandCargaLogo_Click;
 begin
-  Writeln('');
-  Writeln('CARGANDO LOGO EMISOR...');
-  Writeln('');
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
+  OutputDebugString(StringToWideChar('CARGANDO LOGO EMISOR...' , wideChars, 12));
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   Try
     HASARNG.CargarLogoEmisor(ComienzoCargaLogo,
@@ -528,13 +528,13 @@ begin
     HASARNG.CargarLogoEmisor(FinCargaLogo,
       'FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0');
 
-    Writeln('');
-    Writeln('LOGO DEL EMISOR CARGADO !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('LOGO DEL EMISOR CARGADO !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -545,21 +545,19 @@ end;
 
 procedure Tdm.CommandCfgBaudios_Click;
 begin
-  Writeln('');
-  Writeln('CONFIGURANDO BAUDIOS RS-232...');
-  Writeln('');
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
+  OutputDebugString(StringToWideChar('CONFIGURANDO BAUDIOS RS-232...' , wideChars, 12));
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   Try
     HASARNG.CambiarVelocidadPuerto(Baudrate9600);
-    Writeln('Baudios := 9600'
-
-      );
-    Writeln('');
-    Writeln('FIN DE LA CONFIGURACION !...');
+    OutputDebugString(StringToWideChar('Baudios := 9600', wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('FIN DE LA CONFIGURACION !...' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -570,20 +568,20 @@ end;
 
 procedure Tdm.CommandCfgFyh_Click;
 begin
-  Writeln('');
-  Writeln('CONFIGURANDO FECHA Y HORA...');
-  Writeln('');
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
+  OutputDebugString(StringToWideChar('CONFIGURANDO FECHA Y HORA...' , wideChars, 12));
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   Try
     HASARNG.ConfigurarFechaHora(StrToDate('06/03/2015'), StrToDate('10:49:45'));
 
-    Writeln('');
-    Writeln('FIN DE LA CONFIGURACION !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('FIN DE LA CONFIGURACION !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -595,38 +593,38 @@ end;
 procedure Tdm.CommandCfgImprFis_Click;
 
 begin
-  Writeln('');
-  Writeln('CONFIGURANDO PARAMETROS IMPRESORA FISCAL...');
-  Writeln('');
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
+  OutputDebugString(StringToWideChar('CONFIGURANDO PARAMETROS IMPRESORA FISCAL...' , wideChars, 12));
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   Try
-    Writeln('Borrado automático CTD        := P');
-    HASARNG.ConfigurarImpresoraFiscal(BorradoAutomaticoAuditoria, 'P');
-    Writeln('');
+    OutputDebugString(StringToWideChar('Borrado automático CTD        := P' , wideChars, 12));
+    HASARNG.ConfigurarImpresoraFiscal(BorradoAutomaticoAuditoria, 'P' );
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln('Verificar supera monto máximo := N');
+    OutputDebugString(StringToWideChar('Verificar supera monto máximo := N' , wideChars, 12));
     HASARNG.ConfigurarImpresoraFiscal(ChequeoDesborde, 'N');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln('Corte de papel                := P');
+    OutputDebugString(StringToWideChar('Corte de papel                := P' , wideChars, 12));
     HASARNG.ConfigurarImpresoraFiscal(CortePapel, 'P');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln('Imprimir CAMBIO $0.00         := P');
+    OutputDebugString(StringToWideChar('Imprimir CAMBIO $0.00         := P' , wideChars, 12));
     HASARNG.ConfigurarImpresoraFiscal(ImpresionCambio, 'P');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln('Imprimir leyendas opcionales  := P');
+    OutputDebugString(StringToWideChar('Imprimir leyendas opcionales  := P' , wideChars, 12));
     HASARNG.ConfigurarImpresoraFiscal(ImpresionLeyendas, 'P');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln('Texto saldo  pendientes       := Pendiente de pago');
+    OutputDebugString(StringToWideChar('Texto saldo  pendientes       := Pendiente de pago' , wideChars, 12));
     HASARNG.ConfigurarImpresoraFiscal(PagoSaldo, 'Pendiente de pago');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln('Aviso sonoro falta papel      := P');
+    OutputDebugString(StringToWideChar('Aviso sonoro falta papel      := P' , wideChars, 12));
     HASARNG.ConfigurarImpresoraFiscal(SonidoAviso, 'P');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     // 'Modificar estos parámetros requiere Cierre 'Z' previo.
     // '------------------------------------------------------
@@ -638,13 +636,13 @@ begin
     // '    HASARNG.ConfigurarImpresoraFiscal( TipoHabilitacion, "A"
     // 'Debug.Print
 
-    Writeln('');
-    Writeln('FIN DE LA CONFIGURACION !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('FIN DE LA CONFIGURACION !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -655,23 +653,23 @@ end;
 
 procedure Tdm.CommandCfgRed_Click;
 begin
-  Writeln('');
-  Writeln('CONFIGURANDO PARAMETROS CONECTIVIDAD EN RED...');
-  Writeln('');
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
+  OutputDebugString(StringToWideChar('CONFIGURANDO PARAMETROS CONECTIVIDAD EN RED...' , wideChars, 12));
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   Try
-    Writeln('Dirección IP  := 10.0.7.69');
-    Writeln('Máscara       := 255.255.255.0');
-    Writeln('Puerta enlace := 10.0.7.69');
-    HASARNG.ConfigurarRed('10.0.7.69', '255.255.255.0', '10.0.7.69');
+    OutputDebugString(StringToWideChar('Dirección IP  := 10.0.7.69' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Máscara       := 255.255.255.0' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Puerta enlace := 10.0.7.69' , wideChars, 12));
+    HASARNG.ConfigurarRed('10.0.7.69', '255.255.255.0', '10.0.7.69' );
 
-    Writeln('');
-    Writeln('FIN DE LA CONFIGURACION !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('FIN DE LA CONFIGURACION !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -683,24 +681,24 @@ end;
 procedure Tdm.CommandCfgServCorreo_Click;
 begin
 
-  Writeln('');
-  Writeln('CONFIGURANDO SERVIDOR SMTP...');
-  Writeln('');
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
+  OutputDebugString(StringToWideChar('CONFIGURANDO SERVIDOR SMTP...' , wideChars, 12));
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   Try
-    Writeln('IP SMTP     := 200.80.204.3');
-    Writeln('Puerto      := 465');
-    Writeln('Responder a := hasarventas@hasar.com');
+    OutputDebugString(StringToWideChar('IP SMTP     := 200.80.204.3' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Puerto      := 465' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Responder a := hasarventas@hasar.com', wideChars, 12));
     HASARNG.ConfigurarServidorCorreo('200.80.204.3', 465,
-      'hasarventas@hasar.com');
+      'hasarventas@hasar.com' );
 
-    Writeln('');
-    Writeln('FIN DE LA CONFIGURACION !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('FIN DE LA CONFIGURACION !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -712,21 +710,21 @@ end;
 procedure Tdm.CommandCfgZBorr_Click;
 begin
 
-  Writeln('');
-  Writeln('CONFIGURANDO LIMITE BORRADO CTD...');
-  Writeln('');
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
+  OutputDebugString(StringToWideChar('CONFIGURANDO LIMITE BORRADO CTD...' , wideChars, 12));
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   Try
-    Writeln('Límite, Cierre " Z " Nro. := 1');
+    OutputDebugString(StringToWideChar('Límite, Cierre " Z " Nro. := 1' , wideChars, 12));
     HASARNG.ConfigurarZetaBorrable(1);
 
-    Writeln('');
-    Writeln('FIN DE LA CONFIGURACION !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('FIN DE LA CONFIGURACION !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -740,9 +738,9 @@ procedure Tdm.CommandCFgZona_Click;
 var
   estilo: AtributosDeTexto;
 begin
-  Writeln('');
-  Writeln('CONFIGURANDO ZONAS LINEAS DE USUARIO...');
-  Writeln('');
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
+  OutputDebugString(StringToWideChar('CONFIGURANDO ZONAS LINEAS DE USUARIO...' , wideChars, 12));
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   Try
     estilo.Centrado := True;
@@ -796,13 +794,13 @@ begin
     HASARNG.ConfigurarZona(4, estilo, 'Texto línea 4 - Domicilio emisor',
       EstacionTicket, ZonaDomicilioEmisor);
 
-    Writeln('');
-    Writeln('FIN de la CONFIGURACION....');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('FIN de la CONFIGURACION....' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -818,85 +816,83 @@ var
 
 begin
   Try
-    Writeln('');
-    Writeln('IMPRIMIENDO INFORME DIARIO DE CIERRE " Z ":');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('IMPRIMIENDO INFORME DIARIO DE CIERRE " Z ":' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     cierre := HASARNG.CerrarJornadaFiscal(ReporteZ);
-    Writeln('');
-    // ?Writeln('Reporte...           := [' + FloatToStr(cierre.Reporte) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    // ?OutputDebugString(StringToWideChar('Reporte...           := [' + FloatToStr(cierre.Reporte) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln('Cierre Nro.          := [' + IntToStr(cierre.Z.Numero) + ']');
-    Writeln('Fecha cierre         := [' + DateToStr(cierre.Z.Fecha) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('Cierre Nro.          := [' + IntToStr(cierre.Z.Numero) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Fecha cierre         := [' + DateToStr(cierre.Z.Fecha) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln('DF cancelados        := [' +
-      IntToStr(cierre.Z.DF_CantidadCancelados) + ']');
+    OutputDebugString(StringToWideChar('DF cancelados        := [' +
+      IntToStr(cierre.Z.DF_CantidadCancelados) + ']' , wideChars, 12));
 
-    Writeln('DF emitidos          := [' +
-      IntToStr(cierre.Z.DF_CantidadEmitidos) + ']');
+    OutputDebugString(StringToWideChar('DF emitidos          := [' +
+      IntToStr(cierre.Z.DF_CantidadEmitidos) + ']' , wideChars, 12));
 
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln('DF total ventas      := [' + FloatToStr(cierre.Z.DF_Total) + ']');
+    OutputDebugString(StringToWideChar('DF total ventas      := [' + FloatToStr(cierre.Z.DF_Total) + ']' , wideChars, 12));
 
-    Writeln('DF total gravado     := [' +
-      FloatToStr(cierre.Z.DF_TotalGravado) + ']');
+    OutputDebugString(StringToWideChar('DF total gravado     := [' +
+      FloatToStr(cierre.Z.DF_TotalGravado) + ']' , wideChars, 12));
 
-    Writeln('DF total IVA         := [' +
-      FloatToStr(cierre.Z.DF_TotalIVA) + ']');
+    OutputDebugString(StringToWideChar('DF total IVA         := [' +
+      FloatToStr(cierre.Z.DF_TotalIVA) + ']' , wideChars, 12));
 
-    Writeln('DF total no gravado  := [' +
-      FloatToStr(cierre.Z.DF_TotalNoGravado) + ']');
+    OutputDebugString(StringToWideChar('DF total no gravado  := [' +
+      FloatToStr(cierre.Z.DF_TotalNoGravado) + ']' , wideChars, 12));
 
-    Writeln('DF total exento      := [' +
-      FloatToStr(cierre.Z.DF_TotalExento) + ']');
+    OutputDebugString(StringToWideChar('DF total exento      := [' +
+      FloatToStr(cierre.Z.DF_TotalExento) + ']' , wideChars, 12));
 
-    Writeln('DF total tributos    := [' +
-      FloatToStr(cierre.Z.DF_TotalTributos) + ']');
+    OutputDebugString(StringToWideChar('DF total tributos    := [' +
+      FloatToStr(cierre.Z.DF_TotalTributos) + ']' , wideChars, 12));
 
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln('DNFH emitidos        := [' +
-      IntToStr(cierre.Z.DNFH_CantidadEmitidos) + ']');
+    OutputDebugString(StringToWideChar('DNFH emitidos        := [' +
+      IntToStr(cierre.Z.DNFH_CantidadEmitidos) + ']' , wideChars, 12));
 
-    Writeln('DNFH total acumulado := [' +
-      FloatToStr(cierre.Z.DNFH_Total) + ']');
+    OutputDebugString(StringToWideChar('DNFH total acumulado := [' +
+      FloatToStr(cierre.Z.DNFH_Total) + ']' , wideChars, 12));
 
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln('NC canceladas        := [' +
-      IntToStr(cierre.Z.NC_CantidadCancelados) + ']');
+    OutputDebugString(StringToWideChar('NC canceladas        := [' +
+      IntToStr(cierre.Z.NC_CantidadCancelados) + ']' , wideChars, 12));
 
-    Writeln('NC emitidas          := [' +
-      IntToStr(cierre.Z.NC_CantidadEmitidos) + ']');
+    OutputDebugString(StringToWideChar('NC emitidas          := [' +
+      IntToStr(cierre.Z.NC_CantidadEmitidos) + ']' , wideChars, 12));
 
-    Writeln('NC total crédito     := [' + FloatToStr(cierre.Z.NC_Total) + ']');
+    OutputDebugString(StringToWideChar('NC total crédito     := [' + FloatToStr(cierre.Z.NC_Total) + ']' , wideChars, 12));
 
-    Writeln('NC total gravado     := [' +
-      FloatToStr(cierre.Z.NC_TotalGravado) + ']');
+    OutputDebugString(StringToWideChar('NC total gravado     := [' +
+      FloatToStr(cierre.Z.NC_TotalGravado) + ']' , wideChars, 12));
 
-    Writeln('NC total IVA         := [' +
-      FloatToStr(cierre.Z.NC_TotalIVA) + ']');
+    OutputDebugString(StringToWideChar('NC total IVA         := [' +
+      FloatToStr(cierre.Z.NC_TotalIVA) + ']' , wideChars, 12));
 
-    Writeln('NC total no gravado  := [' +
-      FloatToStr(cierre.Z.NC_TotalNoGravado) + ']');
+    OutputDebugString(StringToWideChar('NC total no gravado  := [' +
+      FloatToStr(cierre.Z.NC_TotalNoGravado) + ']' , wideChars, 12));
 
-    Writeln('NC total exento      := [' +
-      FloatToStr(cierre.Z.NC_TotalExento) + ']');
+    OutputDebugString(StringToWideChar('NC total exento      := [' +
+      FloatToStr(cierre.Z.NC_TotalExento) + ']' , wideChars, 12));
 
-    Writeln('NC total tributos    := [' +
-      FloatToStr(cierre.Z.NC_TotalTributos) + ']'
-
-      );
-    Writeln('');
-    Writeln('INFORME DIARIO DE CIERRE " Z "... IMPRESO !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar('NC total tributos    := [' +
+      FloatToStr(cierre.Z.NC_TotalTributos) + ']', wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('INFORME DIARIO DE CIERRE " Z "... IMPRESO !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -913,304 +909,304 @@ var
   acomprob2: RespuestaContinuarConsultaAcumulados;
 
 begin
-  Writeln('');
-  Writeln('CONSULTANDO ACUMULADOS COMPROBANTE:');
-  Writeln('');
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
+  OutputDebugString(StringToWideChar('CONSULTANDO ACUMULADOS COMPROBANTE:' , wideChars, 12));
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   Try
     acomprob := HASARNG.ConsultarAcumuladosComprobante(TiqueFacturaA, 13);
 
     if (acomprob.Registro = (RegistroFinal)) then
     begin
-      Writeln('NO HAY INFORMACION DISPONIBLE !...');
-      Writeln('');
+      OutputDebugString(StringToWideChar('NO HAY INFORMACION DISPONIBLE !...' , wideChars, 12));
+      OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     end;
 
     Case acomprob.Registro of
       HasarArgentina_TLB.RegistroDetalladoDF:
         begin
-          Writeln('');
-          Writeln('TIPO REGISTRO:');
-          // ?Writeln('[' + (acomprob.Registro) + ']');
-          Writeln('');
-          Writeln('DF (Documentos Fiscales);:');
-          Writeln('-------------------------');
-          // ?Writeln('DF Tipo comprobante        := [' +FromTiposComprobanteToString(acomprob.RegDF.CodigoComprobante) + ']');
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
+          OutputDebugString(StringToWideChar('TIPO REGISTRO:' , wideChars, 12));
+          // ?OutputDebugString(StringToWideChar('[' + (acomprob.Registro) + ']' , wideChars, 12));
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
+          OutputDebugString(StringToWideChar('DF (Documentos Fiscales);:' , wideChars, 12));
+          OutputDebugString(StringToWideChar('-------------------------' , wideChars, 12));
+          // ?OutputDebugString(StringToWideChar('DF Tipo comprobante        := [' +FromTiposComprobanteToString(acomprob.RegDF.CodigoComprobante) + ']' , wideChars, 12));
 
-          Writeln('DF Nro. inicial            := [' +
-            IntToStr(acomprob.RegDF.NumeroInicial) + ']');
+          OutputDebugString(StringToWideChar('DF Nro. inicial            := [' +
+            IntToStr(acomprob.RegDF.NumeroInicial) + ']' , wideChars, 12));
 
-          Writeln('DF Nro. final              := [' +
-            IntToStr(acomprob.RegDF.NumeroFinal) + ']');
+          OutputDebugString(StringToWideChar('DF Nro. final              := [' +
+            IntToStr(acomprob.RegDF.NumeroFinal) + ']' , wideChars, 12));
 
-          Writeln('DF cancelados              := [' +
-            IntToStr(acomprob.RegDF.CantidadCancelados) + ']');
-          Writeln('');
+          OutputDebugString(StringToWideChar('DF cancelados              := [' +
+            IntToStr(acomprob.RegDF.CantidadCancelados) + ']' , wideChars, 12));
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-          Writeln('DF total ventas            := [' +
-            FloatToStr(acomprob.RegDF.Total) + ']');
+          OutputDebugString(StringToWideChar('DF total ventas            := [' +
+            FloatToStr(acomprob.RegDF.Total) + ']' , wideChars, 12));
 
-          Writeln('DF total gravado           := [' +
-            FloatToStr(acomprob.RegDF.TotalGravado) + ']');
+          OutputDebugString(StringToWideChar('DF total gravado           := [' +
+            FloatToStr(acomprob.RegDF.TotalGravado) + ']' , wideChars, 12));
 
-          Writeln('DF total no gravado        := [' +
-            FloatToStr(acomprob.RegDF.TotalNoGravado) + ']');
+          OutputDebugString(StringToWideChar('DF total no gravado        := [' +
+            FloatToStr(acomprob.RegDF.TotalNoGravado) + ']' , wideChars, 12));
 
-          Writeln('DF total exento            := [' +
-            FloatToStr(acomprob.RegDF.TotalExento) + ']');
-          Writeln('');
+          OutputDebugString(StringToWideChar('DF total exento            := [' +
+            FloatToStr(acomprob.RegDF.TotalExento) + ']' , wideChars, 12));
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-          Writeln('DF IVA 1                   := [' +
-            FloatToStr(acomprob.RegDF.AlicuotaIVA_1) + ']');
+          OutputDebugString(StringToWideChar('DF IVA 1                   := [' +
+            FloatToStr(acomprob.RegDF.AlicuotaIVA_1) + ']' , wideChars, 12));
 
-          Writeln('DF monto IVA 1             := [' +
-            FloatToStr(acomprob.RegDF.MontoIVA_1) + ']');
+          OutputDebugString(StringToWideChar('DF monto IVA 1             := [' +
+            FloatToStr(acomprob.RegDF.MontoIVA_1) + ']' , wideChars, 12));
 
-          Writeln('DF base imponible 1        := [' +
-            FloatToStr(acomprob.RegDF.MontoNetoSinIVA_1) + ']');
+          OutputDebugString(StringToWideChar('DF base imponible 1        := [' +
+            FloatToStr(acomprob.RegDF.MontoNetoSinIVA_1) + ']' , wideChars, 12));
 
-          Writeln('DF IVA 2                   := [' +
-            FloatToStr(acomprob.RegDF.AlicuotaIVA_2) + ']');
+          OutputDebugString(StringToWideChar('DF IVA 2                   := [' +
+            FloatToStr(acomprob.RegDF.AlicuotaIVA_2) + ']' , wideChars, 12));
 
-          Writeln('DF monto IVA 2             := [' +
-            FloatToStr(acomprob.RegDF.MontoIVA_2) + ']');
+          OutputDebugString(StringToWideChar('DF monto IVA 2             := [' +
+            FloatToStr(acomprob.RegDF.MontoIVA_2) + ']' , wideChars, 12));
 
-          Writeln('DF base imponible 2        := [' +
-            FloatToStr(acomprob.RegDF.MontoNetoSinIVA_2) + ']');
+          OutputDebugString(StringToWideChar('DF base imponible 2        := [' +
+            FloatToStr(acomprob.RegDF.MontoNetoSinIVA_2) + ']' , wideChars, 12));
 
-          Writeln('DF IVA 3                   := [' +
-            FloatToStr(acomprob.RegDF.AlicuotaIVA_3) + ']');
+          OutputDebugString(StringToWideChar('DF IVA 3                   := [' +
+            FloatToStr(acomprob.RegDF.AlicuotaIVA_3) + ']' , wideChars, 12));
 
-          Writeln('DF monto IVA 3             := [' +
-            FloatToStr(acomprob.RegDF.MontoIVA_3) + ']');
+          OutputDebugString(StringToWideChar('DF monto IVA 3             := [' +
+            FloatToStr(acomprob.RegDF.MontoIVA_3) + ']' , wideChars, 12));
 
-          Writeln('DF base imponible 3        := [' +
-            FloatToStr(acomprob.RegDF.MontoNetoSinIVA_3) + ']');
+          OutputDebugString(StringToWideChar('DF base imponible 3        := [' +
+            FloatToStr(acomprob.RegDF.MontoNetoSinIVA_3) + ']' , wideChars, 12));
 
-          Writeln('DF IVA 4                   := [' +
-            FloatToStr(acomprob.RegDF.AlicuotaIVA_4) + ']');
+          OutputDebugString(StringToWideChar('DF IVA 4                   := [' +
+            FloatToStr(acomprob.RegDF.AlicuotaIVA_4) + ']' , wideChars, 12));
 
-          Writeln('DF monto IVA 4             := [' +
-            FloatToStr(acomprob.RegDF.MontoIVA_4) + ']');
+          OutputDebugString(StringToWideChar('DF monto IVA 4             := [' +
+            FloatToStr(acomprob.RegDF.MontoIVA_4) + ']' , wideChars, 12));
 
-          Writeln('DF base imponible 4        := [' +
-            FloatToStr(acomprob.RegDF.MontoNetoSinIVA_4) + ']');
+          OutputDebugString(StringToWideChar('DF base imponible 4        := [' +
+            FloatToStr(acomprob.RegDF.MontoNetoSinIVA_4) + ']' , wideChars, 12));
 
-          Writeln('DF IVA 5                   := [' +
-            FloatToStr(acomprob.RegDF.AlicuotaIVA_5) + ']');
+          OutputDebugString(StringToWideChar('DF IVA 5                   := [' +
+            FloatToStr(acomprob.RegDF.AlicuotaIVA_5) + ']' , wideChars, 12));
 
-          Writeln('DF monto IVA 5             := [' +
-            FloatToStr(acomprob.RegDF.MontoIVA_5) + ']');
+          OutputDebugString(StringToWideChar('DF monto IVA 5             := [' +
+            FloatToStr(acomprob.RegDF.MontoIVA_5) + ']' , wideChars, 12));
 
-          Writeln('DF base imponible 5        := [' +
-            FloatToStr(acomprob.RegDF.MontoNetoSinIVA_5) + ']');
+          OutputDebugString(StringToWideChar('DF base imponible 5        := [' +
+            FloatToStr(acomprob.RegDF.MontoNetoSinIVA_5) + ']' , wideChars, 12));
 
-          Writeln('DF IVA 6                   := [' +
-            FloatToStr(acomprob.RegDF.AlicuotaIVA_6) + ']');
+          OutputDebugString(StringToWideChar('DF IVA 6                   := [' +
+            FloatToStr(acomprob.RegDF.AlicuotaIVA_6) + ']' , wideChars, 12));
 
-          Writeln('DF monto IVA 6             := [' +
-            FloatToStr(acomprob.RegDF.MontoIVA_6) + ']');
+          OutputDebugString(StringToWideChar('DF monto IVA 6             := [' +
+            FloatToStr(acomprob.RegDF.MontoIVA_6) + ']' , wideChars, 12));
 
-          Writeln('DF base imponible 6        := [' +
-            FloatToStr(acomprob.RegDF.MontoNetoSinIVA_6) + ']');
+          OutputDebugString(StringToWideChar('DF base imponible 6        := [' +
+            FloatToStr(acomprob.RegDF.MontoNetoSinIVA_6) + ']' , wideChars, 12));
 
-          Writeln('DF IVA 7                   := [' +
-            FloatToStr(acomprob.RegDF.AlicuotaIVA_7) + ']');
+          OutputDebugString(StringToWideChar('DF IVA 7                   := [' +
+            FloatToStr(acomprob.RegDF.AlicuotaIVA_7) + ']' , wideChars, 12));
 
-          Writeln('DF monto IVA 7             := [' +
-            FloatToStr(acomprob.RegDF.MontoIVA_7) + ']');
+          OutputDebugString(StringToWideChar('DF monto IVA 7             := [' +
+            FloatToStr(acomprob.RegDF.MontoIVA_7) + ']' , wideChars, 12));
 
-          Writeln('DF base imponible 7        := [' +
-            FloatToStr(acomprob.RegDF.MontoNetoSinIVA_7) + ']');
+          OutputDebugString(StringToWideChar('DF base imponible 7        := [' +
+            FloatToStr(acomprob.RegDF.MontoNetoSinIVA_7) + ']' , wideChars, 12));
 
-          Writeln('DF IVA 8                   := [' +
-            FloatToStr(acomprob.RegDF.AlicuotaIVA_8) + ']');
+          OutputDebugString(StringToWideChar('DF IVA 8                   := [' +
+            FloatToStr(acomprob.RegDF.AlicuotaIVA_8) + ']' , wideChars, 12));
 
-          Writeln('DF monto IVA 8             := [' +
-            FloatToStr(acomprob.RegDF.MontoIVA_8) + ']');
+          OutputDebugString(StringToWideChar('DF monto IVA 8             := [' +
+            FloatToStr(acomprob.RegDF.MontoIVA_8) + ']' , wideChars, 12));
 
-          Writeln('DF base imponible 8        := [' +
-            FloatToStr(acomprob.RegDF.MontoNetoSinIVA_8) + ']');
+          OutputDebugString(StringToWideChar('DF base imponible 8        := [' +
+            FloatToStr(acomprob.RegDF.MontoNetoSinIVA_8) + ']' , wideChars, 12));
 
-          Writeln('DF IVA 9                   := [' +
-            FloatToStr(acomprob.RegDF.AlicuotaIVA_9) + ']');
+          OutputDebugString(StringToWideChar('DF IVA 9                   := [' +
+            FloatToStr(acomprob.RegDF.AlicuotaIVA_9) + ']' , wideChars, 12));
 
-          Writeln('DF monto IVA 9             := [' +
-            FloatToStr(acomprob.RegDF.MontoIVA_9) + ']');
+          OutputDebugString(StringToWideChar('DF monto IVA 9             := [' +
+            FloatToStr(acomprob.RegDF.MontoIVA_9) + ']' , wideChars, 12));
 
-          Writeln('DF base imponible 9        := [' +
-            FloatToStr(acomprob.RegDF.MontoNetoSinIVA_9) + ']');
+          OutputDebugString(StringToWideChar('DF base imponible 9        := [' +
+            FloatToStr(acomprob.RegDF.MontoNetoSinIVA_9) + ']' , wideChars, 12));
 
-          Writeln('DF IVA 10                  := [' +
-            FloatToStr(acomprob.RegDF.AlicuotaIVA_10) + ']');
+          OutputDebugString(StringToWideChar('DF IVA 10                  := [' +
+            FloatToStr(acomprob.RegDF.AlicuotaIVA_10) + ']' , wideChars, 12));
 
-          Writeln('DF monto IVA 10            := [' +
-            FloatToStr(acomprob.RegDF.MontoIVA_10) + ']');
+          OutputDebugString(StringToWideChar('DF monto IVA 10            := [' +
+            FloatToStr(acomprob.RegDF.MontoIVA_10) + ']' , wideChars, 12));
 
-          Writeln('DF base imponible 10       := [' +
-            FloatToStr(acomprob.RegDF.MontoNetoSinIVA_10) + ']');
-          Writeln('');
+          OutputDebugString(StringToWideChar('DF base imponible 10       := [' +
+            FloatToStr(acomprob.RegDF.MontoNetoSinIVA_10) + ']' , wideChars, 12));
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-          Writeln('DF total IVA               := [' +
-            FloatToStr(acomprob.RegDF.TotalIVA) + ']');
-          Writeln('');
+          OutputDebugString(StringToWideChar('DF total IVA               := [' +
+            FloatToStr(acomprob.RegDF.TotalIVA) + ']' , wideChars, 12));
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-          Writeln('DF tributo 1               := [' +
-            FloatToStr(acomprob.RegDF.CodigoTributo1) + ']');
+          OutputDebugString(StringToWideChar('DF tributo 1               := [' +
+            FloatToStr(acomprob.RegDF.CodigoTributo1) + ']' , wideChars, 12));
 
-          Writeln('DF monto tributo 1         := [' +
-            FloatToStr(acomprob.RegDF.ImporteTributo1) + ']');
+          OutputDebugString(StringToWideChar('DF monto tributo 1         := [' +
+            FloatToStr(acomprob.RegDF.ImporteTributo1) + ']' , wideChars, 12));
 
-          Writeln('DF tributo 2               := [' +
-            FloatToStr(acomprob.RegDF.CodigoTributo2) + ']');
+          OutputDebugString(StringToWideChar('DF tributo 2               := [' +
+            FloatToStr(acomprob.RegDF.CodigoTributo2) + ']' , wideChars, 12));
 
-          Writeln('DF monto tributo 2         := [' +
-            FloatToStr(acomprob.RegDF.ImporteTributo2) + ']');
+          OutputDebugString(StringToWideChar('DF monto tributo 2         := [' +
+            FloatToStr(acomprob.RegDF.ImporteTributo2) + ']' , wideChars, 12));
 
-          Writeln('DF tributo 3               := [' +
-            FloatToStr(acomprob.RegDF.CodigoTributo3) + ']');
+          OutputDebugString(StringToWideChar('DF tributo 3               := [' +
+            FloatToStr(acomprob.RegDF.CodigoTributo3) + ']' , wideChars, 12));
 
-          Writeln('DF monto tributo 3         := [' +
-            FloatToStr(acomprob.RegDF.ImporteTributo3) + ']');
+          OutputDebugString(StringToWideChar('DF monto tributo 3         := [' +
+            FloatToStr(acomprob.RegDF.ImporteTributo3) + ']' , wideChars, 12));
 
-          Writeln('DF tributo 4               := [' +
-            FloatToStr(acomprob.RegDF.CodigoTributo4) + ']');
+          OutputDebugString(StringToWideChar('DF tributo 4               := [' +
+            FloatToStr(acomprob.RegDF.CodigoTributo4) + ']' , wideChars, 12));
 
-          Writeln('DF monto tributo 4         := [' +
-            FloatToStr(acomprob.RegDF.ImporteTributo4) + ']');
+          OutputDebugString(StringToWideChar('DF monto tributo 4         := [' +
+            FloatToStr(acomprob.RegDF.ImporteTributo4) + ']' , wideChars, 12));
 
-          Writeln('DF tributo 5               := [' +
-            FloatToStr(acomprob.RegDF.CodigoTributo5) + ']');
+          OutputDebugString(StringToWideChar('DF tributo 5               := [' +
+            FloatToStr(acomprob.RegDF.CodigoTributo5) + ']' , wideChars, 12));
 
-          Writeln('DF monto tributo 5         := [' +
-            FloatToStr(acomprob.RegDF.ImporteTributo5) + ']');
+          OutputDebugString(StringToWideChar('DF monto tributo 5         := [' +
+            FloatToStr(acomprob.RegDF.ImporteTributo5) + ']' , wideChars, 12));
 
-          Writeln('DF tributo 6               := [' +
-            FloatToStr(acomprob.RegDF.CodigoTributo6) + ']');
+          OutputDebugString(StringToWideChar('DF tributo 6               := [' +
+            FloatToStr(acomprob.RegDF.CodigoTributo6) + ']' , wideChars, 12));
 
-          Writeln('DF monto tributo 6         := [' +
-            FloatToStr(acomprob.RegDF.ImporteTributo6) + ']');
+          OutputDebugString(StringToWideChar('DF monto tributo 6         := [' +
+            FloatToStr(acomprob.RegDF.ImporteTributo6) + ']' , wideChars, 12));
 
-          Writeln('DF tributo 7               := [' +
-            FloatToStr(acomprob.RegDF.CodigoTributo7) + ']');
+          OutputDebugString(StringToWideChar('DF tributo 7               := [' +
+            FloatToStr(acomprob.RegDF.CodigoTributo7) + ']' , wideChars, 12));
 
-          Writeln('DF monto tributo 7         := [' +
-            FloatToStr(acomprob.RegDF.ImporteTributo7) + ']');
+          OutputDebugString(StringToWideChar('DF monto tributo 7         := [' +
+            FloatToStr(acomprob.RegDF.ImporteTributo7) + ']' , wideChars, 12));
 
-          Writeln('DF tributo 8               := [' +
-            FloatToStr(acomprob.RegDF.CodigoTributo8) + ']');
+          OutputDebugString(StringToWideChar('DF tributo 8               := [' +
+            FloatToStr(acomprob.RegDF.CodigoTributo8) + ']' , wideChars, 12));
 
-          Writeln('DF monto tributo 8         := [' +
-            FloatToStr(acomprob.RegDF.ImporteTributo8) + ']');
+          OutputDebugString(StringToWideChar('DF monto tributo 8         := [' +
+            FloatToStr(acomprob.RegDF.ImporteTributo8) + ']' , wideChars, 12));
 
-          Writeln('DF tributo 9               := [' +
-            FloatToStr(acomprob.RegDF.CodigoTributo9) + ']');
+          OutputDebugString(StringToWideChar('DF tributo 9               := [' +
+            FloatToStr(acomprob.RegDF.CodigoTributo9) + ']' , wideChars, 12));
 
-          Writeln('DF monto tributo 9         := [' +
-            FloatToStr(acomprob.RegDF.ImporteTributo9) + ']');
+          OutputDebugString(StringToWideChar('DF monto tributo 9         := [' +
+            FloatToStr(acomprob.RegDF.ImporteTributo9) + ']' , wideChars, 12));
 
-          Writeln('DF tributo 10              := [' +
-            FloatToStr(acomprob.RegDF.CodigoTributo10) + ']');
+          OutputDebugString(StringToWideChar('DF tributo 10              := [' +
+            FloatToStr(acomprob.RegDF.CodigoTributo10) + ']' , wideChars, 12));
 
-          Writeln('DF monto tributo 10        := [' +
-            FloatToStr(acomprob.RegDF.ImporteTributo10) + ']');
+          OutputDebugString(StringToWideChar('DF monto tributo 10        := [' +
+            FloatToStr(acomprob.RegDF.ImporteTributo10) + ']' , wideChars, 12));
 
-          Writeln('DF tributo 11              := [' +
-            FloatToStr(acomprob.RegDF.CodigoTributo11) + ']');
+          OutputDebugString(StringToWideChar('DF tributo 11              := [' +
+            FloatToStr(acomprob.RegDF.CodigoTributo11) + ']' , wideChars, 12));
 
-          Writeln('DF monto tributo 11        := [' +
-            FloatToStr(acomprob.RegDF.ImporteTributo11) + ']');
-          Writeln('');
+          OutputDebugString(StringToWideChar('DF monto tributo 11        := [' +
+            FloatToStr(acomprob.RegDF.ImporteTributo11) + ']' , wideChars, 12));
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-          Writeln('DF total tributos          := [' +
-            FloatToStr(acomprob.RegDF.TotalTributos) + ']');
-          Writeln('');
+          OutputDebugString(StringToWideChar('DF total tributos          := [' +
+            FloatToStr(acomprob.RegDF.TotalTributos) + ']' , wideChars, 12));
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
         end;
       RegistroDetalladoDNFH:
         begin
-          Writeln('');
-          Writeln('TIPO REGISTRO:');
-          Writeln('[' + FloatToStr(acomprob.Registro) + ']');
-          Writeln('');
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
+          OutputDebugString(StringToWideChar('TIPO REGISTRO:' , wideChars, 12));
+          OutputDebugString(StringToWideChar('[' + FloatToStr(acomprob.Registro) + ']' , wideChars, 12));
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-          Writeln('DNFH (Documentos No Fiscales Homologados);: :=QUE ACUMULAN:=');
+          OutputDebugString(StringToWideChar('DNFH (Documentos No Fiscales Homologados);: :=QUE ACUMULAN:=' , wideChars, 12));
 
-          Writeln('---------------------------------------------------------');
-          Writeln('DNFH Tipo Comprob.         := [' +
+          OutputDebugString(StringToWideChar('---------------------------------------------------------' , wideChars, 12));
+          OutputDebugString(StringToWideChar('DNFH Tipo Comprob.         := [' +
             { FromTiposComprobanteToString }
-            FloatToStr(acomprob.RegDF.CodigoComprobante) + ']');
+            FloatToStr(acomprob.RegDF.CodigoComprobante) + ']' , wideChars, 12));
 
-          Writeln('DNFH Nro. inicial          := [' +
-            IntToStr(acomprob.RegDNFH.NumeroInicial) + ']');
+          OutputDebugString(StringToWideChar('DNFH Nro. inicial          := [' +
+            IntToStr(acomprob.RegDNFH.NumeroInicial) + ']' , wideChars, 12));
 
-          Writeln('DNFH Nro. Final            := [' +
-            IntToStr(acomprob.RegDNFH.NumeroFinal) + ']');
+          OutputDebugString(StringToWideChar('DNFH Nro. Final            := [' +
+            IntToStr(acomprob.RegDNFH.NumeroFinal) + ']' , wideChars, 12));
 
-          Writeln('DNFH total acumulado       := [' +
-            FloatToStr(acomprob.RegDNFH.Total) + ']');
-          Writeln('');
+          OutputDebugString(StringToWideChar('DNFH total acumulado       := [' +
+            FloatToStr(acomprob.RegDNFH.Total) + ']' , wideChars, 12));
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
         end;
       HasarArgentina_TLB.RegistroDetalladoDNFHNoAcum:
         begin
-          Writeln('');
-          Writeln('TIPO REGISTRO:');
-          Writeln('[' + FloatToStr(acomprob.Registro) + ']');
-          Writeln('');
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
+          OutputDebugString(StringToWideChar('TIPO REGISTRO:' , wideChars, 12));
+          OutputDebugString(StringToWideChar('[' + FloatToStr(acomprob.Registro) + ']' , wideChars, 12));
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-          Writeln('DNFH (Documentos No Fiscales Homologados);: :=QUE NO ACUMULAN:=');
+          OutputDebugString(StringToWideChar('DNFH (Documentos No Fiscales Homologados);: :=QUE NO ACUMULAN:=' , wideChars, 12));
 
-          Writeln('------------------------------------------------------------');
-          Writeln('Tipo Comprobante := [' +
+          OutputDebugString(StringToWideChar('------------------------------------------------------------' , wideChars, 12));
+          OutputDebugString(StringToWideChar('Tipo Comprobante := [' +
             { FromTiposComprobanteToString }
-            FloatToStr(acomprob.RegDF.CodigoComprobante) + ']');
+            FloatToStr(acomprob.RegDF.CodigoComprobante) + ']' , wideChars, 12));
 
-          Writeln('Nº inicial       := [' +
-            IntToStr(acomprob.RegDNFH_NoAcum.NumeroInicial) + ']');
+          OutputDebugString(StringToWideChar('Nº inicial       := [' +
+            IntToStr(acomprob.RegDNFH_NoAcum.NumeroInicial) + ']' , wideChars, 12));
 
-          Writeln('Nº final         := [' +
-            IntToStr(acomprob.RegDNFH_NoAcum.NumeroFinal) + ']');
-          Writeln('');
+          OutputDebugString(StringToWideChar('Nº final         := [' +
+            IntToStr(acomprob.RegDNFH_NoAcum.NumeroFinal) + ']' , wideChars, 12));
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
         end;
       HasarArgentina_TLB.RegistroGlobal:
         begin
-          Writeln('');
-          Writeln('TIPO REGISTRO:');
-          Writeln('[' + FloatToStr(acomprob.Registro) + ']');
-          Writeln('');
-          Writeln('INFORMACION GLOBAL:');
-          Writeln('-------------------');
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
+          OutputDebugString(StringToWideChar('TIPO REGISTRO:' , wideChars, 12));
+          OutputDebugString(StringToWideChar('[' + FloatToStr(acomprob.Registro) + ']' , wideChars, 12));
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
+          OutputDebugString(StringToWideChar('INFORMACION GLOBAL:' , wideChars, 12));
+          OutputDebugString(StringToWideChar('-------------------' , wideChars, 12));
 
-          Writeln('DF cant. cancelados := [' +
-            IntToStr(acomprob.RegGlobal.DF_CantidadCancelados) + ']');
+          OutputDebugString(StringToWideChar('DF cant. cancelados := [' +
+            IntToStr(acomprob.RegGlobal.DF_CantidadCancelados) + ']' , wideChars, 12));
 
-          Writeln('DF cant. emitidos   := [' +
-            IntToStr(acomprob.RegGlobal.DF_CantidadEmitidos) + ']');
-          Writeln('');
+          OutputDebugString(StringToWideChar('DF cant. emitidos   := [' +
+            IntToStr(acomprob.RegGlobal.DF_CantidadEmitidos) + ']' , wideChars, 12));
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-          Writeln('DF total ventas     := [' +
-            FloatToStr(acomprob.RegGlobal.DF_Total) + ']');
-          Writeln('');
+          OutputDebugString(StringToWideChar('DF total ventas     := [' +
+            FloatToStr(acomprob.RegGlobal.DF_Total) + ']' , wideChars, 12));
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-          Writeln('DF total gravado    := [' +
-            FloatToStr(acomprob.RegGlobal.DF_TotalGravado) + ']');
+          OutputDebugString(StringToWideChar('DF total gravado    := [' +
+            FloatToStr(acomprob.RegGlobal.DF_TotalGravado) + ']' , wideChars, 12));
 
-          Writeln('DF total IVA        := [' +
-            FloatToStr(acomprob.RegGlobal.DF_TotalIVA) + ']');
+          OutputDebugString(StringToWideChar('DF total IVA        := [' +
+            FloatToStr(acomprob.RegGlobal.DF_TotalIVA) + ']' , wideChars, 12));
 
-          Writeln('DF total tributos   := [' +
-            FloatToStr(acomprob.RegGlobal.DF_TotalTributos) + ']');
+          OutputDebugString(StringToWideChar('DF total tributos   := [' +
+            FloatToStr(acomprob.RegGlobal.DF_TotalTributos) + ']' , wideChars, 12));
 
-          Writeln('DF total no gravado := [' +
-            FloatToStr(acomprob.RegGlobal.DF_TotalNoGravado) + ']');
+          OutputDebugString(StringToWideChar('DF total no gravado := [' +
+            FloatToStr(acomprob.RegGlobal.DF_TotalNoGravado) + ']' , wideChars, 12));
 
-          Writeln('DF total exento     := [' +
-            FloatToStr(acomprob.RegGlobal.DF_TotalExento) + ']');
-          Writeln('');
+          OutputDebugString(StringToWideChar('DF total exento     := [' +
+            FloatToStr(acomprob.RegGlobal.DF_TotalExento) + ']' , wideChars, 12));
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-          Writeln('DF total DNFH       := [' +
-            FloatToStr(acomprob.RegGlobal.DNFH_Total) + ']');
-          Writeln('');
+          OutputDebugString(StringToWideChar('DF total DNFH       := [' +
+            FloatToStr(acomprob.RegGlobal.DNFH_Total) + ']' , wideChars, 12));
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
         end;
     end;
 
@@ -1222,274 +1218,274 @@ begin
       Case acomprob2.Registro of
         HasarArgentina_TLB.RegistroDetalladoDF:
           begin
-            Writeln('');
-            Writeln('TIPO REGISTRO:');
-            Writeln('[' + FloatToStr(acomprob2.Registro) + ']');
-            Writeln('');
-            Writeln('DF (Documentos Fiscales);:');
-            Writeln('-------------------------');
-            Writeln('DF Tipo comprobante        := [' +
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
+            OutputDebugString(StringToWideChar('TIPO REGISTRO:' , wideChars, 12));
+            OutputDebugString(StringToWideChar('[' + FloatToStr(acomprob2.Registro) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
+            OutputDebugString(StringToWideChar('DF (Documentos Fiscales);:' , wideChars, 12));
+            OutputDebugString(StringToWideChar('-------------------------' , wideChars, 12));
+            OutputDebugString(StringToWideChar('DF Tipo comprobante        := [' +
               { FromTiposComprobanteToString }
-              FloatToStr(acomprob2.RegDF.CodigoComprobante) + ']');
+              FloatToStr(acomprob2.RegDF.CodigoComprobante) + ']' , wideChars, 12));
 
-            Writeln('DF Nro. inicial            := [' +
-              IntToStr(acomprob2.RegDF.NumeroInicial) + ']');
+            OutputDebugString(StringToWideChar('DF Nro. inicial            := [' +
+              IntToStr(acomprob2.RegDF.NumeroInicial) + ']' , wideChars, 12));
 
-            Writeln('DF Nro. final              := [' +
-              IntToStr(acomprob2.RegDF.NumeroFinal) + ']');
+            OutputDebugString(StringToWideChar('DF Nro. final              := [' +
+              IntToStr(acomprob2.RegDF.NumeroFinal) + ']' , wideChars, 12));
 
-            Writeln('DF cancelados              := [' +
-              IntToStr(acomprob2.RegDF.CantidadCancelados) + ']');
-            Writeln('');
+            OutputDebugString(StringToWideChar('DF cancelados              := [' +
+              IntToStr(acomprob2.RegDF.CantidadCancelados) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-            Writeln('DF total ventas            := [' +
-              FloatToStr(acomprob2.RegDF.Total) + ']');
+            OutputDebugString(StringToWideChar('DF total ventas            := [' +
+              FloatToStr(acomprob2.RegDF.Total) + ']' , wideChars, 12));
 
-            Writeln('DF total gravado           := [' +
-              FloatToStr(acomprob2.RegDF.TotalGravado) + ']');
+            OutputDebugString(StringToWideChar('DF total gravado           := [' +
+              FloatToStr(acomprob2.RegDF.TotalGravado) + ']' , wideChars, 12));
 
-            Writeln('DF total no gravado        := [' +
-              FloatToStr(acomprob2.RegDF.TotalNoGravado) + ']');
+            OutputDebugString(StringToWideChar('DF total no gravado        := [' +
+              FloatToStr(acomprob2.RegDF.TotalNoGravado) + ']' , wideChars, 12));
 
-            Writeln('DF total exento            := [' +
-              FloatToStr(acomprob2.RegDF.TotalExento) + ']');
-            Writeln('');
+            OutputDebugString(StringToWideChar('DF total exento            := [' +
+              FloatToStr(acomprob2.RegDF.TotalExento) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-            Writeln('DF IVA 1                   := [' +
-              FloatToStr(acomprob2.RegDF.AlicuotaIVA_1) + ']');
+            OutputDebugString(StringToWideChar('DF IVA 1                   := [' +
+              FloatToStr(acomprob2.RegDF.AlicuotaIVA_1) + ']' , wideChars, 12));
 
-            Writeln('DF monto IVA 1             := [' +
-              FloatToStr(acomprob2.RegDF.MontoIVA_1) + ']');
+            OutputDebugString(StringToWideChar('DF monto IVA 1             := [' +
+              FloatToStr(acomprob2.RegDF.MontoIVA_1) + ']' , wideChars, 12));
 
-            Writeln('DF IVA 2                   := [' +
-              FloatToStr(acomprob2.RegDF.AlicuotaIVA_2) + ']');
+            OutputDebugString(StringToWideChar('DF IVA 2                   := [' +
+              FloatToStr(acomprob2.RegDF.AlicuotaIVA_2) + ']' , wideChars, 12));
 
-            Writeln('DF monto IVA 2             := [' +
-              FloatToStr(acomprob2.RegDF.MontoIVA_2) + ']');
+            OutputDebugString(StringToWideChar('DF monto IVA 2             := [' +
+              FloatToStr(acomprob2.RegDF.MontoIVA_2) + ']' , wideChars, 12));
 
-            Writeln('DF IVA 3                   := [' +
-              FloatToStr(acomprob2.RegDF.AlicuotaIVA_3) + ']');
+            OutputDebugString(StringToWideChar('DF IVA 3                   := [' +
+              FloatToStr(acomprob2.RegDF.AlicuotaIVA_3) + ']' , wideChars, 12));
 
-            Writeln('DF monto IVA 3             := [' +
-              FloatToStr(acomprob2.RegDF.MontoIVA_3) + ']');
+            OutputDebugString(StringToWideChar('DF monto IVA 3             := [' +
+              FloatToStr(acomprob2.RegDF.MontoIVA_3) + ']' , wideChars, 12));
 
-            Writeln('DF IVA 4                   := [' +
-              FloatToStr(acomprob2.RegDF.AlicuotaIVA_4) + ']');
+            OutputDebugString(StringToWideChar('DF IVA 4                   := [' +
+              FloatToStr(acomprob2.RegDF.AlicuotaIVA_4) + ']' , wideChars, 12));
 
-            Writeln('DF monto IVA 4             := [' +
-              FloatToStr(acomprob2.RegDF.MontoIVA_4) + ']');
+            OutputDebugString(StringToWideChar('DF monto IVA 4             := [' +
+              FloatToStr(acomprob2.RegDF.MontoIVA_4) + ']' , wideChars, 12));
 
-            Writeln('DF IVA 5                   := [' +
-              FloatToStr(acomprob2.RegDF.AlicuotaIVA_5) + ']');
+            OutputDebugString(StringToWideChar('DF IVA 5                   := [' +
+              FloatToStr(acomprob2.RegDF.AlicuotaIVA_5) + ']' , wideChars, 12));
 
-            Writeln('DF monto IVA 5             := [' +
-              FloatToStr(acomprob2.RegDF.MontoIVA_5) + ']');
+            OutputDebugString(StringToWideChar('DF monto IVA 5             := [' +
+              FloatToStr(acomprob2.RegDF.MontoIVA_5) + ']' , wideChars, 12));
 
-            Writeln('DF IVA 6                   := [' +
-              FloatToStr(acomprob2.RegDF.AlicuotaIVA_6) + ']');
+            OutputDebugString(StringToWideChar('DF IVA 6                   := [' +
+              FloatToStr(acomprob2.RegDF.AlicuotaIVA_6) + ']' , wideChars, 12));
 
-            Writeln('DF monto IVA 6             := [' +
-              FloatToStr(acomprob2.RegDF.MontoIVA_6) + ']');
+            OutputDebugString(StringToWideChar('DF monto IVA 6             := [' +
+              FloatToStr(acomprob2.RegDF.MontoIVA_6) + ']' , wideChars, 12));
 
-            Writeln('DF IVA 7                   := [' +
-              FloatToStr(acomprob2.RegDF.AlicuotaIVA_7) + ']');
+            OutputDebugString(StringToWideChar('DF IVA 7                   := [' +
+              FloatToStr(acomprob2.RegDF.AlicuotaIVA_7) + ']' , wideChars, 12));
 
-            Writeln('DF monto IVA 7             := [' +
-              FloatToStr(acomprob2.RegDF.MontoIVA_7) + ']');
+            OutputDebugString(StringToWideChar('DF monto IVA 7             := [' +
+              FloatToStr(acomprob2.RegDF.MontoIVA_7) + ']' , wideChars, 12));
 
-            Writeln('DF IVA 8                   := [' +
-              FloatToStr(acomprob2.RegDF.AlicuotaIVA_8) + ']');
+            OutputDebugString(StringToWideChar('DF IVA 8                   := [' +
+              FloatToStr(acomprob2.RegDF.AlicuotaIVA_8) + ']' , wideChars, 12));
 
-            Writeln('DF monto IVA 8             := [' +
-              FloatToStr(acomprob2.RegDF.MontoIVA_8) + ']');
+            OutputDebugString(StringToWideChar('DF monto IVA 8             := [' +
+              FloatToStr(acomprob2.RegDF.MontoIVA_8) + ']' , wideChars, 12));
 
-            Writeln('DF IVA 9                   := [' +
-              FloatToStr(acomprob2.RegDF.AlicuotaIVA_9) + ']');
+            OutputDebugString(StringToWideChar('DF IVA 9                   := [' +
+              FloatToStr(acomprob2.RegDF.AlicuotaIVA_9) + ']' , wideChars, 12));
 
-            Writeln('DF monto IVA 9             := [' +
-              FloatToStr(acomprob2.RegDF.MontoIVA_9) + ']');
+            OutputDebugString(StringToWideChar('DF monto IVA 9             := [' +
+              FloatToStr(acomprob2.RegDF.MontoIVA_9) + ']' , wideChars, 12));
 
-            Writeln('DF IVA 10                  := [' +
-              FloatToStr(acomprob2.RegDF.AlicuotaIVA_10) + ']');
+            OutputDebugString(StringToWideChar('DF IVA 10                  := [' +
+              FloatToStr(acomprob2.RegDF.AlicuotaIVA_10) + ']' , wideChars, 12));
 
-            Writeln('DF monto IVA 10            := [' +
-              FloatToStr(acomprob2.RegDF.MontoIVA_10) + ']');
-            Writeln('');
+            OutputDebugString(StringToWideChar('DF monto IVA 10            := [' +
+              FloatToStr(acomprob2.RegDF.MontoIVA_10) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-            Writeln('DF total IVA               := [' +
-              FloatToStr(acomprob2.RegDF.TotalIVA) + ']');
-            Writeln('');
+            OutputDebugString(StringToWideChar('DF total IVA               := [' +
+              FloatToStr(acomprob2.RegDF.TotalIVA) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-            Writeln('DF tributo 1               := [' +
-              FloatToStr(acomprob2.RegDF.CodigoTributo1) + ']');
+            OutputDebugString(StringToWideChar('DF tributo 1               := [' +
+              FloatToStr(acomprob2.RegDF.CodigoTributo1) + ']' , wideChars, 12));
 
-            Writeln('DF monto tributo 1         := [' +
-              FloatToStr(acomprob2.RegDF.ImporteTributo1) + ']');
+            OutputDebugString(StringToWideChar('DF monto tributo 1         := [' +
+              FloatToStr(acomprob2.RegDF.ImporteTributo1) + ']' , wideChars, 12));
 
-            Writeln('DF tributo 2               := [' +
-              FloatToStr(acomprob2.RegDF.CodigoTributo2) + ']');
+            OutputDebugString(StringToWideChar('DF tributo 2               := [' +
+              FloatToStr(acomprob2.RegDF.CodigoTributo2) + ']' , wideChars, 12));
 
-            Writeln('DF monto tributo 2         := [' +
-              FloatToStr(acomprob2.RegDF.ImporteTributo2) + ']');
+            OutputDebugString(StringToWideChar('DF monto tributo 2         := [' +
+              FloatToStr(acomprob2.RegDF.ImporteTributo2) + ']' , wideChars, 12));
 
-            Writeln('DF tributo 3               := [' +
-              FloatToStr(acomprob2.RegDF.CodigoTributo3) + ']');
+            OutputDebugString(StringToWideChar('DF tributo 3               := [' +
+              FloatToStr(acomprob2.RegDF.CodigoTributo3) + ']' , wideChars, 12));
 
-            Writeln('DF monto tributo 3         := [' +
-              FloatToStr(acomprob2.RegDF.ImporteTributo3) + ']');
+            OutputDebugString(StringToWideChar('DF monto tributo 3         := [' +
+              FloatToStr(acomprob2.RegDF.ImporteTributo3) + ']' , wideChars, 12));
 
-            Writeln('DF tributo 4               := [' +
-              FloatToStr(acomprob2.RegDF.CodigoTributo4) + ']');
+            OutputDebugString(StringToWideChar('DF tributo 4               := [' +
+              FloatToStr(acomprob2.RegDF.CodigoTributo4) + ']' , wideChars, 12));
 
-            Writeln('DF monto tributo 4         := [' +
-              FloatToStr(acomprob2.RegDF.ImporteTributo4) + ']');
+            OutputDebugString(StringToWideChar('DF monto tributo 4         := [' +
+              FloatToStr(acomprob2.RegDF.ImporteTributo4) + ']' , wideChars, 12));
 
-            Writeln('DF tributo 5               := [' +
-              FloatToStr(acomprob2.RegDF.CodigoTributo5) + ']');
+            OutputDebugString(StringToWideChar('DF tributo 5               := [' +
+              FloatToStr(acomprob2.RegDF.CodigoTributo5) + ']' , wideChars, 12));
 
-            Writeln('DF monto tributo 5         := [' +
-              FloatToStr(acomprob2.RegDF.ImporteTributo5) + ']');
+            OutputDebugString(StringToWideChar('DF monto tributo 5         := [' +
+              FloatToStr(acomprob2.RegDF.ImporteTributo5) + ']' , wideChars, 12));
 
-            Writeln('DF tributo 6               := [' +
-              FloatToStr(acomprob2.RegDF.CodigoTributo6) + ']');
+            OutputDebugString(StringToWideChar('DF tributo 6               := [' +
+              FloatToStr(acomprob2.RegDF.CodigoTributo6) + ']' , wideChars, 12));
 
-            Writeln('DF monto tributo 6         := [' +
-              FloatToStr(acomprob2.RegDF.ImporteTributo6) + ']');
+            OutputDebugString(StringToWideChar('DF monto tributo 6         := [' +
+              FloatToStr(acomprob2.RegDF.ImporteTributo6) + ']' , wideChars, 12));
 
-            Writeln('DF tributo 7               := [' +
-              FloatToStr(acomprob2.RegDF.CodigoTributo7) + ']');
+            OutputDebugString(StringToWideChar('DF tributo 7               := [' +
+              FloatToStr(acomprob2.RegDF.CodigoTributo7) + ']' , wideChars, 12));
 
-            Writeln('DF monto tributo 7         := [' +
-              FloatToStr(acomprob2.RegDF.ImporteTributo7) + ']');
+            OutputDebugString(StringToWideChar('DF monto tributo 7         := [' +
+              FloatToStr(acomprob2.RegDF.ImporteTributo7) + ']' , wideChars, 12));
 
-            Writeln('DF tributo 8               := [' +
-              FloatToStr(acomprob2.RegDF.CodigoTributo8) + ']');
+            OutputDebugString(StringToWideChar('DF tributo 8               := [' +
+              FloatToStr(acomprob2.RegDF.CodigoTributo8) + ']' , wideChars, 12));
 
-            Writeln('DF monto tributo 8         := [' +
-              FloatToStr(acomprob2.RegDF.ImporteTributo8) + ']');
+            OutputDebugString(StringToWideChar('DF monto tributo 8         := [' +
+              FloatToStr(acomprob2.RegDF.ImporteTributo8) + ']' , wideChars, 12));
 
-            Writeln('DF tributo 9               := [' +
-              FloatToStr(acomprob2.RegDF.CodigoTributo9) + ']');
+            OutputDebugString(StringToWideChar('DF tributo 9               := [' +
+              FloatToStr(acomprob2.RegDF.CodigoTributo9) + ']' , wideChars, 12));
 
-            Writeln('DF monto tributo 9         := [' +
-              FloatToStr(acomprob2.RegDF.ImporteTributo9) + ']');
+            OutputDebugString(StringToWideChar('DF monto tributo 9         := [' +
+              FloatToStr(acomprob2.RegDF.ImporteTributo9) + ']' , wideChars, 12));
 
-            Writeln('DF tributo 10              := [' +
-              FloatToStr(acomprob2.RegDF.CodigoTributo10) + ']');
+            OutputDebugString(StringToWideChar('DF tributo 10              := [' +
+              FloatToStr(acomprob2.RegDF.CodigoTributo10) + ']' , wideChars, 12));
 
-            Writeln('DF monto tributo 10        := [' +
-              FloatToStr(acomprob2.RegDF.ImporteTributo10) + ']');
+            OutputDebugString(StringToWideChar('DF monto tributo 10        := [' +
+              FloatToStr(acomprob2.RegDF.ImporteTributo10) + ']' , wideChars, 12));
 
-            Writeln('DF tributo 11              := [' +
-              FloatToStr(acomprob2.RegDF.CodigoTributo11) + ']');
+            OutputDebugString(StringToWideChar('DF tributo 11              := [' +
+              FloatToStr(acomprob2.RegDF.CodigoTributo11) + ']' , wideChars, 12));
 
-            Writeln('DF monto tributo 11        := [' +
-              FloatToStr(acomprob2.RegDF.ImporteTributo11) + ']');
-            Writeln('');
+            OutputDebugString(StringToWideChar('DF monto tributo 11        := [' +
+              FloatToStr(acomprob2.RegDF.ImporteTributo11) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-            Writeln('DF total tributos          := [' +
-              FloatToStr(acomprob2.RegDF.TotalTributos) + ']');
-            Writeln('');
+            OutputDebugString(StringToWideChar('DF total tributos          := [' +
+              FloatToStr(acomprob2.RegDF.TotalTributos) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
           end;
         HasarArgentina_TLB.RegistroDetalladoDNFH:
           begin
-            Writeln('');
-            Writeln('TIPO REGISTRO:');
-            Writeln('[' + FloatToStr(acomprob2.Registro) + ']');
-            Writeln('');
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
+            OutputDebugString(StringToWideChar('TIPO REGISTRO:' , wideChars, 12));
+            OutputDebugString(StringToWideChar('[' + FloatToStr(acomprob2.Registro) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-            Writeln('DNFH (Documentos No Fiscales Homologados);: :=QUE ACUMULAN:=');
+            OutputDebugString(StringToWideChar('DNFH (Documentos No Fiscales Homologados);: :=QUE ACUMULAN:=' , wideChars, 12));
 
-            Writeln('---------------------------------------------------------');
-            Writeln('DNFH Tipo Comprob.         := [' +
+            OutputDebugString(StringToWideChar('---------------------------------------------------------' , wideChars, 12));
+            OutputDebugString(StringToWideChar('DNFH Tipo Comprob.         := [' +
               { FromTiposComprobanteToString }
-              FloatToStr(acomprob2.RegDF.CodigoComprobante) + ']');
+              FloatToStr(acomprob2.RegDF.CodigoComprobante) + ']' , wideChars, 12));
 
-            Writeln('DNFH Nro. inicial          := [' +
-              FloatToStr(acomprob2.RegDNFH.NumeroInicial) + ']');
+            OutputDebugString(StringToWideChar('DNFH Nro. inicial          := [' +
+              FloatToStr(acomprob2.RegDNFH.NumeroInicial) + ']' , wideChars, 12));
 
-            Writeln('DNFH Nro. Final            := [' +
-              FloatToStr(acomprob2.RegDNFH.NumeroFinal) + ']');
+            OutputDebugString(StringToWideChar('DNFH Nro. Final            := [' +
+              FloatToStr(acomprob2.RegDNFH.NumeroFinal) + ']' , wideChars, 12));
 
-            Writeln('DNFH total acumulado       := [' +
-              FloatToStr(acomprob2.RegDNFH.Total) + ']');
-            Writeln('');
+            OutputDebugString(StringToWideChar('DNFH total acumulado       := [' +
+              FloatToStr(acomprob2.RegDNFH.Total) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
           end;
         HasarArgentina_TLB.RegistroDetalladoDNFHNoAcum:
           begin
-            Writeln('');
-            Writeln('TIPO REGISTRO:');
-            Writeln('[' + FloatToStr(acomprob2.Registro) + ']');
-            Writeln('');
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
+            OutputDebugString(StringToWideChar('TIPO REGISTRO:' , wideChars, 12));
+            OutputDebugString(StringToWideChar('[' + FloatToStr(acomprob2.Registro) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-            Writeln('DNFH (Documentos No Fiscales Homologados);: :=QUE NO ACUMULAN:=');
+            OutputDebugString(StringToWideChar('DNFH (Documentos No Fiscales Homologados);: :=QUE NO ACUMULAN:=' , wideChars, 12));
 
-            Writeln('------------------------------------------------------------');
-            Writeln('Tipo Comprobante := [' +
+            OutputDebugString(StringToWideChar('------------------------------------------------------------' , wideChars, 12));
+            OutputDebugString(StringToWideChar('Tipo Comprobante := [' +
               { FromTiposComprobanteToString }
-              FloatToStr(acomprob2.RegDF.CodigoComprobante) + ']');
+              FloatToStr(acomprob2.RegDF.CodigoComprobante) + ']' , wideChars, 12));
 
-            Writeln('Nº inicial       := [' +
-              FloatToStr(acomprob2.RegDNFH_NoAcum.NumeroInicial) + ']');
+            OutputDebugString(StringToWideChar('Nº inicial       := [' +
+              FloatToStr(acomprob2.RegDNFH_NoAcum.NumeroInicial) + ']' , wideChars, 12));
 
-            Writeln('Nº final         := [' +
-              FloatToStr(acomprob2.RegDNFH_NoAcum.NumeroFinal) + ']');
-            Writeln('');
+            OutputDebugString(StringToWideChar('Nº final         := [' +
+              FloatToStr(acomprob2.RegDNFH_NoAcum.NumeroFinal) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
           end;
         HasarArgentina_TLB.RegistroGlobal:
           begin
-            Writeln('');
-            Writeln('TIPO REGISTRO:');
-            Writeln('[' + FloatToStr(acomprob2.Registro) + ']');
-            Writeln('');
-            Writeln('INFORMACION GLOBAL:');
-            Writeln('-------------------');
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
+            OutputDebugString(StringToWideChar('TIPO REGISTRO:' , wideChars, 12));
+            OutputDebugString(StringToWideChar('[' + FloatToStr(acomprob2.Registro) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
+            OutputDebugString(StringToWideChar('INFORMACION GLOBAL:' , wideChars, 12));
+            OutputDebugString(StringToWideChar('-------------------' , wideChars, 12));
 
-            Writeln('DF cant. cancelados := [' +
-              FloatToStr(acomprob2.RegGlobal.DF_CantidadCancelados) + ']');
+            OutputDebugString(StringToWideChar('DF cant. cancelados := [' +
+              FloatToStr(acomprob2.RegGlobal.DF_CantidadCancelados) + ']' , wideChars, 12));
 
-            Writeln('DF cant. emitidos   := [' +
-              FloatToStr(acomprob2.RegGlobal.DF_CantidadEmitidos) + ']');
-            Writeln('');
+            OutputDebugString(StringToWideChar('DF cant. emitidos   := [' +
+              FloatToStr(acomprob2.RegGlobal.DF_CantidadEmitidos) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-            Writeln('DF total ventas     := [' +
-              FloatToStr(acomprob2.RegGlobal.DF_Total) + ']');
-            Writeln('');
+            OutputDebugString(StringToWideChar('DF total ventas     := [' +
+              FloatToStr(acomprob2.RegGlobal.DF_Total) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-            Writeln('DF total gravado    := [' +
-              FloatToStr(acomprob2.RegGlobal.DF_TotalGravado) + ']');
+            OutputDebugString(StringToWideChar('DF total gravado    := [' +
+              FloatToStr(acomprob2.RegGlobal.DF_TotalGravado) + ']' , wideChars, 12));
 
-            Writeln('DF total IVA        := [' +
-              FloatToStr(acomprob2.RegGlobal.DF_TotalIVA) + ']');
+            OutputDebugString(StringToWideChar('DF total IVA        := [' +
+              FloatToStr(acomprob2.RegGlobal.DF_TotalIVA) + ']' , wideChars, 12));
 
-            Writeln('DF total tributos   := [' +
-              FloatToStr(acomprob2.RegGlobal.DF_TotalTributos) + ']');
+            OutputDebugString(StringToWideChar('DF total tributos   := [' +
+              FloatToStr(acomprob2.RegGlobal.DF_TotalTributos) + ']' , wideChars, 12));
 
-            Writeln('DF total no gravado := [' +
-              FloatToStr(acomprob2.RegGlobal.DF_TotalNoGravado) + ']');
+            OutputDebugString(StringToWideChar('DF total no gravado := [' +
+              FloatToStr(acomprob2.RegGlobal.DF_TotalNoGravado) + ']' , wideChars, 12));
 
-            Writeln('DF total exento     := [' +
-              FloatToStr(acomprob2.RegGlobal.DF_TotalExento) + ']');
-            Writeln('');
+            OutputDebugString(StringToWideChar('DF total exento     := [' +
+              FloatToStr(acomprob2.RegGlobal.DF_TotalExento) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-            Writeln('DF total DNFH       := [' +
-              FloatToStr(acomprob2.RegGlobal.DNFH_Total) + ']');
-            Writeln('');
+            OutputDebugString(StringToWideChar('DF total DNFH       := [' +
+              FloatToStr(acomprob2.RegGlobal.DNFH_Total) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
           end;
       end;
 
       acomprob2 := HASARNG.ContinuarConsultaAcumulados;
     end;
 
-    Writeln('');
-    Writeln('NO HAY MAS INFORMACION DISPONIBLE !...');
-    Writeln('');
-    Writeln('FIN DE LA CONSULTA...');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('NO HAY MAS INFORMACION DISPONIBLE !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('FIN DE LA CONSULTA...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -1505,281 +1501,281 @@ var
 
   amem2: RespuestaContinuarConsultaAcumulados;
 begin
-  Writeln('');
-  Writeln('CONSULTANDO ACUMULADOS MEMORIA DE TRABAJO...');
-  Writeln('');
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
+  OutputDebugString(StringToWideChar('CONSULTANDO ACUMULADOS MEMORIA DE TRABAJO...' , wideChars, 12));
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   Try
     amem := HASARNG.ConsultarAcumuladosMemoriaDeTrabajo(NoDocumento);
 
     If (amem.Registro = HasarArgentina_TLB.RegistroFinal) then
     begin
-      Writeln('');
-      Writeln('NO HAY INFORMACION DISPONIBLE !...');
-      Writeln('');
+      OutputDebugString(StringToWideChar('' , wideChars, 12));
+      OutputDebugString(StringToWideChar('NO HAY INFORMACION DISPONIBLE !...' , wideChars, 12));
+      OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     end;
 
     Case amem.Registro of
       HasarArgentina_TLB.RegistroDetalladoDF:
         begin
-          Writeln('');
-          Writeln('TIPO REGISTRO:');
-          Writeln('[' + FloatToStr(amem.Registro) + ']');
-          Writeln('');
-          Writeln('DF (Documentos Fiscales);:');
-          Writeln('-------------------------');
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
+          OutputDebugString(StringToWideChar('TIPO REGISTRO:' , wideChars, 12));
+          OutputDebugString(StringToWideChar('[' + FloatToStr(amem.Registro) + ']' , wideChars, 12));
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
+          OutputDebugString(StringToWideChar('DF (Documentos Fiscales);:' , wideChars, 12));
+          OutputDebugString(StringToWideChar('-------------------------' , wideChars, 12));
 
-          Writeln('DF cancelados              := [' +
-            FloatToStr(amem.RegDF.CantidadCancelados) + ']');
-          Writeln('DF Tipo comprobante        := [' +
+          OutputDebugString(StringToWideChar('DF cancelados              := [' +
+            FloatToStr(amem.RegDF.CantidadCancelados) + ']' , wideChars, 12));
+          OutputDebugString(StringToWideChar('DF Tipo comprobante        := [' +
             { FromTiposComprobanteToString }
-            FloatToStr(amem.RegDF.CodigoComprobante) + ']');
+            FloatToStr(amem.RegDF.CodigoComprobante) + ']' , wideChars, 12));
 
-          Writeln('DF Nro. inicial            := [' +
-            FloatToStr(amem.RegDF.NumeroInicial) + ']');
+          OutputDebugString(StringToWideChar('DF Nro. inicial            := [' +
+            FloatToStr(amem.RegDF.NumeroInicial) + ']' , wideChars, 12));
 
-          Writeln('DF Nro. final              := [' +
-            FloatToStr(amem.RegDF.NumeroFinal) + ']');
-          Writeln('');
+          OutputDebugString(StringToWideChar('DF Nro. final              := [' +
+            FloatToStr(amem.RegDF.NumeroFinal) + ']' , wideChars, 12));
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-          Writeln('DF total ventas            := [' +
-            FloatToStr(amem.RegDF.Total) + ']');
+          OutputDebugString(StringToWideChar('DF total ventas            := [' +
+            FloatToStr(amem.RegDF.Total) + ']' , wideChars, 12));
 
-          Writeln('');
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-          Writeln('DF total gravado           := [' +
-            FloatToStr(amem.RegDF.TotalGravado) + ']');
+          OutputDebugString(StringToWideChar('DF total gravado           := [' +
+            FloatToStr(amem.RegDF.TotalGravado) + ']' , wideChars, 12));
 
-          Writeln('DF total no gravado        := [' +
-            FloatToStr(amem.RegDF.TotalNoGravado) + ']');
+          OutputDebugString(StringToWideChar('DF total no gravado        := [' +
+            FloatToStr(amem.RegDF.TotalNoGravado) + ']' , wideChars, 12));
 
-          Writeln('DF total exento            := [' +
-            FloatToStr(amem.RegDF.TotalExento) + ']');
-          Writeln('');
+          OutputDebugString(StringToWideChar('DF total exento            := [' +
+            FloatToStr(amem.RegDF.TotalExento) + ']' , wideChars, 12));
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-          Writeln('DF IVA 1                   := [' +
-            FloatToStr(amem.RegDF.AlicuotaIVA_1) + ']');
+          OutputDebugString(StringToWideChar('DF IVA 1                   := [' +
+            FloatToStr(amem.RegDF.AlicuotaIVA_1) + ']' , wideChars, 12));
 
-          Writeln('DF monto IVA 1             := [' +
-            FloatToStr(amem.RegDF.MontoIVA_1) + ']');
+          OutputDebugString(StringToWideChar('DF monto IVA 1             := [' +
+            FloatToStr(amem.RegDF.MontoIVA_1) + ']' , wideChars, 12));
 
-          Writeln('DF IVA 2                   := [' +
-            FloatToStr(amem.RegDF.AlicuotaIVA_2) + ']');
+          OutputDebugString(StringToWideChar('DF IVA 2                   := [' +
+            FloatToStr(amem.RegDF.AlicuotaIVA_2) + ']' , wideChars, 12));
 
-          Writeln('DF monto IVA 2             := [' +
-            FloatToStr(amem.RegDF.MontoIVA_2) + ']');
+          OutputDebugString(StringToWideChar('DF monto IVA 2             := [' +
+            FloatToStr(amem.RegDF.MontoIVA_2) + ']' , wideChars, 12));
 
-          Writeln('DF IVA 3                   := [' +
-            FloatToStr(amem.RegDF.AlicuotaIVA_3) + ']');
+          OutputDebugString(StringToWideChar('DF IVA 3                   := [' +
+            FloatToStr(amem.RegDF.AlicuotaIVA_3) + ']' , wideChars, 12));
 
-          Writeln('DF monto IVA 3             := [' +
-            FloatToStr(amem.RegDF.MontoIVA_3) + ']');
+          OutputDebugString(StringToWideChar('DF monto IVA 3             := [' +
+            FloatToStr(amem.RegDF.MontoIVA_3) + ']' , wideChars, 12));
 
-          Writeln('DF IVA 4                   := [' +
-            FloatToStr(amem.RegDF.AlicuotaIVA_4) + ']');
+          OutputDebugString(StringToWideChar('DF IVA 4                   := [' +
+            FloatToStr(amem.RegDF.AlicuotaIVA_4) + ']' , wideChars, 12));
 
-          Writeln('DF monto IVA 4             := [' +
-            FloatToStr(amem.RegDF.MontoIVA_4) + ']');
+          OutputDebugString(StringToWideChar('DF monto IVA 4             := [' +
+            FloatToStr(amem.RegDF.MontoIVA_4) + ']' , wideChars, 12));
 
-          Writeln('DF IVA 5                   := [' +
-            FloatToStr(amem.RegDF.AlicuotaIVA_5) + ']');
+          OutputDebugString(StringToWideChar('DF IVA 5                   := [' +
+            FloatToStr(amem.RegDF.AlicuotaIVA_5) + ']' , wideChars, 12));
 
-          Writeln('DF monto IVA 5             := [' +
-            FloatToStr(amem.RegDF.MontoIVA_5) + ']');
+          OutputDebugString(StringToWideChar('DF monto IVA 5             := [' +
+            FloatToStr(amem.RegDF.MontoIVA_5) + ']' , wideChars, 12));
 
-          Writeln('DF IVA 6                   := [' +
-            FloatToStr(amem.RegDF.AlicuotaIVA_6) + ']');
+          OutputDebugString(StringToWideChar('DF IVA 6                   := [' +
+            FloatToStr(amem.RegDF.AlicuotaIVA_6) + ']' , wideChars, 12));
 
-          Writeln('DF monto IVA 6             := [' +
-            FloatToStr(amem.RegDF.MontoIVA_6) + ']');
+          OutputDebugString(StringToWideChar('DF monto IVA 6             := [' +
+            FloatToStr(amem.RegDF.MontoIVA_6) + ']' , wideChars, 12));
 
-          Writeln('DF IVA 7                   := [' +
-            FloatToStr(amem.RegDF.AlicuotaIVA_7) + ']');
+          OutputDebugString(StringToWideChar('DF IVA 7                   := [' +
+            FloatToStr(amem.RegDF.AlicuotaIVA_7) + ']' , wideChars, 12));
 
-          Writeln('DF monto IVA 7             := [' +
-            FloatToStr(amem.RegDF.MontoIVA_7) + ']');
+          OutputDebugString(StringToWideChar('DF monto IVA 7             := [' +
+            FloatToStr(amem.RegDF.MontoIVA_7) + ']' , wideChars, 12));
 
-          Writeln('DF IVA 8                   := [' +
-            FloatToStr(amem.RegDF.AlicuotaIVA_8) + ']');
+          OutputDebugString(StringToWideChar('DF IVA 8                   := [' +
+            FloatToStr(amem.RegDF.AlicuotaIVA_8) + ']' , wideChars, 12));
 
-          Writeln('DF monto IVA 8             := [' +
-            FloatToStr(amem.RegDF.MontoIVA_8) + ']');
+          OutputDebugString(StringToWideChar('DF monto IVA 8             := [' +
+            FloatToStr(amem.RegDF.MontoIVA_8) + ']' , wideChars, 12));
 
-          Writeln('DF IVA 9                   := [' +
-            FloatToStr(amem.RegDF.AlicuotaIVA_9) + ']');
+          OutputDebugString(StringToWideChar('DF IVA 9                   := [' +
+            FloatToStr(amem.RegDF.AlicuotaIVA_9) + ']' , wideChars, 12));
 
-          Writeln('DF monto IVA 9             := [' +
-            FloatToStr(amem.RegDF.MontoIVA_9) + ']');
+          OutputDebugString(StringToWideChar('DF monto IVA 9             := [' +
+            FloatToStr(amem.RegDF.MontoIVA_9) + ']' , wideChars, 12));
 
-          Writeln('DF IVA 10                  := [' +
-            FloatToStr(amem.RegDF.AlicuotaIVA_10) + ']');
+          OutputDebugString(StringToWideChar('DF IVA 10                  := [' +
+            FloatToStr(amem.RegDF.AlicuotaIVA_10) + ']' , wideChars, 12));
 
-          Writeln('DF monto IVA 10            := [' +
-            FloatToStr(amem.RegDF.MontoIVA_10) + ']');
-          Writeln('');
+          OutputDebugString(StringToWideChar('DF monto IVA 10            := [' +
+            FloatToStr(amem.RegDF.MontoIVA_10) + ']' , wideChars, 12));
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-          Writeln('DF total IVA               := [' +
-            FloatToStr(amem.RegDF.TotalIVA) + ']');
-          Writeln('');
+          OutputDebugString(StringToWideChar('DF total IVA               := [' +
+            FloatToStr(amem.RegDF.TotalIVA) + ']' , wideChars, 12));
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-          Writeln('DF tributo 1               := [' +
-            FloatToStr(amem.RegDF.CodigoTributo1) + ']');
+          OutputDebugString(StringToWideChar('DF tributo 1               := [' +
+            FloatToStr(amem.RegDF.CodigoTributo1) + ']' , wideChars, 12));
 
-          Writeln('DF monto tributo 1         := [' +
-            FloatToStr(amem.RegDF.ImporteTributo1) + ']');
+          OutputDebugString(StringToWideChar('DF monto tributo 1         := [' +
+            FloatToStr(amem.RegDF.ImporteTributo1) + ']' , wideChars, 12));
 
-          Writeln('DF tributo 2               := [' +
-            FloatToStr(amem.RegDF.CodigoTributo2) + ']');
+          OutputDebugString(StringToWideChar('DF tributo 2               := [' +
+            FloatToStr(amem.RegDF.CodigoTributo2) + ']' , wideChars, 12));
 
-          Writeln('DF monto tributo 2         := [' +
-            FloatToStr(amem.RegDF.ImporteTributo2) + ']');
+          OutputDebugString(StringToWideChar('DF monto tributo 2         := [' +
+            FloatToStr(amem.RegDF.ImporteTributo2) + ']' , wideChars, 12));
 
-          Writeln('DF tributo 3               := [' +
-            FloatToStr(amem.RegDF.CodigoTributo3) + ']');
+          OutputDebugString(StringToWideChar('DF tributo 3               := [' +
+            FloatToStr(amem.RegDF.CodigoTributo3) + ']' , wideChars, 12));
 
-          Writeln('DF monto tributo 3         := [' +
-            FloatToStr(amem.RegDF.ImporteTributo3) + ']');
+          OutputDebugString(StringToWideChar('DF monto tributo 3         := [' +
+            FloatToStr(amem.RegDF.ImporteTributo3) + ']' , wideChars, 12));
 
-          Writeln('DF tributo 4               := [' +
-            FloatToStr(amem.RegDF.CodigoTributo4) + ']');
+          OutputDebugString(StringToWideChar('DF tributo 4               := [' +
+            FloatToStr(amem.RegDF.CodigoTributo4) + ']' , wideChars, 12));
 
-          Writeln('DF monto tributo 4         := [' +
-            FloatToStr(amem.RegDF.ImporteTributo4) + ']');
+          OutputDebugString(StringToWideChar('DF monto tributo 4         := [' +
+            FloatToStr(amem.RegDF.ImporteTributo4) + ']' , wideChars, 12));
 
-          Writeln('DF tributo 5               := [' +
-            FloatToStr(amem.RegDF.CodigoTributo5) + ']');
+          OutputDebugString(StringToWideChar('DF tributo 5               := [' +
+            FloatToStr(amem.RegDF.CodigoTributo5) + ']' , wideChars, 12));
 
-          Writeln('DF monto tributo 5         := [' +
-            FloatToStr(amem.RegDF.ImporteTributo5) + ']');
+          OutputDebugString(StringToWideChar('DF monto tributo 5         := [' +
+            FloatToStr(amem.RegDF.ImporteTributo5) + ']' , wideChars, 12));
 
-          Writeln('DF tributo 6               := [' +
-            FloatToStr(amem.RegDF.CodigoTributo6) + ']');
+          OutputDebugString(StringToWideChar('DF tributo 6               := [' +
+            FloatToStr(amem.RegDF.CodigoTributo6) + ']' , wideChars, 12));
 
-          Writeln('DF monto tributo 6         := [' +
-            FloatToStr(amem.RegDF.ImporteTributo6) + ']');
+          OutputDebugString(StringToWideChar('DF monto tributo 6         := [' +
+            FloatToStr(amem.RegDF.ImporteTributo6) + ']' , wideChars, 12));
 
-          Writeln('DF tributo 7               := [' +
-            FloatToStr(amem.RegDF.CodigoTributo7) + ']');
+          OutputDebugString(StringToWideChar('DF tributo 7               := [' +
+            FloatToStr(amem.RegDF.CodigoTributo7) + ']' , wideChars, 12));
 
-          Writeln('DF monto tributo 7         := [' +
-            FloatToStr(amem.RegDF.ImporteTributo7) + ']');
+          OutputDebugString(StringToWideChar('DF monto tributo 7         := [' +
+            FloatToStr(amem.RegDF.ImporteTributo7) + ']' , wideChars, 12));
 
-          Writeln('DF tributo 8               := [' +
-            FloatToStr(amem.RegDF.CodigoTributo8) + ']');
+          OutputDebugString(StringToWideChar('DF tributo 8               := [' +
+            FloatToStr(amem.RegDF.CodigoTributo8) + ']' , wideChars, 12));
 
-          Writeln('DF monto tributo 8         := [' +
-            FloatToStr(amem.RegDF.ImporteTributo8) + ']');
+          OutputDebugString(StringToWideChar('DF monto tributo 8         := [' +
+            FloatToStr(amem.RegDF.ImporteTributo8) + ']' , wideChars, 12));
 
-          Writeln('DF tributo 9               := [' +
-            FloatToStr(amem.RegDF.CodigoTributo9) + ']');
+          OutputDebugString(StringToWideChar('DF tributo 9               := [' +
+            FloatToStr(amem.RegDF.CodigoTributo9) + ']' , wideChars, 12));
 
-          Writeln('DF monto tributo 9         := [' +
-            FloatToStr(amem.RegDF.ImporteTributo9) + ']');
+          OutputDebugString(StringToWideChar('DF monto tributo 9         := [' +
+            FloatToStr(amem.RegDF.ImporteTributo9) + ']' , wideChars, 12));
 
-          Writeln('DF tributo 10              := [' +
-            FloatToStr(amem.RegDF.CodigoTributo10) + ']');
+          OutputDebugString(StringToWideChar('DF tributo 10              := [' +
+            FloatToStr(amem.RegDF.CodigoTributo10) + ']' , wideChars, 12));
 
-          Writeln('DF monto tributo 10        := [' +
-            FloatToStr(amem.RegDF.ImporteTributo10) + ']');
+          OutputDebugString(StringToWideChar('DF monto tributo 10        := [' +
+            FloatToStr(amem.RegDF.ImporteTributo10) + ']' , wideChars, 12));
 
-          Writeln('DF tributo 11              := [' +
-            FloatToStr(amem.RegDF.CodigoTributo11) + ']');
+          OutputDebugString(StringToWideChar('DF tributo 11              := [' +
+            FloatToStr(amem.RegDF.CodigoTributo11) + ']' , wideChars, 12));
 
-          Writeln('DF monto tributo 11        := [' +
-            FloatToStr(amem.RegDF.ImporteTributo11) + ']');
-          Writeln('');
+          OutputDebugString(StringToWideChar('DF monto tributo 11        := [' +
+            FloatToStr(amem.RegDF.ImporteTributo11) + ']' , wideChars, 12));
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-          Writeln('DF total tributos          := [' +
-            FloatToStr(amem.RegDF.TotalTributos) + ']');
-          Writeln('');
+          OutputDebugString(StringToWideChar('DF total tributos          := [' +
+            FloatToStr(amem.RegDF.TotalTributos) + ']' , wideChars, 12));
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
         end;
       HasarArgentina_TLB.RegistroDetalladoDNFH:
         begin
-          Writeln('');
-          Writeln('TIPO REGISTRO:');
-          Writeln('[' + FloatToStr(amem.Registro) + ']');
-          Writeln('');
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
+          OutputDebugString(StringToWideChar('TIPO REGISTRO:' , wideChars, 12));
+          OutputDebugString(StringToWideChar('[' + FloatToStr(amem.Registro) + ']' , wideChars, 12));
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-          Writeln('DNFH (Documentos No Fiscales Homologados);: :=QUE ACUMULAN:=');
+          OutputDebugString(StringToWideChar('DNFH (Documentos No Fiscales Homologados);: :=QUE ACUMULAN:=' , wideChars, 12));
 
-          Writeln('---------------------------------------------------------');
-          Writeln('DNFH Tipo Comprob.         := [' +
+          OutputDebugString(StringToWideChar('---------------------------------------------------------' , wideChars, 12));
+          OutputDebugString(StringToWideChar('DNFH Tipo Comprob.         := [' +
             { FromTiposComprobanteToString }
-            FloatToStr(amem.RegDNFH.CodigoComprobante) + ']');
+            FloatToStr(amem.RegDNFH.CodigoComprobante) + ']' , wideChars, 12));
 
-          Writeln('DNFH Nro. inicial          := [' +
-            FloatToStr(amem.RegDNFH.NumeroInicial) + ']');
+          OutputDebugString(StringToWideChar('DNFH Nro. inicial          := [' +
+            FloatToStr(amem.RegDNFH.NumeroInicial) + ']' , wideChars, 12));
 
-          Writeln('DNFH Nro. Final            := [' +
-            FloatToStr(amem.RegDNFH.NumeroFinal) + ']');
+          OutputDebugString(StringToWideChar('DNFH Nro. Final            := [' +
+            FloatToStr(amem.RegDNFH.NumeroFinal) + ']' , wideChars, 12));
 
-          Writeln('DNFH total acumulado       := [' +
-            FloatToStr(amem.RegDNFH.Total) + ']');
+          OutputDebugString(StringToWideChar('DNFH total acumulado       := [' +
+            FloatToStr(amem.RegDNFH.Total) + ']' , wideChars, 12));
 
-          Writeln('');
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
         end;
       HasarArgentina_TLB.RegistroDetalladoDNFHNoAcum:
         begin
-          Writeln('');
-          Writeln('TIPO REGISTRO:');
-          Writeln('[' + FloatToStr(amem.Registro) + ']');
-          Writeln('');
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
+          OutputDebugString(StringToWideChar('TIPO REGISTRO:' , wideChars, 12));
+          OutputDebugString(StringToWideChar('[' + FloatToStr(amem.Registro) + ']' , wideChars, 12));
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-          Writeln('DNFH (Documentos No Fiscales Homologados);: :=QUE NO ACUMULAN:=');
+          OutputDebugString(StringToWideChar('DNFH (Documentos No Fiscales Homologados);: :=QUE NO ACUMULAN:=' , wideChars, 12));
 
-          Writeln('------------------------------------------------------------');
-          Writeln('Tipo Comprobante := [' +
+          OutputDebugString(StringToWideChar('------------------------------------------------------------' , wideChars, 12));
+          OutputDebugString(StringToWideChar('Tipo Comprobante := [' +
             { FromTiposComprobanteToString }
-            FloatToStr(amem.RegDNFH_NoAcum.CodigoComprobante) + ']');
-          Writeln('Nº inicial       := [' +
-            FloatToStr(amem.RegDNFH_NoAcum.NumeroInicial) + ']');
+            FloatToStr(amem.RegDNFH_NoAcum.CodigoComprobante) + ']' , wideChars, 12));
+          OutputDebugString(StringToWideChar('Nº inicial       := [' +
+            FloatToStr(amem.RegDNFH_NoAcum.NumeroInicial) + ']' , wideChars, 12));
 
-          Writeln('Nº final         := [' +
-            FloatToStr(amem.RegDNFH_NoAcum.NumeroFinal) + ']');
-          Writeln('');
+          OutputDebugString(StringToWideChar('Nº final         := [' +
+            FloatToStr(amem.RegDNFH_NoAcum.NumeroFinal) + ']' , wideChars, 12));
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
         end;
       HasarArgentina_TLB.RegistroGlobal:
         begin
-          Writeln('');
-          Writeln('TIPO REGISTRO:');
-          Writeln('[' + FloatToStr(amem.Registro) + ']');
-          Writeln('');
-          Writeln('INFORMACION GLOBAL:');
-          Writeln('-------------------');
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
+          OutputDebugString(StringToWideChar('TIPO REGISTRO:' , wideChars, 12));
+          OutputDebugString(StringToWideChar('[' + FloatToStr(amem.Registro) + ']' , wideChars, 12));
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
+          OutputDebugString(StringToWideChar('INFORMACION GLOBAL:' , wideChars, 12));
+          OutputDebugString(StringToWideChar('-------------------' , wideChars, 12));
 
-          Writeln('DF cant. cancelados := [' +
-            FloatToStr(amem.RegGlobal.DF_CantidadCancelados) + ']');
+          OutputDebugString(StringToWideChar('DF cant. cancelados := [' +
+            FloatToStr(amem.RegGlobal.DF_CantidadCancelados) + ']' , wideChars, 12));
 
-          Writeln('DF cant. emitidos   := [' +
-            FloatToStr(amem.RegGlobal.DF_CantidadEmitidos) + ']');
-          Writeln('');
+          OutputDebugString(StringToWideChar('DF cant. emitidos   := [' +
+            FloatToStr(amem.RegGlobal.DF_CantidadEmitidos) + ']' , wideChars, 12));
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-          Writeln('DF total ventas     := [' +
-            FloatToStr(amem.RegGlobal.DF_Total) + ']');
+          OutputDebugString(StringToWideChar('DF total ventas     := [' +
+            FloatToStr(amem.RegGlobal.DF_Total) + ']' , wideChars, 12));
 
-          Writeln('');
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-          Writeln('DF total gravado    := [' +
-            FloatToStr(amem.RegGlobal.DF_TotalGravado) + ']');
+          OutputDebugString(StringToWideChar('DF total gravado    := [' +
+            FloatToStr(amem.RegGlobal.DF_TotalGravado) + ']' , wideChars, 12));
 
-          Writeln('DF total IVA        := [' +
-            FloatToStr(amem.RegGlobal.DF_TotalIVA) + ']');
+          OutputDebugString(StringToWideChar('DF total IVA        := [' +
+            FloatToStr(amem.RegGlobal.DF_TotalIVA) + ']' , wideChars, 12));
 
-          Writeln('DF total tributos   := [' +
-            FloatToStr(amem.RegGlobal.DF_TotalTributos) + ']');
+          OutputDebugString(StringToWideChar('DF total tributos   := [' +
+            FloatToStr(amem.RegGlobal.DF_TotalTributos) + ']' , wideChars, 12));
 
-          Writeln('DF total no gravado := [' +
-            FloatToStr(amem.RegGlobal.DF_TotalNoGravado) + ']');
+          OutputDebugString(StringToWideChar('DF total no gravado := [' +
+            FloatToStr(amem.RegGlobal.DF_TotalNoGravado) + ']' , wideChars, 12));
 
-          Writeln('DF total exento     := [' +
-            FloatToStr(amem.RegGlobal.DF_TotalExento) + ']');
-          Writeln('');
+          OutputDebugString(StringToWideChar('DF total exento     := [' +
+            FloatToStr(amem.RegGlobal.DF_TotalExento) + ']' , wideChars, 12));
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-          Writeln('DF total DNFH       := [' +
-            FloatToStr(amem.RegGlobal.DNFH_Total) + ']');
+          OutputDebugString(StringToWideChar('DF total DNFH       := [' +
+            FloatToStr(amem.RegGlobal.DNFH_Total) + ']' , wideChars, 12));
 
-          Writeln('');
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
         end;
     end;
 
@@ -1791,275 +1787,275 @@ begin
       Case amem2.Registro of
         HasarArgentina_TLB.RegistroDetalladoDF:
           begin
-            Writeln('');
-            Writeln('TIPO REGISTRO:');
-            Writeln('[' + FloatToStr(amem2.Registro) + ']');
-            Writeln('');
-            Writeln('DF (Documentos Fiscales);:');
-            Writeln('-------------------------');
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
+            OutputDebugString(StringToWideChar('TIPO REGISTRO:' , wideChars, 12));
+            OutputDebugString(StringToWideChar('[' + FloatToStr(amem2.Registro) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
+            OutputDebugString(StringToWideChar('DF (Documentos Fiscales);:' , wideChars, 12));
+            OutputDebugString(StringToWideChar('-------------------------' , wideChars, 12));
 
-            Writeln('DF cancelados              := [' +
-              FloatToStr(amem2.RegDF.CantidadCancelados) + ']');
-            Writeln('DF Tipo comprobante        := [' +
+            OutputDebugString(StringToWideChar('DF cancelados              := [' +
+              FloatToStr(amem2.RegDF.CantidadCancelados) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('DF Tipo comprobante        := [' +
               { FromTiposComprobanteToString }
-              FloatToStr(amem2.RegDF.CodigoComprobante) + ']');
+              FloatToStr(amem2.RegDF.CodigoComprobante) + ']' , wideChars, 12));
 
-            Writeln('DF Nro. inicial            := [' +
-              FloatToStr(amem2.RegDF.NumeroInicial) + ']');
+            OutputDebugString(StringToWideChar('DF Nro. inicial            := [' +
+              FloatToStr(amem2.RegDF.NumeroInicial) + ']' , wideChars, 12));
 
-            Writeln('DF Nro. final              := [' +
-              FloatToStr(amem2.RegDF.NumeroFinal) + ']');
-            Writeln('');
+            OutputDebugString(StringToWideChar('DF Nro. final              := [' +
+              FloatToStr(amem2.RegDF.NumeroFinal) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-            Writeln('DF total ventas            := [' +
-              FloatToStr(amem2.RegDF.Total) + ']');
-            Writeln('');
+            OutputDebugString(StringToWideChar('DF total ventas            := [' +
+              FloatToStr(amem2.RegDF.Total) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-            Writeln('DF total gravado           := [' +
-              FloatToStr(amem2.RegDF.TotalGravado) + ']');
+            OutputDebugString(StringToWideChar('DF total gravado           := [' +
+              FloatToStr(amem2.RegDF.TotalGravado) + ']' , wideChars, 12));
 
-            Writeln('DF total no gravado        := [' +
-              FloatToStr(amem2.RegDF.TotalNoGravado) + ']');
+            OutputDebugString(StringToWideChar('DF total no gravado        := [' +
+              FloatToStr(amem2.RegDF.TotalNoGravado) + ']' , wideChars, 12));
 
-            Writeln('DF total exento            := [' +
-              FloatToStr(amem2.RegDF.TotalExento) + ']');
-            Writeln('');
+            OutputDebugString(StringToWideChar('DF total exento            := [' +
+              FloatToStr(amem2.RegDF.TotalExento) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-            Writeln('DF IVA 1                   := [' +
-              FloatToStr(amem2.RegDF.AlicuotaIVA_1) + ']');
+            OutputDebugString(StringToWideChar('DF IVA 1                   := [' +
+              FloatToStr(amem2.RegDF.AlicuotaIVA_1) + ']' , wideChars, 12));
 
-            Writeln('DF monto IVA 1             := [' +
-              FloatToStr(amem2.RegDF.MontoIVA_1) + ']');
+            OutputDebugString(StringToWideChar('DF monto IVA 1             := [' +
+              FloatToStr(amem2.RegDF.MontoIVA_1) + ']' , wideChars, 12));
 
-            Writeln('DF IVA 2                   := [' +
-              FloatToStr(amem2.RegDF.AlicuotaIVA_2) + ']');
+            OutputDebugString(StringToWideChar('DF IVA 2                   := [' +
+              FloatToStr(amem2.RegDF.AlicuotaIVA_2) + ']' , wideChars, 12));
 
-            Writeln('DF monto IVA 2             := [' +
-              FloatToStr(amem2.RegDF.MontoIVA_2) + ']');
+            OutputDebugString(StringToWideChar('DF monto IVA 2             := [' +
+              FloatToStr(amem2.RegDF.MontoIVA_2) + ']' , wideChars, 12));
 
-            Writeln('DF IVA 3                   := [' +
-              FloatToStr(amem2.RegDF.AlicuotaIVA_3) + ']');
+            OutputDebugString(StringToWideChar('DF IVA 3                   := [' +
+              FloatToStr(amem2.RegDF.AlicuotaIVA_3) + ']' , wideChars, 12));
 
-            Writeln('DF monto IVA 3             := [' +
-              FloatToStr(amem2.RegDF.MontoIVA_3) + ']');
+            OutputDebugString(StringToWideChar('DF monto IVA 3             := [' +
+              FloatToStr(amem2.RegDF.MontoIVA_3) + ']' , wideChars, 12));
 
-            Writeln('DF IVA 4                   := [' +
-              FloatToStr(amem2.RegDF.AlicuotaIVA_4) + ']');
+            OutputDebugString(StringToWideChar('DF IVA 4                   := [' +
+              FloatToStr(amem2.RegDF.AlicuotaIVA_4) + ']' , wideChars, 12));
 
-            Writeln('DF monto IVA 4             := [' +
-              FloatToStr(amem2.RegDF.MontoIVA_4) + ']');
+            OutputDebugString(StringToWideChar('DF monto IVA 4             := [' +
+              FloatToStr(amem2.RegDF.MontoIVA_4) + ']' , wideChars, 12));
 
-            Writeln('DF IVA 5                   := [' +
-              FloatToStr(amem2.RegDF.AlicuotaIVA_5) + ']');
+            OutputDebugString(StringToWideChar('DF IVA 5                   := [' +
+              FloatToStr(amem2.RegDF.AlicuotaIVA_5) + ']' , wideChars, 12));
 
-            Writeln('DF monto IVA 5             := [' +
-              FloatToStr(amem2.RegDF.MontoIVA_5) + ']');
+            OutputDebugString(StringToWideChar('DF monto IVA 5             := [' +
+              FloatToStr(amem2.RegDF.MontoIVA_5) + ']' , wideChars, 12));
 
-            Writeln('DF IVA 6                   := [' +
-              FloatToStr(amem2.RegDF.AlicuotaIVA_6) + ']');
+            OutputDebugString(StringToWideChar('DF IVA 6                   := [' +
+              FloatToStr(amem2.RegDF.AlicuotaIVA_6) + ']' , wideChars, 12));
 
-            Writeln('DF monto IVA 6             := [' +
-              FloatToStr(amem2.RegDF.MontoIVA_6) + ']');
+            OutputDebugString(StringToWideChar('DF monto IVA 6             := [' +
+              FloatToStr(amem2.RegDF.MontoIVA_6) + ']' , wideChars, 12));
 
-            Writeln('DF IVA 7                   := [' +
-              FloatToStr(amem2.RegDF.AlicuotaIVA_7) + ']');
+            OutputDebugString(StringToWideChar('DF IVA 7                   := [' +
+              FloatToStr(amem2.RegDF.AlicuotaIVA_7) + ']' , wideChars, 12));
 
-            Writeln('DF monto IVA 7             := [' +
-              FloatToStr(amem2.RegDF.MontoIVA_7) + ']');
+            OutputDebugString(StringToWideChar('DF monto IVA 7             := [' +
+              FloatToStr(amem2.RegDF.MontoIVA_7) + ']' , wideChars, 12));
 
-            Writeln('DF IVA 8                   := [' +
-              FloatToStr(amem2.RegDF.AlicuotaIVA_8) + ']');
+            OutputDebugString(StringToWideChar('DF IVA 8                   := [' +
+              FloatToStr(amem2.RegDF.AlicuotaIVA_8) + ']' , wideChars, 12));
 
-            Writeln('DF monto IVA 8             := [' +
-              FloatToStr(amem2.RegDF.MontoIVA_8) + ']');
+            OutputDebugString(StringToWideChar('DF monto IVA 8             := [' +
+              FloatToStr(amem2.RegDF.MontoIVA_8) + ']' , wideChars, 12));
 
-            Writeln('DF IVA 9                   := [' +
-              FloatToStr(amem2.RegDF.AlicuotaIVA_9) + ']');
+            OutputDebugString(StringToWideChar('DF IVA 9                   := [' +
+              FloatToStr(amem2.RegDF.AlicuotaIVA_9) + ']' , wideChars, 12));
 
-            Writeln('DF monto IVA 9             := [' +
-              FloatToStr(amem2.RegDF.MontoIVA_9) + ']');
+            OutputDebugString(StringToWideChar('DF monto IVA 9             := [' +
+              FloatToStr(amem2.RegDF.MontoIVA_9) + ']' , wideChars, 12));
 
-            Writeln('DF IVA 10                  := [' +
-              FloatToStr(amem2.RegDF.AlicuotaIVA_10) + ']');
+            OutputDebugString(StringToWideChar('DF IVA 10                  := [' +
+              FloatToStr(amem2.RegDF.AlicuotaIVA_10) + ']' , wideChars, 12));
 
-            Writeln('DF monto IVA 10            := [' +
-              FloatToStr(amem2.RegDF.MontoIVA_10) + ']');
-            Writeln('');
+            OutputDebugString(StringToWideChar('DF monto IVA 10            := [' +
+              FloatToStr(amem2.RegDF.MontoIVA_10) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-            Writeln('DF total IVA               := [' +
-              FloatToStr(amem2.RegDF.TotalIVA) + ']');
-            Writeln('');
+            OutputDebugString(StringToWideChar('DF total IVA               := [' +
+              FloatToStr(amem2.RegDF.TotalIVA) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-            Writeln('DF tributo 1               := [' +
-              FloatToStr(amem2.RegDF.CodigoTributo1) + ']');
+            OutputDebugString(StringToWideChar('DF tributo 1               := [' +
+              FloatToStr(amem2.RegDF.CodigoTributo1) + ']' , wideChars, 12));
 
-            Writeln('DF monto tributo 1         := [' +
-              FloatToStr(amem2.RegDF.ImporteTributo1) + ']');
+            OutputDebugString(StringToWideChar('DF monto tributo 1         := [' +
+              FloatToStr(amem2.RegDF.ImporteTributo1) + ']' , wideChars, 12));
 
-            Writeln('DF tributo 2               := [' +
-              FloatToStr(amem2.RegDF.CodigoTributo2) + ']');
+            OutputDebugString(StringToWideChar('DF tributo 2               := [' +
+              FloatToStr(amem2.RegDF.CodigoTributo2) + ']' , wideChars, 12));
 
-            Writeln('DF monto tributo 2         := [' +
-              FloatToStr(amem2.RegDF.ImporteTributo2) + ']');
+            OutputDebugString(StringToWideChar('DF monto tributo 2         := [' +
+              FloatToStr(amem2.RegDF.ImporteTributo2) + ']' , wideChars, 12));
 
-            Writeln('DF tributo 3               := [' +
-              FloatToStr(amem2.RegDF.CodigoTributo3) + ']');
+            OutputDebugString(StringToWideChar('DF tributo 3               := [' +
+              FloatToStr(amem2.RegDF.CodigoTributo3) + ']' , wideChars, 12));
 
-            Writeln('DF monto tributo 3         := [' +
-              FloatToStr(amem2.RegDF.ImporteTributo3) + ']');
+            OutputDebugString(StringToWideChar('DF monto tributo 3         := [' +
+              FloatToStr(amem2.RegDF.ImporteTributo3) + ']' , wideChars, 12));
 
-            Writeln('DF tributo 4               := [' +
-              FloatToStr(amem2.RegDF.CodigoTributo4) + ']');
+            OutputDebugString(StringToWideChar('DF tributo 4               := [' +
+              FloatToStr(amem2.RegDF.CodigoTributo4) + ']' , wideChars, 12));
 
-            Writeln('DF monto tributo 4         := [' +
-              FloatToStr(amem2.RegDF.ImporteTributo4) + ']');
+            OutputDebugString(StringToWideChar('DF monto tributo 4         := [' +
+              FloatToStr(amem2.RegDF.ImporteTributo4) + ']' , wideChars, 12));
 
-            Writeln('DF tributo 5               := [' +
-              FloatToStr(amem2.RegDF.CodigoTributo5) + ']');
+            OutputDebugString(StringToWideChar('DF tributo 5               := [' +
+              FloatToStr(amem2.RegDF.CodigoTributo5) + ']' , wideChars, 12));
 
-            Writeln('DF monto tributo 5         := [' +
-              FloatToStr(amem2.RegDF.ImporteTributo5) + ']');
+            OutputDebugString(StringToWideChar('DF monto tributo 5         := [' +
+              FloatToStr(amem2.RegDF.ImporteTributo5) + ']' , wideChars, 12));
 
-            Writeln('DF tributo 6               := [' +
-              FloatToStr(amem2.RegDF.CodigoTributo6) + ']');
+            OutputDebugString(StringToWideChar('DF tributo 6               := [' +
+              FloatToStr(amem2.RegDF.CodigoTributo6) + ']' , wideChars, 12));
 
-            Writeln('DF monto tributo 6         := [' +
-              FloatToStr(amem2.RegDF.ImporteTributo6) + ']');
+            OutputDebugString(StringToWideChar('DF monto tributo 6         := [' +
+              FloatToStr(amem2.RegDF.ImporteTributo6) + ']' , wideChars, 12));
 
-            Writeln('DF tributo 7               := [' +
-              FloatToStr(amem2.RegDF.CodigoTributo7) + ']');
+            OutputDebugString(StringToWideChar('DF tributo 7               := [' +
+              FloatToStr(amem2.RegDF.CodigoTributo7) + ']' , wideChars, 12));
 
-            Writeln('DF monto tributo 7         := [' +
-              FloatToStr(amem2.RegDF.ImporteTributo7) + ']');
+            OutputDebugString(StringToWideChar('DF monto tributo 7         := [' +
+              FloatToStr(amem2.RegDF.ImporteTributo7) + ']' , wideChars, 12));
 
-            Writeln('DF tributo 8               := [' +
-              FloatToStr(amem2.RegDF.CodigoTributo8) + ']');
+            OutputDebugString(StringToWideChar('DF tributo 8               := [' +
+              FloatToStr(amem2.RegDF.CodigoTributo8) + ']' , wideChars, 12));
 
-            Writeln('DF monto tributo 8         := [' +
-              FloatToStr(amem2.RegDF.ImporteTributo8) + ']');
+            OutputDebugString(StringToWideChar('DF monto tributo 8         := [' +
+              FloatToStr(amem2.RegDF.ImporteTributo8) + ']' , wideChars, 12));
 
-            Writeln('DF tributo 9               := [' +
-              FloatToStr(amem2.RegDF.CodigoTributo9) + ']');
+            OutputDebugString(StringToWideChar('DF tributo 9               := [' +
+              FloatToStr(amem2.RegDF.CodigoTributo9) + ']' , wideChars, 12));
 
-            Writeln('DF monto tributo 9         := [' +
-              FloatToStr(amem2.RegDF.ImporteTributo9) + ']');
+            OutputDebugString(StringToWideChar('DF monto tributo 9         := [' +
+              FloatToStr(amem2.RegDF.ImporteTributo9) + ']' , wideChars, 12));
 
-            Writeln('DF tributo 10              := [' +
-              FloatToStr(amem2.RegDF.CodigoTributo10) + ']');
+            OutputDebugString(StringToWideChar('DF tributo 10              := [' +
+              FloatToStr(amem2.RegDF.CodigoTributo10) + ']' , wideChars, 12));
 
-            Writeln('DF monto tributo 10        := [' +
-              FloatToStr(amem2.RegDF.ImporteTributo10) + ']');
+            OutputDebugString(StringToWideChar('DF monto tributo 10        := [' +
+              FloatToStr(amem2.RegDF.ImporteTributo10) + ']' , wideChars, 12));
 
-            Writeln('DF tributo 11              := [' +
-              FloatToStr(amem2.RegDF.CodigoTributo11) + ']');
+            OutputDebugString(StringToWideChar('DF tributo 11              := [' +
+              FloatToStr(amem2.RegDF.CodigoTributo11) + ']' , wideChars, 12));
 
-            Writeln('DF monto tributo 11        := [' +
-              FloatToStr(amem2.RegDF.ImporteTributo11) + ']');
-            Writeln('');
+            OutputDebugString(StringToWideChar('DF monto tributo 11        := [' +
+              FloatToStr(amem2.RegDF.ImporteTributo11) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-            Writeln('DF total tributos          := [' +
-              FloatToStr(amem2.RegDF.TotalTributos) + ']');
-            Writeln('');
+            OutputDebugString(StringToWideChar('DF total tributos          := [' +
+              FloatToStr(amem2.RegDF.TotalTributos) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
           end;
         HasarArgentina_TLB.RegistroDetalladoDNFH:
           begin
-            Writeln('');
-            Writeln('TIPO REGISTRO:');
-            Writeln('[' + FloatToStr(amem2.Registro) + ']');
-            Writeln('');
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
+            OutputDebugString(StringToWideChar('TIPO REGISTRO:' , wideChars, 12));
+            OutputDebugString(StringToWideChar('[' + FloatToStr(amem2.Registro) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-            Writeln('DNFH (Documentos No Fiscales Homologados);: :=QUE ACUMULAN:=');
+            OutputDebugString(StringToWideChar('DNFH (Documentos No Fiscales Homologados);: :=QUE ACUMULAN:=' , wideChars, 12));
 
-            Writeln('---------------------------------------------------------');
-            Writeln('DNFH Tipo Comprob.         := [' +
+            OutputDebugString(StringToWideChar('---------------------------------------------------------' , wideChars, 12));
+            OutputDebugString(StringToWideChar('DNFH Tipo Comprob.         := [' +
               { FromTiposComprobanteToString }
-              FloatToStr(amem2.RegDNFH.CodigoComprobante) + ']');
+              FloatToStr(amem2.RegDNFH.CodigoComprobante) + ']' , wideChars, 12));
 
-            Writeln('DNFH Nro. inicial          := [' +
-              FloatToStr(amem2.RegDNFH.NumeroInicial) + ']');
+            OutputDebugString(StringToWideChar('DNFH Nro. inicial          := [' +
+              FloatToStr(amem2.RegDNFH.NumeroInicial) + ']' , wideChars, 12));
 
-            Writeln('DNFH Nro. Final            := [' +
-              FloatToStr(amem2.RegDNFH.NumeroFinal) + ']');
+            OutputDebugString(StringToWideChar('DNFH Nro. Final            := [' +
+              FloatToStr(amem2.RegDNFH.NumeroFinal) + ']' , wideChars, 12));
 
-            Writeln('DNFH total acumulado       := [' +
-              FloatToStr(amem2.RegDNFH.Total) + ']');
-            Writeln('');
+            OutputDebugString(StringToWideChar('DNFH total acumulado       := [' +
+              FloatToStr(amem2.RegDNFH.Total) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
           end;
         HasarArgentina_TLB.RegistroDetalladoDNFHNoAcum:
           begin
-            Writeln('');
-            Writeln('TIPO REGISTRO:');
-            Writeln('[' + FloatToStr(amem2.Registro) + ']');
-            Writeln('');
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
+            OutputDebugString(StringToWideChar('TIPO REGISTRO:' , wideChars, 12));
+            OutputDebugString(StringToWideChar('[' + FloatToStr(amem2.Registro) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-            Writeln('DNFH (Documentos No Fiscales Homologados);: :=QUE NO ACUMULAN:=');
+            OutputDebugString(StringToWideChar('DNFH (Documentos No Fiscales Homologados);: :=QUE NO ACUMULAN:=' , wideChars, 12));
 
-            Writeln('------------------------------------------------------------');
-            Writeln('Tipo Comprobante := [' +
+            OutputDebugString(StringToWideChar('------------------------------------------------------------' , wideChars, 12));
+            OutputDebugString(StringToWideChar('Tipo Comprobante := [' +
               { FromTiposComprobanteToString }
-              FloatToStr(amem2.RegDNFH_NoAcum.CodigoComprobante) + ']');
+              FloatToStr(amem2.RegDNFH_NoAcum.CodigoComprobante) + ']' , wideChars, 12));
 
-            Writeln('Nº inicial       := [' +
-              FloatToStr(amem2.RegDNFH_NoAcum.NumeroInicial) + ']');
+            OutputDebugString(StringToWideChar('Nº inicial       := [' +
+              FloatToStr(amem2.RegDNFH_NoAcum.NumeroInicial) + ']' , wideChars, 12));
 
-            Writeln('Nº final         := [' +
-              FloatToStr(amem2.RegDNFH_NoAcum.NumeroFinal) + ']');
-            Writeln('');
+            OutputDebugString(StringToWideChar('Nº final         := [' +
+              FloatToStr(amem2.RegDNFH_NoAcum.NumeroFinal) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
           end;
         HasarArgentina_TLB.RegistroGlobal:
           begin
-            Writeln('');
-            Writeln('TIPO REGISTRO:');
-            Writeln('[' + FloatToStr(amem2.Registro) + ']');
-            Writeln('');
-            Writeln('INFORMACION GLOBAL:');
-            Writeln('-------------------');
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
+            OutputDebugString(StringToWideChar('TIPO REGISTRO:' , wideChars, 12));
+            OutputDebugString(StringToWideChar('[' + FloatToStr(amem2.Registro) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
+            OutputDebugString(StringToWideChar('INFORMACION GLOBAL:' , wideChars, 12));
+            OutputDebugString(StringToWideChar('-------------------' , wideChars, 12));
 
-            Writeln('DF cant. cancelados := [' +
-              FloatToStr(amem2.RegGlobal.DF_CantidadCancelados) + ']');
+            OutputDebugString(StringToWideChar('DF cant. cancelados := [' +
+              FloatToStr(amem2.RegGlobal.DF_CantidadCancelados) + ']' , wideChars, 12));
 
-            Writeln('DF cant. emitidos   := [' +
-              FloatToStr(amem2.RegGlobal.DF_CantidadEmitidos) + ']');
-            Writeln('');
+            OutputDebugString(StringToWideChar('DF cant. emitidos   := [' +
+              FloatToStr(amem2.RegGlobal.DF_CantidadEmitidos) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-            Writeln('DF total ventas     := [' +
-              FloatToStr(amem2.RegGlobal.DF_Total) + ']');
-            Writeln('');
+            OutputDebugString(StringToWideChar('DF total ventas     := [' +
+              FloatToStr(amem2.RegGlobal.DF_Total) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-            Writeln('DF total gravado    := [' +
-              FloatToStr(amem2.RegGlobal.DF_TotalGravado) + ']');
+            OutputDebugString(StringToWideChar('DF total gravado    := [' +
+              FloatToStr(amem2.RegGlobal.DF_TotalGravado) + ']' , wideChars, 12));
 
-            Writeln('DF total IVA        := [' +
-              FloatToStr(amem2.RegGlobal.DF_TotalIVA) + ']');
+            OutputDebugString(StringToWideChar('DF total IVA        := [' +
+              FloatToStr(amem2.RegGlobal.DF_TotalIVA) + ']' , wideChars, 12));
 
-            Writeln('DF total tributos   := [' +
-              FloatToStr(amem2.RegGlobal.DF_TotalTributos) + ']');
+            OutputDebugString(StringToWideChar('DF total tributos   := [' +
+              FloatToStr(amem2.RegGlobal.DF_TotalTributos) + ']' , wideChars, 12));
 
-            Writeln('DF total no gravado := [' +
-              FloatToStr(amem2.RegGlobal.DF_TotalNoGravado) + ']');
+            OutputDebugString(StringToWideChar('DF total no gravado := [' +
+              FloatToStr(amem2.RegGlobal.DF_TotalNoGravado) + ']' , wideChars, 12));
 
-            Writeln('DF total exento     := [' +
-              FloatToStr(amem2.RegGlobal.DF_TotalExento) + ']');
-            Writeln('');
+            OutputDebugString(StringToWideChar('DF total exento     := [' +
+              FloatToStr(amem2.RegGlobal.DF_TotalExento) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-            Writeln('DF total DNFH       := [' +
-              FloatToStr(amem2.RegGlobal.DNFH_Total) + ']');
-            Writeln('');
+            OutputDebugString(StringToWideChar('DF total DNFH       := [' +
+              FloatToStr(amem2.RegGlobal.DNFH_Total) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
           end;
       end;
 
       amem2 := HASARNG.ContinuarConsultaAcumulados;
     end;
 
-    Writeln('');
-    Writeln('NO HAY MAS INFORMACION DISPONIBLE !...');
-    Writeln('');
-    Writeln('FIN DE LA CONSULTA !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('NO HAY MAS INFORMACION DISPONIBLE !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('FIN DE LA CONSULTA !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -2074,24 +2070,24 @@ var
   cfgred: RespuestaConsultarConfiguracionRed;
 
 begin
-  Writeln('');
-  Writeln('CONSULTANDO CONFIGURACION DE RED...');
-  Writeln('');
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
+  OutputDebugString(StringToWideChar('CONSULTANDO CONFIGURACION DE RED...' , wideChars, 12));
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   Try
     cfgred := HASARNG.ConsultarConfiguracionRed;
-    Writeln('');
-    Writeln('CONFIGURACION DE RED:');
-    Writeln('Direcc. IP := [' + (cfgred.DireccionIP) + ']');
-    Writeln('Gateway    := [' + (cfgred.Gateway) + ']');
-    Writeln('Máscara    := [' + (cfgred.Mascara) + ']');
-    Writeln('');
-    Writeln('FIN DE LA CONSULTA !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('CONFIGURACION DE RED:' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Direcc. IP := [' + (cfgred.DireccionIP) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Gateway    := [' + (cfgred.Gateway) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Máscara    := [' + (cfgred.Mascara) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('FIN DE LA CONSULTA !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -2108,279 +2104,279 @@ var
   azeta2: RespuestaContinuarConsultaAcumulados;
 
 begin
-  Writeln('');
-  Writeln('CONSULTANDO ACUMULADOS CIERRE " Z "...');
-  Writeln('');
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
+  OutputDebugString(StringToWideChar('CONSULTANDO ACUMULADOS CIERRE " Z "...' , wideChars, 12));
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   Try
     //?azeta := FloatToStr(HASARNG.ConsultarAcumuladosCierreZeta(ReporteZNumero, 11));
 
     if (azeta.Registro = HasarArgentina_TLB.RegistroFinal) then
     begin
-      Writeln('');
-      Writeln('NO HAY INFORMACION DISPONIBLE !...');
-      Writeln('');
+      OutputDebugString(StringToWideChar('' , wideChars, 12));
+      OutputDebugString(StringToWideChar('NO HAY INFORMACION DISPONIBLE !...' , wideChars, 12));
+      OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     end;
 
     Case azeta.Registro of
       HasarArgentina_TLB.RegistroDetalladoDF:
         begin
-          Writeln('');
-          Writeln('TIPO REGISTRO:');
-          Writeln('[' + FloatToStr(azeta.Registro) + ']');
-          Writeln('');
-          Writeln('DF (Documentos Fiscales);:');
-          Writeln('-------------------------');
-          Writeln('DF Tipo comprobante        := [' +
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
+          OutputDebugString(StringToWideChar('TIPO REGISTRO:' , wideChars, 12));
+          OutputDebugString(StringToWideChar('[' + FloatToStr(azeta.Registro) + ']' , wideChars, 12));
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
+          OutputDebugString(StringToWideChar('DF (Documentos Fiscales);:' , wideChars, 12));
+          OutputDebugString(StringToWideChar('-------------------------' , wideChars, 12));
+          OutputDebugString(StringToWideChar('DF Tipo comprobante        := [' +
             { FromTiposComprobanteToString }
-            FloatToStr(azeta.RegDF.CodigoComprobante) + ']');
+            FloatToStr(azeta.RegDF.CodigoComprobante) + ']' , wideChars, 12));
 
-          Writeln('DF Nro. inicial            := [' +
-            FloatToStr(azeta.RegDF.NumeroInicial) + ']');
+          OutputDebugString(StringToWideChar('DF Nro. inicial            := [' +
+            FloatToStr(azeta.RegDF.NumeroInicial) + ']' , wideChars, 12));
 
-          Writeln('DF Nro. final              := [' +
-            FloatToStr(azeta.RegDF.NumeroFinal) + ']');
+          OutputDebugString(StringToWideChar('DF Nro. final              := [' +
+            FloatToStr(azeta.RegDF.NumeroFinal) + ']' , wideChars, 12));
 
-          Writeln('DF cancelados              := [' +
-            FloatToStr(azeta.RegDF.CantidadCancelados) + ']');
-          Writeln('');
+          OutputDebugString(StringToWideChar('DF cancelados              := [' +
+            FloatToStr(azeta.RegDF.CantidadCancelados) + ']' , wideChars, 12));
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-          Writeln('DF total ventas            := [' +
-            FloatToStr(azeta.RegDF.Total) + ']');
+          OutputDebugString(StringToWideChar('DF total ventas            := [' +
+            FloatToStr(azeta.RegDF.Total) + ']' , wideChars, 12));
 
-          Writeln('');
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-          Writeln('DF total gravado           := [' +
-            FloatToStr(azeta.RegDF.TotalGravado) + ']');
+          OutputDebugString(StringToWideChar('DF total gravado           := [' +
+            FloatToStr(azeta.RegDF.TotalGravado) + ']' , wideChars, 12));
 
-          Writeln('DF total no gravado        := [' +
-            FloatToStr(azeta.RegDF.TotalNoGravado) + ']');
+          OutputDebugString(StringToWideChar('DF total no gravado        := [' +
+            FloatToStr(azeta.RegDF.TotalNoGravado) + ']' , wideChars, 12));
 
-          Writeln('DF total exento            := [' +
-            FloatToStr(azeta.RegDF.TotalExento) + ']');
-          Writeln('');
+          OutputDebugString(StringToWideChar('DF total exento            := [' +
+            FloatToStr(azeta.RegDF.TotalExento) + ']' , wideChars, 12));
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-          Writeln('DF IVA 1                   := [' +
-            FloatToStr(azeta.RegDF.AlicuotaIVA_1) + ']');
+          OutputDebugString(StringToWideChar('DF IVA 1                   := [' +
+            FloatToStr(azeta.RegDF.AlicuotaIVA_1) + ']' , wideChars, 12));
 
-          Writeln('DF monto IVA 1             := [' +
-            FloatToStr(azeta.RegDF.MontoIVA_1) + ']');
+          OutputDebugString(StringToWideChar('DF monto IVA 1             := [' +
+            FloatToStr(azeta.RegDF.MontoIVA_1) + ']' , wideChars, 12));
 
-          Writeln('DF IVA 2                   := [' +
-            FloatToStr(azeta.RegDF.AlicuotaIVA_2) + ']');
+          OutputDebugString(StringToWideChar('DF IVA 2                   := [' +
+            FloatToStr(azeta.RegDF.AlicuotaIVA_2) + ']' , wideChars, 12));
 
-          Writeln('DF monto IVA 2             := [' +
-            FloatToStr(azeta.RegDF.MontoIVA_2) + ']');
+          OutputDebugString(StringToWideChar('DF monto IVA 2             := [' +
+            FloatToStr(azeta.RegDF.MontoIVA_2) + ']' , wideChars, 12));
 
-          Writeln('DF IVA 3                   := [' +
-            FloatToStr(azeta.RegDF.AlicuotaIVA_3) + ']');
+          OutputDebugString(StringToWideChar('DF IVA 3                   := [' +
+            FloatToStr(azeta.RegDF.AlicuotaIVA_3) + ']' , wideChars, 12));
 
-          Writeln('DF monto IVA 3             := [' +
-            FloatToStr(azeta.RegDF.MontoIVA_3) + ']');
+          OutputDebugString(StringToWideChar('DF monto IVA 3             := [' +
+            FloatToStr(azeta.RegDF.MontoIVA_3) + ']' , wideChars, 12));
 
-          Writeln('DF IVA 4                   := [' +
-            FloatToStr(azeta.RegDF.AlicuotaIVA_4) + ']');
+          OutputDebugString(StringToWideChar('DF IVA 4                   := [' +
+            FloatToStr(azeta.RegDF.AlicuotaIVA_4) + ']' , wideChars, 12));
 
-          Writeln('DF monto IVA 4             := [' +
-            FloatToStr(azeta.RegDF.MontoIVA_4) + ']');
+          OutputDebugString(StringToWideChar('DF monto IVA 4             := [' +
+            FloatToStr(azeta.RegDF.MontoIVA_4) + ']' , wideChars, 12));
 
-          Writeln('DF IVA 5                   := [' +
-            FloatToStr(azeta.RegDF.AlicuotaIVA_5) + ']');
+          OutputDebugString(StringToWideChar('DF IVA 5                   := [' +
+            FloatToStr(azeta.RegDF.AlicuotaIVA_5) + ']' , wideChars, 12));
 
-          Writeln('DF monto IVA 5             := [' +
-            FloatToStr(azeta.RegDF.MontoIVA_5) + ']');
+          OutputDebugString(StringToWideChar('DF monto IVA 5             := [' +
+            FloatToStr(azeta.RegDF.MontoIVA_5) + ']' , wideChars, 12));
 
-          Writeln('DF IVA 6                   := [' +
-            FloatToStr(azeta.RegDF.AlicuotaIVA_6) + ']');
+          OutputDebugString(StringToWideChar('DF IVA 6                   := [' +
+            FloatToStr(azeta.RegDF.AlicuotaIVA_6) + ']' , wideChars, 12));
 
-          Writeln('DF monto IVA 6             := [' +
-            FloatToStr(azeta.RegDF.MontoIVA_6) + ']');
+          OutputDebugString(StringToWideChar('DF monto IVA 6             := [' +
+            FloatToStr(azeta.RegDF.MontoIVA_6) + ']' , wideChars, 12));
 
-          Writeln('DF IVA 7                   := [' +
-            FloatToStr(azeta.RegDF.AlicuotaIVA_7) + ']');
+          OutputDebugString(StringToWideChar('DF IVA 7                   := [' +
+            FloatToStr(azeta.RegDF.AlicuotaIVA_7) + ']' , wideChars, 12));
 
-          Writeln('DF monto IVA 7             := [' +
-            FloatToStr(azeta.RegDF.MontoIVA_7) + ']');
+          OutputDebugString(StringToWideChar('DF monto IVA 7             := [' +
+            FloatToStr(azeta.RegDF.MontoIVA_7) + ']' , wideChars, 12));
 
-          Writeln('DF IVA 8                   := [' +
-            FloatToStr(azeta.RegDF.AlicuotaIVA_8) + ']');
+          OutputDebugString(StringToWideChar('DF IVA 8                   := [' +
+            FloatToStr(azeta.RegDF.AlicuotaIVA_8) + ']' , wideChars, 12));
 
-          Writeln('DF monto IVA 8             := [' +
-            FloatToStr(azeta.RegDF.MontoIVA_8) + ']');
+          OutputDebugString(StringToWideChar('DF monto IVA 8             := [' +
+            FloatToStr(azeta.RegDF.MontoIVA_8) + ']' , wideChars, 12));
 
-          Writeln('DF IVA 9                   := [' +
-            FloatToStr(azeta.RegDF.AlicuotaIVA_9) + ']');
+          OutputDebugString(StringToWideChar('DF IVA 9                   := [' +
+            FloatToStr(azeta.RegDF.AlicuotaIVA_9) + ']' , wideChars, 12));
 
-          Writeln('DF monto IVA 9             := [' +
-            FloatToStr(azeta.RegDF.MontoIVA_9) + ']');
+          OutputDebugString(StringToWideChar('DF monto IVA 9             := [' +
+            FloatToStr(azeta.RegDF.MontoIVA_9) + ']' , wideChars, 12));
 
-          Writeln('DF IVA 10                  := [' +
-            FloatToStr(azeta.RegDF.AlicuotaIVA_10) + ']');
+          OutputDebugString(StringToWideChar('DF IVA 10                  := [' +
+            FloatToStr(azeta.RegDF.AlicuotaIVA_10) + ']' , wideChars, 12));
 
-          Writeln('DF monto IVA 10            := [' +
-            FloatToStr(azeta.RegDF.MontoIVA_10) + ']');
-          Writeln('');
+          OutputDebugString(StringToWideChar('DF monto IVA 10            := [' +
+            FloatToStr(azeta.RegDF.MontoIVA_10) + ']' , wideChars, 12));
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-          Writeln('DF total IVA               := [' +
-            FloatToStr(azeta.RegDF.TotalIVA) + ']');
-          Writeln('');
+          OutputDebugString(StringToWideChar('DF total IVA               := [' +
+            FloatToStr(azeta.RegDF.TotalIVA) + ']' , wideChars, 12));
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-          Writeln('DF tributo 1               := [' +
-            FloatToStr(azeta.RegDF.CodigoTributo1) + ']');
+          OutputDebugString(StringToWideChar('DF tributo 1               := [' +
+            FloatToStr(azeta.RegDF.CodigoTributo1) + ']' , wideChars, 12));
 
-          Writeln('DF monto tributo 1         := [' +
-            FloatToStr(azeta.RegDF.ImporteTributo1) + ']');
+          OutputDebugString(StringToWideChar('DF monto tributo 1         := [' +
+            FloatToStr(azeta.RegDF.ImporteTributo1) + ']' , wideChars, 12));
 
-          Writeln('DF tributo 2               := [' +
-            FloatToStr(azeta.RegDF.CodigoTributo2) + ']');
+          OutputDebugString(StringToWideChar('DF tributo 2               := [' +
+            FloatToStr(azeta.RegDF.CodigoTributo2) + ']' , wideChars, 12));
 
-          Writeln('DF monto tributo 2         := [' +
-            FloatToStr(azeta.RegDF.ImporteTributo2) + ']');
+          OutputDebugString(StringToWideChar('DF monto tributo 2         := [' +
+            FloatToStr(azeta.RegDF.ImporteTributo2) + ']' , wideChars, 12));
 
-          Writeln('DF tributo 3               := [' +
-            FloatToStr(azeta.RegDF.CodigoTributo3) + ']');
+          OutputDebugString(StringToWideChar('DF tributo 3               := [' +
+            FloatToStr(azeta.RegDF.CodigoTributo3) + ']' , wideChars, 12));
 
-          Writeln('DF monto tributo 3         := [' +
-            FloatToStr(azeta.RegDF.ImporteTributo3) + ']');
+          OutputDebugString(StringToWideChar('DF monto tributo 3         := [' +
+            FloatToStr(azeta.RegDF.ImporteTributo3) + ']' , wideChars, 12));
 
-          Writeln('DF tributo 4               := [' +
-            FloatToStr(azeta.RegDF.CodigoTributo4) + ']');
+          OutputDebugString(StringToWideChar('DF tributo 4               := [' +
+            FloatToStr(azeta.RegDF.CodigoTributo4) + ']' , wideChars, 12));
 
-          Writeln('DF monto tributo 4         := [' +
-            FloatToStr(azeta.RegDF.ImporteTributo4) + ']');
+          OutputDebugString(StringToWideChar('DF monto tributo 4         := [' +
+            FloatToStr(azeta.RegDF.ImporteTributo4) + ']' , wideChars, 12));
 
-          Writeln('DF tributo 5               := [' +
-            FloatToStr(azeta.RegDF.CodigoTributo5) + ']');
+          OutputDebugString(StringToWideChar('DF tributo 5               := [' +
+            FloatToStr(azeta.RegDF.CodigoTributo5) + ']' , wideChars, 12));
 
-          Writeln('DF monto tributo 5         := [' +
-            FloatToStr(azeta.RegDF.ImporteTributo5) + ']');
+          OutputDebugString(StringToWideChar('DF monto tributo 5         := [' +
+            FloatToStr(azeta.RegDF.ImporteTributo5) + ']' , wideChars, 12));
 
-          Writeln('DF tributo 6               := [' +
-            FloatToStr(azeta.RegDF.CodigoTributo6) + ']');
+          OutputDebugString(StringToWideChar('DF tributo 6               := [' +
+            FloatToStr(azeta.RegDF.CodigoTributo6) + ']' , wideChars, 12));
 
-          Writeln('DF monto tributo 6         := [' +
-            FloatToStr(azeta.RegDF.ImporteTributo6) + ']');
+          OutputDebugString(StringToWideChar('DF monto tributo 6         := [' +
+            FloatToStr(azeta.RegDF.ImporteTributo6) + ']' , wideChars, 12));
 
-          Writeln('DF tributo 7               := [' +
-            FloatToStr(azeta.RegDF.CodigoTributo7) + ']');
+          OutputDebugString(StringToWideChar('DF tributo 7               := [' +
+            FloatToStr(azeta.RegDF.CodigoTributo7) + ']' , wideChars, 12));
 
-          Writeln('DF monto tributo 7         := [' +
-            FloatToStr(azeta.RegDF.ImporteTributo7) + ']');
+          OutputDebugString(StringToWideChar('DF monto tributo 7         := [' +
+            FloatToStr(azeta.RegDF.ImporteTributo7) + ']' , wideChars, 12));
 
-          Writeln('DF tributo 8               := [' +
-            FloatToStr(azeta.RegDF.CodigoTributo8) + ']');
+          OutputDebugString(StringToWideChar('DF tributo 8               := [' +
+            FloatToStr(azeta.RegDF.CodigoTributo8) + ']' , wideChars, 12));
 
-          Writeln('DF monto tributo 8         := [' +
-            FloatToStr(azeta.RegDF.ImporteTributo8) + ']');
+          OutputDebugString(StringToWideChar('DF monto tributo 8         := [' +
+            FloatToStr(azeta.RegDF.ImporteTributo8) + ']' , wideChars, 12));
 
-          Writeln('DF tributo 9               := [' +
-            FloatToStr(azeta.RegDF.CodigoTributo9) + ']');
+          OutputDebugString(StringToWideChar('DF tributo 9               := [' +
+            FloatToStr(azeta.RegDF.CodigoTributo9) + ']' , wideChars, 12));
 
-          Writeln('DF monto tributo 9         := [' +
-            FloatToStr(azeta.RegDF.ImporteTributo9) + ']');
+          OutputDebugString(StringToWideChar('DF monto tributo 9         := [' +
+            FloatToStr(azeta.RegDF.ImporteTributo9) + ']' , wideChars, 12));
 
-          Writeln('DF tributo 10              := [' +
-            FloatToStr(azeta.RegDF.CodigoTributo10) + ']');
+          OutputDebugString(StringToWideChar('DF tributo 10              := [' +
+            FloatToStr(azeta.RegDF.CodigoTributo10) + ']' , wideChars, 12));
 
-          Writeln('DF monto tributo 10        := [' +
-            FloatToStr(azeta.RegDF.ImporteTributo10) + ']');
+          OutputDebugString(StringToWideChar('DF monto tributo 10        := [' +
+            FloatToStr(azeta.RegDF.ImporteTributo10) + ']' , wideChars, 12));
 
-          Writeln('DF tributo 11              := [' +
-            FloatToStr(azeta.RegDF.CodigoTributo11) + ']');
+          OutputDebugString(StringToWideChar('DF tributo 11              := [' +
+            FloatToStr(azeta.RegDF.CodigoTributo11) + ']' , wideChars, 12));
 
-          Writeln('DF monto tributo 11        := [' +
-            FloatToStr(azeta.RegDF.ImporteTributo11) + ']');
-          Writeln('');
+          OutputDebugString(StringToWideChar('DF monto tributo 11        := [' +
+            FloatToStr(azeta.RegDF.ImporteTributo11) + ']' , wideChars, 12));
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-          Writeln('DF total tributos          := [' +
-            FloatToStr(azeta.RegDF.TotalTributos) + ']');
-          Writeln('');
+          OutputDebugString(StringToWideChar('DF total tributos          := [' +
+            FloatToStr(azeta.RegDF.TotalTributos) + ']' , wideChars, 12));
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
         end;
       HasarArgentina_TLB.RegistroDetalladoDNFH:
         begin
-          Writeln('');
-          Writeln('TIPO REGISTRO:');
-          Writeln('[' + FloatToStr(azeta.Registro) + ']');
-          Writeln('');
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
+          OutputDebugString(StringToWideChar('TIPO REGISTRO:' , wideChars, 12));
+          OutputDebugString(StringToWideChar('[' + FloatToStr(azeta.Registro) + ']' , wideChars, 12));
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-          Writeln('DNFH (Documentos No Fiscales Homologados);: :=QUE ACUMULAN:=');
+          OutputDebugString(StringToWideChar('DNFH (Documentos No Fiscales Homologados);: :=QUE ACUMULAN:=' , wideChars, 12));
 
-          Writeln('---------------------------------------------------------');
-          Writeln('DNFH Tipo Comprob.         := [' +
+          OutputDebugString(StringToWideChar('---------------------------------------------------------' , wideChars, 12));
+          OutputDebugString(StringToWideChar('DNFH Tipo Comprob.         := [' +
             { FromTiposComprobanteToString }
-            FloatToStr(azeta.RegDNFH.CodigoComprobante) + ']');
+            FloatToStr(azeta.RegDNFH.CodigoComprobante) + ']' , wideChars, 12));
 
-          Writeln('DNFH Nro. inicial          := [' +
-            FloatToStr(azeta.RegDNFH.NumeroInicial) + ']');
+          OutputDebugString(StringToWideChar('DNFH Nro. inicial          := [' +
+            FloatToStr(azeta.RegDNFH.NumeroInicial) + ']' , wideChars, 12));
 
-          Writeln('DNFH Nro. Final            := [' +
-            FloatToStr(azeta.RegDNFH.NumeroFinal) + ']');
+          OutputDebugString(StringToWideChar('DNFH Nro. Final            := [' +
+            FloatToStr(azeta.RegDNFH.NumeroFinal) + ']' , wideChars, 12));
 
-          Writeln('DNFH total acumulado       := [' +
-            FloatToStr(azeta.RegDNFH.Total) + ']');
-          Writeln('');
+          OutputDebugString(StringToWideChar('DNFH total acumulado       := [' +
+            FloatToStr(azeta.RegDNFH.Total) + ']' , wideChars, 12));
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
         end;
       HasarArgentina_TLB.RegistroDetalladoDNFHNoAcum:
         begin
-          Writeln('');
-          Writeln('TIPO REGISTRO:');
-          Writeln('[' + FloatToStr(azeta.Registro) + ']');
-          Writeln('');
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
+          OutputDebugString(StringToWideChar('TIPO REGISTRO:' , wideChars, 12));
+          OutputDebugString(StringToWideChar('[' + FloatToStr(azeta.Registro) + ']' , wideChars, 12));
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-          Writeln('DNFH (Documentos No Fiscales Homologados);: :=QUE NO ACUMULAN:=');
+          OutputDebugString(StringToWideChar('DNFH (Documentos No Fiscales Homologados);: :=QUE NO ACUMULAN:=' , wideChars, 12));
 
-          Writeln('------------------------------------------------------------');
-          Writeln('Tipo Comprobante := [' +
+          OutputDebugString(StringToWideChar('------------------------------------------------------------' , wideChars, 12));
+          OutputDebugString(StringToWideChar('Tipo Comprobante := [' +
             { FromTiposComprobanteToString }
-            FloatToStr(azeta.RegDNFH_NoAcum.CodigoComprobante) + ']');
-          Writeln('Nº inicial       := [' +
-            FloatToStr(azeta.RegDNFH_NoAcum.NumeroInicial) + ']');
+            FloatToStr(azeta.RegDNFH_NoAcum.CodigoComprobante) + ']' , wideChars, 12));
+          OutputDebugString(StringToWideChar('Nº inicial       := [' +
+            FloatToStr(azeta.RegDNFH_NoAcum.NumeroInicial) + ']' , wideChars, 12));
 
-          Writeln('Nº final         := [' +
-            FloatToStr(azeta.RegDNFH_NoAcum.NumeroFinal) + ']');
-          Writeln('');
+          OutputDebugString(StringToWideChar('Nº final         := [' +
+            FloatToStr(azeta.RegDNFH_NoAcum.NumeroFinal) + ']' , wideChars, 12));
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
         end;
       HasarArgentina_TLB.RegistroGlobal:
         begin
-          Writeln('');
-          Writeln('TIPO REGISTRO:');
-          Writeln('[' + FloatToStr(azeta.Registro) + ']');
-          Writeln('');
-          Writeln('INFORMACION GLOBAL:');
-          Writeln('-------------------');
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
+          OutputDebugString(StringToWideChar('TIPO REGISTRO:' , wideChars, 12));
+          OutputDebugString(StringToWideChar('[' + FloatToStr(azeta.Registro) + ']' , wideChars, 12));
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
+          OutputDebugString(StringToWideChar('INFORMACION GLOBAL:' , wideChars, 12));
+          OutputDebugString(StringToWideChar('-------------------' , wideChars, 12));
 
-          Writeln('DF cant. cancelados := [' +
-            FloatToStr(azeta.RegGlobal.DF_CantidadCancelados) + ']');
+          OutputDebugString(StringToWideChar('DF cant. cancelados := [' +
+            FloatToStr(azeta.RegGlobal.DF_CantidadCancelados) + ']' , wideChars, 12));
 
-          Writeln('DF cant. emitidos   := [' +
-            FloatToStr(azeta.RegGlobal.DF_CantidadEmitidos) + ']');
-          Writeln('');
+          OutputDebugString(StringToWideChar('DF cant. emitidos   := [' +
+            FloatToStr(azeta.RegGlobal.DF_CantidadEmitidos) + ']' , wideChars, 12));
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-          Writeln('DF total ventas     := [' +
-            FloatToStr(azeta.RegGlobal.DF_Total) + ']');
+          OutputDebugString(StringToWideChar('DF total ventas     := [' +
+            FloatToStr(azeta.RegGlobal.DF_Total) + ']' , wideChars, 12));
 
-          Writeln('');
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-          Writeln('DF total gravado    := [' +
-            FloatToStr(azeta.RegGlobal.DF_TotalGravado) + ']');
+          OutputDebugString(StringToWideChar('DF total gravado    := [' +
+            FloatToStr(azeta.RegGlobal.DF_TotalGravado) + ']' , wideChars, 12));
 
-          Writeln('DF total IVA        := [' +
-            FloatToStr(azeta.RegGlobal.DF_TotalIVA) + ']');
+          OutputDebugString(StringToWideChar('DF total IVA        := [' +
+            FloatToStr(azeta.RegGlobal.DF_TotalIVA) + ']' , wideChars, 12));
 
-          Writeln('DF total tributos   := [' +
-            FloatToStr(azeta.RegGlobal.DF_TotalTributos) + ']');
+          OutputDebugString(StringToWideChar('DF total tributos   := [' +
+            FloatToStr(azeta.RegGlobal.DF_TotalTributos) + ']' , wideChars, 12));
 
-          Writeln('DF total no gravado := [' +
-            FloatToStr(azeta.RegGlobal.DF_TotalNoGravado) + ']');
+          OutputDebugString(StringToWideChar('DF total no gravado := [' +
+            FloatToStr(azeta.RegGlobal.DF_TotalNoGravado) + ']' , wideChars, 12));
 
-          Writeln('DF total exento     := [' +
-            FloatToStr(azeta.RegGlobal.DF_TotalExento) + ']');
-          Writeln('');
+          OutputDebugString(StringToWideChar('DF total exento     := [' +
+            FloatToStr(azeta.RegGlobal.DF_TotalExento) + ']' , wideChars, 12));
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-          Writeln('DF total DNFH       := [' +
-            FloatToStr(azeta.RegGlobal.DNFH_Total) + ']');
-          Writeln('');
+          OutputDebugString(StringToWideChar('DF total DNFH       := [' +
+            FloatToStr(azeta.RegGlobal.DNFH_Total) + ']' , wideChars, 12));
+          OutputDebugString(StringToWideChar('' , wideChars, 12));
         end;
     end;
 
@@ -2392,275 +2388,275 @@ begin
       Case azeta2.Registro of
         HasarArgentina_TLB.RegistroDetalladoDF:
           begin
-            Writeln('');
-            Writeln('TIPO REGISTRO:');
-            Writeln('[' + FloatToStr(azeta2.Registro) + ']');
-            Writeln('');
-            Writeln('DF (Documentos Fiscales);:');
-            Writeln('-------------------------');
-            Writeln('DF Tipo comprobante        := [' +
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
+            OutputDebugString(StringToWideChar('TIPO REGISTRO:' , wideChars, 12));
+            OutputDebugString(StringToWideChar('[' + FloatToStr(azeta2.Registro) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
+            OutputDebugString(StringToWideChar('DF (Documentos Fiscales);:' , wideChars, 12));
+            OutputDebugString(StringToWideChar('-------------------------' , wideChars, 12));
+            OutputDebugString(StringToWideChar('DF Tipo comprobante        := [' +
               { FromTiposComprobanteToString }
-              FloatToStr(azeta2.RegDF.CodigoComprobante) + ']');
+              FloatToStr(azeta2.RegDF.CodigoComprobante) + ']' , wideChars, 12));
 
-            Writeln('DF Nro. inicial            := [' +
-              FloatToStr(azeta2.RegDF.NumeroInicial) + ']');
+            OutputDebugString(StringToWideChar('DF Nro. inicial            := [' +
+              FloatToStr(azeta2.RegDF.NumeroInicial) + ']' , wideChars, 12));
 
-            Writeln('DF Nro. final              := [' +
-              FloatToStr(azeta2.RegDF.NumeroFinal) + ']');
+            OutputDebugString(StringToWideChar('DF Nro. final              := [' +
+              FloatToStr(azeta2.RegDF.NumeroFinal) + ']' , wideChars, 12));
 
-            Writeln('DF cancelados              := [' +
-              FloatToStr(azeta2.RegDF.CantidadCancelados) + ']');
-            Writeln('');
+            OutputDebugString(StringToWideChar('DF cancelados              := [' +
+              FloatToStr(azeta2.RegDF.CantidadCancelados) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-            Writeln('DF total ventas            := [' +
-              FloatToStr(azeta2.RegDF.Total) + ']');
-            Writeln('');
+            OutputDebugString(StringToWideChar('DF total ventas            := [' +
+              FloatToStr(azeta2.RegDF.Total) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-            Writeln('DF total gravado           := [' +
-              FloatToStr(azeta2.RegDF.TotalGravado) + ']');
+            OutputDebugString(StringToWideChar('DF total gravado           := [' +
+              FloatToStr(azeta2.RegDF.TotalGravado) + ']' , wideChars, 12));
 
-            Writeln('DF total no gravado        := [' +
-              FloatToStr(azeta2.RegDF.TotalNoGravado) + ']');
+            OutputDebugString(StringToWideChar('DF total no gravado        := [' +
+              FloatToStr(azeta2.RegDF.TotalNoGravado) + ']' , wideChars, 12));
 
-            Writeln('DF total exento            := [' +
-              FloatToStr(azeta2.RegDF.TotalExento) + ']');
-            Writeln('');
+            OutputDebugString(StringToWideChar('DF total exento            := [' +
+              FloatToStr(azeta2.RegDF.TotalExento) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-            Writeln('DF IVA 1                   := [' +
-              FloatToStr(azeta2.RegDF.AlicuotaIVA_1) + ']');
+            OutputDebugString(StringToWideChar('DF IVA 1                   := [' +
+              FloatToStr(azeta2.RegDF.AlicuotaIVA_1) + ']' , wideChars, 12));
 
-            Writeln('DF monto IVA 1             := [' +
-              FloatToStr(azeta2.RegDF.MontoIVA_1) + ']');
+            OutputDebugString(StringToWideChar('DF monto IVA 1             := [' +
+              FloatToStr(azeta2.RegDF.MontoIVA_1) + ']' , wideChars, 12));
 
-            Writeln('DF IVA 2                   := [' +
-              FloatToStr(azeta2.RegDF.AlicuotaIVA_2) + ']');
+            OutputDebugString(StringToWideChar('DF IVA 2                   := [' +
+              FloatToStr(azeta2.RegDF.AlicuotaIVA_2) + ']' , wideChars, 12));
 
-            Writeln('DF monto IVA 2             := [' +
-              FloatToStr(azeta2.RegDF.MontoIVA_2) + ']');
+            OutputDebugString(StringToWideChar('DF monto IVA 2             := [' +
+              FloatToStr(azeta2.RegDF.MontoIVA_2) + ']' , wideChars, 12));
 
-            Writeln('DF IVA 3                   := [' +
-              FloatToStr(azeta2.RegDF.AlicuotaIVA_3) + ']');
+            OutputDebugString(StringToWideChar('DF IVA 3                   := [' +
+              FloatToStr(azeta2.RegDF.AlicuotaIVA_3) + ']' , wideChars, 12));
 
-            Writeln('DF monto IVA 3             := [' +
-              FloatToStr(azeta2.RegDF.MontoIVA_3) + ']');
+            OutputDebugString(StringToWideChar('DF monto IVA 3             := [' +
+              FloatToStr(azeta2.RegDF.MontoIVA_3) + ']' , wideChars, 12));
 
-            Writeln('DF IVA 4                   := [' +
-              FloatToStr(azeta2.RegDF.AlicuotaIVA_4) + ']');
+            OutputDebugString(StringToWideChar('DF IVA 4                   := [' +
+              FloatToStr(azeta2.RegDF.AlicuotaIVA_4) + ']' , wideChars, 12));
 
-            Writeln('DF monto IVA 4             := [' +
-              FloatToStr(azeta2.RegDF.MontoIVA_4) + ']');
+            OutputDebugString(StringToWideChar('DF monto IVA 4             := [' +
+              FloatToStr(azeta2.RegDF.MontoIVA_4) + ']' , wideChars, 12));
 
-            Writeln('DF IVA 5                   := [' +
-              FloatToStr(azeta2.RegDF.AlicuotaIVA_5) + ']');
+            OutputDebugString(StringToWideChar('DF IVA 5                   := [' +
+              FloatToStr(azeta2.RegDF.AlicuotaIVA_5) + ']' , wideChars, 12));
 
-            Writeln('DF monto IVA 5             := [' +
-              FloatToStr(azeta2.RegDF.MontoIVA_5) + ']');
+            OutputDebugString(StringToWideChar('DF monto IVA 5             := [' +
+              FloatToStr(azeta2.RegDF.MontoIVA_5) + ']' , wideChars, 12));
 
-            Writeln('DF IVA 6                   := [' +
-              FloatToStr(azeta2.RegDF.AlicuotaIVA_6) + ']');
+            OutputDebugString(StringToWideChar('DF IVA 6                   := [' +
+              FloatToStr(azeta2.RegDF.AlicuotaIVA_6) + ']' , wideChars, 12));
 
-            Writeln('DF monto IVA 6             := [' +
-              FloatToStr(azeta2.RegDF.MontoIVA_6) + ']');
+            OutputDebugString(StringToWideChar('DF monto IVA 6             := [' +
+              FloatToStr(azeta2.RegDF.MontoIVA_6) + ']' , wideChars, 12));
 
-            Writeln('DF IVA 7                   := [' +
-              FloatToStr(azeta2.RegDF.AlicuotaIVA_7) + ']');
+            OutputDebugString(StringToWideChar('DF IVA 7                   := [' +
+              FloatToStr(azeta2.RegDF.AlicuotaIVA_7) + ']' , wideChars, 12));
 
-            Writeln('DF monto IVA 7             := [' +
-              FloatToStr(azeta2.RegDF.MontoIVA_7) + ']');
+            OutputDebugString(StringToWideChar('DF monto IVA 7             := [' +
+              FloatToStr(azeta2.RegDF.MontoIVA_7) + ']' , wideChars, 12));
 
-            Writeln('DF IVA 8                   := [' +
-              FloatToStr(azeta2.RegDF.AlicuotaIVA_8) + ']');
+            OutputDebugString(StringToWideChar('DF IVA 8                   := [' +
+              FloatToStr(azeta2.RegDF.AlicuotaIVA_8) + ']' , wideChars, 12));
 
-            Writeln('DF monto IVA 8             := [' +
-              FloatToStr(azeta2.RegDF.MontoIVA_8) + ']');
+            OutputDebugString(StringToWideChar('DF monto IVA 8             := [' +
+              FloatToStr(azeta2.RegDF.MontoIVA_8) + ']' , wideChars, 12));
 
-            Writeln('DF IVA 9                   := [' +
-              FloatToStr(azeta2.RegDF.AlicuotaIVA_9) + ']');
+            OutputDebugString(StringToWideChar('DF IVA 9                   := [' +
+              FloatToStr(azeta2.RegDF.AlicuotaIVA_9) + ']' , wideChars, 12));
 
-            Writeln('DF monto IVA 9             := [' +
-              FloatToStr(azeta2.RegDF.MontoIVA_9) + ']');
+            OutputDebugString(StringToWideChar('DF monto IVA 9             := [' +
+              FloatToStr(azeta2.RegDF.MontoIVA_9) + ']' , wideChars, 12));
 
-            Writeln('DF IVA 10                  := [' +
-              FloatToStr(azeta2.RegDF.AlicuotaIVA_10) + ']');
+            OutputDebugString(StringToWideChar('DF IVA 10                  := [' +
+              FloatToStr(azeta2.RegDF.AlicuotaIVA_10) + ']' , wideChars, 12));
 
-            Writeln('DF monto IVA 10            := [' +
-              FloatToStr(azeta2.RegDF.MontoIVA_10) + ']');
-            Writeln('');
+            OutputDebugString(StringToWideChar('DF monto IVA 10            := [' +
+              FloatToStr(azeta2.RegDF.MontoIVA_10) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-            Writeln('DF total IVA               := [' +
-              FloatToStr(azeta2.RegDF.TotalIVA) + ']');
-            Writeln('');
+            OutputDebugString(StringToWideChar('DF total IVA               := [' +
+              FloatToStr(azeta2.RegDF.TotalIVA) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-            Writeln('DF tributo 1               := [' +
-              FloatToStr(azeta2.RegDF.CodigoTributo1) + ']');
+            OutputDebugString(StringToWideChar('DF tributo 1               := [' +
+              FloatToStr(azeta2.RegDF.CodigoTributo1) + ']' , wideChars, 12));
 
-            Writeln('DF monto tributo 1         := [' +
-              FloatToStr(azeta2.RegDF.ImporteTributo1) + ']');
+            OutputDebugString(StringToWideChar('DF monto tributo 1         := [' +
+              FloatToStr(azeta2.RegDF.ImporteTributo1) + ']' , wideChars, 12));
 
-            Writeln('DF tributo 2               := [' +
-              FloatToStr(azeta2.RegDF.CodigoTributo2) + ']');
+            OutputDebugString(StringToWideChar('DF tributo 2               := [' +
+              FloatToStr(azeta2.RegDF.CodigoTributo2) + ']' , wideChars, 12));
 
-            Writeln('DF monto tributo 2         := [' +
-              FloatToStr(azeta2.RegDF.ImporteTributo2) + ']');
+            OutputDebugString(StringToWideChar('DF monto tributo 2         := [' +
+              FloatToStr(azeta2.RegDF.ImporteTributo2) + ']' , wideChars, 12));
 
-            Writeln('DF tributo 3               := [' +
-              FloatToStr(azeta2.RegDF.CodigoTributo3) + ']');
+            OutputDebugString(StringToWideChar('DF tributo 3               := [' +
+              FloatToStr(azeta2.RegDF.CodigoTributo3) + ']' , wideChars, 12));
 
-            Writeln('DF monto tributo 3         := [' +
-              FloatToStr(azeta2.RegDF.ImporteTributo3) + ']');
+            OutputDebugString(StringToWideChar('DF monto tributo 3         := [' +
+              FloatToStr(azeta2.RegDF.ImporteTributo3) + ']' , wideChars, 12));
 
-            Writeln('DF tributo 4               := [' +
-              FloatToStr(azeta2.RegDF.CodigoTributo4) + ']');
+            OutputDebugString(StringToWideChar('DF tributo 4               := [' +
+              FloatToStr(azeta2.RegDF.CodigoTributo4) + ']' , wideChars, 12));
 
-            Writeln('DF monto tributo 4         := [' +
-              FloatToStr(azeta2.RegDF.ImporteTributo4) + ']');
+            OutputDebugString(StringToWideChar('DF monto tributo 4         := [' +
+              FloatToStr(azeta2.RegDF.ImporteTributo4) + ']' , wideChars, 12));
 
-            Writeln('DF tributo 5               := [' +
-              FloatToStr(azeta2.RegDF.CodigoTributo5) + ']');
+            OutputDebugString(StringToWideChar('DF tributo 5               := [' +
+              FloatToStr(azeta2.RegDF.CodigoTributo5) + ']' , wideChars, 12));
 
-            Writeln('DF monto tributo 5         := [' +
-              FloatToStr(azeta2.RegDF.ImporteTributo5) + ']');
+            OutputDebugString(StringToWideChar('DF monto tributo 5         := [' +
+              FloatToStr(azeta2.RegDF.ImporteTributo5) + ']' , wideChars, 12));
 
-            Writeln('DF tributo 6               := [' +
-              FloatToStr(azeta2.RegDF.CodigoTributo6) + ']');
+            OutputDebugString(StringToWideChar('DF tributo 6               := [' +
+              FloatToStr(azeta2.RegDF.CodigoTributo6) + ']' , wideChars, 12));
 
-            Writeln('DF monto tributo 6         := [' +
-              FloatToStr(azeta2.RegDF.ImporteTributo6) + ']');
+            OutputDebugString(StringToWideChar('DF monto tributo 6         := [' +
+              FloatToStr(azeta2.RegDF.ImporteTributo6) + ']' , wideChars, 12));
 
-            Writeln('DF tributo 7               := [' +
-              FloatToStr(azeta2.RegDF.CodigoTributo7) + ']');
+            OutputDebugString(StringToWideChar('DF tributo 7               := [' +
+              FloatToStr(azeta2.RegDF.CodigoTributo7) + ']' , wideChars, 12));
 
-            Writeln('DF monto tributo 7         := [' +
-              FloatToStr(azeta2.RegDF.ImporteTributo7) + ']');
+            OutputDebugString(StringToWideChar('DF monto tributo 7         := [' +
+              FloatToStr(azeta2.RegDF.ImporteTributo7) + ']' , wideChars, 12));
 
-            Writeln('DF tributo 8               := [' +
-              FloatToStr(azeta2.RegDF.CodigoTributo8) + ']');
+            OutputDebugString(StringToWideChar('DF tributo 8               := [' +
+              FloatToStr(azeta2.RegDF.CodigoTributo8) + ']' , wideChars, 12));
 
-            Writeln('DF monto tributo 8         := [' +
-              FloatToStr(azeta2.RegDF.ImporteTributo8) + ']');
+            OutputDebugString(StringToWideChar('DF monto tributo 8         := [' +
+              FloatToStr(azeta2.RegDF.ImporteTributo8) + ']' , wideChars, 12));
 
-            Writeln('DF tributo 9               := [' +
-              FloatToStr(azeta2.RegDF.CodigoTributo9) + ']');
+            OutputDebugString(StringToWideChar('DF tributo 9               := [' +
+              FloatToStr(azeta2.RegDF.CodigoTributo9) + ']' , wideChars, 12));
 
-            Writeln('DF monto tributo 9         := [' +
-              FloatToStr(azeta2.RegDF.ImporteTributo9) + ']');
+            OutputDebugString(StringToWideChar('DF monto tributo 9         := [' +
+              FloatToStr(azeta2.RegDF.ImporteTributo9) + ']' , wideChars, 12));
 
-            Writeln('DF tributo 10              := [' +
-              FloatToStr(azeta2.RegDF.CodigoTributo10) + ']');
+            OutputDebugString(StringToWideChar('DF tributo 10              := [' +
+              FloatToStr(azeta2.RegDF.CodigoTributo10) + ']' , wideChars, 12));
 
-            Writeln('DF monto tributo 10        := [' +
-              FloatToStr(azeta2.RegDF.ImporteTributo10) + ']');
+            OutputDebugString(StringToWideChar('DF monto tributo 10        := [' +
+              FloatToStr(azeta2.RegDF.ImporteTributo10) + ']' , wideChars, 12));
 
-            Writeln('DF tributo 11              := [' +
-              FloatToStr(azeta2.RegDF.CodigoTributo11) + ']');
+            OutputDebugString(StringToWideChar('DF tributo 11              := [' +
+              FloatToStr(azeta2.RegDF.CodigoTributo11) + ']' , wideChars, 12));
 
-            Writeln('DF monto tributo 11        := [' +
-              FloatToStr(azeta2.RegDF.ImporteTributo11) + ']');
-            Writeln('');
+            OutputDebugString(StringToWideChar('DF monto tributo 11        := [' +
+              FloatToStr(azeta2.RegDF.ImporteTributo11) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-            Writeln('DF total tributos          := [' +
-              FloatToStr(azeta2.RegDF.TotalTributos) + ']');
-            Writeln('');
+            OutputDebugString(StringToWideChar('DF total tributos          := [' +
+              FloatToStr(azeta2.RegDF.TotalTributos) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
           end;
         HasarArgentina_TLB.RegistroDetalladoDNFH:
           begin
-            Writeln('');
-            Writeln('TIPO REGISTRO:');
-            Writeln('[' + FloatToStr(azeta2.Registro) + ']');
-            Writeln('');
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
+            OutputDebugString(StringToWideChar('TIPO REGISTRO:' , wideChars, 12));
+            OutputDebugString(StringToWideChar('[' + FloatToStr(azeta2.Registro) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-            Writeln('DNFH (Documentos No Fiscales Homologados);: :=QUE ACUMULAN:=');
+            OutputDebugString(StringToWideChar('DNFH (Documentos No Fiscales Homologados);: :=QUE ACUMULAN:=' , wideChars, 12));
 
-            Writeln('---------------------------------------------------------');
-            Writeln('DNFH Tipo Comprob.         := [' +
+            OutputDebugString(StringToWideChar('---------------------------------------------------------' , wideChars, 12));
+            OutputDebugString(StringToWideChar('DNFH Tipo Comprob.         := [' +
               { FromTiposComprobanteToString }
-              FloatToStr(azeta2.RegDNFH.CodigoComprobante) + ']');
+              FloatToStr(azeta2.RegDNFH.CodigoComprobante) + ']' , wideChars, 12));
 
-            Writeln('DNFH Nro. inicial          := [' +
-              FloatToStr(azeta2.RegDNFH.NumeroInicial) + ']');
+            OutputDebugString(StringToWideChar('DNFH Nro. inicial          := [' +
+              FloatToStr(azeta2.RegDNFH.NumeroInicial) + ']' , wideChars, 12));
 
-            Writeln('DNFH Nro. Final            := [' +
-              FloatToStr(azeta2.RegDNFH.NumeroFinal) + ']');
+            OutputDebugString(StringToWideChar('DNFH Nro. Final            := [' +
+              FloatToStr(azeta2.RegDNFH.NumeroFinal) + ']' , wideChars, 12));
 
-            Writeln('DNFH total acumulado       := [' +
-              FloatToStr(azeta2.RegDNFH.Total) + ']');
-            Writeln('');
+            OutputDebugString(StringToWideChar('DNFH total acumulado       := [' +
+              FloatToStr(azeta2.RegDNFH.Total) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
           end;
         HasarArgentina_TLB.RegistroDetalladoDNFHNoAcum:
           begin
-            Writeln('');
-            Writeln('TIPO REGISTRO:');
-            Writeln('[' + FloatToStr(azeta2.Registro) + ']');
-            Writeln('');
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
+            OutputDebugString(StringToWideChar('TIPO REGISTRO:' , wideChars, 12));
+            OutputDebugString(StringToWideChar('[' + FloatToStr(azeta2.Registro) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-            Writeln('DNFH (Documentos No Fiscales Homologados);: :=QUE NO ACUMULAN:=');
+            OutputDebugString(StringToWideChar('DNFH (Documentos No Fiscales Homologados);: :=QUE NO ACUMULAN:=' , wideChars, 12));
 
-            Writeln('------------------------------------------------------------');
-            Writeln('Tipo Comprobante := [' +
+            OutputDebugString(StringToWideChar('------------------------------------------------------------' , wideChars, 12));
+            OutputDebugString(StringToWideChar('Tipo Comprobante := [' +
               { FromTiposComprobanteToString }
-              FloatToStr(azeta2.RegDNFH_NoAcum.CodigoComprobante) + ']');
+              FloatToStr(azeta2.RegDNFH_NoAcum.CodigoComprobante) + ']' , wideChars, 12));
 
-            Writeln('Nº inicial       := [' +
-              FloatToStr(azeta2.RegDNFH_NoAcum.NumeroInicial) + ']');
+            OutputDebugString(StringToWideChar('Nº inicial       := [' +
+              FloatToStr(azeta2.RegDNFH_NoAcum.NumeroInicial) + ']' , wideChars, 12));
 
-            Writeln('Nº final         := [' +
-              FloatToStr(azeta2.RegDNFH_NoAcum.NumeroFinal) + ']');
-            Writeln('');
+            OutputDebugString(StringToWideChar('Nº final         := [' +
+              FloatToStr(azeta2.RegDNFH_NoAcum.NumeroFinal) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
           end;
         HasarArgentina_TLB.RegistroGlobal:
           begin
-            Writeln('');
-            Writeln('TIPO REGISTRO:');
-            Writeln('[' + FloatToStr(azeta2.Registro) + ']');
-            Writeln('');
-            Writeln('INFORMACION GLOBAL:');
-            Writeln('-------------------');
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
+            OutputDebugString(StringToWideChar('TIPO REGISTRO:' , wideChars, 12));
+            OutputDebugString(StringToWideChar('[' + FloatToStr(azeta2.Registro) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
+            OutputDebugString(StringToWideChar('INFORMACION GLOBAL:' , wideChars, 12));
+            OutputDebugString(StringToWideChar('-------------------' , wideChars, 12));
 
-            Writeln('DF cant. cancelados := [' +
-              IntToStr(azeta2.RegGlobal.DF_CantidadCancelados) + ']');
+            OutputDebugString(StringToWideChar('DF cant. cancelados := [' +
+              IntToStr(azeta2.RegGlobal.DF_CantidadCancelados) + ']' , wideChars, 12));
 
-            Writeln('DF cant. emitidos   := [' +
-              FloatToStr(azeta2.RegGlobal.DF_CantidadEmitidos) + ']');
-            Writeln('');
+            OutputDebugString(StringToWideChar('DF cant. emitidos   := [' +
+              FloatToStr(azeta2.RegGlobal.DF_CantidadEmitidos) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-            Writeln('DF total ventas     := [' +
-              FloatToStr(azeta2.RegGlobal.DF_Total) + ']');
-            Writeln('');
+            OutputDebugString(StringToWideChar('DF total ventas     := [' +
+              FloatToStr(azeta2.RegGlobal.DF_Total) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-            Writeln('DF total gravado    := [' +
-              FloatToStr(azeta2.RegGlobal.DF_TotalGravado) + ']');
+            OutputDebugString(StringToWideChar('DF total gravado    := [' +
+              FloatToStr(azeta2.RegGlobal.DF_TotalGravado) + ']' , wideChars, 12));
 
-            Writeln('DF total IVA        := [' +
-              FloatToStr(azeta2.RegGlobal.DF_TotalIVA) + ']');
+            OutputDebugString(StringToWideChar('DF total IVA        := [' +
+              FloatToStr(azeta2.RegGlobal.DF_TotalIVA) + ']' , wideChars, 12));
 
-            Writeln('DF total tributos   := [' +
-              FloatToStr(azeta2.RegGlobal.DF_TotalTributos) + ']');
+            OutputDebugString(StringToWideChar('DF total tributos   := [' +
+              FloatToStr(azeta2.RegGlobal.DF_TotalTributos) + ']' , wideChars, 12));
 
-            Writeln('DF total no gravado := [' +
-              FloatToStr(azeta2.RegGlobal.DF_TotalNoGravado) + ']');
+            OutputDebugString(StringToWideChar('DF total no gravado := [' +
+              FloatToStr(azeta2.RegGlobal.DF_TotalNoGravado) + ']' , wideChars, 12));
 
-            Writeln('DF total exento     := [' +
-              FloatToStr(azeta2.RegGlobal.DF_TotalExento) + ']');
-            Writeln('');
+            OutputDebugString(StringToWideChar('DF total exento     := [' +
+              FloatToStr(azeta2.RegGlobal.DF_TotalExento) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-            Writeln('DF total DNFH       := [' +
-              FloatToStr(azeta2.RegGlobal.DNFH_Total) + ']');
-            Writeln('');
+            OutputDebugString(StringToWideChar('DF total DNFH       := [' +
+              FloatToStr(azeta2.RegGlobal.DNFH_Total) + ']' , wideChars, 12));
+            OutputDebugString(StringToWideChar('' , wideChars, 12));
           end;
       end;
 
       azeta2 := HASARNG.ContinuarConsultaAcumulados;
     end;
 
-    Writeln('');
-    Writeln('NO HAY MAS INFORMACION DISPONIBLE !...');
-    Writeln('');
-    Writeln('FIN DE LA CONSULTA !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('NO HAY MAS INFORMACION DISPONIBLE !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('FIN DE LA CONSULTA !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -2675,24 +2671,24 @@ var
   respcorreo: RespuestaConsultarConfiguracionServidorCorreo;
 
 begin
-  Writeln('');
-  Writeln('CONSULTANDO CONFIGURACION DEL SERVIDOR DE CORREO ELECTRONICO...');
-  Writeln('');
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
+  OutputDebugString(StringToWideChar('CONSULTANDO CONFIGURACION DEL SERVIDOR DE CORREO ELECTRONICO...' , wideChars, 12));
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   Try
     respcorreo := HASARNG.ConsultarConfiguracionServidorCorreo;
-    Writeln('');
-    Writeln('IP Servidor SMTP     := [' + (respcorreo.DireccionIP) + ']');
-    Writeln('Port Servidor SMTP   := [' + IntToStr(respcorreo.Puerto) + ']');
-    Writeln('Responder a          := [' +
-      (respcorreo.DireccionRemitente) + ']');
-    Writeln('');
-    Writeln('FIN DE LA CONSULTA !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('IP Servidor SMTP     := [' + (respcorreo.DireccionIP) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Port Servidor SMTP   := [' + IntToStr(respcorreo.Puerto) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Responder a          := [' +
+      (respcorreo.DireccionRemitente) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('FIN DE LA CONSULTA !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -2706,38 +2702,38 @@ procedure Tdm.CommandConsDocAsoc_Click;
 var
   respdoc: RespuestaConsultarDocumentoAsociado;
 begin
-  Writeln('');
-  Writeln('CONSULTANDO DOCUMENTOS ASOCIADOS...');
-  Writeln('');
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
+  OutputDebugString(StringToWideChar('CONSULTANDO DOCUMENTOS ASOCIADOS...' , wideChars, 12));
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   Try
     respdoc := HASARNG.ConsultarDocumentoAsociado(1);
-    Writeln('');
-    Writeln(':=LINEA 1:=');
-    Writeln('Tipo comprobante := [' +
-      { FromTiposComprobanteToString } FloatToStr(respdoc.CodigoComprobante) + ']');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(':=LINEA 1:=' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Tipo comprobante := [' +
+      { FromTiposComprobanteToString } FloatToStr(respdoc.CodigoComprobante) + ']' , wideChars, 12));
 
-    Writeln('Nro. comprobante := [' +IntToStr(respdoc.NumeroPos) + '-' +
-      FloatToStr(respdoc.NumeroComprobante) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('Nro. comprobante := [' +IntToStr(respdoc.NumeroPos) + '-' +
+      FloatToStr(respdoc.NumeroComprobante) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     respdoc := HASARNG.ConsultarDocumentoAsociado(2);
-    Writeln('');
-    Writeln(':=LINEA 2:=');
-    Writeln('Tipo comprobante := [' +
-      { FromTiposComprobanteToString } FloatToStr(respdoc.CodigoComprobante) + ']');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(':=LINEA 2:=' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Tipo comprobante := [' +
+      { FromTiposComprobanteToString } FloatToStr(respdoc.CodigoComprobante) + ']' , wideChars, 12));
 
-    Writeln('Nro. comprobante := [' +IntToStr(respdoc.NumeroPos) + '-' +
+    OutputDebugString(StringToWideChar('Nro. comprobante := [' +IntToStr(respdoc.NumeroPos) + '-' +
      IntToStr(respdoc.NumeroComprobante) + ']'
 
-      );
-    Writeln('');
-    Writeln('FIN DE LA CONSULTA !...');
-    Writeln('');
+      , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('FIN DE LA CONSULTA !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -2752,26 +2748,26 @@ var
   resperr: RespuestaConsultarUltimoError;
 
 begin
-  Writeln('');
-  Writeln('CONSULTANDO ULTIMO ERROR...');
-  Writeln('');
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
+  OutputDebugString(StringToWideChar('CONSULTANDO ULTIMO ERROR...' , wideChars, 12));
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   Try
     resperr := HASARNG.ConsultarUltimoError;
-    Writeln('');
-    Writeln('ID error := [' + (resperr.UltimoError) + ']');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('ID error := [' + (resperr.UltimoError) + ']' , wideChars, 12));
 
-    Writeln('Campo    := [' + IntToStr(resperr.NumeroParametro) + ' :: ' +
-      (resperr.NombreParametro) + ']');
-    Writeln('Mensaje  := [' + (resperr.Descripcion) + ']');
-    Writeln('Contexto := [' + (resperr.Contexto) + ']');
-    Writeln('');
-    Writeln('FIN DE LA CONSULTA !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar('Campo    := [' + IntToStr(resperr.NumeroParametro) + ' :: ' +
+      (resperr.NombreParametro) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Mensaje  := [' + (resperr.Descripcion) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Contexto := [' + (resperr.Contexto) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('FIN DE LA CONSULTA !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -2785,56 +2781,56 @@ procedure Tdm.CommandConsEstado_Click;
 var
   respest: RespuestaConsultarEstado;
 begin
-  Writeln('');
-  Writeln('CONSULTANDO ESTADO GENERAL IMPRESORA FISCAL...');
-  Writeln('');
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
+  OutputDebugString(StringToWideChar('CONSULTANDO ESTADO GENERAL IMPRESORA FISCAL...' , wideChars, 12));
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   Try
     respest := HASARNG.ConsultarEstado(NoDocumento);
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln('Tipo Comprobante      := [' + { FromTiposComprobanteToString }
-      FloatToStr(respest.CodigoComprobante) + ']');
+    OutputDebugString(StringToWideChar('Tipo Comprobante      := [' + { FromTiposComprobanteToString }
+      FloatToStr(respest.CodigoComprobante) + ']' , wideChars, 12));
 
-    Writeln('Ultimo Nro.           := [' +
-      FloatToStr(respest.NumeroUltimoComprobante) + ']');
+    OutputDebugString(StringToWideChar('Ultimo Nro.           := [' +
+      FloatToStr(respest.NumeroUltimoComprobante) + ']' , wideChars, 12));
 
-    Writeln('Cancelados            := [' + FloatToStr(respest.CantidadCancelados) + ']');
+    OutputDebugString(StringToWideChar('Cancelados            := [' + FloatToStr(respest.CantidadCancelados) + ']' , wideChars, 12));
 
-    Writeln('Emitidos              := [' + FloatToStr(respest.CantidadEmitidos) + ']');
+    OutputDebugString(StringToWideChar('Emitidos              := [' + FloatToStr(respest.CantidadEmitidos) + ']' , wideChars, 12));
 
-    Writeln('');
-    Writeln('Almacenado en memoria de trabajo...');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Almacenado en memoria de trabajo...' , wideChars, 12));
 
-    Writeln('Código de barras      := [' + BoolToStr(respest.EstadoAuxiliar.CodigoBarrasAlmacenado) + ']');
+    OutputDebugString(StringToWideChar('Código de barras      := [' + BoolToStr(respest.EstadoAuxiliar.CodigoBarrasAlmacenado) + ']' , wideChars, 12));
 
-    Writeln('Datos del cliente     := [' +
-      BoolToStr(respest.EstadoAuxiliar.DatosClienteAlmacenados) + ']');
-    Writeln('');
-    Writeln('Memoria de auditoria...');
+    OutputDebugString(StringToWideChar('Datos del cliente     := [' +
+      BoolToStr(respest.EstadoAuxiliar.DatosClienteAlmacenados) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Memoria de auditoria...' , wideChars, 12));
 
-    Writeln('Casi llena            := [' +
-      BoolToStr(respest.EstadoAuxiliar.MemoriaAuditoriaCasiLlena) + ']');
+    OutputDebugString(StringToWideChar('Casi llena            := [' +
+      BoolToStr(respest.EstadoAuxiliar.MemoriaAuditoriaCasiLlena) + ']' , wideChars, 12));
 
-    Writeln('Llena                 := [' +
-      BoolToStr(respest.EstadoAuxiliar.MemoriaAuditoriaLlena) + ']');
-    Writeln('');
-    Writeln('Otra info...');
+    OutputDebugString(StringToWideChar('Llena                 := [' +
+      BoolToStr(respest.EstadoAuxiliar.MemoriaAuditoriaLlena) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Otra info...' , wideChars, 12));
 
-    Writeln('Modo entrenamiento    := [' +
-      BoolToStr(respest.EstadoAuxiliar.ModoEntrenamiento) + ']');
+    OutputDebugString(StringToWideChar('Modo entrenamiento    := [' +
+      BoolToStr(respest.EstadoAuxiliar.ModoEntrenamiento) + ']' , wideChars, 12));
 
-    Writeln('Ult. comprob. cancel. := [' +
+    OutputDebugString(StringToWideChar('Ult. comprob. cancel. := [' +
       BoolToStr(respest.EstadoAuxiliar.UltimoComprobanteFueCancelado) + ']'
 
-      );
-    Writeln('');
-    Writeln('FIN DE LA CONSULTA !...');
-    Writeln('');
+      , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('FIN DE LA CONSULTA !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -2848,31 +2844,31 @@ procedure Tdm.CommandConsModvers_Click;
 var
   resp: RespuestaConsultarVersion;
 begin
-  Writeln('');
-  Writeln('CONSULTANDO MODELO Y VERSION IMPRESORA FISCAL...');
-  Writeln('');
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
+  OutputDebugString(StringToWideChar('CONSULTANDO MODELO Y VERSION IMPRESORA FISCAL...' , wideChars, 12));
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   Try
     resp := HASARNG.ConsultarVersion;
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln('Impresora fiscal  := [' +(resp.NombreProducto) + ']');
-    Writeln('Marca             := [' +(resp.Marca) + ']');
-    Writeln('Modelo y versión  := [' +(resp.Version) + ']');
+    OutputDebugString(StringToWideChar('Impresora fiscal  := [' +(resp.NombreProducto) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Marca             := [' +(resp.Marca) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Modelo y versión  := [' +(resp.Version) + ']' , wideChars, 12));
 
-    Writeln('Fecha firmware    := [' +(resp.FechaFirmware) + ']');
-    Writeln('Versión motor     := [' +(resp.VersionMotor) + ']');
+    OutputDebugString(StringToWideChar('Fecha firmware    := [' +(resp.FechaFirmware) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Versión motor     := [' +(resp.VersionMotor) + ']' , wideChars, 12));
 
-    Writeln('Versión protocolo := [' + IntToStr(resp.VersionProtocolo) + ']'
+    OutputDebugString(StringToWideChar('Versión protocolo := [' + IntToStr(resp.VersionProtocolo) + ']'
 
-      );
-    Writeln('');
-    Writeln('FIN DE LA CONSULTA !...');
-    Writeln('');
+      , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('FIN DE LA CONSULTA !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -2886,26 +2882,26 @@ procedure Tdm.CommandConsZetas_Click;
 var
   respz: RespuestaConsultarCapacidadZetas;
 begin
-  Writeln('');
-  Writeln('CONSULTANDO CAPACIDAD CIERRES " Z "...');
-  Writeln('');
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
+  OutputDebugString(StringToWideChar('CONSULTANDO CAPACIDAD CIERRES " Z "...' , wideChars, 12));
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   Try
     respz := HASARNG.ConsultarCapacidadZetas;
-    Writeln('');
-    Writeln('Cierres " Z " totales     := [' +
-      IntToStr(respz.CantidadDeZetasRemanentes) + ']');
-    Writeln('Cierres " Z " realizados  := [' + IntToStr(respz.UltimaZeta) + ']');
-    Writeln('Cierres " Z " disponibles := [' +
-      IntToStr((respz.CantidadDeZetasRemanentes) - (respz.UltimaZeta)) + ']');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Cierres " Z " totales     := [' +
+      IntToStr(respz.CantidadDeZetasRemanentes) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Cierres " Z " realizados  := [' + IntToStr(respz.UltimaZeta) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Cierres " Z " disponibles := [' +
+      IntToStr((respz.CantidadDeZetasRemanentes) - (respz.UltimaZeta)) + ']' , wideChars, 12));
 
-    Writeln('');
-    Writeln('FIN DE LA CONSULTA !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('FIN DE LA CONSULTA !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -2920,339 +2916,339 @@ var
   resp: RespuestaConsultarZona;
 
 begin
-  Writeln('');
-  Writeln('CONSULTANDO LINEAS DE USUARIO POR ZONA...');
-  Writeln('');
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
+  OutputDebugString(StringToWideChar('CONSULTANDO LINEAS DE USUARIO POR ZONA...' , wideChars, 12));
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   Try
     resp := HASARNG.ConsultarZona(1, EstacionTicket, ZonaFantasia);
-    Writeln('');
-    Writeln(':=LINEA 1 , Fantasía:=');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(':=LINEA 1 , Fantasía:=' , wideChars, 12));
 
-    Writeln('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']' , wideChars, 12));
 
-    Writeln('Texto               := [' +(resp.Descripcion) + ']');
+    OutputDebugString(StringToWideChar('Texto               := [' +(resp.Descripcion) + ']' , wideChars, 12));
 
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     resp := HASARNG.ConsultarZona(2, EstacionTicket, ZonaFantasia);
-    Writeln('');
-    Writeln(':=LINEA 2 , Fantasía:=');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(':=LINEA 2 , Fantasía:=' , wideChars, 12));
 
-    Writeln('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']' , wideChars, 12));
 
-    Writeln('Texto  := [' +(resp.Descripcion) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('Texto  := [' +(resp.Descripcion) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     resp := HASARNG.ConsultarZona(1, EstacionTicket, Zona1Encabezado);
-    Writeln('');
-    Writeln(':=LINEA 1 , Encabezado 1:=');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(':=LINEA 1 , Encabezado 1:=' , wideChars, 12));
 
-    Writeln('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']' , wideChars, 12));
 
-    Writeln('Texto  := [' +(resp.Descripcion) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('Texto  := [' +(resp.Descripcion) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     resp := HASARNG.ConsultarZona(2, EstacionTicket, Zona1Encabezado);
-    Writeln('');
-    Writeln(':=LINEA 2 , Encabezado 1:=');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(':=LINEA 2 , Encabezado 1:=' , wideChars, 12));
 
-    Writeln('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']' , wideChars, 12));
 
-    Writeln('Texto  := [' +(resp.Descripcion) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('Texto  := [' +(resp.Descripcion) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     resp := HASARNG.ConsultarZona(3, EstacionTicket, Zona1Encabezado);
-    Writeln('');
-    Writeln(':=LINEA 3 , Encabezado 1:=');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(':=LINEA 3 , Encabezado 1:=' , wideChars, 12));
 
-    Writeln('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']' , wideChars, 12));
 
-    Writeln('Texto  := [' +(resp.Descripcion) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('Texto  := [' +(resp.Descripcion) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     resp := HASARNG.ConsultarZona(1, EstacionTicket, Zona2Encabezado);
-    Writeln('');
-    Writeln(':=LINEA 1 , Encabezado 2:=');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(':=LINEA 1 , Encabezado 2:=' , wideChars, 12));
 
-    Writeln('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']' , wideChars, 12));
 
-    Writeln('Texto  := [' +(resp.Descripcion) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('Texto  := [' +(resp.Descripcion) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     resp := HASARNG.ConsultarZona(2, EstacionTicket, Zona2Encabezado);
-    Writeln('');
-    Writeln(':=LINEA 2 , Encabezado 2:=');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(':=LINEA 2 , Encabezado 2:=' , wideChars, 12));
 
-    Writeln('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']' , wideChars, 12));
 
-    Writeln('Texto  := [' +(resp.Descripcion) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('Texto  := [' +(resp.Descripcion) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     resp := HASARNG.ConsultarZona(3, EstacionTicket, Zona2Encabezado);
-    Writeln('');
-    Writeln(':=LINEA 3 , Encabezado 2:=');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(':=LINEA 3 , Encabezado 2:=' , wideChars, 12));
 
-    Writeln('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']' , wideChars, 12));
 
-    Writeln('Texto  := [' +(resp.Descripcion) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('Texto  := [' +(resp.Descripcion) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     resp := HASARNG.ConsultarZona(1, EstacionTicket, Zona1Cola);
-    Writeln('');
-    Writeln(':=LINEA 1 , Cola 1:=');
-    Writeln('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(':=LINEA 1 , Cola 1:=' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']' , wideChars, 12));
 
-    Writeln('Texto  := [' +(resp.Descripcion) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('Texto  := [' +(resp.Descripcion) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     resp := HASARNG.ConsultarZona(2, EstacionTicket, Zona1Cola);
-    Writeln('');
-    Writeln(':=LINEA 2 , Cola 1:=');
-    Writeln('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(':=LINEA 2 , Cola 1:=' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']' , wideChars, 12));
 
-    Writeln('Texto  := [' +(resp.Descripcion) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('Texto  := [' +(resp.Descripcion) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     resp := HASARNG.ConsultarZona(3, EstacionTicket, Zona1Cola);
-    Writeln('');
-    Writeln(':=LINEA 3 , Cola 1:=');
-    Writeln('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(':=LINEA 3 , Cola 1:=' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']' , wideChars, 12));
 
-    Writeln('Texto  := [' +(resp.Descripcion) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('Texto  := [' +(resp.Descripcion) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     resp := HASARNG.ConsultarZona(4, EstacionTicket, Zona1Cola);
-    Writeln('');
-    Writeln(':=LINEA 4 , Cola 1:=');
-    Writeln('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(':=LINEA 4 , Cola 1:=' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']' , wideChars, 12));
 
-    Writeln('Texto  := [' +(resp.Descripcion) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('Texto  := [' +(resp.Descripcion) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     resp := HASARNG.ConsultarZona(1, EstacionTicket, Zona2Cola);
-    Writeln('');
-    Writeln(':=LINEA 1 , Cola 2:=');
-    Writeln('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(':=LINEA 1 , Cola 2:=' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']' , wideChars, 12));
 
-    Writeln('Texto  := [' +(resp.Descripcion) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('Texto  := [' +(resp.Descripcion) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     resp := HASARNG.ConsultarZona(2, EstacionTicket, Zona2Cola);
-    Writeln('');
-    Writeln(':=LINEA 2 , Cola 2:=');
-    Writeln('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(':=LINEA 2 , Cola 2:=' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']' , wideChars, 12));
 
-    Writeln('Texto  := [' +(resp.Descripcion) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('Texto  := [' +(resp.Descripcion) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     resp := HASARNG.ConsultarZona(3, EstacionTicket, Zona2Cola);
-    Writeln('');
-    Writeln(':=LINEA 3 , Cola 2:=');
-    Writeln('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(':=LINEA 3 , Cola 2:=' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']' , wideChars, 12));
 
-    Writeln('Texto  := [' +(resp.Descripcion) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('Texto  := [' +(resp.Descripcion) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     resp := HASARNG.ConsultarZona(4, EstacionTicket, Zona2Cola);
-    Writeln('');
-    Writeln(':=LINEA 4 , Cola 2:=');
-    Writeln('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(':=LINEA 4 , Cola 2:=' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']' , wideChars, 12));
 
-    Writeln('Texto  := [' +(resp.Descripcion) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('Texto  := [' +(resp.Descripcion) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     resp := HASARNG.ConsultarZona(5, EstacionTicket, Zona2Cola);
-    Writeln('');
-    Writeln(':=LINEA 5 , Cola 2:=');
-    Writeln('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(':=LINEA 5 , Cola 2:=' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']' , wideChars, 12));
 
-    Writeln('Texto  := [' +(resp.Descripcion) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('Texto  := [' +(resp.Descripcion) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     resp := HASARNG.ConsultarZona(6, EstacionTicket, Zona2Cola);
-    Writeln('');
-    Writeln(':=LINEA 6 , Cola 2:=');
-    Writeln('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(':=LINEA 6 , Cola 2:=' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']' , wideChars, 12));
 
-    Writeln('Texto  := [' +(resp.Descripcion) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('Texto  := [' +(resp.Descripcion) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     resp := HASARNG.ConsultarZona(1, EstacionTicket, ZonaDomicilioEmisor);
-    Writeln('');
-    Writeln(':=LINEA 1 , Domicilio emisor:=');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(':=LINEA 1 , Domicilio emisor:=' , wideChars, 12));
 
-    Writeln('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']' , wideChars, 12));
 
-    Writeln('Texto  := [' +(resp.Descripcion) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('Texto  := [' +(resp.Descripcion) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     resp := HASARNG.ConsultarZona(2, EstacionTicket, ZonaDomicilioEmisor);
-    Writeln('');
-    Writeln(':=LINEA 2 , Domicilio emisor:=');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(':=LINEA 2 , Domicilio emisor:=' , wideChars, 12));
 
-    Writeln('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']' , wideChars, 12));
 
-    Writeln('Texto  := [' +(resp.Descripcion) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('Texto  := [' +(resp.Descripcion) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     resp := HASARNG.ConsultarZona(3, EstacionTicket, ZonaDomicilioEmisor);
-    Writeln('');
-    Writeln(':=LINEA 3 , Domicilio emisor:=');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(':=LINEA 3 , Domicilio emisor:=' , wideChars, 12));
 
-    Writeln('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']' , wideChars, 12));
 
-    Writeln('Texto  := [' +(resp.Descripcion) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('Texto  := [' +(resp.Descripcion) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     resp := HASARNG.ConsultarZona(4, EstacionTicket, ZonaDomicilioEmisor);
-    Writeln('');
-    Writeln(':=LINEA 4 , Domicilio emisor:=');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(':=LINEA 4 , Domicilio emisor:=' , wideChars, 12));
 
-    Writeln('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Borrado     := [' + BoolToStr(resp.Atributos.BorradoTexto) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Centrado    := [' + BoolToStr(resp.Atributos.Centrado) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Doble ancho := [' + BoolToStr(resp.Atributos.Centrado) + ']' , wideChars, 12));
 
-    Writeln('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']');
+    OutputDebugString(StringToWideChar('Estilo: Negrita     := [' + BoolToStr(resp.Atributos.Negrita) + ']' , wideChars, 12));
 
-    Writeln('Texto  := [' +(resp.Descripcion) + ']'
+    OutputDebugString(StringToWideChar('Texto  := [' +(resp.Descripcion) + ']'
 
-      );
-    Writeln('');
-    Writeln('FIN DE LA CONSULTA !...');
-    Writeln('');
+      , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('FIN DE LA CONSULTA !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -3264,21 +3260,21 @@ end;
 procedure Tdm.CommandCopiarDoc_Click;
 begin
 
-  Writeln('');
-  Writeln('SOLICITANDO REIMPRESION DE COMPROBANTE...');
-  Writeln('');
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
+  OutputDebugString(StringToWideChar('SOLICITANDO REIMPRESION DE COMPROBANTE...' , wideChars, 12));
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   Try
-    Writeln('Copia de Tique Factura " A " Nº 13');
+    OutputDebugString(StringToWideChar('Copia de Tique Factura " A " Nº 13' , wideChars, 12));
     HASARNG.CopiarComprobante(TiqueFacturaA, 13);
 
-    Writeln('');
-    Writeln('COMPROBANTE REIMPRESO !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('COMPROBANTE REIMPRESO !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -3292,34 +3288,34 @@ procedure Tdm.CommandDatosIni_Click;
 var
   datosini: RespuestaConsultarDatosInicializacion;
 begin
-  Writeln('');
-  Writeln('CONSULTANDO DATOS DE INCIALIZACION...');
-  Writeln('');
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
+  OutputDebugString(StringToWideChar('CONSULTANDO DATOS DE INCIALIZACION...' , wideChars, 12));
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   Try
     datosini := HASARNG.ConsultarDatosInicializacion;
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln('Razón Social      := [' + (datosini.RazonSocial) + ']');
-    Writeln('CUIT              := [' + (datosini.Cuit) + ']');
-    Writeln('Responsab. IVA    := [' +
+    OutputDebugString(StringToWideChar('Razón Social      := [' + (datosini.RazonSocial) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('CUIT              := [' + (datosini.Cuit) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Responsab. IVA    := [' +
       { FromTiposDeResponsabilidadesImpresorToString }
-      FloatToStr(datosini.ResponsabilidadIVA) + ']');
-    Writeln('Ingr. Brutos      := [' + (datosini.IngBrutos) + ']');
+      FloatToStr(datosini.ResponsabilidadIVA) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Ingr. Brutos      := [' + (datosini.IngBrutos) + ']' , wideChars, 12));
 
-    Writeln('Fecha inicio act. := [' + DateToStr(datosini.FechaInicioActividades) + ']');
+    OutputDebugString(StringToWideChar('Fecha inicio act. := [' + DateToStr(datosini.FechaInicioActividades) + ']' , wideChars, 12));
 
-    Writeln('Nro. POS          := [' + IntToStr(datosini.NumeroPos) + ']');
-    Writeln('Reg. impr. fiscal := [' + (datosini.Registro) + ']'
+    OutputDebugString(StringToWideChar('Nro. POS          := [' + IntToStr(datosini.NumeroPos) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Reg. impr. fiscal := [' + (datosini.Registro) + ']'
 
-      );
-    Writeln('');
-    Writeln('FIN DE LA CONSULTA !...');
-    Writeln('');
+      , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('FIN DE LA CONSULTA !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -3331,22 +3327,22 @@ end;
 procedure Tdm.CommandDocxMail_Click;
 begin
 
-  Writeln('');
-  Writeln('ENVIANDO COMPROBANTE POR MAIL:');
-  Writeln('');
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
+  OutputDebugString(StringToWideChar('ENVIANDO COMPROBANTE POR MAIL:' , wideChars, 12));
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   Try
-    Writeln('Enviando: Tique Factura " A " Nº 13 :: rcardenes@hasar.com');
-    Writeln('');
+    OutputDebugString(StringToWideChar('Enviando: Tique Factura " A " Nº 13 :: rcardenes@hasar.com', wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
     HASARNG.EnviarDocumentoCorreo(TiqueFacturaA, 13, 'rcardenes@hasar.com');
 
-    Writeln('');
-    Writeln('COMPROBANTE ENVIADO !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('COMPROBANTE ENVIADO !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -3366,23 +3362,23 @@ var
 
 begin
   Try
-    Writeln('');
-    Writeln('IMPRIMIENDO - COMPROBANTE DONACION:');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('IMPRIMIENDO - COMPROBANTE DONACION:' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     HASARNG.CargarDatosCliente('Razón Social Cliente...', '99999999995',
       ResponsableInscripto, TipoCUIT, 'Domicilio Cliente...',
       'Domicilio extensión 1...', 'Domicilio extensión 2...',
-      'Domicilio extensión 3....');
+      'Domicilio extensión 3....' );
     HASARNG.CargarDocumentoAsociado(1, TiqueFacturaA, 2019, 1458);
     HASARNG.CargarBeneficiario('Razón Social Beneficiario...', '00000000000',
       TipoCUIL, 'Domicilio Beneficiario...');
     respabrir := HASARNG.AbrirDocumento(ComprobanteDonacion);
 
-    Writeln('');
-    Writeln(' - (abrir); Comprob. Donación Nro.   := [' +
-      IntToStr(respabrir.NumeroComprobante) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - (abrir); Comprob. Donación Nro.   := [' +
+      IntToStr(respabrir.NumeroComprobante) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     HASARNG.ImprimirItem('Monto parcial vuelto...', 1, 10, Exento, 0,
       ModoSumaMonto, IIVariablePorcentual, 0, DisplayNo, ModoPrecioTotal, 1, '',
@@ -3390,31 +3386,31 @@ begin
     resppago := HASARNG.ImprimirPago('Efectivo...', 10, Pagar, DisplayNo, '',
       Efectivo, 0, '');
 
-    Writeln('');
-    Writeln(' - Pagando... Cambio                 := [' +
-      FloatToStr(resppago.Saldo) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - Pagando... Cambio                 := [' +
+      FloatToStr(resppago.Saldo) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
 
-    Writeln('');
-    Writeln(' - (cerrar);Comprobante Donación Nro. := [' +
-      IntToStr(respcierre.NumeroComprobante) + ']');
-    Writeln(' - Páginas                           := [' +
-      IntToStr(respcierre.CantidadDePaginas) + ']');
-    Writeln('');
-    Writeln('COMPROBANTE DONACION IMPRESO !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - (cerrar);Comprobante Donación Nro. := [' +
+      IntToStr(respcierre.NumeroComprobante) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - Páginas                           := [' +
+      IntToStr(respcierre.CantidadDePaginas) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('COMPROBANTE DONACION IMPRESO !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
 
 // ====================================================================================================================
-// Impresión del Detalle de ventas (cierre 'X');.
+// Impresión del Detalle de ventas (cierre 'X' , wideChars, 12));.
 // ====================================================================================================================
 
 procedure Tdm.CommandEquis_Click;
@@ -3422,60 +3418,60 @@ procedure Tdm.CommandEquis_Click;
 var
   cierre: RespuestaCerrarJornadaFiscal;
 begin
-  Writeln('');
-  Writeln('DETALLE DE VENTAS:');
-  Writeln('');
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
+  OutputDebugString(StringToWideChar('DETALLE DE VENTAS:' , wideChars, 12));
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   Try
     cierre := HASARNG.CerrarJornadaFiscal(ReporteX);
-    Writeln('');
-    Writeln('Reporte...        := [' + FloatToStr(cierre.Reporte) + ']');
-    Writeln('');
-    Writeln('Detalle Nro.      := [' + FloatToStr(cierre.X.Numero) + ']');
-    Writeln('');
-    Writeln('Fecha inicial     := [' + FloatToStr(cierre.X.FechaInicio) + ']');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Reporte...        := [' + FloatToStr(cierre.Reporte) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Detalle Nro.      := [' + FloatToStr(cierre.X.Numero) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Fecha inicial     := [' + FloatToStr(cierre.X.FechaInicio) + ']' , wideChars, 12));
 
-    Writeln('Hora inicial      := [' + FloatToStr(cierre.X.HoraInicio) + ']');
+    OutputDebugString(StringToWideChar('Hora inicial      := [' + FloatToStr(cierre.X.HoraInicio) + ']' , wideChars, 12));
 
-    Writeln('Fecha final       := [' + FloatToStr(cierre.X.FechaCierre) + ']');
+    OutputDebugString(StringToWideChar('Fecha final       := [' + FloatToStr(cierre.X.FechaCierre) + ']' , wideChars, 12));
 
-    Writeln('Hora final        := [' + FloatToStr(cierre.X.HoraCierre) + ']');
+    OutputDebugString(StringToWideChar('Hora final        := [' + FloatToStr(cierre.X.HoraCierre) + ']' , wideChars, 12));
 
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln('DF Emitidos       := [' +
-      FloatToStr(cierre.X.DF_CantidadEmitidos) + ']');
-    Writeln('DF total ventas   := [' + FloatToStr(cierre.X.DF_Total) + ']');
+    OutputDebugString(StringToWideChar('DF Emitidos       := [' +
+      FloatToStr(cierre.X.DF_CantidadEmitidos) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('DF total ventas   := [' + FloatToStr(cierre.X.DF_Total) + ']' , wideChars, 12));
 
-    Writeln('DF total IVA      := [' + FloatToStr(cierre.X.DF_TotalIVA) + ']');
+    OutputDebugString(StringToWideChar('DF total IVA      := [' + FloatToStr(cierre.X.DF_TotalIVA) + ']' , wideChars, 12));
 
-    Writeln('DF total tributos := [' +
-      FloatToStr(cierre.X.DF_TotalTributos) + ']');
+    OutputDebugString(StringToWideChar('DF total tributos := [' +
+      FloatToStr(cierre.X.DF_TotalTributos) + ']' , wideChars, 12));
 
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln('DNFH emitidos     := [' +
-      FloatToStr(cierre.X.DNFH_CantidadEmitidos) + ']');
+    OutputDebugString(StringToWideChar('DNFH emitidos     := [' +
+      FloatToStr(cierre.X.DNFH_CantidadEmitidos) + ']' , wideChars, 12));
 
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln('NC emitidas       := [' +
-      FloatToStr(cierre.X.NC_CantidadEmitidos) + ']');
-    Writeln('NC total crédito  := [' + FloatToStr(cierre.X.NC_Total) + ']');
+    OutputDebugString(StringToWideChar('NC emitidas       := [' +
+      FloatToStr(cierre.X.NC_CantidadEmitidos) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('NC total crédito  := [' + FloatToStr(cierre.X.NC_Total) + ']' , wideChars, 12));
 
-    Writeln('NC total IVA      := [' + FloatToStr(cierre.X.NC_TotalIVA) + ']');
+    OutputDebugString(StringToWideChar('NC total IVA      := [' + FloatToStr(cierre.X.NC_TotalIVA) + ']' , wideChars, 12));
 
-    Writeln('NC total tributos := [' +
+    OutputDebugString(StringToWideChar('NC total tributos := [' +
       FloatToStr(cierre.X.NC_TotalTributos) + ']'
 
-      );
-    Writeln('');
-    Writeln('DETALLE DE VENTAS IMPRESO !...');
-    Writeln('');
+      , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('DETALLE DE VENTAS IMPRESO !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -3489,24 +3485,22 @@ procedure Tdm.CommandFechaHora_Click;
 var
   respfyh: RespuestaConsultarFechaHora;
 begin
-  Writeln('');
-  Writeln('CONSULTA DE FECHA Y HORA:');
-  Writeln('');
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
+  OutputDebugString(StringToWideChar('CONSULTA DE FECHA Y HORA:' , wideChars, 12));
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   Try
     respfyh := HASARNG.ConsultarFechaHora;
-    Writeln('');
-    Writeln('Fecha := [' + DateToStr(respfyh.Fecha) + ']');
-    Writeln('Hora  := [' + TimeToStr(respfyh.Hora) + ']'
-
-      );
-    Writeln('');
-    Writeln('FIN DE LA CONSULTA !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Fecha := [' + DateToStr(respfyh.Fecha) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Hora  := [' + TimeToStr(respfyh.Hora) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('FIN DE LA CONSULTA !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+//      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -3528,9 +3522,9 @@ var
 
 begin
   Try
-    Writeln('');
-    Writeln('IMPRIMIENDO - DOCUMENTO GENERICO:');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('IMPRIMIENDO - DOCUMENTO GENERICO:' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     HASARNG.CargarDatosCliente('Razón Social Cliente...', '99999999995',
       ResponsableInscripto, TipoCUIT, 'Domicilio Cliente...',
@@ -3539,11 +3533,11 @@ begin
     HASARNG.CargarDocumentoAsociado(1, FacturaA, 2019, 1458);
 
     respabrir := HASARNG.AbrirDocumento(Generico);
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln(' - (abrir); Documento Genérico Nro. := [' +
-      IntToStr(respabrir.NumeroComprobante) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar(' - (abrir); Documento Genérico Nro. := [' +
+      IntToStr(respabrir.NumeroComprobante) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     estilo.DobleAncho := True;
     HASARNG.ImprimirTextoGenerico(estilo, 'Texto doble ancho.', DisplayNo);
@@ -3582,18 +3576,18 @@ begin
 
     respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
 
-    Writeln('');
-    Writeln(' - (cerrar);Documento Genérico Nro. := [' +
-      IntToStr(respcierre.NumeroComprobante) + ']');
-    Writeln(' - Páginas                         := [' +
-      IntToStr(respcierre.CantidadDePaginas) + ']');
-    Writeln('');
-    Writeln('DOCUMENTO GENERICO IMPRESO !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - (cerrar);Documento Genérico Nro. := [' +
+      IntToStr(respcierre.NumeroComprobante) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - Páginas                         := [' +
+      IntToStr(respcierre.CantidadDePaginas) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('DOCUMENTO GENERICO IMPRESO !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -3606,21 +3600,21 @@ end;
 procedure Tdm.CommandModifCateg_Click;
 begin
 
-  Writeln('');
-  Writeln('MODIFICANDO CATEGORIA IVA...');
-  Writeln('');
-  Writeln('Nueva responsabilidad IVA := Responsable Inscripto');
-  Writeln('');
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
+  OutputDebugString(StringToWideChar('MODIFICANDO CATEGORIA IVA...' , wideChars, 12));
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
+  OutputDebugString(StringToWideChar('Nueva responsabilidad IVA := Responsable Inscripto' , wideChars, 12));
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   Try
     HASARNG.CambiarCategoriaIVA(IFResponsableInscripto);
-    Writeln('');
-    Writeln('CATEGORIA IVA MODIFICADA !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('CATEGORIA IVA MODIFICADA !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -3633,22 +3627,22 @@ end;
 procedure Tdm.CommandModifIIBB_Click;
 begin
 
-  Writeln('');
-  Writeln('MODIFICANDO INSCRIPCION INGRESOS BRUTOS...');
-  Writeln('');
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
+  OutputDebugString(StringToWideChar('MODIFICANDO INSCRIPCION INGRESOS BRUTOS...' , wideChars, 12));
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-  Writeln('Nuevo código Ingresos Brutos := IIBB-54321099876543210');
-  Writeln('');
+  OutputDebugString(StringToWideChar('Nuevo código Ingresos Brutos := IIBB-54321099876543210' , wideChars, 12));
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   Try
     HASARNG.CambiarInscripIIBB('IIBB-54321099876543210');
-    Writeln('');
-    Writeln('INSCRIPCION INGRESOS BRUTOS MODIFICADA !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('INSCRIPCION INGRESOS BRUTOS MODIFICADA !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -3661,21 +3655,21 @@ end;
 procedure Tdm.CommandModifIniActiv_Click;
 begin
 
-  Writeln('');
-  Writeln('MODIFICANDO FECHA DE INICIO DE ACTIVIDADES...');
-  Writeln('');
-  Writeln('Nueva fecha inicio actividades := 01/02/2015');
-  Writeln('');
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
+  OutputDebugString(StringToWideChar('MODIFICANDO FECHA DE INICIO DE ACTIVIDADES...' , wideChars, 12));
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
+  OutputDebugString(StringToWideChar('Nueva fecha inicio actividades := 01/02/2015' , wideChars, 12));
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   Try
     HASARNG.CambiarFechaInicioActividades(01/02/2015);
-    Writeln('');
-    Writeln('FECHA DE INICIO DE ACTIVIDADES MODIFICADA !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('FECHA DE INICIO DE ACTIVIDADES MODIFICADA !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -3691,28 +3685,28 @@ var
 
   resp2: RespuestaObtenerSiguienteBloqueAuditoria;
 begin
-  Writeln('');
-  Writeln('DESCARGA DE CTD (Cinta Testigo Digital);:');
-  Writeln('');
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
+  OutputDebugString(StringToWideChar('DESCARGA DE CTD (Cinta Testigo Digital);:' , wideChars, 12));
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   Try
-    Writeln('Período: 01/02/2015 al 27/02/2015 , Comprimir, XML único');
-    Writeln('');
+    OutputDebugString(StringToWideChar('Período: 01/02/2015 al 27/02/2015 , Comprimir, XML único' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
     resp := HASARNG.ObtenerPrimerBloqueAuditoria('150201', '150227', ReporteZFecha,
       Comprime, XMLUnico);
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     if (resp.Registro = BloqueFinal) then
     begin
-      Writeln('NO HAY INFORMACION DISPONIBLE !...');
-      Writeln('');
+      OutputDebugString(StringToWideChar('NO HAY INFORMACION DISPONIBLE !...' , wideChars, 12));
+      OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     end
     else
     begin
-      Writeln('Primer bloque de información    := [' +
-       (resp.Informacion) + ']');
-      Writeln('');
+      OutputDebugString(StringToWideChar('Primer bloque de información    := [' +
+       (resp.Informacion) + ']' , wideChars, 12));
+      OutputDebugString(StringToWideChar('' , wideChars, 12));
     end;
 
     while True do
@@ -3721,24 +3715,24 @@ begin
 
       if (resp2.Registro = BloqueInformacion) then
       begin
-        Writeln('Siguiente bloque de información := [' +
-          (resp2.Informacion) + ']');
-        Writeln('');
+        OutputDebugString(StringToWideChar('Siguiente bloque de información := [' +
+          (resp2.Informacion) + ']' , wideChars, 12));
+        OutputDebugString(StringToWideChar('' , wideChars, 12));
       end
       else
       begin
-        Writeln('');
-        Writeln('NO HAY MAS INFORMACION DISPONIBLE !...');
-        Writeln('');
-        Writeln('INFORMACION CTD DESCARGADA !...');
-        Writeln('');
+        OutputDebugString(StringToWideChar('' , wideChars, 12));
+        OutputDebugString(StringToWideChar('NO HAY MAS INFORMACION DISPONIBLE !...' , wideChars, 12));
+        OutputDebugString(StringToWideChar('' , wideChars, 12));
+        OutputDebugString(StringToWideChar('INFORMACION CTD DESCARGADA !...' , wideChars, 12));
+        OutputDebugString(StringToWideChar('' , wideChars, 12));
       end;
 
     end;
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -3754,9 +3748,9 @@ var
 
   resp2: RespuestaObtenerSiguienteBloqueDocumento;
 begin
-  Writeln('');
-  Writeln('DESCARGA INFORMACION COMPROBANTES:');
-  Writeln('');
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
+  OutputDebugString(StringToWideChar('DESCARGA INFORMACION COMPROBANTES:' , wideChars, 12));
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   Try
     resp := HASARNG.ObtenerPrimerBloqueDocumento(1, 4, TiqueFacturaA, Comprime,
@@ -3764,15 +3758,15 @@ begin
 
     if (resp.Registro = BloqueFinal) then
     begin
-      Writeln('NO HAY INFORMACION DISPONIBLE !...!');
-      Writeln('');
+      OutputDebugString(StringToWideChar('NO HAY INFORMACION DISPONIBLE !...!' , wideChars, 12));
+      OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     end
     else
     begin
-      Writeln('Primer bloque de información    := [' +
-       (resp.Informacion) + ']');
-      Writeln('');
+      OutputDebugString(StringToWideChar('Primer bloque de información    := [' +
+       (resp.Informacion) + ']' , wideChars, 12));
+      OutputDebugString(StringToWideChar('' , wideChars, 12));
     end;
 
     while (True) do
@@ -3781,24 +3775,24 @@ begin
 
       if (resp2.Registro = BloqueInformacion) then
       begin
-        Writeln('Siguiente bloque de información := [' +
-          (resp2.Informacion) + ']');
-        Writeln('');
+        OutputDebugString(StringToWideChar('Siguiente bloque de información := [' +
+          (resp2.Informacion) + ']' , wideChars, 12));
+        OutputDebugString(StringToWideChar('' , wideChars, 12));
       end
       else
       begin
-        Writeln('');
-        Writeln('NO HAY MAS INFORMACION DISPONIBLE !...');
-        Writeln('');
-        Writeln('INFORMACION COMPROBANTES DESCARGADA !...');
-        Writeln('');
+        OutputDebugString(StringToWideChar('' , wideChars, 12));
+        OutputDebugString(StringToWideChar('NO HAY MAS INFORMACION DISPONIBLE !...' , wideChars, 12));
+        OutputDebugString(StringToWideChar('' , wideChars, 12));
+        OutputDebugString(StringToWideChar('INFORMACION COMPROBANTES DESCARGADA !...' , wideChars, 12));
+        OutputDebugString(StringToWideChar('' , wideChars, 12));
 
       end;
     end;
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -3814,26 +3808,26 @@ var
 
   resp2: RespuestaObtenerSiguienteBloqueReporteElectronico;
 begin
-  Writeln('');
-  Writeln('DESCARGA DE REPORTES SEMANALES:');
-  Writeln('');
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
+  OutputDebugString(StringToWideChar('DESCARGA DE REPORTES SEMANALES:' , wideChars, 12));
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   Try
-    Writeln('Período: 01/02/2015 al 27/02/2015');
+    OutputDebugString(StringToWideChar('Período: 01/02/2015 al 27/02/2015' , wideChars, 12));
     resp := HASARNG.ObtenerPrimerBloqueReporteElectronico(01/02/2015, 27/02/2015,0);
 
     if (resp.Registro = BloqueFinal) then
     begin
-      Writeln('');
-      Writeln('NO HAY INFORMACION DISPONIBLE !...');
-      Writeln('');
+      OutputDebugString(StringToWideChar('' , wideChars, 12));
+      OutputDebugString(StringToWideChar('NO HAY INFORMACION DISPONIBLE !...' , wideChars, 12));
+      OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     end
     else
     begin
-      Writeln('Primer bloque de información    := [' +
-       (resp.Informacion) + ']');
-      Writeln('');
+      OutputDebugString(StringToWideChar('Primer bloque de información    := [' +
+       (resp.Informacion) + ']' , wideChars, 12));
+      OutputDebugString(StringToWideChar('' , wideChars, 12));
     end;
 
     while (True) do
@@ -3842,24 +3836,24 @@ begin
 
       if (resp2.Registro = BloqueInformacion) then
       begin
-        Writeln('Siguiente bloque de información := [' +
-          (resp2.Informacion) + ']');
-        Writeln('');
+        OutputDebugString(StringToWideChar('Siguiente bloque de información := [' +
+          (resp2.Informacion) + ']' , wideChars, 12));
+        OutputDebugString(StringToWideChar('' , wideChars, 12));
       end
       else
       begin
-        Writeln('');
-        Writeln('NO HAY MÁS INFORMACION DISPONIBLE !...');
-        Writeln('');
-        Writeln('REPORTES SEMANALES DECARGADOS !...');
-        Writeln('');
+        OutputDebugString(StringToWideChar('' , wideChars, 12));
+        OutputDebugString(StringToWideChar('NO HAY MÁS INFORMACION DISPONIBLE !...' , wideChars, 12));
+        OutputDebugString(StringToWideChar('' , wideChars, 12));
+        OutputDebugString(StringToWideChar('REPORTES SEMANALES DECARGADOS !...' , wideChars, 12));
+        OutputDebugString(StringToWideChar('' , wideChars, 12));
 
       end;
     end;
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -3875,25 +3869,25 @@ var
 
   resp2: RespuestaObtenerSiguienteBloqueLog;
 begin
-  Writeln('');
-  Writeln('DESCARGA LOG INTERNO:');
-  Writeln('');
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
+  OutputDebugString(StringToWideChar('DESCARGA LOG INTERNO:' , wideChars, 12));
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   Try
     resp := HASARNG.ObtenerPrimerBloqueLog;
 
     if (resp.Registro = BloqueFinal) then
     begin
-      Writeln('');
-      Writeln('NO HAY INFORMACION DISPONIBLE !...');
-      Writeln('');
+      OutputDebugString(StringToWideChar('' , wideChars, 12));
+      OutputDebugString(StringToWideChar('NO HAY INFORMACION DISPONIBLE !...' , wideChars, 12));
+      OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     end
     else
     begin
-      Writeln('Primer bloque de información    := [' +
-       (resp.Informacion) + ']');
-      Writeln('');
+      OutputDebugString(StringToWideChar('Primer bloque de información    := [' +
+       (resp.Informacion) + ']' , wideChars, 12));
+      OutputDebugString(StringToWideChar('' , wideChars, 12));
     end;
 
     While (True) do
@@ -3902,24 +3896,24 @@ begin
 
       if (resp2.Registro = BloqueInformacion) then
       begin
-        Writeln('Siguiente bloque de información := [' +
-          (resp2.Informacion) + ']');
-        Writeln('');
+        OutputDebugString(StringToWideChar('Siguiente bloque de información := [' +
+          (resp2.Informacion) + ']' , wideChars, 12));
+        OutputDebugString(StringToWideChar('' , wideChars, 12));
       end
       else
       begin
-        Writeln('');
-        Writeln('NO HAY MAS INFORMACION DISPONIBLE !...');
-        Writeln('');
-        Writeln('LOG INTERNO DESCARGADO !...');
-        Writeln('');
+        OutputDebugString(StringToWideChar('' , wideChars, 12));
+        OutputDebugString(StringToWideChar('NO HAY MAS INFORMACION DISPONIBLE !...' , wideChars, 12));
+        OutputDebugString(StringToWideChar('' , wideChars, 12));
+        OutputDebugString(StringToWideChar('LOG INTERNO DESCARGADO !...' , wideChars, 12));
+        OutputDebugString(StringToWideChar('' , wideChars, 12));
 
       end;
     end;
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -3933,47 +3927,47 @@ procedure Tdm.CommandObtStFiscal_Click;
 var
   resp: EstadoFiscal;
 begin
-  Writeln('');
-  Writeln('CONSULTA ULTIMO ESTADO FISCAL:');
-  Writeln('');
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
+  OutputDebugString(StringToWideChar('CONSULTA ULTIMO ESTADO FISCAL:' , wideChars, 12));
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   Try
     resp := HASARNG.ObtenerUltimoEstadoFiscal;
 
-    Writeln('Doc. abierto             := [' + BoolToStr(resp.DocumentoAbierto) + ']');
+    OutputDebugString(StringToWideChar('Doc. abierto             := [' + BoolToStr(resp.DocumentoAbierto) + ']' , wideChars, 12));
 
-    Writeln('Doc. fiscal abierto      := [' + BoolToStr(resp.DocumentoFiscalAbierto) + ']');
+    OutputDebugString(StringToWideChar('Doc. fiscal abierto      := [' + BoolToStr(resp.DocumentoFiscalAbierto) + ']' , wideChars, 12));
 
-    Writeln('Error aritmético         := [' + BoolToStr(resp.ErrorAritmetico) + ']');
+    OutputDebugString(StringToWideChar('Error aritmético         := [' + BoolToStr(resp.ErrorAritmetico) + ']' , wideChars, 12));
 
-    Writeln('Error de ejecución       := [' + BoolToStr(resp.ErrorEjecucion) + ']');
+    OutputDebugString(StringToWideChar('Error de ejecución       := [' + BoolToStr(resp.ErrorEjecucion) + ']' , wideChars, 12));
 
-    Writeln('Error de estado          := [' + BoolToStr(resp.ErrorEstado) + ']');
+    OutputDebugString(StringToWideChar('Error de estado          := [' + BoolToStr(resp.ErrorEstado) + ']' , wideChars, 12));
 
-    Writeln('Error general            := [' + BoolToStr(resp.ErrorGeneral) + ']');
+    OutputDebugString(StringToWideChar('Error general            := [' + BoolToStr(resp.ErrorGeneral) + ']' , wideChars, 12));
 
-    Writeln('Error mem. auditoría     := [' + BoolToStr(resp.ErrorMemoriaAuditoria) + ']');
+    OutputDebugString(StringToWideChar('Error mem. auditoría     := [' + BoolToStr(resp.ErrorMemoriaAuditoria) + ']' , wideChars, 12));
 
-    Writeln('Error mem. fiscal        := [' + BoolToStr(resp.ErrorMemoriaFiscal) + ']');
+    OutputDebugString(StringToWideChar('Error mem. fiscal        := [' + BoolToStr(resp.ErrorMemoriaFiscal) + ']' , wideChars, 12));
 
-    Writeln('Error mem. trabajo       := [' + BoolToStr(resp.ErrorMemoriaTrabajo) + ']');
+    OutputDebugString(StringToWideChar('Error mem. trabajo       := [' + BoolToStr(resp.ErrorMemoriaTrabajo) + ']' , wideChars, 12));
 
-    Writeln('Error parámetro          := [' + BoolToStr(resp.ErrorParametro) + ']');
+    OutputDebugString(StringToWideChar('Error parámetro          := [' + BoolToStr(resp.ErrorParametro) + ']' , wideChars, 12));
 
-    Writeln('Mem. fiscal casi llena   := [' + BoolToStr(resp.MemoriaFiscalCasiLlena) + ']');
+    OutputDebugString(StringToWideChar('Mem. fiscal casi llena   := [' + BoolToStr(resp.MemoriaFiscalCasiLlena) + ']' , wideChars, 12));
 
-    Writeln('Mem. fiscal inicializada := [' + BoolToStr(resp.MemoriaFiscalInicializada) + ']');
+    OutputDebugString(StringToWideChar('Mem. fiscal inicializada := [' + BoolToStr(resp.MemoriaFiscalInicializada) + ']' , wideChars, 12));
 
-    Writeln('Mem. fiscal llena        := [' + BoolToStr(resp.MemoriaFiscalLlena) + ']'
+    OutputDebugString(StringToWideChar('Mem. fiscal llena        := [' + BoolToStr(resp.MemoriaFiscalLlena) + ']'
 
-      );
-    Writeln('');
-    Writeln('FIN DE LA CONSULTA !...');
-    Writeln('');
+      , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('FIN DE LA CONSULTA !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -3987,35 +3981,35 @@ procedure Tdm.CommandObtStImpr_Click;
 var
   resp: EstadoImpresora;
 begin
-  Writeln('');
-  Writeln('CONSULTA ULTIMO ESTADO DE IMPRESORA:');
-  Writeln('');
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
+  OutputDebugString(StringToWideChar('CONSULTA ULTIMO ESTADO DE IMPRESORA:' , wideChars, 12));
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   Try
     resp := HASARNG.ObtenerUltimoEstadoImpresora;
-    Writeln('Cajón abierto        := [' + BoolToStr(resp.CajonAbierto) + ']');
+    OutputDebugString(StringToWideChar('Cajón abierto        := [' + BoolToStr(resp.CajonAbierto) + ']' , wideChars, 12));
 
-    Writeln('Error impresora      := [' + BoolToStr(resp.ErrorImpresora) + ']');
+    OutputDebugString(StringToWideChar('Error impresora      := [' + BoolToStr(resp.ErrorImpresora) + ']' , wideChars, 12));
 
-    Writeln('Falta papel testigo  := [' + BoolToStr(resp.FaltaPapelJournal) + ']');
+    OutputDebugString(StringToWideChar('Falta papel testigo  := [' + BoolToStr(resp.FaltaPapelJournal) + ']' , wideChars, 12));
 
-    Writeln('Falta papel comprob. := [' + BoolToStr(resp.FaltaPapelReceipt) + ']');
+    OutputDebugString(StringToWideChar('Falta papel comprob. := [' + BoolToStr(resp.FaltaPapelReceipt) + ']' , wideChars, 12));
 
-    Writeln('Impresora ocupada    := [' + BoolToStr(resp.ImpresoraOcupada) + ']');
+    OutputDebugString(StringToWideChar('Impresora ocupada    := [' + BoolToStr(resp.ImpresoraOcupada) + ']' , wideChars, 12));
 
-    Writeln('Impresora offline    := [' + BoolToStr(resp.ImpresoraOffLine) + ']');
+    OutputDebugString(StringToWideChar('Impresora offline    := [' + BoolToStr(resp.ImpresoraOffLine) + ']' , wideChars, 12));
 
-    Writeln('Estado Or lógico     := [' + BoolToStr(resp.OrLogico) + ']');
-    Writeln('Tapa abierta         := [' + BoolToStr(resp.TapaAbierta) + ']'
+    OutputDebugString(StringToWideChar('Estado Or lógico     := [' + BoolToStr(resp.OrLogico) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Tapa abierta         := [' + BoolToStr(resp.TapaAbierta) + ']'
 
-      );
-    Writeln('');
-    Writeln('FIN DE LA CONSULTA !...');
-    Writeln('');
+      , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('FIN DE LA CONSULTA !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -4031,9 +4025,9 @@ var
 
   resp: RespuestaAbrirDocumento;
 begin
-  Writeln('');
-  Writeln('IMPRESION DE DOCUMENTO PATRON:');
-  Writeln('');
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
+  OutputDebugString(StringToWideChar('IMPRESION DE DOCUMENTO PATRON:' , wideChars, 12));
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   Try
     estilo.BorradoTexto := False;
@@ -4061,23 +4055,23 @@ begin
       'República Argentina ............................................',
       'América del Sur ................................................');
     resp := HASARNG.AbrirDocumento(TiqueFacturaA);
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln('(abrir); Doc. Patrón Nro. := [' +intToStr(resp.NumeroComprobante) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('(abrir); Doc. Patrón Nro. := [' +intToStr(resp.NumeroComprobante) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
     resp := HASARNG.AbrirDocumento(TiqueFacturaA);
 
-    Writeln('Tique Factura " A " Nº [' +intToStr(resp.NumeroComprobante) +
-      ']... ABIERTO !');
-    Writeln('');
+    OutputDebugString(StringToWideChar('Tique Factura " A " Nº [' +intToStr(resp.NumeroComprobante) +
+      ']... ABIERTO !' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln('');
-    Writeln('DOCUMENTO PATRON IMPRESO !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('DOCUMENTO PATRON IMPRESO !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 
@@ -4166,19 +4160,19 @@ var
 
 begin
   Try
-    Writeln('');
-    Writeln('IMPRIMIENDO - PRESUPUESTO " X " Clase " A ":');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('IMPRIMIENDO - PRESUPUESTO " X " Clase " A ":' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     HASARNG.CargarDatosCliente('Razón Social Cliente...', '99999999995',
       ResponsableInscripto, TipoCUIT, 'Domicilio Cliente...',
       'Domicilio extensión 1...', 'Domicilio extensión 2...',
       'Domicilio extensión 3....');
     respabrir := HASARNG.AbrirDocumento(PresupuestoX);
-    Writeln('');
-    Writeln(' - (abrir);Presupuesto " X " Nro.  := [' +
-      intToStr(respabrir.NumeroComprobante) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - (abrir);Presupuesto " X " Nro.  := [' +
+      intToStr(respabrir.NumeroComprobante) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     estilo.Negrita := True;
     HASARNG.ImprimirTextoFiscal(estilo, 'Hasta agotar stock...', DisplayNo);
@@ -4190,18 +4184,18 @@ begin
 
     respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
 
-    Writeln('');
-    Writeln(' - (cerrar);Presupuesto " X " Nro. := [' +
-     IntToStr(respcierre.NumeroComprobante) + ']');
-    Writeln(' - Páginas                      := [' +
-     IntToStr(respcierre.CantidadDePaginas) + ']');
-    Writeln('');
-    Writeln('PRESUPUESTO " X " IMPRESO !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - (cerrar);Presupuesto " X " Nro. := [' +
+     IntToStr(respcierre.NumeroComprobante) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - Páginas                      := [' +
+     IntToStr(respcierre.CantidadDePaginas) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('PRESUPUESTO " X " IMPRESO !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -4217,32 +4211,32 @@ procedure Tdm.CommandProtocolo_Click;
 
 begin
   Try
-    Writeln('');
-    Writeln('========================================');
-    Writeln('VERIFICANDO CONEXION A IMPRESORA FISCAL:');
-    Writeln('');
-    Writeln('ETHERNET - Conectando a... 10.0.7.69');
-    Writeln('ETHERNET - Conectando a... 127.0.0.1');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('========================================' , wideChars, 12));
+    OutputDebugString(StringToWideChar('VERIFICANDO CONEXION A IMPRESORA FISCAL:' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('ETHERNET - Conectando a... 10.0.7.69' , wideChars, 12));
+    OutputDebugString(StringToWideChar('ETHERNET - Conectando a... 127.0.0.1' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
     HASARNG.Conectar('10.0.7.69',0);
     HASARNG.Conectar('127.0.0.1',0);
-    Writeln('');
-    Writeln('CONECTADO ! ...');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('CONECTADO ! ...' , wideChars, 12));
 
     CommandObtStImpr_Click;
     CommandObtStFiscal_Click;
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln('OCX FISCAL HASAR NG versión := [' +
-      IntToStr(HASARNG.ObtenerVersion) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('OCX FISCAL HASAR NG versión := [' +
+      IntToStr(HASARNG.ObtenerVersion) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
     CommandConsModvers_Click;
-    Writeln('========================================');
-    Writeln('');
+    OutputDebugString(StringToWideChar('========================================' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -4260,36 +4254,36 @@ var
 
 begin
   Try
-    Writeln('');
-    Writeln('CONSULTA RANGO NUMEROS DE CIERRES " Z ":');
-    Writeln('');
-    Writeln('Rango consultado: 01/01/2015 al 31/12/2015...');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('CONSULTA RANGO NUMEROS DE CIERRES " Z ":' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Rango consultado: 01/01/2015 al 31/12/2015...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     resp2 := HASARNG.ObtenerRangoZetasPorFechas(01/01/2014, 31/12/2015);
-    Writeln('');
-    Writeln('Nro. " Z " inicial  := [' + IntToStr(resp2.ZetaInicial) + ']');
-    Writeln('Nro. " Z " final    := [' + IntToStr(resp2.ZetaFinal) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Nro. " Z " inicial  := [' + IntToStr(resp2.ZetaInicial) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Nro. " Z " final    := [' + IntToStr(resp2.ZetaFinal) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln('CONSULTA RANGO FECHAS DE CIERRES " Z ":');
-    Writeln('');
-    Writeln('Rango consultado: 1 al 4000...');
-    Writeln('');
+    OutputDebugString(StringToWideChar('CONSULTA RANGO FECHAS DE CIERRES " Z ":' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Rango consultado: 1 al 4000...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     resp1 := HASARNG.ObtenerRangoFechasPorZetas(1, 4000);
-    Writeln('');
-    Writeln('Fecha " Z " inicial := [' + DateToStr(resp1.FechaInicial) + ']');
-    Writeln('Fecha " Z " final   := [' + DateToStr(resp1.FechaFinal) + ']'
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Fecha " Z " inicial := [' + DateToStr(resp1.FechaInicial) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Fecha " Z " final   := [' + DateToStr(resp1.FechaFinal) + ']'
 
-      );
-    Writeln('');
-    Writeln('FIN DE LA CONSULTA !...');
-    Writeln('');
+      , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('FIN DE LA CONSULTA !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -4311,9 +4305,9 @@ var
 
 begin
   Try
-    Writeln('');
-    Writeln('IMPRIMIENDO - RECIBO " X ":');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('IMPRIMIENDO - RECIBO " X ":' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     HASARNG.CargarDocumentoAsociado(1, TiqueFacturaA, 2019, 1458);
     HASARNG.CargarDatosCliente('Razón Social Cliente...', '99999999995',
@@ -4321,11 +4315,11 @@ begin
       'Domicilio extensión 1...', 'Domicilio extensión 2...',
       'Domicilio extensión 3....');
     respabrir := HASARNG.AbrirDocumento(ReciboX);
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln(' - (abrir); Recibo " X " Nro. := [' +
-      intToStr(respabrir.NumeroComprobante) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar(' - (abrir); Recibo " X " Nro. := [' +
+      intToStr(respabrir.NumeroComprobante) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     HASARNG.ImprimirItem('Item a la venta...', 1, 3500, Gravado, 0,
       ModoSumaMonto, IIVariablePorcentual, 0, DisplayNo, ModoPrecioTotal, 1,
@@ -4334,24 +4328,24 @@ begin
 
     resppago := HASARNG.ImprimirPago('Efectivo...', 3500, Pagar, DisplayNo, '',
       Efectivo, 0, '');
-    Writeln('');
-    Writeln(' - Pagando... Cambio       := [' + FloatToStr(resppago.Saldo) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - Pagando... Cambio       := [' + FloatToStr(resppago.Saldo) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
-    Writeln('');
-    Writeln(' - (cerrar);Recibo " X " Nro. := [' +
-     IntToStr(respcierre.NumeroComprobante) + ']');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - (cerrar);Recibo " X " Nro. := [' +
+     IntToStr(respcierre.NumeroComprobante) + ']' , wideChars, 12));
 
-    Writeln(' - Páginas                 := [' +
-     IntToStr(respcierre.CantidadDePaginas) + ']');
-    Writeln('');
-    Writeln('RECIBO " X " IMPRESO !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar(' - Páginas                 := [' +
+     IntToStr(respcierre.CantidadDePaginas) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('RECIBO " X " IMPRESO !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -4365,21 +4359,21 @@ procedure Tdm.CommandReimpr_Click;
 var
   resp: RespuestaPedirReimpresion;
 begin
-  Writeln('');
-  Writeln('REIMPRESION COMPROBANTE:');
-  Writeln('');
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
+  OutputDebugString(StringToWideChar('REIMPRESION COMPROBANTE:' , wideChars, 12));
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   Try
     resp := HASARNG.PedirReimpresion;
-    Writeln('');
-    Writeln('Copia Nro. := [' +intToStr(resp.NumeroDeCopia) + ']');
-    Writeln('');
-    Writeln('FIN DE LA REIMPRESION !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Copia Nro. := [' +intToStr(resp.NumeroDeCopia) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('FIN DE LA REIMPRESION !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -4401,9 +4395,9 @@ var
 
 begin
   Try
-    Writeln('');
-    Writeln('IMPRIMIENDO - REMITO " R ":');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('IMPRIMIENDO - REMITO " R ":' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     HASARNG.CargarDatosCliente('Razón Social Cliente...', '99999999995',
       ResponsableInscripto, TipoCUIT, 'Domicilio Cliente...',
@@ -4414,11 +4408,11 @@ begin
       'ABC123', 'DEF456');
     HASARNG.CargarDocumentoAsociado(1, TiqueFacturaA, 2019, 1458);
     respabrir := HASARNG.AbrirDocumento(RemitoR);
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln(' - (abrir); Remito " R " Nro. := [' +
-      intToStr(respabrir.NumeroComprobante) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar(' - (abrir); Remito " R " Nro. := [' +
+      intToStr(respabrir.NumeroComprobante) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     estilo.Negrita := True;
     HASARNG.ImprimirTextoFiscal(estilo, 'Hasta agotar stock...', DisplayNo);
@@ -4427,25 +4421,25 @@ begin
       '779123456789', '', Unidad);
     resppago := HASARNG.ImprimirPago('Efectivo...', 100, Pagar, DisplayNo, '',
       Efectivo, 0, '');
-    Writeln('');
-    Writeln(' - Pagando... Cambio       := [' + FloatToStr(resppago.Saldo) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - Pagando... Cambio       := [' + FloatToStr(resppago.Saldo) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
 
-    Writeln('');
-    Writeln(' - (cerrar);Remito " R " Nro. := [' +
-     IntToStr(respcierre.NumeroComprobante) + ']');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - (cerrar);Remito " R " Nro. := [' +
+     IntToStr(respcierre.NumeroComprobante) + ']' , wideChars, 12));
 
-    Writeln(' - Páginas                 := [' +
-     IntToStr(respcierre.CantidadDePaginas) + ']');
-    Writeln('');
-    Writeln('REMITO " R " IMPRESO !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar(' - Páginas                 := [' +
+     IntToStr(respcierre.CantidadDePaginas) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('REMITO " R " IMPRESO !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -4467,9 +4461,9 @@ var
 
 begin
   Try
-    Writeln('');
-    Writeln('IMPRIMIENDO - REMITO " X ":');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('IMPRIMIENDO - REMITO " X ":' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     HASARNG.CargarDatosCliente('Razón Social Cliente...', '99999999995',
       ResponsableInscripto, TipoCUIT, 'Domicilio Cliente...',
@@ -4480,11 +4474,11 @@ begin
       'ABC123', 'DEF456');
     HASARNG.CargarDocumentoAsociado(1, TiqueFacturaA, 2019, 1458);
     respabrir := HASARNG.AbrirDocumento(RemitoX);
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln(' - (abrir); Remito " X " Nro.  := [' +
-      intToStr(respabrir.NumeroComprobante) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar(' - (abrir); Remito " X " Nro.  := [' +
+      intToStr(respabrir.NumeroComprobante) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     estilo.Negrita := True;
     HASARNG.ImprimirTextoFiscal(estilo, 'Hasta agotar stock...', DisplayNo);
@@ -4493,25 +4487,25 @@ begin
       '779123456789', '', Unidad);
     resppago := HASARNG.ImprimirPago('Efectivo...', 100, Pagar, DisplayNo, '',
       Efectivo, 0, '');
-    Writeln('');
-    Writeln(' - Pagando... Cambio        := [' + FloatToStr(resppago.Saldo) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - Pagando... Cambio        := [' + FloatToStr(resppago.Saldo) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
 
-    Writeln('');
-    Writeln(' - (cerrar); Remito " X " Nro. := [' +
-     IntToStr(respcierre.NumeroComprobante) + ']');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - (cerrar); Remito " X " Nro. := [' +
+     IntToStr(respcierre.NumeroComprobante) + ']' , wideChars, 12));
 
-    Writeln(' - Páginas                  := [' +
-     IntToStr(respcierre.CantidadDePaginas) + ']');
-    Writeln('');
-    Writeln('CREMITO " X " IMPRESO !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar(' - Páginas                  := [' +
+     IntToStr(respcierre.CantidadDePaginas) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('CREMITO " X " IMPRESO !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -4523,13 +4517,13 @@ end;
 procedure Tdm.CommandSalir_Click;
 begin
 
-  Writeln('');
-  Writeln('...Oh !.................................................');
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
+  OutputDebugString(StringToWideChar('...Oh !.................................................' , wideChars, 12));
 
-  Writeln('...................CERRANDO PROGRAMA....................');
+  OutputDebugString(StringToWideChar('...................CERRANDO PROGRAMA....................' , wideChars, 12));
 
-  Writeln('...............................................Chau !...');
-  Writeln('');
+  OutputDebugString(StringToWideChar('...............................................Chau !...' , wideChars, 12));
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   exit; // End
 
@@ -4544,29 +4538,29 @@ procedure Tdm.CommandSubtot_Click;
 var
   respsubt: RespuestaConsultarSubtotal;
 begin
-  Writeln('');
-  Writeln('CONSULTA SUBTOTAL:');
-  Writeln('');
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
+  OutputDebugString(StringToWideChar('CONSULTA SUBTOTAL:' , wideChars, 12));
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   Try
     respsubt := HASARNG.ConsultarSubtotal(NoImprimeSubtotal, DisplayNo);
-    Writeln('');
-    Writeln('Cant. Items    := [' + FloatToStr(respsubt.CantidadItems) + ']');
-    Writeln('Subtotal       := [' + FloatToStr(respsubt.Subtotal) + ']');
-    Writeln('Base imponible := [' + FloatToStr(respsubt.MontoBase) + ']');
-    Writeln('IVA            := [' + FloatToStr(respsubt.MontoIVA) + ']');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Cant. Items    := [' + FloatToStr(respsubt.CantidadItems) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Subtotal       := [' + FloatToStr(respsubt.Subtotal) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Base imponible := [' + FloatToStr(respsubt.MontoBase) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('IVA            := [' + FloatToStr(respsubt.MontoIVA) + ']' , wideChars, 12));
 
-    Writeln('Imp. Internos  := [' + FloatToStr(respsubt.MontoImpInternos) + ']');
+    OutputDebugString(StringToWideChar('Imp. Internos  := [' + FloatToStr(respsubt.MontoImpInternos) + ']' , wideChars, 12));
 
-    Writeln('Otros tributos := [' + FloatToStr(respsubt.MontoOtrosTributos) + ']');
-    Writeln('Pagado         := [' + FloatToStr(respsubt.MontoPagado) + ']');
-    Writeln('');
-    Writeln('FIN DE LA CONSULTA !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar('Otros tributos := [' + FloatToStr(respsubt.MontoOtrosTributos) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('Pagado         := [' + FloatToStr(respsubt.MontoPagado) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('FIN DE LA CONSULTA !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -4588,20 +4582,20 @@ var
 
 begin
   Try
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln('IMPRIMIENDO - TIQUE FACTURA " A " /  A CON LEYENDA :');
-    Writeln('');
+    OutputDebugString(StringToWideChar('IMPRIMIENDO - TIQUE FACTURA " A " /  A CON LEYENDA :' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     HASARNG.CargarDatosCliente('Razón Social Cliente...', '99999999995',
       ResponsableInscripto, TipoCUIT, 'Domicilio Cliente...',
       'Domicilio extensión 1...', 'Domicilio extensión 2...',
       'Domicilio extensión 3....');
     respabrir := HASARNG.AbrirDocumento(TiqueFacturaA);
-    Writeln('');
-    Writeln(' - (abrir); Tique Factura " A " Nro.  := [' +
-      intToStr(respabrir.NumeroComprobante) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - (abrir); Tique Factura " A " Nro.  := [' +
+      intToStr(respabrir.NumeroComprobante) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     estilo.Negrita := True;
     HASARNG.ImprimirTextoFiscal(estilo, 'Hasta agotar stock...', DisplayNo);
@@ -4612,25 +4606,25 @@ begin
       ModoPrecioBase);
     resppago := HASARNG.ImprimirPago('Efectivo...', 90, Pagar, DisplayNo, '',
       Efectivo, 0, '');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln(' - Pagando... Cambio               := [' + FloatToStr(resppago.Saldo) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar(' - Pagando... Cambio               := [' + FloatToStr(resppago.Saldo) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
 
-    Writeln('');
-    Writeln(' - (cerrar); Tique Factura " A " Nro. := [' +
-     IntToStr(respcierre.NumeroComprobante) + ']');
-    Writeln(' - Páginas                         := [' +
-     IntToStr(respcierre.CantidadDePaginas) + ']');
-    Writeln('');
-    Writeln('TIQUE FACTURA " A " IMPRESO !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - (cerrar); Tique Factura " A " Nro. := [' +
+     IntToStr(respcierre.NumeroComprobante) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - Páginas                         := [' +
+     IntToStr(respcierre.CantidadDePaginas) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('TIQUE FACTURA " A " IMPRESO !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -4652,18 +4646,18 @@ var
 
 begin
   Try
-    Writeln('');
-    Writeln('IMPRIMIENDO - TIQUE FACTURA " B ":');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('IMPRIMIENDO - TIQUE FACTURA " B ":' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     HASARNG.CargarDatosCliente('Razón Social Cliente...', '99999999995',
       Monotributo, TipoCUIT, 'Domicilio Cliente...', 'Domicilio extensión 1...',
       'Domicilio extensión 2...', 'Domicilio extensión 3....');
     respabrir := HASARNG.AbrirDocumento(TiqueFacturaB);
-    Writeln('');
-    Writeln(' - (abrir); Tique Factura " B " Nro.  := [' +
-      intToStr(respabrir.NumeroComprobante) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - (abrir); Tique Factura " B " Nro.  := [' +
+      intToStr(respabrir.NumeroComprobante) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     estilo.Negrita := True;
     HASARNG.ImprimirTextoFiscal(estilo, 'Hasta agotar stock...', DisplayNo);
@@ -4674,25 +4668,25 @@ begin
       ModoPrecioBase);
     resppago := HASARNG.ImprimirPago('Efectivo...', 90, Pagar, DisplayNo, '',
       Efectivo, 0, '');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln(' - Pagando... Cambio               := [' + FloatToStr(resppago.Saldo) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar(' - Pagando... Cambio               := [' + FloatToStr(resppago.Saldo) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
 
-    Writeln('');
-    Writeln(' - (cerrar); Tique Factura " B " Nro. := [' +
-     IntToStr(respcierre.NumeroComprobante) + ']');
-    Writeln(' - Páginas                         := [' +
-     IntToStr(respcierre.CantidadDePaginas) + ']');
-    Writeln('');
-    Writeln('TIQUE FACTURA " B " IMPRESO !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - (cerrar); Tique Factura " B " Nro. := [' +
+     IntToStr(respcierre.NumeroComprobante) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - Páginas                         := [' +
+     IntToStr(respcierre.CantidadDePaginas) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('TIQUE FACTURA " B " IMPRESO !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -4714,18 +4708,18 @@ var
 
 begin
   Try
-    Writeln('');
-    Writeln('IMPRIMIENDO - TIQUE FACTURA " C ":');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('IMPRIMIENDO - TIQUE FACTURA " C ":' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     HASARNG.CargarDatosCliente('Razón Social Cliente...', '99999999995',
       Monotributo, TipoCUIT, 'Domicilio Cliente...', 'Domicilio extensión 1...',
-      'Domicilio extensión 2...', 'Domicilio extensión 3....');
+      'Domicilio extensión 2...', 'Domicilio extensión 3....' );
     respabrir := HASARNG.AbrirDocumento(TiqueFacturaC);
-    Writeln('');
-    Writeln(' - (abrir); Tique Factura " C " Nro.  := [' +
-      intToStr(respabrir.NumeroComprobante) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - (abrir); Tique Factura " C " Nro.  := [' +
+      intToStr(respabrir.NumeroComprobante) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     estilo.Negrita := True;
     HASARNG.ImprimirTextoFiscal(estilo, 'Hasta agotar stock...', DisplayNo);
@@ -4736,25 +4730,25 @@ begin
       ModoPrecioTotal);
     resppago := HASARNG.ImprimirPago('Efectivo...', 90, Pagar, DisplayNo, '',
       Efectivo, 0, '');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln(' - Pagando... Cambio               := [' + FloatToStr(resppago.Saldo) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar(' - Pagando... Cambio               := [' + FloatToStr(resppago.Saldo) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
 
-    Writeln('');
-    Writeln(' - (cerrar); Tique Factura " C " Nro. := [' +
-     IntToStr(respcierre.NumeroComprobante) + ']');
-    Writeln(' - Páginas                         := [' +
-     IntToStr(respcierre.CantidadDePaginas) + ']');
-    Writeln('');
-    Writeln('TIQUE FACTURA " C "IMPRESO !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - (cerrar); Tique Factura " C " Nro. := [' +
+     IntToStr(respcierre.NumeroComprobante) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - Páginas                         := [' +
+     IntToStr(respcierre.CantidadDePaginas) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('TIQUE FACTURA " C "IMPRESO !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -4776,18 +4770,18 @@ var
 
 begin
   Try
-    Writeln('');
-    Writeln('IMPRIMIENDO - TIQUE FACTURA " M ":');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('IMPRIMIENDO - TIQUE FACTURA " M ":' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     HASARNG.CargarDatosCliente('Razón Social Cliente...', '99999999995',
       Monotributo, TipoCUIT, 'Domicilio Cliente...', 'Domicilio extensión 1...',
-      'Domicilio extensión 2...', 'Domicilio extensión 3....');
+      'Domicilio extensión 2...', 'Domicilio extensión 3....' );
     respabrir := HASARNG.AbrirDocumento(TiqueFacturaM);
-    Writeln('');
-    Writeln(' - (abrir); Tique Factura " M " Nro.  := [' +
-      intToStr(respabrir.NumeroComprobante) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - (abrir); Tique Factura " M " Nro.  := [' +
+      intToStr(respabrir.NumeroComprobante) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     estilo.Negrita := True;
     HASARNG.ImprimirTextoFiscal(estilo, 'Hasta agotar stock...', DisplayNo);
@@ -4798,25 +4792,25 @@ begin
       ModoPrecioTotal);
     resppago := HASARNG.ImprimirPago('Efectivo...', 90, Pagar, DisplayNo, '',
       Efectivo, 0, '');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln(' - Pagando... Cambio               := [' + FloatToStr(resppago.Saldo) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar(' - Pagando... Cambio               := [' + FloatToStr(resppago.Saldo) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
 
-    Writeln('');
-    Writeln(' - (cerrar); Tique Factura " M " Nro. := [' +
-     IntToStr(respcierre.NumeroComprobante) + ']');
-    Writeln(' - Páginas                         := [' +
-     IntToStr(respcierre.CantidadDePaginas) + ']');
-    Writeln('');
-    Writeln('TIQUE FACTURA " M "IMPRESO !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - (cerrar); Tique Factura " M " Nro. := [' +
+     IntToStr(respcierre.NumeroComprobante) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - Páginas                         := [' +
+     IntToStr(respcierre.CantidadDePaginas) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('TIQUE FACTURA " M "IMPRESO !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -4838,16 +4832,16 @@ var
 
 begin
   Try
-    Writeln('');
-    Writeln('IMPRIMIENDO - TIQUE A CONSUMIDOR FINAL:');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('IMPRIMIENDO - TIQUE A CONSUMIDOR FINAL:' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     respabrir := HASARNG.AbrirDocumento(Tique);
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln(' - (abrir); Tique Cons. Final Nro.  := [' +
-      intToStr(respabrir.NumeroComprobante) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar(' - (abrir); Tique Cons. Final Nro.  := [' +
+      intToStr(respabrir.NumeroComprobante) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     estilo.Negrita := True;
     HASARNG.ImprimirTextoFiscal(estilo, 'Hasta agotar stock...', DisplayNo);
@@ -4859,24 +4853,24 @@ begin
 
     resppago := HASARNG.ImprimirPago('Efectivo...', 90, Pagar, DisplayNo, '',
       Efectivo, 0, '');
-    Writeln('');
-    Writeln(' - Pagando... Cambio               := [' + FloatToStr(resppago.Saldo) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - Pagando... Cambio               := [' + FloatToStr(resppago.Saldo) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
 
-    Writeln('');
-    Writeln(' - (cerrar); Tique Cons. Final Nro. := [' +
-     IntToStr(respcierre.NumeroComprobante) + ']');
-    Writeln(' - Páginas                         := [' +
-     IntToStr(respcierre.CantidadDePaginas) + ']');
-    Writeln('');
-    Writeln('TIQUE A CONSUMIDOR FINAL IMPRESO !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - (cerrar); Tique Cons. Final Nro. := [' +
+     IntToStr(respcierre.NumeroComprobante) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - Páginas                         := [' +
+     IntToStr(respcierre.CantidadDePaginas) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('TIQUE A CONSUMIDOR FINAL IMPRESO !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -4898,16 +4892,16 @@ var
 
 begin
   Try
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln('IMPRIMIENDO - TIQUE NOTA DE CREDITO A CONSUMIDOR FINAL:');
-    Writeln('');
+    OutputDebugString(StringToWideChar('IMPRIMIENDO - TIQUE NOTA DE CREDITO A CONSUMIDOR FINAL:' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     respabrir := HASARNG.AbrirDocumento(TiqueNotaCredito);
-    Writeln('');
-    Writeln(' - (abrir); Tique Nota de Crédito a Cons. Final Nro.  := [' +
-      intToStr(respabrir.NumeroComprobante) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - (abrir); Tique Nota de Crédito a Cons. Final Nro.  := [' +
+      intToStr(respabrir.NumeroComprobante) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     estilo.Negrita := True;
     HASARNG.ImprimirTextoFiscal(estilo, 'Hasta agotar stock...', DisplayNo);
@@ -4918,28 +4912,28 @@ begin
       ModoPrecioTotal);
     resppago := HASARNG.ImprimirPago('Efectivo...', 90, Pagar, DisplayNo, '',
       Efectivo, 0, '');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln(' - Pagando... Cambio                                 := [' +
-      FloatToStr(resppago.Saldo) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar(' - Pagando... Cambio                                 := [' +
+      FloatToStr(resppago.Saldo) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
 
-    Writeln('');
-    Writeln(' - (cerrar); Tique Nota de Crédito a Cons. Final Nro. := [' +
-     IntToStr(respcierre.NumeroComprobante) + ']');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - (cerrar); Tique Nota de Crédito a Cons. Final Nro. := [' +
+     IntToStr(respcierre.NumeroComprobante) + ']' , wideChars, 12));
 
-    Writeln(' - Páginas                                           := [' +
-     IntToStr(respcierre.CantidadDePaginas) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar(' - Páginas                                           := [' +
+     IntToStr(respcierre.CantidadDePaginas) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln('TIQUE NOTA DE CREDITO A CONSUMIDOR FINAL IMPRESO !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar('TIQUE NOTA DE CREDITO A CONSUMIDOR FINAL IMPRESO !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -4961,20 +4955,20 @@ var
 
 begin
   Try
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln('IMPRIMIENDO - TIQUE NOTA DE CREDITO " A " /  A CON LEYENDA :');
-    Writeln('');
+    OutputDebugString(StringToWideChar('IMPRIMIENDO - TIQUE NOTA DE CREDITO " A " /  A CON LEYENDA :' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     HASARNG.CargarDatosCliente('Razón Social Cliente...', '99999999995',
       ResponsableInscripto, TipoCUIT, 'Domicilio Cliente...',
       'Domicilio extensión 1...', 'Domicilio extensión 2...',
-      'Domicilio extensión 3....');
+      'Domicilio extensión 3....' );
     respabrir := HASARNG.AbrirDocumento(TiqueNotaCreditoA);
-    Writeln('');
-    Writeln(' - (abrir); Tique Nota de Crédito " A " Nro.  := [' +
-      intToStr(respabrir.NumeroComprobante) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - (abrir); Tique Nota de Crédito " A " Nro.  := [' +
+      intToStr(respabrir.NumeroComprobante) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     estilo.Negrita := True;
     HASARNG.ImprimirTextoFiscal(estilo, 'Hasta agotar stock...', DisplayNo);
@@ -4985,27 +4979,27 @@ begin
       ModoPrecioTotal);
     resppago := HASARNG.ImprimirPago('Efectivo...', 90, Pagar, DisplayNo, '',
       Efectivo, 0, '');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln(' - Pagando... Cambio                       := [' +
-      FloatToStr(resppago.Saldo) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar(' - Pagando... Cambio                       := [' +
+      FloatToStr(resppago.Saldo) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
 
-    Writeln('');
-    Writeln(' - (cerrar); Tique Nota de Crédito " A " Nro. := [' +
-     IntToStr(respcierre.NumeroComprobante) + ']');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - (cerrar); Tique Nota de Crédito " A " Nro. := [' +
+     IntToStr(respcierre.NumeroComprobante) + ']' , wideChars, 12));
 
-    Writeln(' - Páginas                                 := [' +
-     IntToStr(respcierre.CantidadDePaginas) + ']');
-    Writeln('');
-    Writeln('TIQUE NOTA DE CREDITO " A " IMPRESO !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar(' - Páginas                                 := [' +
+     IntToStr(respcierre.CantidadDePaginas) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('TIQUE NOTA DE CREDITO " A " IMPRESO !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -5027,18 +5021,18 @@ var
 
 begin
   Try
-    Writeln('');
-    Writeln('IMPRIMIENDO - TIQUE NOTA DE CREDITO " B ":');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('IMPRIMIENDO - TIQUE NOTA DE CREDITO " B ":' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     HASARNG.CargarDatosCliente('Razón Social Cliente...', '99999999995',
       Monotributo, TipoCUIT, 'Domicilio Cliente...', 'Domicilio extensión 1...',
-      'Domicilio extensión 2...', 'Domicilio extensión 3....');
+      'Domicilio extensión 2...', 'Domicilio extensión 3....' );
     respabrir := HASARNG.AbrirDocumento(TiqueNotaCreditoB);
-    Writeln('');
-    Writeln(' - (abrir); Tique Nota de Crédito " B " Nro.  := [' +
-      intToStr(respabrir.NumeroComprobante) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - (abrir); Tique Nota de Crédito " B " Nro.  := [' +
+      intToStr(respabrir.NumeroComprobante) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     estilo.Negrita := True;
     HASARNG.ImprimirTextoFiscal(estilo, 'Hasta agotar stock...', DisplayNo);
@@ -5049,27 +5043,27 @@ begin
       ModoPrecioTotal);
     resppago := HASARNG.ImprimirPago('Efectivo...', 90, Pagar, DisplayNo, '',
       Efectivo, 0, '');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln(' - Pagando... Cambio                       := [' +
-      FloatToStr(resppago.Saldo) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar(' - Pagando... Cambio                       := [' +
+      FloatToStr(resppago.Saldo) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
 
-    Writeln('');
-    Writeln(' - (cerrar); Tique Nota de Crédito " B " Nro. := [' +
-     IntToStr(respcierre.NumeroComprobante) + ']');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - (cerrar); Tique Nota de Crédito " B " Nro. := [' +
+     IntToStr(respcierre.NumeroComprobante) + ']' , wideChars, 12));
 
-    Writeln(' - Páginas                                 := [' +
-     IntToStr(respcierre.CantidadDePaginas) + ']');
-    Writeln('');
-    Writeln('TIQUE NOTA DE CREDITO " B " IMPRESO !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar(' - Páginas                                 := [' +
+     IntToStr(respcierre.CantidadDePaginas) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('TIQUE NOTA DE CREDITO " B " IMPRESO !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -5091,18 +5085,18 @@ var
 
 begin
   Try
-    Writeln('');
-    Writeln('IMPRIMIENDO - TIQUE NOTA DE CREDITO " C ":');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('IMPRIMIENDO - TIQUE NOTA DE CREDITO " C ":' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     HASARNG.CargarDatosCliente('Razón Social Cliente...', '99999999995',
       Monotributo, TipoCUIT, 'Domicilio Cliente...', 'Domicilio extensión 1...',
-      'Domicilio extensión 2...', 'Domicilio extensión 3....');
+      'Domicilio extensión 2...', 'Domicilio extensión 3....' );
     respabrir := HASARNG.AbrirDocumento(TiqueNotaCreditoC);
-    Writeln('');
-    Writeln(' - (abrir); Tique Nota de Crédito " C " Nro.  := [' +
-      intToStr(respabrir.NumeroComprobante) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - (abrir); Tique Nota de Crédito " C " Nro.  := [' +
+      intToStr(respabrir.NumeroComprobante) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     estilo.Negrita := True;
     HASARNG.ImprimirTextoFiscal(estilo, 'Hasta agotar stock...', DisplayNo);
@@ -5113,27 +5107,27 @@ begin
       ModoPrecioTotal);
     resppago := HASARNG.ImprimirPago('Efectivo...', 90, Pagar, DisplayNo, '',
       Efectivo, 0, '');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln(' - Pagando... Cambio                       := [' +
-      FloatToStr(resppago.Saldo) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar(' - Pagando... Cambio                       := [' +
+      FloatToStr(resppago.Saldo) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
 
-    Writeln('');
-    Writeln(' - (cerrar); Tique Nota de Crédito " C " Nro. := [' +
-     IntToStr(respcierre.NumeroComprobante) + ']');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - (cerrar); Tique Nota de Crédito " C " Nro. := [' +
+     IntToStr(respcierre.NumeroComprobante) + ']' , wideChars, 12));
 
-    Writeln(' - Páginas                                 := [' +
-     IntToStr(respcierre.CantidadDePaginas) + ']');
-    Writeln('');
-    Writeln('TIQUE NOTA DE CREDITO " C " IMPRESO !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar(' - Páginas                                 := [' +
+     IntToStr(respcierre.CantidadDePaginas) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('TIQUE NOTA DE CREDITO " C " IMPRESO !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -5155,18 +5149,18 @@ var
 
 begin
   Try
-    Writeln('');
-    Writeln('IMPRIMIENDO - TIQUE NOTA DE CREDITO " M ":');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('IMPRIMIENDO - TIQUE NOTA DE CREDITO " M ":' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     HASARNG.CargarDatosCliente('Razón Social Cliente...', '99999999995',
       Monotributo, TipoCUIT, 'Domicilio Cliente...', 'Domicilio extensión 1...',
-      'Domicilio extensión 2...', 'Domicilio extensión 3....');
+      'Domicilio extensión 2...', 'Domicilio extensión 3....' );
     respabrir := HASARNG.AbrirDocumento(TiqueNotaCreditoM);
-    Writeln('');
-    Writeln(' - (abrir); Tique Nota de Crédito " M " Nro.  := [' +
-      intToStr(respabrir.NumeroComprobante) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - (abrir); Tique Nota de Crédito " M " Nro.  := [' +
+      intToStr(respabrir.NumeroComprobante) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     estilo.Negrita := True;
     HASARNG.ImprimirTextoFiscal(estilo, 'Hasta agotar stock...', DisplayNo);
@@ -5177,27 +5171,27 @@ begin
       ModoPrecioTotal);
     resppago := HASARNG.ImprimirPago('Efectivo...', 90, Pagar, DisplayNo, '',
       Efectivo, 0, '');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln(' - Pagando... Cambio                       := [' +
-      FloatToStr(resppago.Saldo) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar(' - Pagando... Cambio                       := [' +
+      FloatToStr(resppago.Saldo) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
 
-    Writeln('');
-    Writeln(' - (cerrar); Tique Nota de Crédito " M " Nro. := [' +
-     IntToStr(respcierre.NumeroComprobante) + ']');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - (cerrar); Tique Nota de Crédito " M " Nro. := [' +
+     IntToStr(respcierre.NumeroComprobante) + ']' , wideChars, 12));
 
-    Writeln(' - Páginas                                 := [' +
-     IntToStr(respcierre.CantidadDePaginas) + ']');
-    Writeln('');
-    Writeln('TIQUE NOTA DE CREDITO " M " IMPRESO !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar(' - Páginas                                 := [' +
+     IntToStr(respcierre.CantidadDePaginas) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('TIQUE NOTA DE CREDITO " M " IMPRESO !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -5219,20 +5213,20 @@ var
 
 begin
   Try
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln('IMPRIMIENDO - TIQUE NOTA DE DEBITO " A " /  A CON LEYENDA :');
-    Writeln('');
+    OutputDebugString(StringToWideChar('IMPRIMIENDO - TIQUE NOTA DE DEBITO " A " /  A CON LEYENDA :' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     HASARNG.CargarDatosCliente('Razón Social Cliente...', '99999999995',
       ResponsableInscripto, TipoCUIT, 'Domicilio Cliente...',
       'Domicilio extensión 1...', 'Domicilio extensión 2...',
-      'Domicilio extensión 3....');
+      'Domicilio extensión 3....' );
     respabrir := HASARNG.AbrirDocumento(TiqueNotaDebitoA);
-    Writeln('');
-    Writeln(' - (abrir); Tique Nota de Débito " A " Nro.  := [' +
-      intToStr(respabrir.NumeroComprobante) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - (abrir); Tique Nota de Débito " A " Nro.  := [' +
+      intToStr(respabrir.NumeroComprobante) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     estilo.Negrita := True;
     HASARNG.ImprimirTextoFiscal(estilo, 'Hasta agotar stock...', DisplayNo);
@@ -5243,27 +5237,27 @@ begin
       ModoPrecioTotal);
     resppago := HASARNG.ImprimirPago('Efectivo...', 90, Pagar, DisplayNo, '',
       Efectivo, 0, '');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln(' - Pagando... Cambio                      := [' +
-      FloatToStr(resppago.Saldo) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar(' - Pagando... Cambio                      := [' +
+      FloatToStr(resppago.Saldo) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
 
-    Writeln('');
-    Writeln(' - (cerrar); Tique Nota de Débito " A " Nro. := [' +
-     IntToStr(respcierre.NumeroComprobante) + ']');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - (cerrar); Tique Nota de Débito " A " Nro. := [' +
+     IntToStr(respcierre.NumeroComprobante) + ']' , wideChars, 12));
 
-    Writeln(' - Páginas                                := [' +
-     IntToStr(respcierre.CantidadDePaginas) + ']');
-    Writeln('');
-    Writeln('TIQUE NOTA DE DEBITO " A " IMPRESO !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar(' - Páginas                                := [' +
+     IntToStr(respcierre.CantidadDePaginas) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('TIQUE NOTA DE DEBITO " A " IMPRESO !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -5285,18 +5279,18 @@ var
 
 begin
   Try
-    Writeln('');
-    Writeln('IMPRIMIENDO - TIQUE NOTA DE DEBITO " B ":');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('IMPRIMIENDO - TIQUE NOTA DE DEBITO " B ":' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     HASARNG.CargarDatosCliente('Razón Social Cliente...', '99999999995',
       Monotributo, TipoCUIT, 'Domicilio Cliente...', 'Domicilio extensión 1...',
-      'Domicilio extensión 2...', 'Domicilio extensión 3....');
+      'Domicilio extensión 2...', 'Domicilio extensión 3....' );
     respabrir := HASARNG.AbrirDocumento(TiqueNotaDebitoB);
-    Writeln('');
-    Writeln(' - (abrir); Tique Nota de Débito " B " Nro.  := [' +
-      intToStr(respabrir.NumeroComprobante) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - (abrir); Tique Nota de Débito " B " Nro.  := [' +
+      intToStr(respabrir.NumeroComprobante) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     estilo.Negrita := True;
     HASARNG.ImprimirTextoFiscal(estilo, 'Hasta agotar stock...', DisplayNo);
@@ -5307,27 +5301,27 @@ begin
       ModoPrecioTotal);
     resppago := HASARNG.ImprimirPago('Efectivo...', 90, Pagar, DisplayNo, '',
       Efectivo, 0, '');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln(' - Pagando... Cambio                      := [' +
-      FloatToStr(resppago.Saldo) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar(' - Pagando... Cambio                      := [' +
+      FloatToStr(resppago.Saldo) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
 
-    Writeln('');
-    Writeln(' - (cerrar); Tique Nota de Débito " B " Nro. := [' +
-     IntToStr(respcierre.NumeroComprobante) + ']');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - (cerrar); Tique Nota de Débito " B " Nro. := [' +
+     IntToStr(respcierre.NumeroComprobante) + ']' , wideChars, 12));
 
-    Writeln(' - Páginas                                := [' +
-     IntToStr(respcierre.CantidadDePaginas) + ']');
-    Writeln('');
-    Writeln('TIQUE NOTA DE DEBITO " B " IMPRESO !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar(' - Páginas                                := [' +
+     IntToStr(respcierre.CantidadDePaginas) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('TIQUE NOTA DE DEBITO " B " IMPRESO !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -5349,18 +5343,18 @@ var
 
 begin
   Try
-    Writeln('');
-    Writeln('IMPRIMIENDO - TIQUE NOTA DE DEBITO " C ":');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('IMPRIMIENDO - TIQUE NOTA DE DEBITO " C ":' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     HASARNG.CargarDatosCliente('Razón Social Cliente...', '99999999995',
       Monotributo, TipoCUIT, 'Domicilio Cliente...', 'Domicilio extensión 1...',
-      'Domicilio extensión 2...', 'Domicilio extensión 3....');
+      'Domicilio extensión 2...', 'Domicilio extensión 3....' );
     respabrir := HASARNG.AbrirDocumento(NotaDeDebitoC);
-    Writeln('');
-    Writeln(' - (abrir); Tique Nota de Débtio " C " Nro.  := [' +
-      intToStr(respabrir.NumeroComprobante) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - (abrir); Tique Nota de Débtio " C " Nro.  := [' +
+      intToStr(respabrir.NumeroComprobante) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     estilo.Negrita := True;
     HASARNG.ImprimirTextoFiscal(estilo, 'Hasta agotar stock...', DisplayNo);
@@ -5371,27 +5365,27 @@ begin
       ModoPrecioTotal);
     resppago := HASARNG.ImprimirPago('Efectivo...', 90, Pagar, DisplayNo, '',
       Efectivo, 0, '');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln(' - Pagando... Cambio                      := [' +
-      FloatToStr(resppago.Saldo) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar(' - Pagando... Cambio                      := [' +
+      FloatToStr(resppago.Saldo) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
 
-    Writeln('');
-    Writeln(' - (cerrar); Tique Nota de Débtio " C " Nro. := [' +
-     IntToStr(respcierre.NumeroComprobante) + ']');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - (cerrar); Tique Nota de Débtio " C " Nro. := [' +
+     IntToStr(respcierre.NumeroComprobante) + ']' , wideChars, 12));
 
-    Writeln(' - Páginas                                := [' +
-     IntToStr(respcierre.CantidadDePaginas) + ']');
-    Writeln('');
-    Writeln('TIQUE NOTA DE DEBITO " C " IMPRESO !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar(' - Páginas                                := [' +
+     IntToStr(respcierre.CantidadDePaginas) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('TIQUE NOTA DE DEBITO " C " IMPRESO !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -5413,18 +5407,18 @@ var
 
 begin
   Try
-    Writeln('');
-    Writeln('IMPRIMIENDO - TIQUE NOTA DE DEBITO " M ":');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('IMPRIMIENDO - TIQUE NOTA DE DEBITO " M ":' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     HASARNG.CargarDatosCliente('Razón Social Cliente...', '99999999995',
       Monotributo, TipoCUIT, 'Domicilio Cliente...', 'Domicilio extensión 1...',
-      'Domicilio extensión 2...', 'Domicilio extensión 3....');
+      'Domicilio extensión 2...', 'Domicilio extensión 3....' );
     respabrir := HASARNG.AbrirDocumento(NotaDeDebitoM);
-    Writeln('');
-    Writeln(' - (abrir); Tique Nota de Débito " M " Nro.  := [' +
-      intToStr(respabrir.NumeroComprobante) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - (abrir); Tique Nota de Débito " M " Nro.  := [' +
+      intToStr(respabrir.NumeroComprobante) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     estilo.Negrita := True;
     HASARNG.ImprimirTextoFiscal(estilo, 'Hasta agotar stock...', DisplayNo);
@@ -5435,27 +5429,27 @@ begin
       ModoPrecioTotal);
     resppago := HASARNG.ImprimirPago('Efectivo...', 90, Pagar, DisplayNo, '',
       Efectivo, 0, '');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln(' - Pagando... Cambio                      := [' +
-      FloatToStr(resppago.Saldo) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar(' - Pagando... Cambio                      := [' +
+      FloatToStr(resppago.Saldo) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
 
-    Writeln('');
-    Writeln(' - (cerrar); Tique Nota de Débito " M " Nro. := [' +
-     IntToStr(respcierre.NumeroComprobante) + ']');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - (cerrar); Tique Nota de Débito " M " Nro. := [' +
+     IntToStr(respcierre.NumeroComprobante) + ']' , wideChars, 12));
 
-    Writeln(' - Páginas                                := [' +
-     IntToStr(respcierre.CantidadDePaginas) + ']');
-    Writeln('');
-    Writeln('TIQUE NOTA DE DEBITO " M " IMPRESO !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar(' - Páginas                                := [' +
+     IntToStr(respcierre.CantidadDePaginas) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('TIQUE NOTA DE DEBITO " M " IMPRESO !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -5477,21 +5471,21 @@ var
 
 begin
   Try
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln('IMPRIMIENDO - TIQUE RECIBO " A " /  A CON LEYENDA :');
-    Writeln('');
+    OutputDebugString(StringToWideChar('IMPRIMIENDO - TIQUE RECIBO " A " /  A CON LEYENDA :' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     HASARNG.CargarDatosCliente('Razón Social Cliente...', '99999999995',
       ResponsableInscripto, TipoCUIT, 'Domicilio Cliente...',
       'Domicilio extensión 1...', 'Domicilio extensión 2...',
-      'Domicilio extensión 3....');
+      'Domicilio extensión 3....' );
     respabrir := HASARNG.AbrirDocumento(ReciboA);
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln(' - (abrir); Tique Recibo " A " Nro.  := [' +
-      intToStr(respabrir.NumeroComprobante) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar(' - (abrir); Tique Recibo " A " Nro.  := [' +
+      intToStr(respabrir.NumeroComprobante) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     estilo.Negrita := True;
     HASARNG.ImprimirTextoFiscal(estilo, 'Hasta agotar stock...', DisplayNo);
@@ -5502,25 +5496,25 @@ begin
       ModoPrecioTotal);
     resppago := HASARNG.ImprimirPago('Efectivo...', 90, Pagar, DisplayNo, '',
       Efectivo, 0, '');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln('Pagando... Cambio                 := [' + FloatToStr(resppago.Saldo) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar('Pagando... Cambio                 := [' + FloatToStr(resppago.Saldo) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
 
-    Writeln('');
-    Writeln(' - (cerrar); Tique Recibo " A " Nro. := [' +
-     IntToStr(respcierre.NumeroComprobante) + ']');
-    Writeln(' - Páginas                        := [' +
-     IntToStr(respcierre.CantidadDePaginas) + ']');
-    Writeln('');
-    Writeln('TIQUE RECIBO " A " IMPRESO !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - (cerrar); Tique Recibo " A " Nro. := [' +
+     IntToStr(respcierre.NumeroComprobante) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - Páginas                        := [' +
+     IntToStr(respcierre.CantidadDePaginas) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('TIQUE RECIBO " A " IMPRESO !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -5542,19 +5536,19 @@ var
 
 begin
   Try
-    Writeln('');
-    Writeln('IMPRIMIENDO - TIQUE RECIBO " B ":');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('IMPRIMIENDO - TIQUE RECIBO " B ":' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     HASARNG.CargarDatosCliente('Razón Social Cliente...', '99999999995',
       Monotributo, TipoCUIT, 'Domicilio Cliente...', 'Domicilio extensión 1...',
-      'Domicilio extensión 2...', 'Domicilio extensión 3....');
+      'Domicilio extensión 2...', 'Domicilio extensión 3....' );
     respabrir := HASARNG.AbrirDocumento(ReciboB);
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln(' - (abrir); Tique Recibo " B " Nro.  := [' +
-      intToStr(respabrir.NumeroComprobante) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar(' - (abrir); Tique Recibo " B " Nro.  := [' +
+      intToStr(respabrir.NumeroComprobante) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     estilo.Negrita := True;
     HASARNG.ImprimirTextoFiscal(estilo, 'Hasta agotar stock...', DisplayNo);
@@ -5565,25 +5559,25 @@ begin
       ModoPrecioTotal);
     resppago := HASARNG.ImprimirPago('Efectivo...', 90, Pagar, DisplayNo, '',
       Efectivo, 0, '');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln(' - Pagando... Cambio              := [' + FloatToStr(resppago.Saldo) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar(' - Pagando... Cambio              := [' + FloatToStr(resppago.Saldo) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
 
-    Writeln('');
-    Writeln(' - (cerrar); Tique Recibo " B " Nro. := [' +
-     IntToStr(respcierre.NumeroComprobante) + ']');
-    Writeln(' - Páginas                        := [' +
-     IntToStr(respcierre.CantidadDePaginas) + ']');
-    Writeln('');
-    Writeln('TIQUE RECIBO " B " IMPRESO !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - (cerrar); Tique Recibo " B " Nro. := [' +
+     IntToStr(respcierre.NumeroComprobante) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - Páginas                        := [' +
+     IntToStr(respcierre.CantidadDePaginas) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('TIQUE RECIBO " B " IMPRESO !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -5605,16 +5599,16 @@ var
 
 begin
   Try
-    Writeln('');
-    Writeln('IMPRIMIENDO - TIQUE RECIBO " C ":');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('IMPRIMIENDO - TIQUE RECIBO " C ":' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     HASARNG.CargarDatosCliente('Razón Social Cliente...', '99999999995',
       Monotributo, TipoCUIT, 'Domicilio Cliente...', 'Domicilio extensión 1...',
-      'Domicilio extensión 2...', 'Domicilio extensión 3....');
+      'Domicilio extensión 2...', 'Domicilio extensión 3....' );
     respabrir := HASARNG.AbrirDocumento(ReciboC);
-    Writeln(' - (abrir); Tique Recibo " C " Nro.  := [' +
-      intToStr(respabrir.NumeroComprobante) + ']');
+    OutputDebugString(StringToWideChar(' - (abrir); Tique Recibo " C " Nro.  := [' +
+      intToStr(respabrir.NumeroComprobante) + ']' , wideChars, 12));
 
     estilo.Negrita := True;
     HASARNG.ImprimirTextoFiscal(estilo, 'Hasta agotar stock...', DisplayNo);
@@ -5625,25 +5619,25 @@ begin
       ModoPrecioTotal);
     resppago := HASARNG.ImprimirPago('Efectivo...', 90, Pagar, DisplayNo, '',
       Efectivo, 0, '');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln(' - Pagando... Cambio              := [' + FloatToStr(resppago.Saldo) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar(' - Pagando... Cambio              := [' + FloatToStr(resppago.Saldo) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
 
-    Writeln('');
-    Writeln(' - (cerrar); Tique Recibo " C " Nro. := [' +
-     IntToStr(respcierre.NumeroComprobante) + ']');
-    Writeln(' - Páginas                        := [' +
-     IntToStr(respcierre.CantidadDePaginas) + ']');
-    Writeln('');
-    Writeln('TIQUE RECIBO " C " IMPRESO !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - (cerrar); Tique Recibo " C " Nro. := [' +
+     IntToStr(respcierre.NumeroComprobante) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - Páginas                        := [' +
+     IntToStr(respcierre.CantidadDePaginas) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('TIQUE RECIBO " C " IMPRESO !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -5665,19 +5659,19 @@ var
 
 begin
   Try
-    Writeln('');
-    Writeln('IMPRIMIENDO - TIQUE RECIBO " M ":');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('IMPRIMIENDO - TIQUE RECIBO " M ":' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     HASARNG.CargarDatosCliente('Razón Social Cliente...', '99999999995',
       Monotributo, TipoCUIT, 'Domicilio Cliente...', 'Domicilio extensión 1...',
-      'Domicilio extensión 2...', 'Domicilio extensión 3....');
+      'Domicilio extensión 2...', 'Domicilio extensión 3....' );
     respabrir := HASARNG.AbrirDocumento(ReciboM);
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln(' - (abrir); Tique Recibo " M " Nro.  := [' +
-      intToStr(respabrir.NumeroComprobante) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar(' - (abrir); Tique Recibo " M " Nro.  := [' +
+      intToStr(respabrir.NumeroComprobante) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     estilo.Negrita := True;
     HASARNG.ImprimirTextoFiscal(estilo, 'Hasta agotar stock...', DisplayNo);
@@ -5688,25 +5682,25 @@ begin
       ModoPrecioTotal);
     resppago := HASARNG.ImprimirPago('Efectivo...', 90, Pagar, DisplayNo, '',
       Efectivo, 0, '');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln(' - Pagando... Cambio              := [' + FloatToStr(resppago.Saldo) + ']');
-    Writeln('');
+    OutputDebugString(StringToWideChar(' - Pagando... Cambio              := [' + FloatToStr(resppago.Saldo) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
     respcierre := HASARNG.CerrarDocumento(0, 'hasarventas@hasar.com');
 
-    Writeln('');
-    Writeln(' - (cerrar); Tique Recibo " M " Nro. := [' +
-     IntToStr(respcierre.NumeroComprobante) + ']');
-    Writeln(' - Páginas                        := [' +
-     IntToStr(respcierre.CantidadDePaginas) + ']');
-    Writeln('');
-    Writeln('TIQUE RECIBO " M " IMPRESO !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - (cerrar); Tique Recibo " M " Nro. := [' +
+     IntToStr(respcierre.NumeroComprobante) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar(' - Páginas                        := [' +
+     IntToStr(respcierre.CantidadDePaginas) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('TIQUE RECIBO " M " IMPRESO !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -5720,22 +5714,22 @@ procedure Tdm.CommandZBorr_Click;
 var
   resp: RespuestaConsultarZetaBorrable;
 begin
-  Writeln('');
-  Writeln('CONSULTA LIMITE BORRADO CIERRES " Z ":');
-  Writeln('');
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
+  OutputDebugString(StringToWideChar('CONSULTA LIMITE BORRADO CIERRES " Z ":' , wideChars, 12));
+  OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   Try
     resp := HASARNG.ConsultarZetaBorrable;
-    Writeln('');
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
-    Writeln('Límite Cierre " Z " Nro. := [' +intToStr(resp.NumeroZeta) + ']');
-    Writeln('');
-    Writeln('FIN DE LA CONSULTA !...');
-    Writeln('');
+    OutputDebugString(StringToWideChar('Límite Cierre " Z " Nro. := [' +intToStr(resp.NumeroZeta) + ']' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
+    OutputDebugString(StringToWideChar('FIN DE LA CONSULTA !...' , wideChars, 12));
+    OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   except
     on E: Exception do
-      Writeln('Error := ' + (E.ClassName + ' : ' + (E.Message)));
+      OutputDebugString(StringToWideChar('Error := ' + (E.ClassName) + ' : ' + (E.Message), wideChars, 12));
   end;
 
 end;
@@ -5761,7 +5755,7 @@ begin
 
   // if Not(proc) then
   begin
-    Writeln('Comando en proceso...');
+    OutputDebugString(StringToWideChar('Comando en proceso...' , wideChars, 12));
     // proc := True;
 
   end;
@@ -5775,7 +5769,7 @@ end;
 procedure HASARNG_ComandoProcesado;
 begin
 
-  Writeln('Comando procesado !');
+  OutputDebugString(StringToWideChar('Comando procesado !' , wideChars, 12));
   // proc := False;
 
 end;
@@ -5787,8 +5781,8 @@ end;
 procedure HASARNG_EventoImpresora(Estado: EstadoImpresora);
 begin
 
-  Writeln('Evento impresora...');
-//?  Writeln('Estado := [' + (Estado) + ']');
+  OutputDebugString(StringToWideChar('Evento impresora...' , wideChars, 12));
+//?  OutputDebugString(StringToWideChar('Estado := [' + (Estado) + ']' , wideChars, 12));
 
 end;
 

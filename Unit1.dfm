@@ -457,6 +457,8 @@ object Form1: TForm1
         Caption = 'FECHA Y HORA'
         TabOrder = 8
         OnClick = FechaHoraClick
+        ExplicitLeft = 1
+        ExplicitTop = 9
       end
       object ConsEstado: TButton
         Left = 2
