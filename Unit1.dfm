@@ -3,7 +3,7 @@ object Form1: TForm1
   Top = 0
   Align = alCustom
   Caption = 'Form1'
-  ClientHeight = 729
+  ClientHeight = 695
   ClientWidth = 1008
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -34,7 +34,7 @@ object Form1: TForm1
     Left = 0
     Top = 35
     Width = 305
-    Height = 694
+    Height = 660
     Align = alLeft
     TabOrder = 0
     object Descargas: TGroupBox
@@ -288,7 +288,7 @@ object Form1: TForm1
     Left = 744
     Top = 35
     Width = 264
-    Height = 694
+    Height = 660
     Align = alRight
     TabOrder = 1
     object AcumCierres: TGroupBox
@@ -457,8 +457,6 @@ object Form1: TForm1
         Caption = 'FECHA Y HORA'
         TabOrder = 8
         OnClick = FechaHoraClick
-        ExplicitLeft = 1
-        ExplicitTop = 9
       end
       object ConsEstado: TButton
         Left = 2
@@ -575,7 +573,7 @@ object Form1: TForm1
     Left = 305
     Top = 35
     Width = 439
-    Height = 694
+    Height = 660
     Align = alClient
     TabOrder = 2
     object DNFH: TGroupBox

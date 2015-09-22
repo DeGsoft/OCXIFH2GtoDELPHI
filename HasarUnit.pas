@@ -8,8 +8,6 @@ uses
 type
   Tdm = class(TDataModule)
 
-
-
   private
     { Private declarations }
   public
@@ -94,7 +92,7 @@ procedure CommandZBorr_Click;
 
 var
   dm: Tdm;
-  HASARNG: ImpresoraFiscalRG3561;
+  HASARNG: TImpresoraFiscalRG3561;
   wideChars   : array[0..11] of WideChar;
 
 implementation
@@ -3490,7 +3488,8 @@ begin
   OutputDebugString(StringToWideChar('' , wideChars, 12));
 
   Try
-    respfyh := HASARNG.ConsultarFechaHora;
+    respfyh :=
+    HASARNG.ConsultarFechaHora;
     OutputDebugString(StringToWideChar('' , wideChars, 12));
     OutputDebugString(StringToWideChar('Fecha := [' + DateToStr(respfyh.Fecha) + ']' , wideChars, 12));
     OutputDebugString(StringToWideChar('Hora  := [' + TimeToStr(respfyh.Hora) + ']' , wideChars, 12));
